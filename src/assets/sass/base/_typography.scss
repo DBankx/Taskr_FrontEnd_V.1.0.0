@@ -1,8 +1,14 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap');
 
 body{
-  font-family:  'Merriweather Sans', sans-serif !important;
+  font-family: 'Signika Negative', sans-serif;
   font-weight: 300 !important;
   font-size: 1.6rem !important;
   line-height: 1.7 !important;
+}
+
+.text {
+  &__primary {
+    color: $color-primary !important;
+  }
 }
