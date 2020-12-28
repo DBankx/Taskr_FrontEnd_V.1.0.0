@@ -4,10 +4,15 @@
     box-shadow: 0px 1px 10px rgba(0,0,0,.2);
   }
   
+  &__flex__top{
+    flex-wrap: wrap !important;
+  }
+  
   &__search{
     display: flex;
     width: 50%;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
+    margin-left: 1em;
   }
   
   &__logo{
@@ -60,5 +65,25 @@
   &__location{
    border-radius: 0 !important; 
     border-left: 0 !important;
+  }
+}
+
+@media (max-width: 1224px) {
+  .navbar{
+    &__search{
+      order: 3;
+      width: 100%;
+      margin-top: 0.5em;
+      margin-left: 0;
+    }
+}
+}
+
+@media (max-width: 600px){
+  .navbar{
+    &__logo{
+      width: 100px;
+      height: 50px;
+    }
   }
 }

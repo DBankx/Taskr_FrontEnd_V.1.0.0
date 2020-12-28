@@ -1,0 +1,55 @@
+﻿.home{
+  &__banner{
+    background-image: url("../../images/banner.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 500px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    
+    &__learn{
+      color: #fff;
+      margin-left: 1em;
+      font-size: 1.2em;
+    }
+
+    &__container{
+      top: 25%;
+      width: 70%;
+    }
+    
+    &__text{
+      font-size: 40px;
+      color: #fff;
+      font-weight: 700;
+      
+      
+    }
+  }
+}
+
+@media(max-width: 600px){
+  .home{
+    &__banner{
+      height: 250px;
+      background-image: none;
+      background-color: $color-primary;
+
+      &__container{
+        width: 100%;
+      }
+      
+      &__learn{
+        margin-left: 0;  
+      }
+      
+      &__text{
+        font-size: 25px;
+
+       
+      }
+    }
+  }
+}

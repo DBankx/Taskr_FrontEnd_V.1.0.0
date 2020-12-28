@@ -22,6 +22,7 @@ body {
   box-sizing: border-box;
   position: relative;
   background: $color-secondary;
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -32,6 +33,13 @@ body {
   margin: auto 9em;
 }
 
+.middle{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .flexer{
   list-style: none;
   margin: 0;
@@ -40,14 +48,18 @@ body {
   align-items: center;
 }
 
+
+@media(max-width: 1000px){
+  .container{
+    margin: auto 3em;
+  }
+}
+
+
 @media(max-width: 600px){
   .container{
     margin: auto 1em;
   }
 }
 
-@media(max-width: 900px){
-  .container{
-    margin: auto 3em;
-  }
-}
+
