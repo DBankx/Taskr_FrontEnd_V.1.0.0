@@ -1,0 +1,15 @@
+.reminder{
+  &__white__body{
+    background-color: #fff;
+    padding: 0.5em;
+  }
+  
+  &__fixed{
+    position: fixed;
+  }
+  
+  &__border__dark{
+    border: 1px solid $border-color;
+    border-radius: 5px;
+  }
+}

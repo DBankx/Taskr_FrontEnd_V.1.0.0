@@ -2,13 +2,15 @@
 import React from "react";
 import NavTop from "./NavTop";
 import NavBottom from "./NavBottom";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
+    const location = useLocation();
     return (
         <Box className="navbar__container" w="100%">
             <div className="container">
                 <NavTop />
-                <NavBottom />
+                {location.pathname === "/" && <NavBottom />}
             </div>
         </Box>
     )

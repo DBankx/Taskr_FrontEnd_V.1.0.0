@@ -13,7 +13,7 @@ const Pagination : React.FC<IProps> = ({totalPages}) => {
     return (
        <ReactPaginate
             previousLabel="Prev"
-            nextLabel="Next&nbsp;"
+            nextLabel="Next&#8594;"
             pageCount={totalPages}
             pageRangeDisplayed={2}
             marginPagesDisplayed={2}

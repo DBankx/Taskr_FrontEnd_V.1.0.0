@@ -1,10 +1,10 @@
 ﻿.btn__primary{
-  background-color: $color-primary;
-  color: #fff;
+  background-color: $color-primary !important;
+  color: #fff !important;
   
   &:hover{
-    background-color: lighten($color-primary, 20%);
-    transition: 0.5s ease;
+    background-color: lighten($color-primary, 20%) !important;
+    transition: 0.5s ease !important;
   }
 }
 
@@ -14,13 +14,37 @@
 }
 
 .btn{
-  height: 40px;
-  padding: 0 16px;
-  font-size: 0.9em;
-  border-radius: 5px;
-  outline: none;
-  text-align: center;
-  vertical-align: top;
+  height: 40px !important;
+  padding: 0 16px !important;
+  font-size: 0.9em !important;
+  border-radius: 5px !important;
+  outline: none !important;
+  text-align: center !important;
+  vertical-align: top !important;
+  
+  &__fb{
+    color: #fff !important;
+    background-color: #3B5998 !important;
+  }
+  
+  &__outline__auth{
+    border: 1px solid $border-color !important;
+    background: none !important;
+    color: $color-tetiary !important;
+  }
+  
+  &__auth{
+    padding: 17px 30px 17px 16px !important;
+    margin: 10px 0 !important;
+    font-weight: 500 !important;
+    font-size: 1em !important;
+    position: relative !important;
+    
+    & > .chakra-button__icon{
+      position: absolute !important;
+      left: 15px !important;
+    }
+  }
   
   &__sm{
     padding: 4px 12px;
@@ -39,8 +63,8 @@
   }
   
   &__bg{
-    height: 50px;
-    font-size: 1em;
+    height: 50px !important;
+    font-size: 1em !important;
   }
   
   &__accent{
@@ -49,12 +73,16 @@
   }
   
   &__full-width{
-    width: 100%;
+    width: 100% !important;
   }
 }
 
 .btn__bold{
   font-weight: 700;
+}
+
+.btn__block{
+  display: block !important;
 }
 
 .menu__btn{
@@ -71,3 +99,13 @@
   }
 }
 
+@media(max-width: 600px){
+  .btn{
+    &__auth{
+      & > .chakra-button__icon{
+        position: relative !important;
+        left: auto !important;
+      }
+    }
+  }
+}

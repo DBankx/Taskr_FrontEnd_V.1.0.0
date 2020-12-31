@@ -2,7 +2,8 @@
     brand:{
         100: "#3D3373",
         200: "#F8F9F9",
-        300: "#FCDADC"
+        300: "#FCDADC",
+        400: "#3B5998"
     },
     fonts:{
         body: 'Signika Negative, sans-serif'

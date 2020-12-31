@@ -14,8 +14,9 @@ body{
   
   &__lg{
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 150%;
+    color: #3e4153;
   }
   
   &__sm{
@@ -24,6 +25,10 @@ body{
   
   &__silent{
     color: #7a7d85;
+  }
+  
+  &__blue{
+    color: #2681db !important;
   }
   
   &__darker{

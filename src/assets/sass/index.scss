@@ -10,8 +10,10 @@
 @import "components/icons";
 @import "components/buttons";
 @import "components/pagination";
-
+@import "components/reminders";
+@import "components/form";
 
 // Pages
 @import "pages/home";
 @import "pages/query";
+@import "pages/auth";
