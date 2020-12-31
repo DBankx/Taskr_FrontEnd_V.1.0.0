@@ -23,6 +23,8 @@ body {
   position: relative;
   background: $color-secondary;
   overflow-x: hidden;
+  width: 100vw;
+  height: 100vh;
 }
 
 ::selection {
@@ -33,7 +35,7 @@ body {
   margin: auto 9em;
 }
 
-.middle{
+.middle_position{
   position: absolute;
   top: 50%;
   left: 50%;
@@ -61,5 +63,40 @@ body {
     margin: auto 1em;
   }
 }
+
+@media(max-width: 1200px){
+  .container{
+    margin: auto 2em;
+  }
+}
+
+.spinner__inline{
+  margin: 2em auto;
+}
+
+.main{
+  margin-top: 3em;
+}
+
+.slick-list:hover{
+  overflow: visible !important;
+}
+
+@media(min-width: 1280px){
+  .slick-track{
+    width: 100% !important;
+  }
+}
+
+
+.spinner__inline > .chakra-spinner{
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: -1 !important;
+  margin: 2em auto;
+}
+
 
 

@@ -3,8 +3,8 @@ import React from "react";
 
 export default function Loader(){
     return (
-        <div className="middle">
-            <Spinner size="lg" color="brand.100"  />
+        <div className="middle_position">
+            <Spinner size="xl" color="brand.100"  />
         </div>
     )
 }

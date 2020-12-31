@@ -6,6 +6,11 @@
     },
     fonts:{
         body: 'Signika Negative, sans-serif'
+    },
+    styles:{
+        global:{
+            body: "#F8F9F9"
+        }
     }
 }
 

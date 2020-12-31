@@ -22,6 +22,22 @@
   text-align: center;
   vertical-align: top;
   
+  &__sm{
+    padding: 4px 12px;
+    font-size: 14px;
+    height: 30px;
+  }
+  
+  &__none{
+    background: none;
+    color: #95979d;
+    
+    &:hover{
+      transition: 0.5s ease-in;
+      color: $color-primary;
+    }
+  }
+  
   &__bg{
     height: 50px;
     font-size: 1em;
@@ -40,3 +56,18 @@
 .btn__bold{
   font-weight: 700;
 }
+
+.menu__btn{
+  &__outlined{
+    font-weight: 550 !important;
+    background: none !important;
+    border: 1px solid #dadbdd !important;
+    text-decoration: none !important;
+    padding: 8px 12px !important;
+    border-radius: 4px !important;
+    font-size: 16px !important;
+    height: 40px !important;
+    background-color: #fff !important; 
+  }
+}
+

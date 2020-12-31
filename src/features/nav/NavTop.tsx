@@ -21,9 +21,9 @@ const NavTop = () => {
            <Flex alignItems="center" justifyContent="space-between">
                {!isMobile && <Link className="text__primary" mr={4} href="#"><EmailIcon /> Contact</Link>}
                <Flex alignItems="center">
-               <Link className="text__primary" mr={3} href="#">Login</Link>
-                   <Divider mr={3} orientation="vertical" size="lg"/>
-               <Link mr={4} className="text__primary" href="#">Signup</Link>
+                    <Link className="text__primary" mr={3} href="#">Login</Link>
+                   {!isMobile && <Divider mr={3} orientation="vertical" size="lg"/> }
+                   {!isMobile &&<Link mr={4} className="text__primary" href="#">Signup</Link>}
                </Flex>
                <button className="btn btn__primary btn__shadow btn__bold">Post a task</button>
            </Flex>
