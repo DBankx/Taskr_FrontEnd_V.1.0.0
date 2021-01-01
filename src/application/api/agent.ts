@@ -1,8 +1,20 @@
 ﻿import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
 import {IPaginatedTaskResponse, ITaskQueryValues} from "../../infrastructure/models/task";
-import {IAuthLoginSuccessValues, ISignInFormValues} from "../../infrastructure/models/auth";
+import {IAuthSuccessResponse, ISignInFormValues} from "../../infrastructure/models/auth";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+
+// append a users jwt token to every axios request
+axios.interceptors.request.use((config: AxiosRequestConfig) => {
+    const jwToken = localStorage.getItem("jwt")   
+    if(jwToken){
+        config.headers.Authorization = `Bearer ${jwToken}`;
+    }
+    return config;
+}, (error) => {
+    return Promise.reject(error);
+})
+
 
 const responseBody = (response: AxiosResponse) => response.data;
 
@@ -30,5 +42,6 @@ export const JobRequest = {
 
 // Requests for auth
 export const AuthRequest = {
-    signIn: (signInValues: ISignInFormValues) : Promise<IAuthLoginSuccessValues> => ApiRequest.post("/auth/signin", signInValues)
+    signIn: (signInValues: ISignInFormValues) : Promise<IAuthSuccessResponse> => ApiRequest.post("/auth/signin", signInValues),
+    getCurrentUser: () : Promise<IAuthSuccessResponse> => ApiRequest.get("/auth")
 }

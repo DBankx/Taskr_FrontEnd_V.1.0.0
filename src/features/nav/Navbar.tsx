@@ -3,6 +3,7 @@ import React from "react";
 import NavTop from "./NavTop";
 import NavBottom from "./NavBottom";
 import { useLocation } from "react-router-dom";
+import {observer} from "mobx-react-lite";
 
 const Navbar = () => {
     const location = useLocation();
@@ -16,4 +17,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar;
+export default observer(Navbar);

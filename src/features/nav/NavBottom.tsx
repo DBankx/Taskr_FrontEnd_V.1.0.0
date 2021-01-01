@@ -1,7 +1,8 @@
 ﻿import React from "react";
 import { Box, Link } from "@chakra-ui/react";
 import Slider from "react-slick";
-import {useMediaQuery} from "react-responsive"; 
+import {useMediaQuery} from "react-responsive";
+import { observer } from "mobx-react-lite";
 
 const NavBottom = () => {
     const isMobile = useMediaQuery({query: "(max-width: 500px)"});
@@ -56,4 +57,4 @@ const NavBottom = () => {
     )
 }
 
-export default NavBottom;
+export default observer(NavBottom);

@@ -3,7 +3,7 @@ export interface ISignInFormValues{
     password: string;
 }
 
-export interface IAuthLoginSuccessValues{
+export interface IAuthSuccessResponse {
     token: string;
     user: IUser;
 }

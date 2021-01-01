@@ -1,6 +1,7 @@
 ﻿import {IconButton, InputGroup, InputLeftElement, Input} from "@chakra-ui/react";
 import React from "react";
 import {LocationIcon, SearchIcon} from "../../infrastructure/icons/Icons";
+import {observer} from "mobx-react-lite";
 
 const NavSearchInput = () => {
     return (
@@ -17,4 +18,4 @@ const NavSearchInput = () => {
     )
 }
 
-export default NavSearchInput;
+export default observer(NavSearchInput);

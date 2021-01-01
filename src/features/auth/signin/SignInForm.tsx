@@ -7,6 +7,7 @@ import {Input, InputGroup, InputLeftElement, Button, Flex, Checkbox, Spacer } fr
 import {EmailIcon, PadLockIcon} from "../../../infrastructure/icons/Icons";
 import {Link} from "react-router-dom";
 import rootStoreContext from "../../../application/stores/rootstore";
+import {history} from "../../../index";
 
 const SignInForm = () => {
     const {signInUser} = useContext(rootStoreContext).authStore;
@@ -16,7 +17,10 @@ const SignInForm = () => {
     });
     
     return (
-        <Formik validationSchema={validationSchema} initialValues={{email: "", password: ""}} onSubmit={(values: ISignInFormValues, action) => signInUser(values).then(() => alert("Signed in !")).catch(() => action.setSubmitting(false))}>
+        <Formik validationSchema={validationSchema} initialValues={{email: "", password: ""}} onSubmit={(values: ISignInFormValues, action) => signInUser(values).then(() => history.push("/")).catch(() => {
+            action.setSubmitting(false);
+            action.setFieldError("email", "Invalid credentials");
+        })}>
             {({
                 handleSubmit,
                 handleChange,
@@ -25,7 +29,8 @@ const SignInForm = () => {
                 isValid,
                 isSubmitting,
                 touched,
-                values
+                values,
+                dirty
               }) => (
                 <form onSubmit={handleSubmit} style={{marginTop: "0.7em"}}>
                     <div className="form__field">
@@ -55,7 +60,7 @@ const SignInForm = () => {
                     </InputGroup>
                     </div>
                     <div className="form__field">
-                        <Button type="submit" isLoading={isSubmitting} disabled={isSubmitting || !isValid } className="form__action__button btn__full-width btn__primary">Sign In</Button>
+                        <Button type="submit" isLoading={isSubmitting} disabled={isSubmitting || !isValid || !dirty} className="form__action__button btn__full-width btn__primary">Sign In</Button>
                     </div>
                     <div>
                         <Flex alignItems="center">
