@@ -1,5 +1,5 @@
 ﻿import {Box, Flex, Spacer, Image, Divider} from "@chakra-ui/react";
-import React, {useContext} from "react";
+import React, {useContext, lazy, Suspense} from "react";
 import Logo from "../../assets/images/taskr-logo.svg";
 import NavSearchInput from "./NavSearchInput";
 import {EmailIcon} from "../../infrastructure/icons/Icons";
@@ -7,7 +7,9 @@ import {useMediaQuery} from "react-responsive";
 import {useLocation, Link} from "react-router-dom";
 import rootStoreContext from "../../application/stores/rootstore";
 import {observer} from "mobx-react-lite";
-import AuthNavItems from "./navAuth/AuthNavItems";
+import InlineLoader from "../../application/appLayout/InlineLoader";
+
+const AuthNavItems = lazy(() => import("./navAuth/AuthNavItems"))
 
 const NavTop = () => {
     const isSmallScreen = useMediaQuery({query: "(max-width: 1224px)"});
@@ -23,7 +25,11 @@ const NavTop = () => {
            {isSmallScreen && <Spacer />}
          <NavSearchInput />
            <Spacer />
-           {isLoggedIn && user ? <AuthNavItems user={user} /> : <div style={!isSmallScreen ? {width: "30%"} : {}}>
+           {isLoggedIn && user ? 
+               <Suspense fallback={<InlineLoader />}>
+                   <AuthNavItems user={user} />
+               </Suspense>
+               : <div style={!isSmallScreen ? {width: "30%"} : {}}>
                <Flex alignItems="center" justifyContent="space-between">
                    {!isMobile && <Link className="text__primary" to="/contact" style={{marginRight: "1em"}}
                                        href="#"><EmailIcon/> Contact</Link>}

@@ -37,12 +37,12 @@ export class TaskStore{
         }
     }
     
-    @action setJobQueryParams = (title?: string, maxPrice?: number, minPrice?: number, pageNumber?: number, pageSize?: number) => {
-        if(title) this.taskQueryValues.title = title;
-        if(maxPrice) this.taskQueryValues.maxPrice = maxPrice;
-        if(minPrice) this.taskQueryValues.minPrice = minPrice;
-        if(pageNumber) this.taskQueryValues.pageNumber = pageNumber;
-        if(pageSize) this.taskQueryValues.pageSize = pageSize;
+    @action setTasksQueryParams = (title?: string, maxPrice?: number, minPrice?: number, pageNumber?: number, pageSize?: number) => {
+        this.taskQueryValues.title = title ? title : "";
+        this.taskQueryValues.maxPrice = maxPrice ? maxPrice : 0;
+        this.taskQueryValues.minPrice = minPrice ? minPrice : 0 ; 
+        this.taskQueryValues.pageNumber = pageNumber ? pageNumber : 1;
+        this.taskQueryValues.pageSize = pageSize ? pageSize : 20;
     }
     
     

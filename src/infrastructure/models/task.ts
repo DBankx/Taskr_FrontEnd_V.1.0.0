@@ -5,6 +5,15 @@
     initialPrice: number;
     creatorId: string;
     creatorUsername: string;
+    createdAt: Date;
+    deliveryDate: Date;
+    photos: [{
+        id: string;
+        url: string;
+    }],
+    city: string;
+    postCode: string;
+    views: number;
 }
 
 export interface IPaginatedTaskResponse{
@@ -16,9 +25,10 @@ export interface IPaginatedTaskResponse{
 }
 
 export interface ITaskQueryValues{
-    title: string;
+    title?: string;
     minPrice: number;
     maxPrice: number;
     pageSize: number;
     pageNumber: number;
+    city?: string;
 } 
