@@ -2,25 +2,40 @@
 import React from "react";
 import {ChevronDownIcon} from "../../infrastructure/icons/Icons";
 import PriceQueryForm from "./PriceQueryForm";
-import {useMediaQuery} from "react-responsive";
 import Slider from "react-slick";
 import {observer} from "mobx-react-lite";
 
 const QueryActions = () => {
-    const isMobile = useMediaQuery({query: "(max-width: 600px)"});
-    const isTablet = useMediaQuery({query: "(max-width: 1224px)"});
     const sliderSettings = {
         dots: false,
         adaptiveHeight: true,
         infinite: false,
         speed: 500,
-        slidesToShow: isMobile ? 2 : isTablet ? 4 : 10,
-        slidesToScroll: isMobile ? 2 : isTablet ? 3 :  1,
+        slidesToShow: 10,
+        slidesToScroll: 1,
         arrows: false,
         variableWidth: true,
-        slidesPerRow: 1
+        slidesPerRow: 1,
+        initialSlide: 0,
+        responsive: [
+            {
+                breakpoint: 600,
+                settings:{
+                    slidesToScroll: 2,
+                    slidesToShow: 2,
+                }
+            },
+            {
+                breakpoint: 1224,
+                settings:{
+                    slidesToScroll: 3,
+                    slidesToShow: 4
+                }
+            }
+        ]
     }
     return (
+        <div className="query__action__container">
         <Slider {...sliderSettings}>
             <div className="query__action">
                 <Menu isLazy={true} >
@@ -85,6 +100,7 @@ const QueryActions = () => {
                 </Menu>
             </div>
         </Slider>
+        </div>
     )
 }
 

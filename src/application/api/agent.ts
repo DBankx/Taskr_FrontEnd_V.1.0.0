@@ -1,5 +1,5 @@
 ﻿import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
-import {IPaginatedTaskResponse, ITaskQueryValues} from "../../infrastructure/models/task";
+import {IPaginatedTaskResponse, ITask, ITaskQueryValues} from "../../infrastructure/models/task";
 import {IAuthSuccessResponse, ISignInFormValues} from "../../infrastructure/models/auth";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
@@ -30,13 +30,14 @@ const ApiRequest = {
 
 // Requests for Jobs
 export const JobRequest = {
-    getAllJobs: (queryValues: ITaskQueryValues) : Promise<IPaginatedTaskResponse> => ApiRequest.get("/jobs", {params: {
+    getAllTasks: (queryValues: ITaskQueryValues) : Promise<IPaginatedTaskResponse> => ApiRequest.get("/jobs", {params: {
         title: queryValues?.title,
             minPrice: queryValues?.minPrice,
             maxPrice: queryValues?.maxPrice,
             pageSize: queryValues?.pageSize,
             pageNumber: queryValues?.pageNumber
-        }})
+        }}),
+    getTaskById: (id: string): Promise<ITask> => ApiRequest.get(`/jobs/${id}`)
 }
 
 

@@ -7,13 +7,15 @@
     creatorUsername: string;
     createdAt: Date;
     deliveryDate: Date;
-    photos: [{
-        id: string;
-        url: string;
-    }],
+    photos: IPhoto[],
     city: string;
     postCode: string;
     views: number;
+}
+
+export interface IPhoto{
+    id: string;
+    url: string;
 }
 
 export interface IPaginatedTaskResponse{

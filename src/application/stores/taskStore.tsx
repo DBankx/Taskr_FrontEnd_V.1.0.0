@@ -1,7 +1,11 @@
 ﻿import {RootStore} from "./rootstore";
 import {action, makeObservable, observable, runInAction} from "mobx";
-import {ITaskQueryValues, IPaginatedTaskResponse} from "../../infrastructure/models/task";
+import {ITaskQueryValues, IPaginatedTaskResponse, ITask} from "../../infrastructure/models/task";
 import {JobRequest} from "../api/agent";
+import {toast} from "react-toastify";
+import Alert from "../common/Alert";
+import {CloseIcon} from "../../infrastructure/icons/Icons";
+import React from "react";
 
 //---------------------------------------------------------
 // Store for all Job related actions
@@ -17,6 +21,7 @@ export class TaskStore{
     @observable tasks: IPaginatedTaskResponse | null = null;
     @observable loadingInitial = false;
     @observable taskQueryValues: ITaskQueryValues = {title: "", pageNumber: 1, pageSize: 20, maxPrice: 0, minPrice: 0};
+    @observable task: ITask | null = null;
     
     
     // ------------------------
@@ -26,7 +31,7 @@ export class TaskStore{
     @action getAllJobs = async () => {
         this.loadingInitial = true;
         try{
-            const paginatedJobResponse = await JobRequest.getAllJobs(this.taskQueryValues);
+            const paginatedJobResponse = await JobRequest.getAllTasks(this.taskQueryValues);
             runInAction(() => {
                 this.tasks = paginatedJobResponse;
                 this.loadingInitial = false;
@@ -45,5 +50,19 @@ export class TaskStore{
         this.taskQueryValues.pageSize = pageSize ? pageSize : 20;
     }
     
+    @action getTaskById = async (id: string) => {
+        this.loadingInitial = true;
+        try{
+          const taskResponse = await JobRequest.getTaskById(id);
+          runInAction(() => {
+              this.task = taskResponse;
+              this.loadingInitial = false;
+          })
+        } catch (error) {
+            runInAction(() => this.loadingInitial = false);
+            toast.error(<Alert type="error" subject="Error occurred" icon={<CloseIcon boxSize={8} color="#73000c"/>} message="Problem loading task" />)
+            throw error;
+        }
+    }
     
 }

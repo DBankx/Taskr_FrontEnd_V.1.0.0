@@ -78,12 +78,12 @@ body {
   margin-top: 3em;
 }
 
-.slick-list:hover{
+.query__action__container  .slick-list:hover{
   overflow: visible !important;
 }
 
 @media(min-width: 1280px){
-  .slick-track{
+ .query__action__container .slick-track{
     width: 100% !important;
   }
 }

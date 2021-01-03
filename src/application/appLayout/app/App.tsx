@@ -15,6 +15,7 @@ import {ToastContainer} from "react-toastify";
 const HomePage = lazy(() => import("../../../features/home/HomePage"));
 const QueryPage = lazy(() => import("../../../features/search/QueryPage"));
 const SignInPage = lazy(() => import("../../../features/auth/signin/SignInPage"));
+const TaskPage = lazy(() => import("../../../features/task/TaskPage"));
 
 // Chakra ui theme
 const theme = extendTheme(customTheme);
@@ -47,6 +48,7 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/tasks" component={QueryPage} />
           <Route exact path="/signin" component={SignInPage} />
+          <Route exact path="/task/:id" component={TaskPage} />
         </Switch>
       </Suspense>
     </div>

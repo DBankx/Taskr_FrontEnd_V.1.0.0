@@ -1,22 +1,31 @@
 ﻿import React from "react";
 import { Box, Link } from "@chakra-ui/react";
 import Slider from "react-slick";
-import {useMediaQuery} from "react-responsive";
 import { observer } from "mobx-react-lite";
 
 const NavBottom = () => {
-    const isMobile = useMediaQuery({query: "(max-width: 500px)"});
     
     const settings = {
         dots: false,
         infinite: false,
         speed: 500,
-        slidesToShow: isMobile ? 4 : 10,
-        slidesToScroll: isMobile ? 3 : 1,
+        slidesToShow:  10,
+        slidesToScroll: 1,
         arrows: false,
         variableWidth: true,
         slidesPerRow: 1,
-        adaptiveHeight: true
+        adaptiveHeight: true,
+        initialSlide: 0,
+        responsive: [
+            {
+                breakpoint: 500,
+                settings:{
+                    slidesToShow: 4,
+                    slidesToScroll: 3,
+                    infinite: true,
+                }
+            }
+        ]
     }
     
     return (
