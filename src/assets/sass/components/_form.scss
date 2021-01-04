@@ -48,6 +48,10 @@
   
   &__field{
     margin-bottom: 14px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
   }
   
   &__checkbox{
@@ -61,5 +65,40 @@
     color: $error-color !important;
     display: block !important;
     margin-top: 0.2em;
+  }
+
+
+  &__textarea{
+    padding: 30px 10px 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    position: relative;
+    color: $color-tetiary;
+    line-height: 1.2em;
+  }
+
+  
+  &__textarea__label{
+   display: block;
+   color: #8e909b;
+   position: absolute;
+   z-index: 10;
+   font-size: 12px;
+    left: 10px;
+    top: 10px;
+ } 
+  
+  
+  
+
+  
+  
+  &__sm__text{
+    display: block;
+    color: #767676;
   }
 }
