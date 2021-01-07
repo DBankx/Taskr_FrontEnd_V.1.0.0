@@ -11,6 +11,7 @@ export interface IAuthSuccessResponse {
 export interface IUser{
     id: string;
     username: string;
+    userName: string;
     email: string;
     bio: string;
     firstName: string;

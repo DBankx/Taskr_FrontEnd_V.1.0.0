@@ -30,7 +30,6 @@
     margin-bottom: 20px;
     padding: 25px 20px;
     p{
-      text-align: center;
       color: $color-primary;
     }
   }
@@ -76,24 +75,36 @@
   &__image{
     &__container{
       box-sizing: border-box;
+      padding: 0 1em 0 1em !important;
+      position: relative !important;
       .slick-slider{
-        width: 100% !important;
+        width: auto;
+        height: 527px !important;
         display: grid;
         box-sizing: border-box !important;
-        position: relative;
         border: 0.5px solid $border-color;
         text-align: center;
         .sc{
           text-align: center;
         }
-        .sc img{
-          margin: auto;
+        .task__img{
+          background-size: 80px;
+          max-width: 100%;
+          max-height: 100%;
+          min-width: 140px;
+          min-height: 140px;
+          width: 100%;
+          height: 100%;
+          -o-object-fit: contain;
+          object-fit: contain;
         }
       }
       
       .slick-track{
         display: flex !important;
+        height: 427px !important;
         align-items: center !important;
+        background-color: #fff;
       }
     }
   }
@@ -110,7 +121,8 @@
       margin: 0px 10px 1em;
       img{
         margin: 0 auto;
-        height: 100px;
+        height: 50px;
+        width: 50px !important;
         box-shadow: 0px 1px 10px rgba(0,0,0,.2);
       }
     }
@@ -127,28 +139,68 @@
     
     &__next__arr{
       position: absolute;
+      display: flex;
+      align-items: center;
       top: 30%;
-      right: 0;
-      background-color: rgba(62,65,83,0.85);
-      border: 1px solid #000;
+      right: -30px;
+      background-color: #fff;
+      border: none;
+      border-radius: 50%;
       outline: none;
+      width: 50px;
+      height: 50px;
       color: #fff;
-      padding: 0.5em;
+      padding: 1em;
+      -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.15);
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,.15);
     }
     
     &__prev__arr{
       position: absolute;
+      display: flex;
+      align-items: center;
       top: 30%;
       z-index: 500;
-      left: 0;
-      background-color: rgba(62,65,83,0.85);
-      border: 1px solid #000;
+      left: -30px;
+      background-color: #fff;
+      border-radius: 50%;
+      border: none;
       outline: none;
       color: #fff;
-      padding: 0.5em;      
+      width: 50px;
+      height: 50px;
+      padding: 1em;
+      -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.15);
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,.15);
     }
   }
   
+  &__description {
+    &__container{
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 26px;
+      margin: 30px 0;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      color: $color-tetiary;
+    }
+    &__title {
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 26px;
+      color: #373373;
+      margin: 0 0 20px;
+    }
+  }
+  
+  &__fixed__box{
+    position: sticky;
+    top: 20%;
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 0 5% 5% 5%;
+  }
 }
 
 @media(max-width: 500px){
@@ -167,6 +219,52 @@
   text-transform: uppercase;
 }
 
+.show__more {
+  &__child {
+    height: 150px !important;
+    overflow: hidden;
+    -webkit-transition: height .4s linear;
+    -moz-transition: height .4s linear;
+    transition: height .4s linear;
+    
+    &__released{
+      height: auto;
+    }
+  }
+  
+}
+
+.show__more__btn{
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+  text-decoration: none;
+  color: #2681db;
+  background: none;
+  border: none;
+  bottom: 0;
+  cursor: pointer;
+  display: block;
+  left: 50%;
+  padding: 10px;
+  position: absolute;
+  -webkit-transition: color .2s linear;
+  -moz-transition: color .2s linear;
+  transition: color .2s linear;
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.show__more__fade__out{
+  background: linear-gradient(180deg,hsla(0,0%,100%,0) 0,#fff);
+  bottom: 20px;
+  height: 100px;
+  position: absolute;
+  width: 100%;
+  right: 0 !important;
+}
+
 @media(max-width: 900px){
   .task{
     &__details{
@@ -179,9 +277,10 @@
   .task{
     &__image{
       &__container{
+        padding: 0 !important;
         .slick-slider{
           .sc img{
-            height: calc(50vh - 100px);
+            height: calc(60vh - 100px);
           }
         }
       }
@@ -194,3 +293,4 @@
     }
   }
 }
+

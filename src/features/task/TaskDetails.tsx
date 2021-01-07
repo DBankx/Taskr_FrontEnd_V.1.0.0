@@ -11,7 +11,7 @@ import MoneyIcon, {
     EyeIcon,
     LocationIcon
 } from "../../infrastructure/icons/Icons";
-import BidForm from "../bid/BidForm";
+// import BidForm from "../bid/BidForm";
 
 dayjs.extend(relativeTime);
 
@@ -41,7 +41,7 @@ const TaskDetails : React.FC<IProps> = ({task}) => {
             
             <div style={{margin: "1em 0"}}>
                 <p className="text__dark__grey query__price__label a"><MoneyIcon boxSize={8} color="#37a864" style={{marginRight: "0.3em"}} />Starting Bid: <span className="task__price">${task.initialPrice}</span></p>
-                <BidForm task={task} />
+                {/*<BidForm task={task} />*/}
             </div>
             
             <HStack className="task__labels" spacing="20px" style={{margin: "1em 0"}}>

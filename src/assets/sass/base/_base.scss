@@ -35,6 +35,7 @@ body {
   margin: auto 9em;
 }
 
+
 .middle_position{
   position: absolute;
   top: 50%;
@@ -74,8 +75,35 @@ body {
   margin: 2em auto;
 }
 
+.map__compact__image{
+  overflow: hidden;margin-top: 0;
+  border-radius: 4px;
+  width: 100%;
+  position: relative;
+  
+  img{
+    width: 100%;
+    height: 95px;
+  }
+}
+
+.map__compact__footer{
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+}
+
 .main{
+  width: 100%;
   margin-top: 3em;
+}
+
+.white__border{
+  background-color: #fff;
+  border: 1px solid #dcdacb;
+  border-radius: 4px;
+  padding: 2em;
 }
 
 .query__action__container  .slick-list:hover{

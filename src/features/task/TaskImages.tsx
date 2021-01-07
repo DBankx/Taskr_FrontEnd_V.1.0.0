@@ -20,7 +20,7 @@ const TaskImages : React.FC<IProps> = ({task}) => {
                 className="task__carousel__next__arr"
                 onClick={onClick}
             >
-              <ChevronRightIcon boxSize={7} color="#fff" /> 
+              <ChevronRightIcon boxSize={7} color="#3D3373" /> 
             </button>
         );
     }
@@ -32,7 +32,7 @@ const TaskImages : React.FC<IProps> = ({task}) => {
                 className="task__carousel__prev__arr"
                 onClick={onClick}
             >
-                <ChevronLeftIcon boxSize={7} color="#fff" />
+                <ChevronLeftIcon boxSize={7} color="#3D3373" />
             </button>
         );
     }
@@ -43,8 +43,6 @@ const TaskImages : React.FC<IProps> = ({task}) => {
         slidesToShow: 1,
         slidesToScroll: 1,
         initialSlide: 0,
-            centerMode: true,
-            centerPadding: "0",
         customPaging: function customPaging(i: any) {
          return (<div>
                 <img style={{width: "100px"}} src={task.photos[i].url} alt="task-photos" />
@@ -73,7 +71,7 @@ const TaskImages : React.FC<IProps> = ({task}) => {
                {task.photos.map((photo) => (
                    <div className="sc" key={photo.id}>
                        <Zoom>
-                           <Image src={photo.url} boxSize="100%" alt="task-photo" />
+                           <Image src={photo.url} className="task__img" alt="task-photo" />
                        </Zoom>
                    </div>
                ))}

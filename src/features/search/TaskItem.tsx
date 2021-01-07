@@ -14,6 +14,8 @@ interface IProps{
 
 dayjs.extend(relativeTime);
 
+// TODO - change creator avatar to use the avatar from the Database
+
 const TaskItem : React.FC<IProps> = ({task}) => {
     const hasPhotos = task.photos.length > 0;
     const isMobile = useMediaQuery({query: "(max-width: 400px)"});
@@ -28,8 +30,8 @@ const TaskItem : React.FC<IProps> = ({task}) => {
                <Link to={`/task/${task.id}`}><span className="truncate">{task.title}</span></Link>
             </div>
                 <HStack spacing="10px">
-                    <Image borderRadius="full" boxSize="30px" alt="tasker-avatar" src={`https://ui-avatars.com/api/?name=${task.creatorUsername}&rounded=true&bold=true`} />
-                    <span>{task.creatorUsername}</span>
+                    <Image borderRadius="full" boxSize="30px" alt="tasker-avatar" src={`https://ui-avatars.com/api/?name=${task.creator.userName}&rounded=true&bold=true`} />
+                    <span>{task.creator.userName}</span>
                     <div>
                         <span className="text__sm text__silent">•</span>
                         <span className="text__sm text__silent" style={{marginLeft: "0.5em"}}>{dayjs(task.createdAt).fromNow()}</span>

@@ -1,16 +1,19 @@
-﻿export interface ITask{
+﻿import {IUser} from "./auth";
+
+export interface ITask{
     id: string;
     title: string;
     description: string;
     initialPrice: number;
-    creatorId: string;
-    creatorUsername: string;
     createdAt: Date;
     deliveryDate: Date;
     photos: IPhoto[],
     city: string;
     postCode: string;
     views: number;
+    bidCount: number;
+    watchCount: number;
+    creator: IUser;
 }
 
 export interface IPhoto{
