@@ -11,9 +11,10 @@ export interface ITask{
     city: string;
     postCode: string;
     views: number;
-    bidCount: number;
+    bidsCount: number;
     watchCount: number;
     creator: IUser;
+    isBidActive: boolean;
 }
 
 export interface IPhoto{

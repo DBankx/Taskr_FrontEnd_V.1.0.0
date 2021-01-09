@@ -65,4 +65,10 @@ export class AuthStore{
             throw error;
         }
     }
+    
+    @action logOutUser = () => {
+        localStorage.removeItem("jwt");
+        this.user = null;
+        window.location.reload();
+    }
 }

@@ -13,7 +13,7 @@ body{
   }
   
   &__light__dark{
-    color: #8A7D83;
+    color: #8A7D83 !important;
   }
   
   &__lg{
@@ -24,11 +24,11 @@ body{
   }
   
   &__sm{
-    font-size: 14px;
+    font-size: 14px !important;
   }
   
   &__silent{
-    color: #7a7d85;
+    color: #7a7d85 !important;
   }
   
   &__blue{
@@ -36,11 +36,11 @@ body{
   }
   
   &__darker{
-    color: #3e4153;
+    color: #3e4153 !important;
   }
   
   &__dark__grey{
-    color: #555555;
+    color: #555555 !important;
   }
 }
 

@@ -1,4 +1,13 @@
 export interface IBidSubmission{
-    description: string;
+    description?: string;
     price: number;
+}
+
+export interface IBid{
+    id: string;
+    description: string;
+    jobId: string;
+    price: number;
+    createdAt: Date;
+    Status: number;
 }

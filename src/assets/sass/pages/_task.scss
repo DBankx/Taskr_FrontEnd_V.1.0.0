@@ -10,7 +10,7 @@
   }
   
   &__posted{
-    font-size: 17px;
+    font-size: 14px;
     line-height: 20px;
     margin-bottom: 2px;
   }
@@ -75,7 +75,6 @@
   &__image{
     &__container{
       box-sizing: border-box;
-      padding: 0 1em 0 1em !important;
       position: relative !important;
       .slick-slider{
         width: auto;
@@ -194,12 +193,22 @@
     }
   }
   
+  &__avatar{
+    &__username{
+      fontSize: 19px ; lineHeight: 20px ; textAlign: left;
+    }
+  }
+  
   &__fixed__box{
     position: sticky;
-    top: 20%;
+    top: 10%;
     height: 100vh;
     box-sizing: border-box;
     padding: 0 5% 5% 5%;
+  }
+  
+  &__details{
+    margin-top: 3em;
   }
 }
 
@@ -275,6 +284,17 @@
 
 @media(max-width: 500px){
   .task{
+    
+    &__avatar{
+      margin: 0 auto;
+      
+      &__username{
+        text-align: center;
+      }
+    }
+    &__title{
+      font-size: 19px;
+    }
     &__image{
       &__container{
         padding: 0 !important;

@@ -1,6 +1,7 @@
 ﻿import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
 import {IPaginatedTaskResponse, ITask, ITaskQueryValues} from "../../infrastructure/models/task";
 import {IAuthSuccessResponse, ISignInFormValues} from "../../infrastructure/models/auth";
+import {IBid, IBidSubmission} from "../../infrastructure/models/bid";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
@@ -45,4 +46,9 @@ export const JobRequest = {
 export const AuthRequest = {
     signIn: (signInValues: ISignInFormValues) : Promise<IAuthSuccessResponse> => ApiRequest.post("/auth/signin", signInValues),
     getCurrentUser: () : Promise<IAuthSuccessResponse> => ApiRequest.get("/auth")
+}
+
+// Requests for bids
+export const BidRequest = {
+    placeBid: (values: IBidSubmission, jobId: string) : Promise<IBid> => ApiRequest.post(`bids/${jobId}`, values)
 }

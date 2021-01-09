@@ -5,14 +5,18 @@ import {
     NumberInput,
     NumberInputField,
     NumberInputStepper,
-    Button
+    Button,
+    Flex,
+    Spacer
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { observer } from "mobx-react-lite";
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {IBidSubmission} from "../../infrastructure/models/bid";
 import {ITask} from "../../infrastructure/models/task";
-// import MoneyIcon from "../../infrastructure/icons/Icons";
+import {MoneyIcon} from "../../infrastructure/icons/Icons";
+import * as yup from "yup";
+import rootStoreContext from "../../application/stores/rootstore";
 
 interface IProps{
     task: ITask
@@ -20,16 +24,24 @@ interface IProps{
 
 const BidForm : React.FC<IProps> = ({task}) => {
     const [isDescriptionEnabled, setDescription] = useState<boolean>(false);
+    const validationSchema = yup.object().shape({
+        price: yup.number().lessThan(task.initialPrice, `Price must be less than initial bid: $${task.initialPrice} `)
+    });
+    const {createBid} = useContext(rootStoreContext).bidStore;
+    
     return (
-        <Formik initialValues={{description: "", price: 0}} onSubmit={(values: IBidSubmission) => {
-            console.log(isDescriptionEnabled  ? values : {price: values.price});
+        <Formik validationSchema={validationSchema} initialValues={{description: "", price: 0}} onSubmit={(values: IBidSubmission, action) => {
+            createBid(isDescriptionEnabled  ? values : {price: values.price}, task.id).finally(() => action.setSubmitting(false));
         }}>
             {({
                 handleSubmit,
                 handleChange,
                 handleBlur,
                 isSubmitting,
-                values
+                values,
+                errors,
+                touched,
+                isValid,
               }) => (
                 <form onSubmit={handleSubmit} className="task__bid__form__card">
                     
@@ -38,11 +50,18 @@ const BidForm : React.FC<IProps> = ({task}) => {
                         <p className="map__compact__footer">VIEW MAP</p>
                     </div>
                   
-                    <h3 style={{color:"#37a864", fontSize: "24px"}}><span style={{color: "#777777", fontSize: "16px"}}>Starting at</span> &#36;{task.initialPrice}<span style={{color: "#777777", fontSize: "13px"}}>/ Price</span></h3>
+                    <div style={{textAlign: "center", margin: "1em 0"}}>
+                        <Flex spacing="10px" alignItems="center">
+                            
+                    <span style={{color: "#777777", fontSize: "12px"}} className="query__price__label a"><MoneyIcon boxSize={8} color="#37a864"/>Starting bid:</span>
+                            
+                            <Spacer />
+                            
+                        <h3 style={{color:"#37a864", fontSize: "24px"}}> &#36;{task.initialPrice}</h3>
+                        </Flex>
+                    </div>
                   
                     
-                    <p style={{marginBottom: "1em"}}>Place a bid</p>
-                  
                     <div className="form__field">
                         <InputGroup>
                             <InputLeftElement
@@ -52,8 +71,8 @@ const BidForm : React.FC<IProps> = ({task}) => {
                             >
                                 $
                             </InputLeftElement>
-                            <NumberInput size="md" defaultValue={0} precision={2} min={0}>
-                                <NumberInputField name="price" value={values.price} onChange={handleChange} onBlur={handleBlur}  className="task__price__input" />
+                            <NumberInput max={task.initialPrice} clampValueOnBlur={false}  size="md" defaultValue={0} precision={2} min={0}>
+                                <NumberInputField name="price" error={!!errors.price && touched.price} value={values.price} onChange={handleChange} onBlur={handleBlur}  className="task__price__input" />
                                 <NumberInputStepper>
                                     <NumberIncrementStepper />
                                     <NumberDecrementStepper />
@@ -61,10 +80,10 @@ const BidForm : React.FC<IProps> = ({task}) => {
 
                             </NumberInput>
                         </InputGroup>
-                        <small className="form__sm__text">Enter ${task.initialPrice} or less</small>
+                        {errors.price ? <small className="form__error">{errors.price}</small> :<small className="form__sm__text">Enter ${task.initialPrice} or less</small>}
                     </div>
 
-                    <button type="button" className="text__blue" onClick={() => setDescription(!isDescriptionEnabled)}>{isDescriptionEnabled ? <span>&#8722;</span> : <span>&#43;</span>} Add description</button>
+                    <button type="button" className="text__blue" onClick={() => setDescription(!isDescriptionEnabled)}>{isDescriptionEnabled ? <span>&#8722;</span> : <span>&#43;</span>} {!isDescriptionEnabled ? "Add description" : "Remove description"}</button>
 
                     {isDescriptionEnabled && <div className="form__field">
                         <label data-testid="label" className="form__textarea__label" id="message-Your Message" htmlFor="description">Your Message</label>
@@ -72,11 +91,11 @@ const BidForm : React.FC<IProps> = ({task}) => {
                     </div>}
                     
                     <div className="form__field">
-                        <Button isLoading={isSubmitting} type="submit" className="btn btn__primary btn__bg btn__full-width">Submit bid</Button>
+                        <Button disabled={!isValid || isSubmitting} isLoading={isSubmitting} style={{fontWeight: 500}} type="submit" className="btn btn__primary btn__bg btn__full-width">SUBMIT BID</Button>
                     </div>
                     
                     <div style={{textAlign: "center"}}>
-                        <p className="text__primary" style={{fontSize: "11px", lineHeight: "16px"}}>To deter and identify potential fraud, spam or suspicious behaviour, we anonymize your email address (as applicable) and reserve the right to monitor conversations. By sending the message you agree to our Terms of Use and Privacy Policy.</p>
+                        <p className="text__primary" style={{fontSize: "11px", lineHeight: "16px"}}>To make taskr a more reliable platform for delegating tasks we treat all bids as legal binding. By sending this bid you agree with our Terms of Use and Privacy Policy.</p>
                     </div>
                 </form>
             )}
