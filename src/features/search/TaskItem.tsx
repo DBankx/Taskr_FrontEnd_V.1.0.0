@@ -1,12 +1,11 @@
 import React from "react";
 import {ITask} from "../../infrastructure/models/task";
 import {observer} from "mobx-react-lite";
-import {Box, Divider, Flex, HStack, Image, SimpleGrid, Spacer} from "@chakra-ui/react";
+import {Box, Divider, Flex, HStack, Image, SimpleGrid, Spacer, useMediaQuery} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import {BidIcon, BinocularsIcon, DeliveryIcon, LocationIcon} from "../../infrastructure/icons/Icons";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
-import {useMediaQuery} from "react-responsive";
 
 interface IProps{
     task: ITask
@@ -18,7 +17,7 @@ dayjs.extend(relativeTime);
 
 const TaskItem : React.FC<IProps> = ({task}) => {
     const hasPhotos = task.photos.length > 0;
-    const isMobile = useMediaQuery({query: "(max-width: 400px)"});
+    const [isMobile] = useMediaQuery("(max-width: 400px)");
     return (
         <div className="query__task__card">
             <SimpleGrid columns={{sm: 1, md: 2, lg: 2}} spacing="15px" templateColumns={{sm: "1fr", lg:!hasPhotos ? "1fr" : "0.5fr 2fr", md: !hasPhotos ? "1fr" : "0.5fr 2fr"}}>

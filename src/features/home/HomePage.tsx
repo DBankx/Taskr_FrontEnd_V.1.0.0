@@ -1,10 +1,10 @@
 ﻿import { Box} from "@chakra-ui/react";
 import React from "react";
-import {useMediaQuery} from "react-responsive";
+import {useMediaQuery} from "@chakra-ui/react";
 import {RightArrowIcon} from "../../infrastructure/icons/Icons";
 
 const HomePage = () => {
-    const isMobile = useMediaQuery({query: "(max-width: 400px)"});
+    const [isMobile] = useMediaQuery("(max-width: 400px)");
     return (
         <div>
             <Box className="home__banner">

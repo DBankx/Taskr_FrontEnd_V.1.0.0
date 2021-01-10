@@ -49,7 +49,7 @@ const BidPageForm : React.FC<IProps> = ({task}) => {
                                 $
                             </InputLeftElement>
                             <NumberInput max={task.initialPrice} clampValueOnBlur={false}  size="md" defaultValue={0} precision={2} min={0}>
-                                <NumberInputField name="price" error={!!errors.price && touched.price} value={values.price} onChange={handleChange} onBlur={handleBlur}  className="task__price__input" />
+                                <NumberInputField name="price" error={errors.price && touched.price} value={values.price} onChange={handleChange} onBlur={handleBlur}  className="task__price__input" />
                                 <NumberInputStepper>
                                     <NumberIncrementStepper />
                                     <NumberDecrementStepper />

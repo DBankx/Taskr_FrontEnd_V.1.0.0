@@ -30,9 +30,10 @@ export class BidStore{
                 }
                 if(this.rootStore.bidStore.bids){
                     // find if a bid by the user exists
-                    let userBid = this.rootStore.bidStore.bids.find((bid) => bid.userName == this.rootStore.authStore.user?.userName);
+                    const userBid = this.rootStore.bidStore.bids.find((bid) => bid.userName === this.rootStore.authStore.user!.username);
                     if(userBid){
-                        userBid = bid; 
+                        userBid.price = bid.price;
+                        userBid.createdAt = bid.createdAt;
                     } else {
                         this.rootStore.bidStore.bids.unshift(bid);
                     }

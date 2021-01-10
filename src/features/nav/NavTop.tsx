@@ -1,9 +1,8 @@
-﻿import {Box, Flex, Spacer, Image, Divider} from "@chakra-ui/react";
+﻿import {Box, Flex, Spacer, Image, Divider, useMediaQuery} from "@chakra-ui/react";
 import React, {useContext, lazy, Suspense} from "react";
 import Logo from "../../assets/images/taskr-logo.svg";
 import NavSearchInput from "./NavSearchInput";
 import {EmailIcon} from "../../infrastructure/icons/Icons";
-import {useMediaQuery} from "react-responsive";
 import {useLocation, Link} from "react-router-dom";
 import rootStoreContext from "../../application/stores/rootstore";
 import {observer} from "mobx-react-lite";
@@ -12,8 +11,8 @@ import InlineLoader from "../../application/appLayout/InlineLoader";
 const AuthNavItems = lazy(() => import("./navAuth/AuthNavItems"))
 
 const NavTop = () => {
-    const isSmallScreen = useMediaQuery({query: "(max-width: 1224px)"});
-    const isMobile = useMediaQuery({query: "(max-width: 600px)"});
+    const [isSmallScreen] = useMediaQuery("(max-width: 1224px)");
+    const [isMobile] = useMediaQuery("(max-width: 600px)");
     const location = useLocation();
     const {isLoggedIn, user} = useContext(rootStoreContext).authStore;
     return (

@@ -18,7 +18,7 @@ const TaskBidItem : React.FC<IProps> = ({task}) => {
                 <div style={{margin: "1em 0"}}>
                     {task.isBidActive && <Alert status="info" variant="left-accent">
                         <AlertIcon/>
-                        You have an active bid on this task. 
+                        You have an active bid on this task 
                     </Alert>}
                 </div>
             <Stack direction={["column", "row"]} spacing="20px">
@@ -26,7 +26,7 @@ const TaskBidItem : React.FC<IProps> = ({task}) => {
                    <Image src={task.photos[0].url} alt="task-photo" boxSize="100px" />
                </Box> }
                 <Box>
-                    <Link className="text__blue" to={`/task/${task.id}`}><Linker>{task.title}</Linker></Link>
+                    <Linker className="text__blue" as={Link} to={`/task/${task.id}`}>{task.title}</Linker>
                 </Box>
             </Stack>
             <div style={{margin: "1em 0"}}>

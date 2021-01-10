@@ -1,16 +1,15 @@
 ﻿import React from "react";
 import {ITask} from "../../infrastructure/models/task";
 import {observer} from "mobx-react-lite";
-import {Box, Divider, HStack, Image, SimpleGrid, Spacer } from "@chakra-ui/react";
+import {Box, Divider, HStack, Image, SimpleGrid, Spacer, useMediaQuery } from "@chakra-ui/react";
 import {EmailIcon, StarIcon} from "../../infrastructure/icons/Icons";
-import {useMediaQuery} from "react-responsive";
 
 interface IProps{
     task: ITask
 }
 
 const TaskCreatorDetails : React.FC<IProps> = ({task}) => {
-    const isMobile = useMediaQuery({query: "(max-width: 500px)"});
+    const [isMobile] = useMediaQuery("(max-width: 500px)");
     return (
         <div className="task__details task__bid__form__card">
             <h3 className="task__description__title">About this taskr</h3> 

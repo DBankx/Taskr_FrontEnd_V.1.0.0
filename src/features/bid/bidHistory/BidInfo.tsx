@@ -8,6 +8,9 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { Link } from "react-router-dom";
 import BidTable from "./BidTable";
 import Slider from "react-slick";
+import { Menu, MenuItem, MenuDivider, MenuList, MenuButton, MenuGroup, useMediaQuery } from "@chakra-ui/react";
+import { ChevronDownIcon } from "../../../infrastructure/icons/Icons";
+import BidAccordian from "./BidAccordian";
 
 dayjs.extend(relativeTime);
 
@@ -16,7 +19,11 @@ interface IProps{
     task: ITask
 }
 
+// TODO - filter bids
+// TODO - owner of task view
+
 const BidInfo : React.FC<IProps> = ({bids, task}) => {
+    const [isMobile] = useMediaQuery("(max-width: 500px)");
     const sliderSettings = {
         dots: false,
         infinite: false,
@@ -64,10 +71,47 @@ const BidInfo : React.FC<IProps> = ({bids, task}) => {
             </div>
             
             <div style={{margin: "1em 0"}}>
+                <Menu>
+                    <MenuButton
+                        px={4}
+                        py={2}
+                        borderRadius="md"
+                        borderWidth="1px"
+                        _hover={{ bg: "gray.100" }}
+                        _focus={{ outline: 0, boxShadow: "outline" }}
+                    >
+                        Filter bids <ChevronDownIcon />
+                    </MenuButton>
+                    <MenuList>
+                        <MenuGroup title="Status">
+                        <MenuItem>Approved</MenuItem>
+                        <MenuItem>Submitted</MenuItem>
+                            <MenuItem>Seen</MenuItem>
+                            <MenuItem>Rejected</MenuItem>
+                        </MenuGroup>
+                        <MenuDivider />
+                        <MenuGroup title="Price">
+                        <MenuItem>Highest price</MenuItem>
+                        <MenuItem>Lowest price</MenuItem>
+                        </MenuGroup>
+                    </MenuList>
+                </Menu>
+            </div>
+            
+            {!isMobile ? <div style={{margin: "1em 0"}}>
                 {bids.length > 0 ? <BidTable bids={bids} /> : (<div className="text__middle">
                     <p>There are no bids on this task</p>
                     </div>)}
-            </div>
+            </div>  : (
+                <div style={{margin: "1em 0"}}>
+                    {bids.length > 0 ? <BidAccordian bids={bids} /> : (<div className="text__middle">
+                        <p>There are no bids on this task</p>
+                    </div>)}
+                </div>
+            )}
+            
+            
+            
         </div>
     )
 }

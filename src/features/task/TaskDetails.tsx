@@ -3,7 +3,7 @@ import {ITask} from "../../infrastructure/models/task";
 import {observer} from "mobx-react-lite";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import {HStack, Spacer, Wrap } from "@chakra-ui/react";
+import {HStack, Spacer, Wrap, useMediaQuery } from "@chakra-ui/react";
 import  {
     BidIcon,
     BinocularsIcon,
@@ -12,7 +12,6 @@ import  {
     LocationIcon
 } from "../../infrastructure/icons/Icons";
 import { Link } from "react-router-dom";
-import {useMediaQuery} from "react-responsive";
 
 dayjs.extend(relativeTime);
 
@@ -22,7 +21,7 @@ interface IProps{
 
 const TaskDetails : React.FC<IProps> = ({task}) => {
     const devDate = new Date(task.deliveryDate);
-    const isMobile = useMediaQuery({query: "(max-width: 500px)"});
+    const [isMobile] = useMediaQuery("(max-width: 500px)");
     return (
         <div className="task__details task__bid__form__card">
             <HStack style={isMobile ? {display: "block"} : {}}>

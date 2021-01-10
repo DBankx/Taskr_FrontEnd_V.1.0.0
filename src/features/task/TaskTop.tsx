@@ -1,7 +1,7 @@
 import React from "react";
 import { ITask } from "../../infrastructure/models/task";
 import {observer} from "mobx-react-lite";
-import {Box, HStack, Image} from "@chakra-ui/react";
+import {Box, HStack, Image, useMediaQuery} from "@chakra-ui/react";
 import {BinocularsIcon, FlagIcon, ShareButtonIcon, StarIcon} from "../../infrastructure/icons/Icons";
 
 interface IProps{
@@ -9,6 +9,7 @@ interface IProps{
 }
 
 const TaskTop : React.FC<IProps> = ({task}) => {
+    const [isMobile] = useMediaQuery("(max-width: 500px)");
     return (
         <div >
         <div className="task__top">
@@ -25,7 +26,7 @@ const TaskTop : React.FC<IProps> = ({task}) => {
                 </Box>
             </HStack>
         </div>
-            <div>
+            <div style={isMobile ? {margin: "1em 0"} : {}}>
                 <HStack spacing="9px">
                     <Image borderRadius="full" boxSize="30px" alt="tasker-avatar" src={task.creator.avatar} />
                     <div>

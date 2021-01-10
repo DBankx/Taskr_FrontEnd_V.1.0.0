@@ -2,8 +2,7 @@ import React, {lazy, Suspense} from "react";
 import {observer} from "mobx-react-lite";
 import {IPaginatedTaskResponse, ITaskQueryValues} from "../../infrastructure/models/task";
 import TaskItem from "./TaskItem";
-import {Box, SimpleGrid} from "@chakra-ui/react";
-import {useMediaQuery} from "react-responsive";
+import {Box, SimpleGrid, useMediaQuery} from "@chakra-ui/react";
 import Pagination from "../../infrastructure/paging/Pagination";
 import InlineLoader from "../../application/appLayout/InlineLoader";
 
@@ -15,7 +14,7 @@ interface IProps{
 }
 
 const QueryBody : React.FC<IProps> = ({tasks, taskQueryValues}) => {
-    const isSmallScreen = useMediaQuery({query: "(max-width: 1000px)"});
+    const [isSmallScreen] = useMediaQuery("(max-width: 1000px)");
     return (
         <div>
             <SimpleGrid columns={{sm: 1, md: 1, lg: 2, xl: 2}} spacing="15px" templateColumns={{lg: "2fr 0.5fr", sm: "1fr", md: "1fr", xl: "2fr 0.4fr"}}>
