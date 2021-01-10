@@ -16,6 +16,24 @@ body{
     color: #8A7D83 !important;
   }
   
+  &__md{
+    font-size: 17px !important;
+  }
+  
+  &__error{
+    color: $error-color;
+  }
+  &__info__box{
+    line-height: 15px !important;
+  }
+  &__small__info{
+    line-height: 15px !important;
+  }
+  
+  &__middle{
+    text-align: center;
+  }
+  
   &__lg{
     font-size: 32px;
     font-weight: 500;

@@ -15,7 +15,8 @@ export class BidStore{
     }
     
    @observable bid: IBid | null = null;
-    
+   @observable bids: IBid[] | null = null; 
+   @observable loadingInitialBids = false; 
     
     // Actions
     @action createBid = async (values: IBidSubmission, jobId: string) => {
@@ -23,11 +24,38 @@ export class BidStore{
             const bid = await BidRequest.placeBid(values, jobId);
             runInAction(() => {
                 this.bid = bid;
-                if(this.rootStore.jobStore.task) this.rootStore.jobStore.task.bidsCount += 1; 
+                if(this.rootStore.jobStore.task) {
+                    this.rootStore.jobStore.task.bidsCount += 1;
+                    this.rootStore.jobStore.task.isBidActive = true;
+                }
+                if(this.rootStore.bidStore.bids){
+                    // find if a bid by the user exists
+                    let userBid = this.rootStore.bidStore.bids.find((bid) => bid.userName == this.rootStore.authStore.user?.userName);
+                    if(userBid){
+                        userBid = bid; 
+                    } else {
+                        this.rootStore.bidStore.bids.unshift(bid);
+                    }
+                }
                 toast.success(<Alert type="success" subject="Success" icon={<CheckmarkIcon boxSize={8} color="#224a23" />} message="Successfully placed a bid" />);
             })
         }catch(error){
             toast.error(<Alert type="error" subject="Error occurred" icon={<CloseIcon boxSize={8} color="#73000c"/>} message="Error occurred while submitting bid" />);
+            throw error;
+        }
+    }
+    
+    @action getTaskBids = async (taskId: string) => {
+        this.loadingInitialBids = true;
+        try{
+            const taskBids = await BidRequest.getAllTaskBids(taskId);
+            runInAction(() => {
+                this.bids = taskBids;
+                this.loadingInitialBids = false;
+            })
+        }catch (error) {
+            runInAction(() => this.loadingInitialBids = false);
+            toast.error(<Alert type="error" subject="Error occurred" icon={<CloseIcon boxSize={8} color="#73000c"/>} message="Problem loading task bids" />)
             throw error;
         }
     }

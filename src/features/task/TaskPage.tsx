@@ -19,7 +19,9 @@ const TaskPage : React.FC<RouteComponentProps<{id: string}>> = ({match}) => {
     const isSmallerScreen = useMediaQuery({query: "(max-width: 800px)"});
     
     useEffect(() => {
-        getTaskById(match.params.id)
+        if(task === null){
+            getTaskById(match.params.id)
+        }
     }, [getTaskById, match.params.id])
     
     if(loadingInitial || !task) return <FullPageSpinner />

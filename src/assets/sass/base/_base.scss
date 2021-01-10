@@ -117,6 +117,20 @@ body {
   }
 }
 
+.bid__info .slick-track{
+  display: flex !important;
+}
+
+.bid__info .slick-slider{
+  display: grid !important;
+}
+
+@media (min-width: 497px) {
+  .bid__info .slick-track{
+    width: 100% !important;
+  }
+}
+
 
 .spinner__inline > .chakra-spinner{
   position: absolute !important;
@@ -227,6 +241,20 @@ body {
     &__info{
       color: #044868;
     }
+  }
+}
+
+.top__back__button{
+  color: $color-blue;
+}
+
+.chakra-table{
+  th{
+    font-size: 1rem !important;
+  }
+  
+  td{
+    color: $color-tetiary;
   }
 }
 

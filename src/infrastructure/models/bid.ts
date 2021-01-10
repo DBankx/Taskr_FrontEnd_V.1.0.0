@@ -9,5 +9,7 @@ export interface IBid{
     jobId: string;
     price: number;
     createdAt: Date;
-    Status: number;
+    status: number;
+    userName: string;
+    avatar: string;
 }

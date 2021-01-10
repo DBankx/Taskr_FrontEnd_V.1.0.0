@@ -16,6 +16,7 @@ const HomePage = lazy(() => import("../../../features/home/HomePage"));
 const QueryPage = lazy(() => import("../../../features/search/QueryPage"));
 const SignInPage = lazy(() => import("../../../features/auth/signin/SignInPage"));
 const TaskPage = lazy(() => import("../../../features/task/TaskPage"));
+const BidHistoryPage = lazy(() => import("../../../features/bid/bidHistory/BidHistoryPage"));
 
 // Chakra ui theme
 const theme = extendTheme(customTheme);
@@ -49,6 +50,7 @@ function App() {
           <Route exact path="/tasks" component={QueryPage} />
           <Route exact path="/signin" component={SignInPage} />
           <Route exact path="/task/:id" component={TaskPage} />
+          <Route exact path="/view-bids/:taskId" component={BidHistoryPage} />
         </Switch>
       </Suspense>
     </div>

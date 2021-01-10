@@ -34,7 +34,7 @@ const TaskDetails : React.FC<IProps> = ({task}) => {
                 </div>
             </HStack>
                 <Spacer />
-                <Link style={isMobile ? {marginTop: "0.5em"} : {}} to="/" className="text__blue">
+                <Link style={isMobile ? {marginTop: "0.5em"} : {}} to={`/view-bids/${task.id}`} className="text__blue">
                     View all bids
                 </Link>
             </HStack>
