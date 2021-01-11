@@ -13,7 +13,7 @@ import BidForm from "../bid/BidForm";
 import TaskCreatorDetails from "./TaskCreatorDetails";
 
 const TaskPage : React.FC<RouteComponentProps<{id: string}>> = ({match}) => {
-    const {getTaskById, loadingInitial, task} = useContext(rootStoreContext).jobStore;
+    const {getTaskById, loadingInitial, task} = useContext(rootStoreContext).taskStore;
     const [isMobile] = useMediaQuery("(max-width: 500px)");
     const [isSmallerScreen] = useMediaQuery( "(max-width: 800px)");
     

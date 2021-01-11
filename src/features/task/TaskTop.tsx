@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import { ITask } from "../../infrastructure/models/task";
 import {observer} from "mobx-react-lite";
-import {Box, HStack, Image, useMediaQuery} from "@chakra-ui/react";
-import {BinocularsIcon, FlagIcon, ShareButtonIcon, StarIcon} from "../../infrastructure/icons/Icons";
+import {Box, HStack, Image, Spinner, useMediaQuery} from "@chakra-ui/react";
+import {BinocularsFilledIcon, BinocularsIcon, FlagIcon, ShareButtonIcon, StarIcon} from "../../infrastructure/icons/Icons";
+import rootStoreContext from "../../application/stores/rootstore";
 
 interface IProps{
     task: ITask
@@ -10,13 +11,14 @@ interface IProps{
 
 const TaskTop : React.FC<IProps> = ({task}) => {
     const [isMobile] = useMediaQuery("(max-width: 500px)");
+    const {watchTask, watching, unWatchTask} = useContext(rootStoreContext).taskStore;
     return (
         <div >
         <div className="task__top">
             <h1 className="task__title">{task.title}</h1>
             <HStack className="task__top__actions" alignItems="center" spacing="10px">
-                <Box className="task__action__button">
-                    <BinocularsIcon boxSize={8} color="#3D3373" />
+                <Box className="task__action__button" onClick={() => task.isWatching ? unWatchTask(task.id) : watchTask(task.id)} title={task.isWatching ? "unwatch" : "watch"}>
+                    {watching ? <Spinner color="#3D3373" boxSize={8} /> : task.isWatching ? <BinocularsFilledIcon boxSize={8} color="#3D3373" /> : <BinocularsIcon boxSize={8} color="#3D3373" />}
                 </Box>
                 <Box className="task__action__button">
                     <FlagIcon boxSize={8} color="#F1454F" />

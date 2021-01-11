@@ -38,6 +38,8 @@ export class AuthStore{
     // Actions
     // ------------------------
     
+    
+    // TODO - Login should refresh the page
     @action signInUser = async (signInFormValues: ISignInFormValues) => {
         try{
             const signInResponse = await AuthRequest.signIn(signInFormValues);

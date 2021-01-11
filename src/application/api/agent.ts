@@ -38,7 +38,9 @@ export const JobRequest = {
             pageSize: queryValues?.pageSize,
             pageNumber: queryValues?.pageNumber
         }}),
-    getTaskById: (id: string): Promise<ITask> => ApiRequest.get(`/jobs/${id}`)
+    getTaskById: (id: string): Promise<ITask> => ApiRequest.get(`/jobs/${id}`),
+    watchTask: (taskId: string) : Promise<{}> => ApiRequest.post(`/jobs/watch/${taskId}`),
+    unwatchTask: (taskId: string) : Promise<{}> => ApiRequest.delete(`/jobs/watch/${taskId}`),
 }
 
 

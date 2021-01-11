@@ -15,6 +15,7 @@ export interface ITask{
     watchCount: number;
     creator: IUser;
     isBidActive: boolean;
+    isWatching: boolean;
 }
 
 export interface IPhoto{

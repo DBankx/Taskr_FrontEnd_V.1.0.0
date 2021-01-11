@@ -9,12 +9,12 @@ configure({enforceActions: "always"});
 
 export class RootStore {
     appStore: AppStore
-    jobStore: TaskStore
+    taskStore: TaskStore
     authStore: AuthStore
     bidStore: BidStore
     constructor() {
         this.appStore = new AppStore(this);
-        this.jobStore = new TaskStore(this);
+        this.taskStore = new TaskStore(this);
         this.authStore = new AuthStore(this);
         this.bidStore = new BidStore(this);
     }

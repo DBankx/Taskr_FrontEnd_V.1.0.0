@@ -17,7 +17,7 @@ interface IBidHistoryPageRouteValues{
 const BidHistoryPage : React.FC<RouteComponentProps<IBidHistoryPageRouteValues>> = ({match}) => {
     const {taskId} = match.params;
     const {getTaskBids, bids, loadingInitialBids} = useContext(rootStoreContext).bidStore;
-    const {getTaskById, task} = useContext(rootStoreContext).jobStore;
+    const {getTaskById, task} = useContext(rootStoreContext).taskStore;
    
     useEffect(() => {
         if(task == null){

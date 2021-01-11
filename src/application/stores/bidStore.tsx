@@ -24,9 +24,9 @@ export class BidStore{
             const bid = await BidRequest.placeBid(values, jobId);
             runInAction(() => {
                 this.bid = bid;
-                if(this.rootStore.jobStore.task) {
-                    this.rootStore.jobStore.task.bidsCount += 1;
-                    this.rootStore.jobStore.task.isBidActive = true;
+                if(this.rootStore.taskStore.task) {
+                    this.rootStore.taskStore.task.bidsCount += 1;
+                    this.rootStore.taskStore.task.isBidActive = true;
                 }
                 if(this.rootStore.bidStore.bids){
                     // find if a bid by the user exists

@@ -7,7 +7,7 @@ import QueryBody from "./QueryBody";
 import {StringParam, useQueryParams} from "use-query-params";
 
 const QueryPage = () => {
-    const {loadingInitial, tasks, getAllJobs, taskQueryValues, setTasksQueryParams} = useContext(rootStoreContext).jobStore;
+    const {loadingInitial, tasks, getAllJobs, taskQueryValues, setTasksQueryParams} = useContext(rootStoreContext).taskStore;
     const [queryParams] = useQueryParams({
         title: StringParam,
         city: StringParam
