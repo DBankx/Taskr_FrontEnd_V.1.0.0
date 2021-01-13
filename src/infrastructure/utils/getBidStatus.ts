@@ -13,4 +13,11 @@
     }
 }
 
+export enum BidStatus{
+    Submitted = "Submitted",
+    Seen = "Seen",
+    Rejected = "Rejected",
+    Approved = "Approved"
+}
+
 export default getBidStatus;

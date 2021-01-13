@@ -7,6 +7,7 @@ import {useLocation, Link} from "react-router-dom";
 import rootStoreContext from "../../application/stores/rootstore";
 import {observer} from "mobx-react-lite";
 import InlineLoader from "../../application/appLayout/InlineLoader";
+import {history} from "../../index";
 
 const AuthNavItems = lazy(() => import("./navAuth/AuthNavItems"))
 
@@ -38,7 +39,7 @@ const NavTop = () => {
                        {!isMobile &&
                        <Link to="/signup" style={{marginRight: "1em"}} className="text__primary" href="#">Signup</Link>}
                    </Flex>
-                   <button className="btn btn__primary btn__shadow btn__bold">Post a task</button>
+                   <button onClick={() => history.push("/create-task/details")} className="btn btn__primary btn__shadow btn__bold">Post a task</button>
                </Flex>
            </div>
            }

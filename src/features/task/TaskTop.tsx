@@ -38,6 +38,12 @@ const TaskTop : React.FC<IProps> = ({task}) => {
                     <p style={{color: "#C9D7EC"}}>&#124;</p>
                     
                     <p style={{fontSize: "15px", color: "#FFC850"}}><StarIcon boxSize={5} /> <StarIcon boxSize={5} /> <StarIcon boxSize={5} /> <StarIcon boxSize={5} /> 4.0 <span style={{color: "#62677D"}}>(12) reviews</span></p>
+
+                    <p style={{color: "#C9D7EC"}}>&#124;</p>
+
+                    <div className="task__status__label__steady">
+                        OPEN
+                    </div>
                 </HStack>
             </div>
         </div>

@@ -131,6 +131,10 @@ body {
   }
 }
 
+.nav__auth__box{
+  color: $color-tetiary !important;
+}
+
 
 .spinner__inline > .chakra-spinner{
   position: absolute !important;
@@ -278,8 +282,6 @@ body {
 }
 
 .label{
-  border: 0 solid $color-tetiary;
-  border-right-width: 1px;
   padding-right: 1em;
   color: $color-tetiary;
 }
@@ -308,5 +310,56 @@ body {
     &:last-child{
       padding-left: 0.7em
     }
+  }
+}
+
+.soft__alert{
+  display: flex;
+  align-items: center;
+  border: 1px solid #9cd4f2;
+  border-radius: 5px;
+  line-height: 22px;
+  margin-bottom: 20px;
+  padding: 20px;
+  position: relative;
+  background-color: #f0fafc;
+  
+  &__message{
+    color: #3e4153;
+    display: inline;
+    font-size: 17px;
+    margin: 0 1em;
+    padding: 3px 0;
+  }
+}
+
+.changing__middle__box {
+  width: 35vw;
+}
+
+@media(max-width: 1030px){
+  .changing__middle__box{
+    width: 50vw;
+  }
+}
+
+@media(max-width: 850px){
+  .changing__middle__box{
+    width: 70vw;
+  }
+}
+
+@media(max-width: 500px) {
+  .changing__middle__box {
+    width: 90vw;
+  }
+}
+
+
+
+
+@media(max-width: 500px) {
+  .changing__middle__box {
+    width: 90vw;
   }
 }

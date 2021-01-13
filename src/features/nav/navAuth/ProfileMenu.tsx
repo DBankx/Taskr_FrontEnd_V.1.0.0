@@ -19,7 +19,7 @@ const ProfileMenu : React.FC<IProps> = ({user}) => {
                     <ChevronDownIcon boxSize={8} />
                 </HStack>
             </MenuButton>
-            <MenuList minWidth="180px">
+            <MenuList minWidth="180px" className="nav__auth__box">
                     <MenuItem>My Tasks</MenuItem>
                     <MenuItem>Bids / Offers</MenuItem>
                     <MenuItem>My Orders </MenuItem>

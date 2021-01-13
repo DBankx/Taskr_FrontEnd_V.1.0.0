@@ -17,6 +17,7 @@ const QueryPage = lazy(() => import("../../../features/search/QueryPage"));
 const SignInPage = lazy(() => import("../../../features/auth/signin/SignInPage"));
 const TaskPage = lazy(() => import("../../../features/task/TaskPage"));
 const BidHistoryPage = lazy(() => import("../../../features/bid/bidHistory/BidHistoryPage"));
+const TitleCategoryPage = lazy(() => import("../../../features/createTask/Title-category"));
 
 // Chakra ui theme
 const theme = extendTheme(customTheme);
@@ -36,8 +37,8 @@ function App() {
     }
   }, [setAppLoaded, getCurrentUser, token]);
   
-  if(!appLoaded) return <FullPageSpinner />;
   
+  if(!appLoaded) return <FullPageSpinner />;
   return (
       <ChakraProvider theme={theme}>
     <div className="App">
@@ -51,6 +52,7 @@ function App() {
           <Route exact path="/signin" component={SignInPage} />
           <Route exact path="/task/:id" component={TaskPage} />
           <Route exact path="/view-bids/:taskId" component={BidHistoryPage} />
+          <Route exact path="/create-task/details" component={TitleCategoryPage} />
         </Switch>
       </Suspense>
     </div>

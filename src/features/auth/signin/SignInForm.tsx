@@ -20,6 +20,7 @@ const SignInForm = () => {
         <Formik validationSchema={validationSchema} initialValues={{email: "", password: ""}} onSubmit={(values: ISignInFormValues, action) => signInUser(values).then(() => history.push("/")).catch(() => {
             action.setSubmitting(false);
             action.setFieldError("email", "Invalid credentials");
+            action.setFieldError("password", "Invalid credentials");
         })}>
             {({
                 handleSubmit,
@@ -60,7 +61,7 @@ const SignInForm = () => {
                     </InputGroup>
                     </div>
                     <div className="form__field">
-                        <Button type="submit" isLoading={isSubmitting} disabled={isSubmitting || !isValid || !dirty} className="form__action__button btn__full-width btn__primary">Sign In</Button>
+                        <Button type="submit" loadingText="Authenticating..." isLoading={isSubmitting} disabled={isSubmitting || !isValid || !dirty} className="form__action__button btn__full-width btn__primary">Sign In</Button>
                     </div>
                     <div>
                         <Flex alignItems="center">

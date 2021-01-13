@@ -4,6 +4,7 @@ import {observer} from "mobx-react-lite";
 import {Box, HStack } from "@chakra-ui/react";
 import ProfileMenu from "./ProfileMenu";
 import {BinocularsIcon, ChatIcon, NotificationIcon} from "../../../infrastructure/icons/Icons";
+import {history} from "../../../index";
 
 interface IProps{
     user: IUser
@@ -25,7 +26,7 @@ const AuthNavItems : React.FC<IProps> = ({user}) => {
                 <ProfileMenu user={user} />
             </Box>
             <Box>
-                <button className="btn btn__primary btn__shadow btn__bold">Post a task</button>
+                <button onClick={() => history.push("/create-task/details")} className="btn btn__primary btn__shadow btn__bold">Post a task</button>
             </Box>
         </HStack>
     )

@@ -80,6 +80,7 @@ export class TaskStore{
                 }
                 if(this.task){
                     this.task.isWatching = true;
+                    this.task.watchCount++;
                 }
                 
                 this.watching = false;
@@ -104,6 +105,7 @@ export class TaskStore{
                 }
                 if(this.task){
                     this.task.isWatching = false;
+                    this.task.watchCount--;
                 }
 
                 this.watching = false;

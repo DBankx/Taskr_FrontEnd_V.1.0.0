@@ -20,7 +20,7 @@ function SEO({ description, lang, title, keywords}: IProps) {
                 lang,
             }}
             title={title}
-            titleTemplate={`Taskr - %s`}
+            titleTemplate={`%s | Taskr`}
             meta={[
                 {
                     name: `description`,

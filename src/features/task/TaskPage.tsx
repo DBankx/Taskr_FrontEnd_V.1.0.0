@@ -43,7 +43,7 @@ const TaskPage : React.FC<RouteComponentProps<{id: string}>> = ({match}) => {
                 <div style={{marginTop: "1em"}}>
                 <SimpleGrid className="task__body__grid" templateColumns={{xl: "2fr 1fr", lg: "1.6fr 1fr", md: "1fr", sm: "1fr"}} spacing="40px">
                     <Box style={{boxSizing: "border-box", width: "100%"}} className="">
-                        <TaskImages task={task} />
+                        {task.photos.length > 0 && <TaskImages task={task} />}
                         <TaskDetails task={task} />
                         {isSmallerScreen && (
                             <div className="task__details">

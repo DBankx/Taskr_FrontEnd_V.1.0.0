@@ -4,10 +4,10 @@ import {observer} from "mobx-react-lite";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import {HStack, Spacer, Wrap, useMediaQuery } from "@chakra-ui/react";
-import  {
+import {
+    CalendarIcon,
     BidIcon,
     BinocularsIcon,
-    DeliveryIcon,
     EyeIcon,
     LocationIcon
 } from "../../infrastructure/icons/Icons";
@@ -23,7 +23,7 @@ const TaskDetails : React.FC<IProps> = ({task}) => {
     const devDate = new Date(task.deliveryDate);
     const [isMobile] = useMediaQuery("(max-width: 500px)");
     return (
-        <div className="task__details task__bid__form__card">
+        <div className={`${task.photos.length > 0 && "task__details"} task__bid__form__card`}>
             <HStack style={isMobile ? {display: "block"} : {}}>
             <HStack>
                 <LocationIcon boxSize={8} color="#3D3373" />
@@ -36,10 +36,10 @@ const TaskDetails : React.FC<IProps> = ({task}) => {
                 <Link style={isMobile ? {marginTop: "0.5em"} : {}} to={`/view-bids/${task.id}`} className="text__blue">
                     View all bids
                 </Link>
-            </HStack>
+            </HStack>   
             
-            <HStack style={{margin: "1em 0"}}>
-                <DeliveryIcon boxSize={9} color="#3D3373" />
+            <HStack alignItems="center" style={{margin: "1em 0"}}>
+                <CalendarIcon boxSize={7} color="#3D3373" />
                     <p className="text__darker task__posted">Ends {dayjs(task.deliveryDate).from(Date.now())} | {devDate.toUTCString()}</p>
             </HStack>
             

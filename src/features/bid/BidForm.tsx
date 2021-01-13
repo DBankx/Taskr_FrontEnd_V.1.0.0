@@ -53,7 +53,7 @@ const BidForm : React.FC<IProps> = ({task}) => {
                     <div style={{textAlign: "center", margin: "1em 0"}}>
                         <Flex spacing="10px" alignItems="center">
                             
-                    <span style={{color: "#777777", fontSize: "12px"}} className="query__price__label a"><MoneyIcon boxSize={8} color="#37a864"/>Starting bid:</span>
+                    <span style={{color: "#777777", fontSize: "12px"}} className="query__price__label a"><MoneyIcon boxSize={8} color="#37a864"/>Budget:</span>
                             
                             <Spacer />
                             

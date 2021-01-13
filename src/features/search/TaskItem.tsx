@@ -3,7 +3,7 @@ import {ITask} from "../../infrastructure/models/task";
 import {observer} from "mobx-react-lite";
 import {Box, Divider, Flex, HStack, Image, SimpleGrid, Spacer, useMediaQuery} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import {BidIcon, BinocularsIcon, DeliveryIcon, LocationIcon} from "../../infrastructure/icons/Icons";
+import {CalendarIcon, LocationIcon} from "../../infrastructure/icons/Icons";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
 
@@ -28,7 +28,7 @@ const TaskItem : React.FC<IProps> = ({task}) => {
             <div className="query__task__title">
                <Link to={`/task/${task.id}`}><span className="truncate">{task.title}</span></Link>
             </div>
-                <HStack spacing="10px">
+                <HStack spacing="10px" style={{margin: "0.5em 0"}}>
                     <Image borderRadius="full" boxSize="30px" alt="tasker-avatar" src={`https://ui-avatars.com/api/?name=${task.creator.userName}&rounded=true&bold=true`} />
                     <span>{task.creator.userName}</span>
                     <div>
@@ -41,10 +41,8 @@ const TaskItem : React.FC<IProps> = ({task}) => {
                                 {task.description}
                             </span>
                         </div>
-                    <div>
-                        <small className="text__primary"><BinocularsIcon /> 13K watching </small>
-                        <small style={{marginLeft: "2em"}} className="text__primary"><BidIcon /> 10 Bids </small>
-                        <small style={{marginLeft: "2em"}} className="text__primary"><DeliveryIcon /> In 3 days time </small>
+                    <div className="query__task__endDate">
+                        <small className="text__primary"><CalendarIcon color="#3D3373" /> Ends {dayjs(task.deliveryDate).from(Date.now())} </small>
                     </div>
                 </Box>
             </SimpleGrid>
@@ -60,6 +58,9 @@ const TaskItem : React.FC<IProps> = ({task}) => {
                     <span>${task.initialPrice}</span>
                 </div>
             </Flex>
+            <div className="task__status__label">
+                OPEN
+            </div>
         </div>
     )
 } 

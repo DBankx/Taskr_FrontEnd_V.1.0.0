@@ -11,6 +11,7 @@
     color: #7a7d85 !important;
   }
   
+  
   &__price__label{
     color: #62646a;
     font-size: 17px !important;
@@ -34,6 +35,7 @@
     border: 0.8px solid #E5E5E5;
     border-left: 0;
     border-right: 0;
+    position: relative;
     &:first-child{
       border-top: 0;
     }

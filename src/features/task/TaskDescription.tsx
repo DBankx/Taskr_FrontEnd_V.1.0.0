@@ -11,7 +11,7 @@ const TaskDescription : React.FC<IProps> = ({task}) => {
     return ( 
         <div style={{marginTop: "3em", position: "relative"}} className="task__bid__form__card">
             <div className={!showMore ? "show__more__child" : "show__more__child__released"}>
-            <h3 className="task__description__title">Description</h3>
+            <h3 className="task__description__title">Details</h3>
             <p className="task__description__container">{task.description}</p>
             </div>
             <div className={!showMore ? "show__more__fade__out" : "show__more__fade__out__released"}>
