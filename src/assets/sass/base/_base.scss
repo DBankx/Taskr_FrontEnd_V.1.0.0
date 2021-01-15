@@ -355,11 +355,79 @@ body {
   }
 }
 
+.numbered__box{
+  align-items: center;
+  background-color: #ececee;
+  border-radius: 5px;
+  bottom: 2px;
+  color: #373373;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 700;
+  height: 20px;
+  justify-content: center;
+  margin-right: 10px;
+  padding: 1px 0 2px;
+  position: relative;
+  width: 20px;
+}
 
+.formMap{
+  height: 400px !important;
+  width: 400px !important;
+}
 
+.marker{
+  background-image: url("../../svg-icons/location-pin.svg");
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
 
 @media(max-width: 500px) {
   .changing__middle__box {
     width: 90vw;
+  }
+}
+
+.title{
+  display: block;
+  font-size: 1.2em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+.urgent__label{
+  padding: 0.2em;
+  background-color: $error-color;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.image__dropzone{
+  border: 3px dashed $color-primary;
+  text-align: center;
+  height: 300px;
+  width: 100%;
+  position: relative;
+  border-radius: 4px;
+  background-color: $color-secondary;
+  
+  &__active{
+    border: 3px dashed $color-green;
+  }
+  
+  &__error{
+    border: 3px dashed $error-color;
+  }
+}
+
+@media(max-width: 500px){
+  .image__dropzone{
+    width: 100%;
   }
 }

@@ -49,6 +49,11 @@ body{
     font-size: 14px !important;
   }
   
+  &__small__cut{
+    width: 60%;
+    line-height: 18px;
+  }
+  
   &__silent{
     color: #7a7d85 !important;
   }
@@ -59,6 +64,14 @@ body{
   
   &__darker{
     color: #3e4153 !important;
+  }
+  
+  &__error{
+    color: $error-color !important;
+  }
+  
+  &__success{
+    color: $color-green !important;
   }
   
   &__dark__grey{
@@ -88,7 +101,12 @@ body{
     &__lg{
       font-size: 20px;
     }
+    &__small__cut{
+      width: 100% !important;
+    }
   }
+  
+ 
   
   .truncate__3{
     -webkit-line-clamp: 4;

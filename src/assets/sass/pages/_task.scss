@@ -131,6 +131,38 @@
     font-weight: 700;
   }
   
+  &__form__preview__card{
+    border: 2px solid $border-color;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 0 1em;
+    position: relative;
+    &__overlay{
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: $color-secondary;
+      color: $color-tetiary;
+      opacity: 0;
+      
+      .content{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+      }
+    }
+    
+    &:hover{
+      .task__form__preview__card__overlay{
+        opacity: 1;
+      }
+    }
+  }
+  
   &__dots__ul{
     display: flex;
     align-items: center;

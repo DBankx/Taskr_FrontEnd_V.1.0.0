@@ -55,6 +55,13 @@
    
   }
   
+  &__detail{
+    flex-basis: 200px;
+    text-align: right;
+  }
+  
+  
+  
   &__field{
     margin-bottom: 14px;
     -webkit-box-sizing: border-box;
@@ -68,7 +75,15 @@
       font-size: 1em !important;
       color: $color-tetiary;
     }
+    
+    &__bg{
+      width: 1.25em !important;
+      height: 1.25em !important;
+    }
   }
+
+   
+  
   
   &__error{
     color: $error-color !important;
@@ -76,6 +91,20 @@
     margin-top: 0.2em;
   }
 
+  &__box{
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
+    margin-top: 20px;
+    padding: 20px;
+    position: relative;
+  }
+  
+  &__task{
+    font-size: 17px;
+    line-height: 22px;
+    width: 100%;
+  }
 
   &__textarea{
     padding: 30px 10px 10px !important;
@@ -124,4 +153,18 @@
     display: block;
     color: #767676;
   }
+}
+
+@media(max-width: 600px){
+  .form{
+    &__detail{
+      flex-basis: 0;
+      text-align: left;
+    }
+  }
+}
+
+.chakra-checkbox__control{
+  width: 1.25em !important;
+  height: 1.25em !important;
 }

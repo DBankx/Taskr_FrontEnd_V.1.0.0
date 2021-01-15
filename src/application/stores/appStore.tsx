@@ -14,10 +14,17 @@ export class AppStore{
     }
     
     @observable appLoaded = false;
+    @observable uploadedTaskFormFiles : any[] = [];
     
     @action setAppLoaded = () => {
         this.appLoaded = true;
     }
     
+    @action setPreviewImages = (files: any) => {
+        this.uploadedTaskFormFiles = files;
+    }
     
+   @action removePreviewImages = () => {
+        this.uploadedTaskFormFiles = [];
+   } 
 }

@@ -22,6 +22,24 @@
   text-align: center !important;
   vertical-align: top !important;
   
+  &__green{
+    background-color: $color-green !important;
+    color: #fff !important;
+    &:hover{
+      background-color: lighten($color-green, 20%) !important;
+      transition: 0.5s ease !important;
+    }
+  }
+
+  &__error{
+    background-color: $error-color !important;
+    color: #fff !important;
+    &:hover{
+      background-color: lighten($error-color, 20%) !important;
+      transition: 0.5s ease !important;
+    }
+  }
+  
   &__fb{
     color: #fff !important;
     background-color: #3B5998 !important;

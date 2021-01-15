@@ -17,6 +17,7 @@
     "dayjs": "^1.9.8",
     "formik": "^2.2.6",
     "framer-motion": "^3.1.1",
+    "mapbox-gl": "^2.0.1",
     "mobx": "^6.0.4",
     "mobx-react-lite": "^3.1.6",
     "node-sass": "4.14.1",
@@ -24,6 +25,7 @@
     "react": "^17.0.1",
     "react-countdown": "^2.3.1",
     "react-dom": "^17.0.1",
+    "react-dropzone": "^11.2.4",
     "react-helmet": "^6.1.0",
     "react-medium-image-zoom": "^4.3.1",
     "react-paginate": "^7.0.0",
@@ -67,6 +69,7 @@
     ]
   },
   "devDependencies": {
+    "@types/mapbox-gl": "^2.0.2",
     "@types/react-helmet": "^6.1.0",
     "@types/react-paginate": "^6.2.1",
     "@types/react-router-dom": "^5.1.6",
