@@ -10,7 +10,8 @@
     },
     styles:{
         global:{
-            body: "#F8F9F9"
+            body: "#F8F9F9",
+            fontSize: "1em"
         }
     }
 }

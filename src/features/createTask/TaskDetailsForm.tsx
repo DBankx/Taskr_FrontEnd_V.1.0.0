@@ -108,7 +108,7 @@ const TaskDetailsForm = () => {
                     <div className="form__box">
                         <div className="form__box__description">
                             <div className="numbered__box">2</div>
-                            Task Media
+                            Task Media (Optional)
                         </div>
                         <Divider mt={4} mb={4} />
                         
@@ -126,7 +126,19 @@ const TaskDetailsForm = () => {
                         </SimpleGrid>
                         
                     </div>
-                    
+
+                    <div className="form__box">
+                        <div className="form__box__description">
+                            <div className="numbered__box">3</div>
+                            Task Location
+                        </div>
+                        <Divider mt={4} mb={4} />
+                        
+                        
+
+                    </div>
+
+
                     <button type="submit">submit</button>
                 </form>
                     )}

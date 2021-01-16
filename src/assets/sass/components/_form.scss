@@ -46,6 +46,13 @@
     }
   }
   
+  &__location__picker{
+    background-color: #fff;
+    padding: 1em;
+    border-radius: 4px;
+    border: 1px solid $border-color;
+  }
+  
   &__select{
     color: $color-tetiary !important;
     font-size: 1em !important;
@@ -60,7 +67,16 @@
     text-align: right;
   }
   
-  
+ &__radio__bg{
+   width: 1.2em !important;
+   height: 1.2em !important;
+   
+   &__label{
+     font-size: 1.7em !important;
+     color: $color-tetiary;
+   }
+ } 
+ 
   
   &__field{
     margin-bottom: 14px;

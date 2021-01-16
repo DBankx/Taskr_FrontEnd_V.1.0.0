@@ -23,7 +23,7 @@ const TaskFormImageUploader : React.FC<IProps> = ({setFieldValue}) => {
     }, [])
     return (
         <Dropzone noClick={true} noKeyboard={true} onDropRejected={() => toast.error(<Alert type="error" subject="Error occurred" icon={<CloseIcon boxSize={8} color="#73000c"/>} message="Please upload only 3 *jpeg or *png files " />)} accept="image/jpeg, image/png" maxFiles={3} onDrop={acceptedFiles => {
-            setPreviewImages(acceptedFiles.map((file: object) => Object.assign(file, {
+            setPreviewImages(acceptedFiles.map((file: any) => Object.assign(file, {
                 preview: URL.createObjectURL(file)
             })));
             setFieldValue("imageFiles", acceptedFiles);

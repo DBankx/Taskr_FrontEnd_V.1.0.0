@@ -1,5 +1,7 @@
 ﻿.navbar{
+  position: relative;
   &__container{
+    position: relative;
     background-color: #fff;
     box-shadow: 0px 1px 10px rgba(0,0,0,.2);
   }
