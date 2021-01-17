@@ -1,18 +1,23 @@
 ﻿import {Button, Checkbox, Divider, Input, SimpleGrid, Stack, Textarea } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, {lazy, Suspense} from "react";
 import {StringParam, useQueryParams} from "use-query-params";
 import SEO from "../../application/appLayout/SEO";
 import {InfoIcon} from "../../infrastructure/icons/Icons";
 import TaskFormImageUploader from "./TaskFormImageUploader";
 import TaskFormUploadedImagesPreview from "./TaskFormUploadedImagesPreview";
+import {DeliveryTypes} from "../../infrastructure/enums/deliveryTypes";
+import InlineLoader from "../../application/appLayout/InlineLoader";
 
 const TaskDetailsForm = () => {
     const [taskDetails] = useQueryParams({
         title: StringParam,
-        category: StringParam
+        category: StringParam,
+        deliveryType: StringParam
     }) 
+    
+    const LocationComponent = lazy(() => import("./LocationFinder"));
     
     return (
         <div className="container">
@@ -134,7 +139,19 @@ const TaskDetailsForm = () => {
                         </div>
                         <Divider mt={4} mb={4} />
                         
-                        
+                        <div style={{marginBottom: "1em"}}>
+                            <p className="bold__label">Delivery Type: <span className="text__darker">{taskDetails.deliveryType}</span></p>
+                            <p className="text__blue">Change</p>
+                        </div>
+                        {taskDetails.deliveryType === DeliveryTypes.InPerson ? (
+                            <Suspense fallback={<InlineLoader />}>
+                                <p className="text__darker">Search and select your address</p>
+                                <LocationComponent />
+                            </Suspense>
+                        ) : (
+                            <p>This is online</p>
+                        )}
+                    
 
                     </div>
 

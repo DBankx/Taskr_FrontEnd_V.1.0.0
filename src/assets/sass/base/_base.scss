@@ -58,7 +58,12 @@ body {
   }
 }
 
-
+.bold__label{
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  color: #7a7d85;
+}
 
 @media(max-width: 1200px){
   .container{
@@ -69,7 +74,7 @@ body {
 
 @media(max-width: 600px){
   .container{
-    margin: auto 1.2em;
+    margin: auto 0.5em;
   }
 }
 .spinner__inline{

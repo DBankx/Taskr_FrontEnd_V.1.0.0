@@ -65,6 +65,7 @@ const TitleCategory = () =>{
                                     <SimpleGrid spacing="10px" templateColumns={{xl: "1fr 1fr", lg: "1fr 1fr", md: "1fr 1fr", sm: "1fr"}}>
                                         
                                         <div className="form__location__picker">
+                                            <p className="bold__label">Delivery type</p>
                                         <Radio defaultChecked className="form__radio__bg" colorScheme="green" value={DeliveryTypes.InPerson}>
                                             <p className="form__radio__bg__label">In Person</p>
                                         </Radio>
@@ -73,6 +74,7 @@ const TitleCategory = () =>{
                                         </div>
                                         
                                         <div className="form__location__picker">
+                                            <p className="bold__label">Delivery type</p>
                                         <Radio className="form__radio__bg" colorScheme="green" value={DeliveryTypes.Online}>
                                             <p className="form__radio__bg__label">Online</p>
                                         </Radio>
