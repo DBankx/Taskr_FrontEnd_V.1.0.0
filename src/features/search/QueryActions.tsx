@@ -104,4 +104,4 @@ const QueryActions = () => {
     )
 }
 
-export default observer(QueryActions);
+export default React.memo(observer(QueryActions));

@@ -103,4 +103,4 @@ const TitleCategory = () =>{
     )
 }
 
-export default observer(TitleCategory);
+export default React.memo(observer(TitleCategory));

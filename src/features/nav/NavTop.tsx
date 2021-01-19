@@ -1,4 +1,4 @@
-﻿import {Box, Flex, Spacer, Image, Divider, useMediaQuery} from "@chakra-ui/react";
+﻿import {Flex, Spacer, Image, Divider, useMediaQuery} from "@chakra-ui/react";
 import React, {useContext, lazy, Suspense} from "react";
 import Logo from "../../assets/images/taskr-logo.svg";
 import NavSearchInput from "./NavSearchInput";
@@ -19,9 +19,9 @@ const NavTop = () => {
     return (
         <div style={{padding: location.pathname === "/" ? "1em 0 0 0" : "1em 0" }}>
        <Flex alignItems="center" className="navbar__flex__top">
-           <Box>
+           <Link to="/">
            <Image className="navbar__logo" src={Logo} alt="taskr-logo"/>
-           </Box>
+           </Link>
            {isSmallScreen && <Spacer />}
          <NavSearchInput />
            <Spacer />
@@ -48,4 +48,4 @@ const NavTop = () => {
     )
 }
 
-export default observer(NavTop);
+export default React.memo(observer(NavTop));

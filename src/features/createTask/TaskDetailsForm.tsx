@@ -18,7 +18,6 @@ const TaskDetailsForm = () => {
     }) 
     
     const LocationComponent = lazy(() => import("./LocationFinder"));
-    
     return (
         <div className="container">
             <SEO title={`${taskDetails.title} for ${taskDetails.category}`} />
@@ -27,7 +26,7 @@ const TaskDetailsForm = () => {
                     <h1 className="text__darker text__bigger__md">Post your task it&apos;s <span className="text__primary">Fast</span> & <span className="text__primary">Easy</span></h1>
                 </div>
                 
-                <Formik initialValues={{title: taskDetails.title!, description: "", urgent: false, imageFiles: []}} onSubmit={values => console.log(values)}>
+                <Formik initialValues={{title: taskDetails.title!, description: "", urgent: false, imageFiles: [], address: "", postCode: ""}} onSubmit={values => console.log(values)}>
                     {({
                        handleChange,
                        handleBlur, 
@@ -35,7 +34,8 @@ const TaskDetailsForm = () => {
                        values,
                        errors,
                        touched,
-                        setFieldValue
+                        setFieldValue,
+                        setFieldError
                     }) => (
                         
                     
@@ -78,10 +78,10 @@ const TaskDetailsForm = () => {
                                 ) : <small className="text__darker"><span style={{marginRight: "0.5em"}}><InfoIcon boxSize={6} color="#3182CE" /></span>Be as specific as you can about what needs doing</small>}
                             </div>
                         </Stack>
-                    </div>
+                    </div>  
 
                     <div className="form__field form__task" style={{margin: "2em 0"}}>
-                        <Stack alignItems="center" direction={["column", "row"]} spacing={{xl: "15px", lg: "15px", md: "5px", sm: "8px"}}>
+                        <Stack direction={["column", "row"]} spacing={{xl: "15px", lg: "15px", md: "5px", sm: "8px"}}>
                             <p className="form__detail">Urgency:<span style={{display: "block"}}>(Optional)</span></p>
                                 
                             <div style={{width: "100%"}}>
@@ -98,7 +98,7 @@ const TaskDetailsForm = () => {
                         <Stack direction={["column", "row"]} spacing={{xl: "15px", lg: "15px", md: "5px", sm: "8px"}}>
                             <p className="form__detail">Tags:<span style={{display: "block"}}>(Optional)</span></p>
                             <div style={{width: "100%"}}>
-                                <p className="text__dark__grey">Increase your exposure. Enter up to 4 keywords taskers can use to search yout task.</p>
+                                <small className="text__dark__grey">Increase your exposure. Enter up to 4 keywords taskers can use to search yout task.</small>
                                 
                                 <Stack style={{marginTop: "1em"}} direction="row" spacing="20px">
                                     <Input style={{width: "300px"}} placeholder="Add a tag" className="form__input" />
@@ -146,7 +146,9 @@ const TaskDetailsForm = () => {
                         {taskDetails.deliveryType === DeliveryTypes.InPerson ? (
                             <Suspense fallback={<InlineLoader />}>
                                 <p className="text__darker">Search and select your address</p>
-                                <LocationComponent />
+                                <LocationComponent addressErrors={errors.address} setFieldError={setFieldError} setFieldValue={setFieldValue} values={values} />
+                                <small className="text__darker"><span style={{marginRight: "0.5em"}}><InfoIcon boxSize={6} color="#3182CE" /></span>If you cannot see your address please select online as the delivery type then convey your real address to the runner on messages</small>
+                               
                             </Suspense>
                         ) : (
                             <p>This is online</p>

@@ -17,4 +17,4 @@ const Navbar = () => {
     )
 }
 
-export default observer(Navbar);
+export default React.memo(observer(Navbar));

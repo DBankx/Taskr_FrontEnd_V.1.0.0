@@ -33,4 +33,4 @@ const ProfileMenu : React.FC<IProps> = ({user}) => {
     )
 }
 
-export default observer(ProfileMenu);
+export default React.memo(observer(ProfileMenu));

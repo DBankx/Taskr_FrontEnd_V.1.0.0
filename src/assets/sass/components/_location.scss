@@ -1,7 +1,10 @@
 ﻿.geocoder__input{
+  height: fit-content;
   input{
     width: 100% !important;
   }
+  
+ 
 }
 
 .mapboxgl-ctrl-geocoder{
@@ -35,4 +38,26 @@
 
 .mapboxgl-ctrl-bottom-left, .mapboxgl-ctrl-bottom-right{
   z-index: 0 !important;
+}
+
+.location{
+  &__finder{
+    align-items: start;
+    position: relative !important;
+  }
+}
+
+@media (max-width: 500px){
+  .mapbox-gl-map{
+    height: 30vh !important;
+  }
+ 
+}
+
+.address__box{
+  margin-top: 1em;
+  padding: 1em;
+  background-color: $color-secondary;
+  border-radius: 4px;
+  color: $color-tetiary;
 }
