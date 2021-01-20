@@ -11,6 +11,7 @@ import TaskDetails from "./TaskDetails";
 import TaskDescription from "./TaskDescription";
 import BidForm from "../bid/BidForm";
 import TaskCreatorDetails from "./TaskCreatorDetails";
+import {Category} from "../../infrastructure/enums/category";
 
 const TaskPage : React.FC<RouteComponentProps<{id: string}>> = ({match}) => {
     const {getTaskById, loadingInitial, task} = useContext(rootStoreContext).taskStore;
@@ -29,7 +30,9 @@ const TaskPage : React.FC<RouteComponentProps<{id: string}>> = ({match}) => {
         <div>
         <div className="container">
             <SEO title={task.title} />
-            
+           <div style={{margin: "1em 0"}}>
+               <small className="text__darker">Task posted in: <span className="text__blue">{Category[task.category]}</span></small>
+           </div> 
             <div className="main">
                 <div style={{marginBottom: "1em"}}>
                     {task.isBidActive && <Alert status="info" variant="left-accent">

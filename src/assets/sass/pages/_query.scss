@@ -10,7 +10,13 @@
     height: 2em !important;
     color: #7a7d85 !important;
   }
-  
+
+
+  &__price__placeholder__green {
+    color: $color-green !important;
+    height: 2em !important;
+    
+  }
   
   &__price__label{
     color: #62646a;

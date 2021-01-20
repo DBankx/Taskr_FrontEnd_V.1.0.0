@@ -9,10 +9,11 @@ import {history} from "../../index";
 import SEO from "../../application/appLayout/SEO";
 import * as yup from "yup";
 import {DeliveryTypes} from "../../infrastructure/enums/deliveryTypes";
+import {getAllEnumKeys} from "../../infrastructure/enums/enumFunctions";
 
 const TitleCategory = () =>{
         const validationSchema = yup.object().shape({
-            title: yup.string().required("Descriptive title for your task is required").max(50, "Task title is too long").min(3, "Task title is too short"),
+            title: yup.string().required("Descriptive title for your task is required").max(140, "Task title is too long").min(3, "Task title is too short"),
             category: yup.string().required("Task category is required")
         })
     return (
@@ -24,7 +25,7 @@ const TitleCategory = () =>{
                     <h1 className="text__primary text__lg text__middle">Tell us what you need done?</h1>
                 </div>
                 
-                <Formik validationSchema={validationSchema} initialValues={{title: "", category: "", deliveryType: DeliveryTypes.InPerson}} onSubmit={values => history.push(`/post-task?title=${values.title}&category=${values.category}&deliveryType=${values.deliveryType}`)}>
+                <Formik validationSchema={validationSchema} initialValues={{title: "", category: "", deliveryType: "0"}} onSubmit={values => history.push(`/post-task?title=${values.title}&category=${values.category}&deliveryType=${values.deliveryType}`)}>
                     {({
                         handleSubmit,
                         handleBlur,
@@ -40,7 +41,7 @@ const TitleCategory = () =>{
                                 <label data-testid="label" className="text__darker text__bigger__md" id="message-Your Message" htmlFor="title">Task title</label>
                                 <Textarea isInvalid={!!errors.title && touched.title} data-testid="input" value={values.title} onChange={handleChange} onBlur={handleBlur} className="form__textarea form__textarea__no__label" id="title" rows={3} name="title" />
                                 
-                                <small className="form__textarea__counter text__silent">{values.title.length}/50</small>
+                                <small className="form__textarea__counter text__silent">{values.title.length}/140</small>
                                 {errors.title && touched.title && (
                                     <small className="form__error">{errors.title}</small>
                                 )}
@@ -49,8 +50,8 @@ const TitleCategory = () =>{
                             <div className="form__field">
                                 <label htmlFor="category" className="text__darker text__bigger__md">Category</label>
                                 <Select isInvalid={!!errors.category && touched.category} name="category" onChange={handleChange} onBlur={handleBlur} value={values.category} size="lg" className="form__select" variant="filled" placeholder="Please select a category">
-                                    {Object.values(Category).map((category, i) => (
-                                        <option key={i} value={category}>
+                                    {getAllEnumKeys(Category).map((category: string, i) => (
+                                        <option key={category} value={i}>
                                             {category}
                                         </option>
                                     ))} 
@@ -61,12 +62,12 @@ const TitleCategory = () =>{
                             </div>
                             
                             <div className="form__field">
-                                <RadioGroup value={values.deliveryType} name="deliveryType" onChange={handleChange} onBlur={handleBlur}>
+                                <RadioGroup value={values.deliveryType} name="deliveryType" onChange={handleChange} onBlur={handleBlur} >
                                     <SimpleGrid spacing="10px" templateColumns={{xl: "1fr 1fr", lg: "1fr 1fr", md: "1fr 1fr", sm: "1fr"}}>
                                         
                                         <div className="form__location__picker">
                                             <p className="bold__label">Delivery type</p>
-                                        <Radio defaultChecked className="form__radio__bg" colorScheme="green" value={DeliveryTypes.InPerson}>
+                                        <Radio defaultChecked className="form__radio__bg" colorScheme="green" value={DeliveryTypes.InPerson.toString()}>
                                             <p className="form__radio__bg__label">In Person</p>
                                         </Radio>
                                             <p className="text__darker">Select this option if a tasker is needed in person to respond to your needs.</p>
@@ -75,7 +76,7 @@ const TitleCategory = () =>{
                                         
                                         <div className="form__location__picker">
                                             <p className="bold__label">Delivery type</p>
-                                        <Radio className="form__radio__bg" colorScheme="green" value={DeliveryTypes.Online}>
+                                        <Radio className="form__radio__bg" colorScheme="green" value={DeliveryTypes.Online.toString()}>
                                             <p className="form__radio__bg__label">Online</p>
                                         </Radio>
                                             <p className="text__darker">Select this option if your needs can be met if the tasker works remotley.</p>

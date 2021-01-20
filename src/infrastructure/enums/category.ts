@@ -1,10 +1,10 @@
 ﻿export enum Category{
-    Cleaning= "Cleaning",
-    Catering = "Catering",
-    Laundry = "Laundry",
-    Groceries = "Groceries",
-    Digital = "Digital",
-    Errands = "Errands",
-    Delivery = "Delivery"
+    Cleaning,
+    Catering,
+    Laundry,
+    Groceries,
+    Digital,
+    Errands,
+    Delivery
 }
 

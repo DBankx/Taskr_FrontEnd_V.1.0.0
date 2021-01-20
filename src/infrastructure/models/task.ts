@@ -1,4 +1,6 @@
 ﻿import {IUser} from "./auth";
+import {Category} from "../enums/category";
+import {DeliveryTypes} from "../enums/deliveryTypes";
 
 export interface ITask{
     id: string;
@@ -7,8 +9,8 @@ export interface ITask{
     initialPrice: number;
     createdAt: Date;
     deliveryDate: Date;
-    photos: IPhoto[],
-    city: string;
+    photos: IPhoto[];
+    address: string;
     postCode: string;
     views: number;
     bidsCount: number;
@@ -16,6 +18,8 @@ export interface ITask{
     creator: IUser;
     isBidActive: boolean;
     isWatching: boolean;
+    deliveryType: number;
+    category: number;
 }
 
 export interface IPhoto{
@@ -39,3 +43,16 @@ export interface ITaskQueryValues{
     pageNumber: number;
     city?: string;
 } 
+
+export interface ITaskSubmission{
+    id: string;
+    title: string;
+    price: number;
+    imageFiles: Blob[];
+    category: number;
+    deliveryType: number;
+    address: string;
+    postCode: string;
+    deliveryDate: string;
+    description: string;
+}

@@ -36,7 +36,7 @@ const TaskBidItem : React.FC<IProps> = ({task}) => {
                 </SimpleGrid>
                 <SimpleGrid templateColumns="0.5fr 1fr">
                     <p className="text__silent">Location:</p>
-                    <p className="text__darker">{task.city && `${task.city} / `}{task.postCode}</p>
+                    <p className="text__darker">{task.address && `${task.address} / `}{task.postCode}</p>
                 </SimpleGrid>
                 <SimpleGrid templateColumns="0.5fr 1fr">
                     <p className="text__silent">Item number:</p>

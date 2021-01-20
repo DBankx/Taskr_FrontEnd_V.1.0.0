@@ -4,7 +4,7 @@ import {ITaskQueryValues, IPaginatedTaskResponse, ITask} from "../../infrastruct
 import {JobRequest} from "../api/agent";
 import {toast} from "react-toastify";
 import Alert from "../common/Alert";
-import {CloseIcon} from "../../infrastructure/icons/Icons";
+import {CheckmarkIcon, CloseIcon} from "../../infrastructure/icons/Icons";
 import React from "react";
 import {alertErrors} from "../../infrastructure/utils/getErrors";
 
@@ -117,4 +117,14 @@ export class TaskStore{
         }
     }
     
+    
+    @action createTask = async (taskSubmission: FormData) => {
+        try{
+            await JobRequest.createTask(taskSubmission);
+            toast.success(<Alert type="success" subject="Task created" icon={<CheckmarkIcon boxSize={8} color="#224a23" />} message="Your task has been created & activated" />)
+        }catch (e) {
+           alertErrors(e);
+           throw e;
+        }
+    }
 }

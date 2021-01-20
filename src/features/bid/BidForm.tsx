@@ -1,10 +1,8 @@
 import {
     InputGroup,
-    InputLeftElement, NumberDecrementStepper,
-    NumberIncrementStepper,
+    InputLeftElement,
     NumberInput,
     NumberInputField,
-    NumberInputStepper,
     Button,
     Flex,
     Spacer
@@ -17,6 +15,7 @@ import {ITask} from "../../infrastructure/models/task";
 import {MoneyIcon} from "../../infrastructure/icons/Icons";
 import * as yup from "yup";
 import rootStoreContext from "../../application/stores/rootstore";
+import {DeliveryTypes} from "../../infrastructure/enums/deliveryTypes";
 
 interface IProps{
     task: ITask
@@ -45,10 +44,10 @@ const BidForm : React.FC<IProps> = ({task}) => {
               }) => (
                 <form onSubmit={handleSubmit} className="task__bid__form__card">
                     
-                    <div className="map__compact__image">
+                    {task.deliveryType === DeliveryTypes.InPerson && <div className="map__compact__image">
                         <img src="https://cdn6.agoda.net/images/MAPS-1214/default/property-map-entry-1.svg" alt="compact-map" />
                         <p className="map__compact__footer">VIEW MAP</p>
-                    </div>
+                    </div>}
                   
                     <div style={{textAlign: "center", margin: "1em 0"}}>
                         <Flex spacing="10px" alignItems="center">
@@ -73,11 +72,7 @@ const BidForm : React.FC<IProps> = ({task}) => {
                             </InputLeftElement>
                             <NumberInput max={task.initialPrice} clampValueOnBlur={false}  size="md" defaultValue={0} precision={2} min={0}>
                                 <NumberInputField name="price" error={!!errors.price && touched.price} value={values.price} onChange={handleChange} onBlur={handleBlur}  className="task__price__input" />
-                                <NumberInputStepper>
-                                    <NumberIncrementStepper />
-                                    <NumberDecrementStepper />
-                                </NumberInputStepper>
-
+                               
                             </NumberInput>
                         </InputGroup>
                         {errors.price ? <small className="form__error">{errors.price}</small> :<small className="form__sm__text">Enter ${task.initialPrice} or less</small>}

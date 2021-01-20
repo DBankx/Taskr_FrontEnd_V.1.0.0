@@ -61,7 +61,7 @@ const LocationFinder : React.FC<IProps> = ({setFieldValue, setFieldError, addres
                             <span style={{marginLeft: "1em"}}>Your task will be posted in</span> 
                         </small>
                         <p>{values.address}</p>
-                        <p>Postcode: {values.postCode}</p>
+                        <p><span className="text__bold text__silent">Postcode:</span> {values.postCode}</p>
                     </div>}
                 </div>
             <MapGL

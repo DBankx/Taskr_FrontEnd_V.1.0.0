@@ -8,6 +8,17 @@
   }
 }
 
+.btn__white{
+  background-color: #fff !important;
+  border: 1px solid $border-color !important;
+  color: $color-primary !important;
+  &:hover{
+    background-color: $color-primary !important; 
+    transition: 0.5s ease !important;
+    color: #fff !important;
+  }
+}
+
 
 .btn__shadow{
   box-shadow: 0 2px 10px 0 rgba(55,51,115,.3);
@@ -17,10 +28,15 @@
   height: 40px !important;
   padding: 0 16px !important;
   font-size: 0.9em !important;
-  border-radius: 5px !important;
+  border-radius: 4px !important;
   outline: none !important;
   text-align: center !important;
   vertical-align: top !important;
+  
+  &__nm{
+    font-weight: 500 !important;
+    padding: 1em 2em !important;
+  }
   
   &__green{
     background-color: $color-green !important;
@@ -84,6 +100,7 @@
     height: 50px !important;
     font-size: 1em !important;
   }
+  
   
   &__accent{
     background-color: lighten($color-primary, 20%);

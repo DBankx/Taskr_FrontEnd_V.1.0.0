@@ -3,7 +3,7 @@ import {ITask} from "../../infrastructure/models/task";
 import {observer} from "mobx-react-lite";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import {HStack, Spacer, Wrap, useMediaQuery } from "@chakra-ui/react";
+import {HStack, Wrap, useMediaQuery, SimpleGrid } from "@chakra-ui/react";
 import {
     CalendarIcon,
     BidIcon,
@@ -21,22 +21,21 @@ interface IProps{
 
 const TaskDetails : React.FC<IProps> = ({task}) => {
     const devDate = new Date(task.deliveryDate);
-    const [isMobile] = useMediaQuery("(max-width: 500px)");
+    const [isMobile, isTablet] = useMediaQuery(["(max-width: 500px)", "(max-width: 991px)"]);
     return (
         <div className={`${task.photos.length > 0 && "task__details"} task__bid__form__card`}>
-            <HStack style={isMobile ? {display: "block"} : {}}>
+            <SimpleGrid spacing="10px" templateColumns={{xl: "2.5fr 0.5fr", lg: "2fr 1fr", md: "1fr", sm: "1fr"}}>
             <HStack>
                 <LocationIcon boxSize={8} color="#3D3373" />
                 <div>
-                    <p className="text__darker task__posted" style={{fontSize: "17px"}}>{`${task.city && task.city} ${task.postCode && "/ " + task.postCode.toUpperCase()}`} {task.postCode && <span className="text__blue task__posted__map">(View on Map)</span>}</p>
+                    <p className="text__darker task__posted" style={{fontSize: "17px"}}>{`${task.address && task.address} ${task.postCode && "/ " + task.postCode.toUpperCase()}`} {task.postCode && <span className="text__blue task__posted__map">(View on Map)</span>}</p>
                     <p className="text__light__dark task__posted">Posted about {dayjs(task.createdAt).fromNow()}</p>
                 </div>
             </HStack>
-                <Spacer />
-                <Link style={isMobile ? {marginTop: "0.5em"} : {}} to={`/view-bids/${task.id}`} className="text__blue">
+                <Link style={isMobile ? {marginTop: "0.5em"} : isTablet ? {textAlign: "left"} : {textAlign: "right"}} to={`/view-bids/${task.id}`} className="text__blue">
                     View all bids
                 </Link>
-            </HStack>   
+            </SimpleGrid>   
             
             <HStack alignItems="center" style={{margin: "1em 0"}}>
                 <CalendarIcon boxSize={7} color="#3D3373" />

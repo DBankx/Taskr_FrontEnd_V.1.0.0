@@ -99,6 +99,17 @@ const QueryActions = () => {
                     </MenuList>
                 </Menu>
             </div>
+            <div className="query__action">
+                <Menu isLazy={true}>
+                    <MenuButton className="menu__btn__outlined" as={Button} rightIcon={<ChevronDownIcon />}>
+                        Delivery type
+                    </MenuButton>
+                    <MenuList>
+                        <MenuItem>In Person</MenuItem>
+                        <MenuItem>Online</MenuItem>
+                    </MenuList>
+                </Menu>
+            </div>
         </Slider>
         </div>
     )

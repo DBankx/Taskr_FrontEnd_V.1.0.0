@@ -41,6 +41,7 @@ export const JobRequest = {
     getTaskById: (id: string): Promise<ITask> => ApiRequest.get(`/jobs/${id}`),
     watchTask: (taskId: string) : Promise<Record<string, unknown>> => ApiRequest.post(`/jobs/watch/${taskId}`),
     unwatchTask: (taskId: string) : Promise<Record<string,  unknown>> => ApiRequest.delete(`/jobs/watch/${taskId}`),
+    createTask: (taskSubmission: FormData) : Promise<Record<string, unknown>> => ApiRequest.post("/jobs", taskSubmission)
 }
 
 

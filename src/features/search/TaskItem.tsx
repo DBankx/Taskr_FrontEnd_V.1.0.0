@@ -50,7 +50,7 @@ const TaskItem : React.FC<IProps> = ({task}) => {
             <Flex alignItems="center">
                 <div className="text__darker">
                     <LocationIcon boxSize={8} />
-                    {task.city ? task.city : "NA"} / {task.postCode ? task.postCode : "NA"}
+                    {task.postCode ? task.postCode : "Online"}
                 </div>
                 <Spacer />
                 <div className="text__dark__grey query__price__label">
