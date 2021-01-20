@@ -122,6 +122,14 @@ body {
   }
 }
 
+.profile__tabs .slick-track{
+  display: flex !important;
+}
+
+.profile__tabs .slick-slider{
+  display: grid !important;
+}
+
 .bid__info .slick-track{
   display: flex !important;
 }

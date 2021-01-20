@@ -19,6 +19,7 @@ const TaskPage = lazy(() => import("../../../features/task/TaskPage"));
 const BidHistoryPage = lazy(() => import("../../../features/bid/bidHistory/BidHistoryPage"));
 const TitleCategoryPage = lazy(() => import("../../../features/createTask/Title-category"));
 const TaskDetailsForm = lazy(() => import ("../../../features/createTask/TaskDetailsForm"));
+const ProfilePage = lazy(() => import("../../../features/profile/ProfilePage"));
 
 // Chakra ui theme
 const theme = extendTheme(customTheme);
@@ -55,6 +56,7 @@ function App() {
           <Route exact path="/view-bids/:taskId" component={BidHistoryPage} />
           <Route exact path="/create-task/details" component={TitleCategoryPage} />
           <Route exact path="/post-task" component={TaskDetailsForm} />
+          <Route exact path="/profile" component={ProfilePage} />
         </Switch>
       </Suspense>
     </div>

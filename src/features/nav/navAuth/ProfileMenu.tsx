@@ -4,6 +4,7 @@ import {Box, HStack, Menu, MenuButton,MenuItem, MenuList, Image} from "@chakra-u
 import {ChevronDownIcon} from "../../../infrastructure/icons/Icons";
 import { observer } from "mobx-react-lite";
 import rootStoreContext from "../../../application/stores/rootstore";
+import {history} from "../../../index";
 
 interface IProps{
     user: IUser
@@ -20,7 +21,8 @@ const ProfileMenu : React.FC<IProps> = ({user}) => {
                 </HStack>
             </MenuButton>
             <MenuList minWidth="180px" className="nav__auth__box">
-                    <MenuItem>My Tasks</MenuItem>
+                    <MenuItem onClick={() => history.push("/profile")}>My Tasks</MenuItem>
+                    <MenuItem>My Services</MenuItem>
                     <MenuItem>Bids / Offers</MenuItem>
                     <MenuItem>My Orders </MenuItem>
                     <MenuItem>Watchlist</MenuItem>

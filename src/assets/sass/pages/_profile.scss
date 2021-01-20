@@ -1,0 +1,45 @@
+﻿.profile {
+  &__tabs {
+    background-color: #fff !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,.05) !important;
+    padding: 0 9em !important;
+    button {
+      font-size: 1em !important;
+      color: #6F727F !important;
+      outline: none !important;
+      padding: 1em !important;
+      &:hover{
+        color: #3E4153 !important;
+      }
+      
+      &[aria-selected="true"]{
+        color: #3E4153 !important;
+      }
+    }
+  }
+}
+
+@media(max-width: 1000px){
+  .profile {
+    &__tabs {
+      padding: 0 3em !important;
+    }
+  }
+}
+
+@media(max-width: 1200px){
+  .profile {
+    &__tabs {
+      padding: 0 2em !important;
+    }
+  }
+}
+
+
+@media(max-width: 600px){
+  .profile {
+    &__tabs {
+      padding: 0 0.5em !important;
+    }
+  }
+}
