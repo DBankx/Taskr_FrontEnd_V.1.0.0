@@ -56,3 +56,12 @@ export const BidRequest = {
     placeBid: (values: IBidSubmission, jobId: string) : Promise<IBid> => ApiRequest.post(`bids/${jobId}`, values),
     getAllTaskBids: (taskId: string) : Promise<IBid[]> => ApiRequest.get(`/bids/${taskId}`)
 }
+
+// Requests for profile
+export const profileRequest = {
+    getAllTasks: (predicate: string) : Promise<ITask[]> => ApiRequest.get("/profile/jobs", {
+        params:{
+            status: predicate
+        }
+    })
+}
