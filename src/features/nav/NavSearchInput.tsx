@@ -34,7 +34,7 @@ const NavSearchInput = () => {
                 <form className="navbar__search" onSubmit={handleSubmit}>
                     <input autoComplete="off"  placeholder="Find services..." name="title" onChange={handleChange} onBlur={handleBlur} value={values.title} className="navbar__search__input search__main" />
                     <InputGroup className="navbar__input__group">
-                        <InputLeftElement className="navbar__input__group__right">
+                        <InputLeftElement style={{zIndex: 0}} className="navbar__input__group__right">
                             <LocationIcon boxSize={8} />
                         </InputLeftElement>
                         <Input name="city" onBlur={handleBlur} onChange={handleChange} value={values.city} placeholder="Location" className="navbar__search__input search__location" />

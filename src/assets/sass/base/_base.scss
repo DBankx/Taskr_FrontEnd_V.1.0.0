@@ -71,6 +71,9 @@ body {
   }
 }
 
+.cursor{
+  cursor: pointer;
+}
 
 @media(max-width: 600px){
   .container{
@@ -148,6 +151,7 @@ body {
 
 .nav__auth__box{
   color: $color-tetiary !important;
+  z-index: 1000 !important;
 }
 
 
@@ -450,3 +454,11 @@ body {
     width: 100%;
   }
 }
+
+.highlight__card{
+  background: none;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  padding: 0.4em
+}
+

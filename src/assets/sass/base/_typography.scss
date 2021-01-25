@@ -16,6 +16,14 @@ body{
     color: $color-green !important;
   }
   
+  &__main{
+    color: $color-main !important;
+  }
+  
+  &__light__grey{
+    color: #62646A !important;
+  }
+  
   &__light__dark{
     color: #8A7D83 !important;
   }

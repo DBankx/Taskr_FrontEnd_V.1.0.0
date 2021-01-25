@@ -13,14 +13,14 @@ interface IProps{
 const ProfileMenu : React.FC<IProps> = ({user}) => {
     const {logOutUser} = useContext(rootStoreContext).authStore;
     return (
-        <Menu size="large">
+        <Menu size="large" >
             <MenuButton as={Box} isLazy={true}>
                 <HStack spacing="10px">
                     <Image src={user.avatar} alt="user_avatar" borderRadius="full" boxSize="40px" />
                     <ChevronDownIcon boxSize={8} />
                 </HStack>
             </MenuButton>
-            <MenuList minWidth="180px" className="nav__auth__box">
+            <MenuList   minWidth="180px" className="nav__auth__box">
                     <MenuItem onClick={() => history.push("/profile")}>My Tasks</MenuItem>
                     <MenuItem>My Services</MenuItem>
                     <MenuItem>Bids / Offers</MenuItem>

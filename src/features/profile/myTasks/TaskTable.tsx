@@ -1,4 +1,4 @@
-﻿import {Table, Td, Th, TableCaption, Tr, Tbody, Thead, Image, Link, Menu, Button, MenuButton, MenuList, MenuItem, Checkbox, HStack} from "@chakra-ui/react";
+﻿import {Table, Td, Th, Tr, Tbody, Thead, Image, Link, Menu, Button, MenuButton, MenuList, MenuItem, Checkbox, HStack} from "@chakra-ui/react";
 import React from "react";
 import {ITask} from "../../../infrastructure/models/task";
 import {observer} from "mobx-react-lite";
@@ -26,13 +26,12 @@ const TaskTable : React.FC<IProps> = ({tasks}) => {
     return (
         <div className="profile__table__container">
             <Table variant="simple">
-                <TableCaption>Imperial to metric conversion factors</TableCaption>
                 <Thead>
                     <Tr>
                         <Th></Th>
                         <Th>Title</Th>
                         <Th>Budget</Th>
-                        <Th>Expires</Th>
+                        <Th>Ends</Th>
                         <Th>Bids</Th>
                         <Th>Views</Th>
                         <Th>Actions</Th>
@@ -48,7 +47,7 @@ const TaskTable : React.FC<IProps> = ({tasks}) => {
                             </Td>
                             <Td style={{position: "relative"}}>
                                 <div className="profile__table__text">
-                                    <p>{task.title}</p>
+                                    <p className="truncate__3">{task.title}</p>
                                    <Link className="text__blue" style={{marginTop: "1em", display: "block"}} to={`/task/${task.id}`} as={Linker}>view</Link> 
                                     </div>
                             </Td>

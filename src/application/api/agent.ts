@@ -2,6 +2,8 @@
 import {IPaginatedTaskResponse, ITask, ITaskQueryValues} from "../../infrastructure/models/task";
 import {IAuthSuccessResponse, ISignInFormValues} from "../../infrastructure/models/auth";
 import {IBid, IBidSubmission} from "../../infrastructure/models/bid";
+import {TaskStatus} from "../../infrastructure/enums/taskStatus";
+import {IPrivateProfile} from "../../infrastructure/models/profile";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
@@ -59,9 +61,10 @@ export const BidRequest = {
 
 // Requests for profile
 export const profileRequest = {
-    getAllTasks: (predicate: string) : Promise<ITask[]> => ApiRequest.get("/profile/jobs", {
+    getAllTasks: (taskStatus: TaskStatus) : Promise<ITask[]> => ApiRequest.get("/profile/jobs", {
         params:{
-            status: predicate
+            status: taskStatus
         }
-    })
+    }),
+    getProfile: () : Promise<IPrivateProfile> => ApiRequest.get("/profile")
 }

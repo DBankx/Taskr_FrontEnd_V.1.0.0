@@ -1,43 +1,64 @@
 ﻿import React from "react";
 import {observer} from "mobx-react-lite";
 import {TabList, Tabs, Tab,  TabPanel, TabPanels } from "@chakra-ui/react";
-// import Slider from "react-slick";
+import Slider from "react-slick";
 import TaskTab from "./myTasks/TaskTab";
+import {ChevronLeftIcon, ChevronRightIcon} from "../../infrastructure/icons/Icons";
+import MyProfile from "./myProfile/MyProfile";
 
 const ProfilePage = () => {
-    // const sliderSettings = {
-    //     dots: false,
-    //     infinite: false,
-    //     speed: 500,
-    //     slidesToShow:  5,
-    //     slidesToScroll: 1,
-    //     arrows: false,
-    //     variableWidth: true,
-    //     slidesPerRow: 1,
-    //     initialSlide: 0,
-    //     responsive: [
-    //         {
-    //             breakpoint: 500,
-    //             settings:{
-    //                 slidesToShow: 3,
-    //                 slidesToScroll: 3,
-    //                 infinite: false,
-    //             }
-    //         },
-    //         {
-    //             breakpoint: 900,
-    //             settings:{
-    //                 slidesToShow: 4,
-    //                 slidesToScroll: 1,
-    //                 infinite: false
-    //             }
-    //         }
-    //     ]
-    // }
+    function NextArrow(props: any) {
+        const { onClick } = props;
+        return (
+               <ChevronRightIcon className="profile__tabs__next__arr" onClick={onClick} boxSize={7} color="#A0AEC0" />
+        );
+    }
+
+    function PrevArrow(props: any) {
+        const { onClick } = props;
+        return (
+                <ChevronLeftIcon className="profile__tabs__prev__arr" onClick={onClick} boxSize={7} color="#A0AEC0" />
+        );
+    }
+
+    const sliderSettings = {
+        dots: false,
+        infinite: false,
+        speed: 500,
+        slidesToShow:  5,
+        slidesToScroll: 1,
+        arrows: false,
+        variableWidth: true,
+        slidesPerRow: 1,
+        initialSlide: 0,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />,
+        responsive: [
+            {
+                breakpoint: 500,
+                settings:{
+                    slidesToShow: 1,
+                    slidesToScroll: 2,
+                    infinite: false,
+                    arrows: true
+                }
+            },
+            {
+                breakpoint: 900,
+                settings:{
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    infinite: false,
+                    arrows: true
+                }
+            }
+        ]
+    }
     return (
         <div>
-           <Tabs index={0} isLazy>
+           <Tabs isLazy>
              <TabList className="profile__tabs">
+                 <Slider {...sliderSettings}>
                  <Tab>My Tasks</Tab>
                  <Tab>My Services</Tab>
                  <Tab>Bids / Offers</Tab>
@@ -47,11 +68,30 @@ const ProfilePage = () => {
                  <Tab>My Profile</Tab>
                  <Tab>My Reviews</Tab>
                  <Tab>Account Settings</Tab>
+                 </Slider>
              </TabList>  
                
                <TabPanels>
                    <TabPanel>
                        <TaskTab />
+                   </TabPanel>
+                   <TabPanel>
+                       hey
+                   </TabPanel>
+                   <TabPanel>
+                       hey
+                   </TabPanel>
+                   <TabPanel>
+                       hey
+                   </TabPanel>
+                   <TabPanel>
+                       hey
+                   </TabPanel>
+                   <TabPanel>
+                       hey
+                   </TabPanel>
+                   <TabPanel>
+                       <MyProfile />
                    </TabPanel>
                </TabPanels>
            </Tabs> 

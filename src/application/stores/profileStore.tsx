@@ -3,6 +3,8 @@ import {action, makeObservable, observable, runInAction} from "mobx";
 import {ITask} from "../../infrastructure/models/task";
 import {profileRequest} from "../api/agent";
 import {alertErrors} from "../../infrastructure/utils/getErrors";
+import {TaskStatus} from "../../infrastructure/enums/taskStatus";
+import {IPrivateProfile} from "../../infrastructure/models/profile";
 
 export class ProfileStore{
     rootStore: RootStore
@@ -14,18 +16,19 @@ export class ProfileStore{
     @observable profileActiveTasks : ITask[] | null = null;
     @observable profileInactiveTasks : ITask[] | null = null; 
     @observable loadingInitial = false;
+    @observable privateProfile : IPrivateProfile | null = null;
     
     
-    @action getProfileTasks = async (predicate: string) => {
+    @action getProfileTasks = async (taskStatus: TaskStatus) => {
         this.loadingInitial = true;
         try{
-            const tasks = await profileRequest.getAllTasks(predicate);
+            const tasks = await profileRequest.getAllTasks(taskStatus);
             runInAction(() => {
-                switch (predicate) {
-                    case "active":
+                switch (taskStatus) {
+                    case TaskStatus.Active:
                         this.profileActiveTasks = tasks;
                         break;
-                    case "inactive":
+                    case TaskStatus.InActive:
                         this.profileInactiveTasks = tasks;
                         break;
                     default:
@@ -37,6 +40,21 @@ export class ProfileStore{
             runInAction(() => this.loadingInitial = false);
             alertErrors(errors);
             throw errors;
+        }
+    }
+    
+    @observable getPrivateProfile = async () => {
+        this.loadingInitial = true;
+        try{
+           const profile = await profileRequest.getProfile();
+           runInAction(() => {
+               this.privateProfile = profile;
+               this.loadingInitial = false;
+           })
+        }catch (e) {
+            runInAction(() => this.loadingInitial = false);
+            alertErrors(e);
+            throw e;
         }
     }
     

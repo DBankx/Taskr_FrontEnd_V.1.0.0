@@ -1,17 +1,20 @@
 ﻿import React from "react";
 import {observer} from "mobx-react-lite";
-import {Tab, TabList, TabPanel, TabPanels, Tabs} from "@chakra-ui/react";
+import {Tab, TabList, TabPanel, TabPanels, Tabs, useMediaQuery} from "@chakra-ui/react";
 import ActiveTasks from "./ActiveTasks";
 
 const TaskTab = () => {
+    const [isMobile] = useMediaQuery("(max-width: 500px)");
     return (
         <div className="container">
             <div className="main">
                 <div>
-                    <Tabs index={0} isLazy>
-                        <TabList className="profile__inner__tabs">
-                            <Tab>Active Tasks</Tab>
-                            <Tab>In Active / Completed Tasks</Tab>
+                    <Tabs index={0}  isFitted={isMobile} isLazy>
+                        <TabList style={isMobile ? {width: "100px"} : {margin: "0 auto"}} className="profile__inner__tabs">
+                            <Tab>Active</Tab>
+                            <Tab>Assigned</Tab>
+                            <Tab>Completed</Tab>
+                            <Tab>In-active</Tab>
                         </TabList>
 
                         <TabPanels>

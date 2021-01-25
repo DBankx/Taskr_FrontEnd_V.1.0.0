@@ -33,9 +33,24 @@
   text-align: center !important;
   vertical-align: top !important;
   
+  &__grey{
+    border: 1px solid #62646A;
+    color: #62646A !important;
+    display: block;
+    margin: 0 auto !important;
+    &:hover {
+      background-color: #62646A !important;
+      color: #fff !important;
+    }
+  }
+  
   &__nm{
     font-weight: 500 !important;
     padding: 1em 2em !important;
+  }
+  
+  &__long{
+    padding: 1em 4em !important;
   }
   
   &__green{
