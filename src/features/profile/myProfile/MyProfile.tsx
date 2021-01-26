@@ -1,10 +1,12 @@
 ﻿import React, {useContext, useEffect} from "react";
 import {observer} from "mobx-react-lite";
-import { SimpleGrid } from "@chakra-ui/react";
+import {Stack, SimpleGrid } from "@chakra-ui/react";
 import ProfileBox from "./ProfileBox";
 import rootStoreContext from "../../../application/stores/rootstore";
 import Loader from "../../../application/appLayout/FullPageSpinner";
 import AccountBio from "./AccountBio";
+import ReviewSummary from "./ReviewSummary";
+import TagLine from "./TagLine";
 
 const MyProfile = () => {
     const {loadingInitial, privateProfile, getPrivateProfile} = useContext(rootStoreContext).profileStore;
@@ -22,7 +24,10 @@ const MyProfile = () => {
                         <AccountBio profile={privateProfile} />
                     </div>      
                     <div>
-                        
+                        <Stack direction={["column", "row"]} spacing="1em" justifyContent={["start", "space-between"]}>
+                            <TagLine />
+                            <ReviewSummary />
+                        </Stack>
                     </div>
                 </SimpleGrid>
             </div>

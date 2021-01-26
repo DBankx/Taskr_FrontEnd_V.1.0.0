@@ -57,6 +57,10 @@ body{
     color: #3e4153;
   }
   
+  &__mpx{
+    font-size: 25px;
+  }
+  
   &__sm{
     font-size: 14px !important;
   }
@@ -68,6 +72,14 @@ body{
   
   &__bold{
     font-weight: 600;
+  }
+  
+  &__italic{
+    font-style: italic !important;
+  }
+  
+  &__light{
+    color: #bbc2dc;
   }
   
   &__silent{
@@ -117,6 +129,11 @@ body{
     &__lg{
       font-size: 20px;
     }
+    
+    &__mpx{
+      font-size: 17px;
+    }
+    
     &__small__cut{
       width: 100% !important;
     }

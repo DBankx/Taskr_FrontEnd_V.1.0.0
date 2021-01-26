@@ -10,6 +10,12 @@
     text-align: center;
   }
   
+  &__review__summary__tab{
+    button{
+      font-size: 0.8em !important;
+    }
+  }
+  
   &__message__content{
     font-size: 18px;
     font-weight: 400;
