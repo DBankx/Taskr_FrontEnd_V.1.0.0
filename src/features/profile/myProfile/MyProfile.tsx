@@ -25,7 +25,7 @@ const MyProfile = () => {
                     </div>      
                     <div>
                         <Stack direction={["column", "row"]} spacing="1em" justifyContent={["start", "space-between"]}>
-                            <TagLine />
+                            <TagLine tagline={privateProfile.tagline} />
                             <ReviewSummary />
                         </Stack>
                     </div>

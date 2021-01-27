@@ -33,6 +33,9 @@ const SignInPage = () => {
                       <SignInForm />
                   </div>
                   </div>
+                  <div className="text__middle">
+                      <small className="text__silent">By continuing, you agree to Taskr&apos;s <span className="text__blue">Terms of Service</span> and <span className="text__blue">Privacy policy</span>.</small>
+                  </div>
                   <Divider />
                   <div style={{padding: "1em", textAlign: "center"}} className="text__darker">
                       Not registered yet? <Link to="/signup" className="text__blue">Join now</Link>

@@ -4,6 +4,7 @@ import {IPrivateProfile} from "../../../infrastructure/models/profile";
 import {observer} from "mobx-react-lite";
 import InlineLoader from "../../../application/appLayout/InlineLoader";
 import {EditIcon, FacebookIcon, InstagramIcon, PinterestIcon, TwitterIcon} from "../../../infrastructure/icons/Icons";
+import {ExperienceLevel} from "../../../infrastructure/enums/skill";
 const DescriptionForm = lazy(() => import("../forms/DescriptionForm"));
 const SkillsForm = lazy(() => import("../forms/SkillsForm"));
 const SocialsForm = lazy(() => import("../forms/SocialsForm"));
@@ -44,7 +45,13 @@ const AccountBio : React.FC<IProps> = ({profile}) => {
                     <Suspense fallback={<InlineLoader />}>
                         <SkillsForm cancelEditing={setIsEditingSkills} />
                     </Suspense>
-                ) : <p className="text__light__grey text__sm text__bold" style={{margin: "1em 0"}}>Add your skills</p>}
+                ) : profile.skillSet.length == 0 ? <p className="text__light__grey text__sm text__bold" style={{margin: "1em 0"}}>Add your skills</p> : (
+                    <Box mt={4} mb={4}>
+                        {profile.skillSet.map((skill, i) => (
+                            <p className="text__darker" key={i}>{skill.skillName} - <span className="text__light">{ExperienceLevel[skill.experienceLevel]}</span></p>
+                        ))}
+                    </Box>
+                )}
             </Box>
             
             <Box mt={3} mb={3}>
@@ -57,7 +64,13 @@ const AccountBio : React.FC<IProps> = ({profile}) => {
                     <Suspense fallback={<InlineLoader />}>
                         <LanguageForm cancelEditing={setIsEditingLanguage} />
                     </Suspense>
-                ) : <p className="text__light__grey text__sm text__bold" style={{margin: "1em 0"}}>Add a language</p>}
+                ) : profile.languages.length === 0 ? <p className="text__light__grey text__sm text__bold" style={{margin: "1em 0"}}>Add a language</p> : (
+                    <Box mt={4} mb={4}>
+                        {profile.languages.map((language, i) => (
+                            <p className="text__darker" key={i}>{language.languageName} - <span className="text__light">{ExperienceLevel[language.experienceLevel]}</span></p>
+                        ))}
+                    </Box>
+                )}
             </Box>
             <Box mt={3} mb={3}>
                 <HStack justifyContent="space-between">
@@ -67,14 +80,14 @@ const AccountBio : React.FC<IProps> = ({profile}) => {
                 <Divider />
                 {isEditingSocials ?  (
                     <Suspense fallback={<InlineLoader />}>
-                        <SocialsForm cancelEditing={setIsEditingSocials} />
+                        <SocialsForm socials={profile.socials} cancelEditing={setIsEditingSocials} />
                     </Suspense>
                 ) : <div style={{margin: "1em 0"}}>
                     <Box mb={8}>
                         <div>
                             <HStack spacing="10px">
                                 <FacebookIcon />
-                                <span className="text__blue cursor">--</span>
+                                <span className="text__blue cursor">{profile.socials !== null && profile.socials.facebook ? <a href={profile.socials.facebook} target="_blank" rel="noreferrer noopener">{profile.socials.facebook}</a>  : "--"}</span>
                             </HStack>
                         </div>
                     </Box>
@@ -82,7 +95,7 @@ const AccountBio : React.FC<IProps> = ({profile}) => {
                         <div>
                             <HStack spacing="10px">
                                 <TwitterIcon />
-                                <span className="text__blue cursor">--</span>
+                                <span className="text__blue cursor">{profile.socials !== null && profile.socials.twitter ? <a href={profile.socials.twitter} target="_blank" rel="noreferrer noopener">{profile.socials.twitter}</a>  : "--"}</span>
                             </HStack>
                         </div>
                     </Box>
@@ -90,7 +103,7 @@ const AccountBio : React.FC<IProps> = ({profile}) => {
                         <div>
                             <HStack spacing="10px">
                                 <InstagramIcon/>
-                                <span className="text__blue cursor">--</span>
+                                <span className="text__blue cursor">{profile.socials !== null && profile.socials.instagram ? <a href={profile.socials.instagram} target="_blank" rel="noreferrer noopener">{profile.socials.instagram}</a> : "--"}</span>
                             </HStack>
                         </div>
                     </Box>
@@ -98,7 +111,7 @@ const AccountBio : React.FC<IProps> = ({profile}) => {
                         <div>
                             <HStack spacing="10px">
                                 <PinterestIcon />
-                                <span className="text__blue cursor">--</span>
+                                <span className="text__blue cursor">{profile.socials !== null && profile.socials.pinterest ? <a href={profile.socials.pinterest} target="_blank" rel="noreferrer noopener">{profile.socials.pinterest}</a> : "--"}</span>
                             </HStack>
                         </div>
                     </Box>

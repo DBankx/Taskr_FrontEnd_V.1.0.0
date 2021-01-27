@@ -1,5 +1,7 @@
 ﻿
 // TODO - ADD REVIEWS
+import {ExperienceLevel} from "../enums/skill";
+
 export interface IPrivateProfile{
     firstName: string;
     lastName: string;
@@ -8,4 +10,28 @@ export interface IPrivateProfile{
     createdAt: Date;
     avatar: string;
     username: string;
+    languages: ILanguage[],
+    skillSet: ISkill[],
+    tagline: string;
+    socials: ISocials
 }
+
+export interface ISocials{
+    twitter: string;
+    instagram: string;
+    pinterest: string;
+    facebook: string;
+}
+
+export interface ISkill {
+    skillName: string;
+    experienceLevel: ExperienceLevel;
+}
+
+
+export interface ILanguage{
+    languageName: string;
+    experienceLevel: ExperienceLevel;
+}
+
+

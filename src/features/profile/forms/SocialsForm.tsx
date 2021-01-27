@@ -1,16 +1,29 @@
 ﻿import { Formik } from "formik";
-import React from "react";
+import React, {useContext} from "react";
 import {Button, HStack, Input, InputGroup, InputLeftElement} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
 import {FacebookIcon, InstagramIcon, PinterestIcon, TwitterIcon} from "../../../infrastructure/icons/Icons";
+import {ISocials} from "../../../infrastructure/models/profile";
+import * as yup from "yup";
+import rootStoreContext from "../../../application/stores/rootstore";
 
 interface IProps{
     cancelEditing: any;
+    socials: ISocials;
 }
 
-const SocialsForm : React.FC<IProps> = ({cancelEditing}) => {
+const SocialsForm : React.FC<IProps> = ({cancelEditing, socials}) => {
+    const validationSchema = yup.object().shape({
+        twitter: yup.string().url("Please use a full twitter url e.g https://twitter.com/you"),
+        instagram: yup.string().url("Please use a full instagram url e.g https://instagram.com/you"),
+        facebook: yup.string().url("Please use a full facebook url e.g https://facebook.com/you"),
+        pinterest: yup.string().url("Please use a full pinterest url e.g https://pinterest.com/you")
+    });
+    
+    const {updateProfile} = useContext(rootStoreContext).profileStore;
+    
     return (
-        <Formik initialValues={{twitter: "", instagram: "", facebook: "", pinterest: ""}} onSubmit={values => console.log(values)}>
+        <Formik validationSchema={validationSchema} initialValues={{twitter: socials !== null && socials.twitter ? socials.twitter : "", instagram:socials !== null && socials.instagram ? socials.instagram : "", facebook:socials !== null && socials.facebook ? socials.facebook : "", pinterest:socials !== null && socials.pinterest ? socials.pinterest : ""}} onSubmit={(values, action) => updateProfile(values).then(() => action.setSubmitting(false)).then(() => cancelEditing(false))}>
             {({
                   values,
                   isSubmitting,
@@ -18,7 +31,9 @@ const SocialsForm : React.FC<IProps> = ({cancelEditing}) => {
                   handleBlur,
                   handleChange,
                   errors,
-                  touched
+                  touched,
+                isValid,
+                dirty
               }) => (
                 <form onSubmit={handleSubmit}>
                     <div className="form__field">
@@ -75,7 +90,7 @@ const SocialsForm : React.FC<IProps> = ({cancelEditing}) => {
                     </div>
                     <HStack justifyContent="space-between">
                         <Button onClick={() => cancelEditing(false)} className="btn btn__long" type="button">Cancel</Button>
-                        <Button className="btn btn__primary btn__long" isLoading={isSubmitting}>Update</Button>
+                        <Button type="submit" disabled={isSubmitting || !isValid || !dirty} className="btn btn__primary btn__long" isLoading={isSubmitting}>Update</Button>
                     </HStack>
                 </form>
             )}

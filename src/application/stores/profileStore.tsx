@@ -4,7 +4,15 @@ import {ITask} from "../../infrastructure/models/task";
 import {profileRequest} from "../api/agent";
 import {alertErrors} from "../../infrastructure/utils/getErrors";
 import {TaskStatus} from "../../infrastructure/enums/taskStatus";
-import {IPrivateProfile} from "../../infrastructure/models/profile";
+import {
+    ILanguage,
+    IPrivateProfile,
+    ISkill,
+} from "../../infrastructure/models/profile";
+import {toast} from "react-toastify";
+import {CheckmarkIcon} from "../../infrastructure/icons/Icons";
+import Alert from "../common/Alert";
+import React from "react";
 
 export class ProfileStore{
     rootStore: RootStore
@@ -53,6 +61,63 @@ export class ProfileStore{
            })
         }catch (e) {
             runInAction(() => this.loadingInitial = false);
+            alertErrors(e);
+            throw e;
+        }
+    }
+    
+    @observable addProfileSkills = async (values: ISkill) => {
+        try{
+            await profileRequest.addProfileSkills(values);
+            runInAction(() => {
+                this.privateProfile!.skillSet.unshift(values);
+                toast.success(<Alert type="success" subject="Skills Updated" icon={<CheckmarkIcon boxSize={8} color="#224a23" />} message="" />)
+            })
+        }catch (e){
+            alertErrors(e);
+            throw e;
+        }
+    }
+
+    @observable addProfileLanguages = async (values: ILanguage) => {
+        try{
+            await profileRequest.addProfileLanguages(values);
+            runInAction(() => {
+                this.privateProfile!.languages.unshift(values);
+                toast.success(<Alert type="success" subject="Languages Updated" icon={<CheckmarkIcon boxSize={8} color="#224a23" />} message="" />)
+            })
+        }catch (e){
+            alertErrors(e);
+            throw e;
+        }
+    }
+    
+    @observable updateProfile = async (values: any) => {
+        try{
+            await profileRequest.updateProfile(values);
+            runInAction(() => {
+                if(values.description){
+                    this.privateProfile!.bio = values.description;
+                }
+                if(values.tagline){
+                    this.privateProfile!.tagline = values.tagline;
+                }
+                if(values.twitter){
+                    this.privateProfile!.socials.twitter = values.twitter;
+                }
+                if(values.instagram){
+                    this.privateProfile!.socials.instagram = values.instagram;
+                }
+                if(values.facebook){
+                    this.privateProfile!.socials.facebook = values.facebook;
+                }
+                if(values.pinterest){
+                    this.privateProfile!.socials.pinterest = values.pinterest;
+                }
+
+                toast.success(<Alert type="success" subject="Profile Updated" icon={<CheckmarkIcon boxSize={8} color="#224a23" />} message="" />)
+            })
+        }catch(e){
             alertErrors(e);
             throw e;
         }

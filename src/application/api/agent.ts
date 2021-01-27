@@ -3,7 +3,11 @@ import {IPaginatedTaskResponse, ITask, ITaskQueryValues} from "../../infrastruct
 import {IAuthSuccessResponse, ISignInFormValues} from "../../infrastructure/models/auth";
 import {IBid, IBidSubmission} from "../../infrastructure/models/bid";
 import {TaskStatus} from "../../infrastructure/enums/taskStatus";
-import {IPrivateProfile} from "../../infrastructure/models/profile";
+import {
+    ILanguage,
+    IPrivateProfile,
+    ISkill
+} from "../../infrastructure/models/profile";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
@@ -66,5 +70,8 @@ export const profileRequest = {
             status: taskStatus
         }
     }),
-    getProfile: () : Promise<IPrivateProfile> => ApiRequest.get("/profile")
+    getProfile: () : Promise<IPrivateProfile> => ApiRequest.get("/profile"),
+    addProfileSkills: (values: ISkill) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/skills", values),
+    addProfileLanguages: (values: ILanguage) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/languages", values),
+    updateProfile: (values: any) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/update", values)
 }
