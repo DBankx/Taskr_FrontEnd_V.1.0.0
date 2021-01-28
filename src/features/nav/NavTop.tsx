@@ -1,4 +1,4 @@
-﻿import {Flex, Spacer, Image, Divider, useMediaQuery} from "@chakra-ui/react";
+﻿import {Flex, Spacer, Image,  useMediaQuery} from "@chakra-ui/react";
 import React, {useContext, lazy, Suspense} from "react";
 import Logo from "../../assets/images/taskr-logo.svg";
 import NavSearchInput from "./NavSearchInput";
@@ -12,7 +12,7 @@ import {history} from "../../index";
 const AuthNavItems = lazy(() => import("./navAuth/AuthNavItems"))
 
 const NavTop = () => {
-    const [isSmallScreen] = useMediaQuery("(max-width: 1224px)");
+    const [isSmallScreen] = useMediaQuery("(max-width: 1349px)");
     const [isMobile] = useMediaQuery("(max-width: 600px)");
     const location = useLocation();
     const {isLoggedIn, user} = useContext(rootStoreContext).authStore;
@@ -35,7 +35,6 @@ const NavTop = () => {
                                        href="#"><EmailIcon/> Contact</Link>}
                    <Flex alignItems="center">
                        <Link className="text__primary" to="/signin" style={{marginRight: "1em"}}>Login</Link>
-                       {!isMobile && <Divider mr={3} orientation="vertical" size="lg"/>}
                        {!isMobile &&
                        <Link to="/signup" style={{marginRight: "1em"}} className="text__primary" href="#">Signup</Link>}
                    </Flex>

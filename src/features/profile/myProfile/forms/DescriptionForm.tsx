@@ -2,7 +2,7 @@
 import React, {useContext} from "react";
 import {Button, HStack, Textarea} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
-import rootStoreContext from "../../../application/stores/rootstore";
+import rootStoreContext from "../../../../application/stores/rootstore";
 
 interface IProps{
     description: string;

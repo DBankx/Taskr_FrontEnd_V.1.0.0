@@ -6,7 +6,7 @@ import {TaskStatus} from "../../infrastructure/enums/taskStatus";
 import {
     ILanguage,
     IPrivateProfile,
-    ISkill
+    ISkill, ISocials
 } from "../../infrastructure/models/profile";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
@@ -73,5 +73,6 @@ export const profileRequest = {
     getProfile: () : Promise<IPrivateProfile> => ApiRequest.get("/profile"),
     addProfileSkills: (values: ISkill) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/skills", values),
     addProfileLanguages: (values: ILanguage) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/languages", values),
-    updateProfile: (values: any) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/update", values)
+    updateProfile: (values: any) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/update", values),
+    updateSocials: (values: ISocials) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/socials", values) 
 }

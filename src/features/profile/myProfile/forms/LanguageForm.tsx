@@ -2,11 +2,11 @@
 import React, {useContext} from "react";
 import {Button, HStack, Input, Select} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
-import {getAllEnumKeys} from "../../../infrastructure/enums/enumFunctions";
-import {ExperienceLevel} from "../../../infrastructure/enums/skill";
-import rootStoreContext from "../../../application/stores/rootstore";
+import {getAllEnumKeys} from "../../../../infrastructure/enums/enumFunctions";
+import {ExperienceLevel} from "../../../../infrastructure/enums/skill";
+import rootStoreContext from "../../../../application/stores/rootstore";
 import * as yup from "yup";
-import {ILanguage} from "../../../infrastructure/models/profile";
+import {ILanguage} from "../../../../infrastructure/models/profile";
 
 interface IProps{
     cancelEditing: any;

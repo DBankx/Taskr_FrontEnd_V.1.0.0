@@ -2,7 +2,7 @@
 import {observer} from "mobx-react-lite";
 import {EditIcon} from "../../../infrastructure/icons/Icons";
 import InlineLoader from "../../../application/appLayout/InlineLoader";
-const TagLineForm = lazy(() => import("../forms/TaglineForm"));
+const TagLineForm = lazy(() => import("./forms/TaglineForm"));
 
 interface IProps{
     tagline: string;

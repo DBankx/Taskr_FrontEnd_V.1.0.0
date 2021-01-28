@@ -5,10 +5,10 @@ import {observer} from "mobx-react-lite";
 import InlineLoader from "../../../application/appLayout/InlineLoader";
 import {EditIcon, FacebookIcon, InstagramIcon, PinterestIcon, TwitterIcon} from "../../../infrastructure/icons/Icons";
 import {ExperienceLevel} from "../../../infrastructure/enums/skill";
-const DescriptionForm = lazy(() => import("../forms/DescriptionForm"));
-const SkillsForm = lazy(() => import("../forms/SkillsForm"));
-const SocialsForm = lazy(() => import("../forms/SocialsForm"));
-const LanguageForm = lazy(() => import("../forms/LanguageForm"));
+const DescriptionForm = lazy(() => import("./forms/DescriptionForm"));
+const SkillsForm = lazy(() => import("./forms/SkillsForm"));
+const SocialsForm = lazy(() => import("./forms/SocialsForm"));
+const LanguageForm = lazy(() => import("./forms/LanguageForm"));
 
 interface IProps{
     profile: IPrivateProfile;
@@ -33,7 +33,7 @@ const AccountBio : React.FC<IProps> = ({profile}) => {
                     <Suspense fallback={<InlineLoader />}>
                     <DescriptionForm cancelEditing={setIsEditingDescription} description={profile.bio} />
                     </Suspense>
-                    : <p className="text__darker text__sm">{profile.bio ? profile.bio : "Tell your taskr about you"}</p>}
+                    : <Box mt={4} mb={4}><p className="text__darker text__sm">{profile.bio ? profile.bio : "Tell your taskr about you"}</p></Box>}
             </Box>
             <Box mt={3} mb={3}>
                 <HStack justifyContent="space-between">

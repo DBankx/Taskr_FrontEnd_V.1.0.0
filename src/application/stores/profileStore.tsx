@@ -7,7 +7,7 @@ import {TaskStatus} from "../../infrastructure/enums/taskStatus";
 import {
     ILanguage,
     IPrivateProfile,
-    ISkill,
+    ISkill, ISocials,
 } from "../../infrastructure/models/profile";
 import {toast} from "react-toastify";
 import {CheckmarkIcon} from "../../infrastructure/icons/Icons";
@@ -102,6 +102,20 @@ export class ProfileStore{
                 if(values.tagline){
                     this.privateProfile!.tagline = values.tagline;
                 }
+                
+
+                toast.success(<Alert type="success" subject="Profile Updated" icon={<CheckmarkIcon boxSize={8} color="#224a23" />} message="" />)
+            })
+        }catch(e){
+            alertErrors(e);
+            throw e;
+        }
+    }
+    
+    @action updateSocials = async (values: ISocials) => {
+        try{
+            await profileRequest.updateSocials(values);
+            runInAction(() => {
                 if(values.twitter){
                     this.privateProfile!.socials.twitter = values.twitter;
                 }
@@ -115,7 +129,7 @@ export class ProfileStore{
                     this.privateProfile!.socials.pinterest = values.pinterest;
                 }
 
-                toast.success(<Alert type="success" subject="Profile Updated" icon={<CheckmarkIcon boxSize={8} color="#224a23" />} message="" />)
+                toast.success(<Alert type="success" subject="Socials Updated" icon={<CheckmarkIcon boxSize={8} color="#224a23" />} message="" />)
             })
         }catch(e){
             alertErrors(e);

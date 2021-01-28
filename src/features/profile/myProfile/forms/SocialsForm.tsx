@@ -2,10 +2,10 @@
 import React, {useContext} from "react";
 import {Button, HStack, Input, InputGroup, InputLeftElement} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
-import {FacebookIcon, InstagramIcon, PinterestIcon, TwitterIcon} from "../../../infrastructure/icons/Icons";
-import {ISocials} from "../../../infrastructure/models/profile";
+import {FacebookIcon, InstagramIcon, PinterestIcon, TwitterIcon} from "../../../../infrastructure/icons/Icons";
+import {ISocials} from "../../../../infrastructure/models/profile";
 import * as yup from "yup";
-import rootStoreContext from "../../../application/stores/rootstore";
+import rootStoreContext from "../../../../application/stores/rootstore";
 
 interface IProps{
     cancelEditing: any;
@@ -20,10 +20,10 @@ const SocialsForm : React.FC<IProps> = ({cancelEditing, socials}) => {
         pinterest: yup.string().url("Please use a full pinterest url e.g https://pinterest.com/you")
     });
     
-    const {updateProfile} = useContext(rootStoreContext).profileStore;
+    const {updateSocials} = useContext(rootStoreContext).profileStore;
     
     return (
-        <Formik validationSchema={validationSchema} initialValues={{twitter: socials !== null && socials.twitter ? socials.twitter : "", instagram:socials !== null && socials.instagram ? socials.instagram : "", facebook:socials !== null && socials.facebook ? socials.facebook : "", pinterest:socials !== null && socials.pinterest ? socials.pinterest : ""}} onSubmit={(values, action) => updateProfile(values).then(() => action.setSubmitting(false)).then(() => cancelEditing(false))}>
+        <Formik validationSchema={validationSchema} initialValues={{twitter: socials !== null && socials.twitter ? socials.twitter : "", instagram:socials !== null && socials.instagram ? socials.instagram : "", facebook:socials !== null && socials.facebook ? socials.facebook : "", pinterest:socials !== null && socials.pinterest ? socials.pinterest : ""}} onSubmit={(values: ISocials, action) => updateSocials(values).then(() => action.setSubmitting(false)).then(() => cancelEditing(false))}>
             {({
                   values,
                   isSubmitting,

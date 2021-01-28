@@ -7,6 +7,7 @@ import Loader from "../../../application/appLayout/FullPageSpinner";
 import AccountBio from "./AccountBio";
 import ReviewSummary from "./ReviewSummary";
 import TagLine from "./TagLine";
+import ProfileReviews from "./ProfileReviews";
 
 const MyProfile = () => {
     const {loadingInitial, privateProfile, getPrivateProfile} = useContext(rootStoreContext).profileStore;
@@ -28,6 +29,7 @@ const MyProfile = () => {
                             <TagLine tagline={privateProfile.tagline} />
                             <ReviewSummary />
                         </Stack>
+                        <ProfileReviews />
                     </div>
                 </SimpleGrid>
             </div>
