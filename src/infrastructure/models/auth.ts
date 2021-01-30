@@ -19,4 +19,5 @@ export interface IUser{
     city: string;
     createdAt: Date;
     avatar: string;
+    hasUnReadNotifications: boolean;
 }

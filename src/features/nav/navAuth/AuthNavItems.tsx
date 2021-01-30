@@ -3,8 +3,9 @@ import {IUser} from "../../../infrastructure/models/auth";
 import {observer} from "mobx-react-lite";
 import {Box, HStack } from "@chakra-ui/react";
 import ProfileMenu from "./ProfileMenu";
-import {BinocularsIcon, ChatIcon, NotificationIcon} from "../../../infrastructure/icons/Icons";
+import {BinocularsIcon, ChatIcon} from "../../../infrastructure/icons/Icons";
 import {history} from "../../../index";
+import NotificationBox from "./NotificationBox";
 
 interface IProps{
     user: IUser
@@ -17,7 +18,7 @@ const AuthNavItems : React.FC<IProps> = ({user}) => {
                 <BinocularsIcon boxSize={10} color="#3D3373" />
             </Box>
             <Box>
-                <NotificationIcon boxSize={10} color="#3D3373" />
+                <NotificationBox user={user} />
             </Box>
             <Box>
                 <ChatIcon boxSize={10} color="#3D3373" />

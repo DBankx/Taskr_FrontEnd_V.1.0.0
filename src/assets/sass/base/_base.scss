@@ -125,6 +125,15 @@ body {
   }
 }
 
+.notif__label{
+  position: absolute;
+  top: 5px;
+  right: 2px;
+  width: 8px;
+  background-color: red;
+  border-radius: 50%;
+  height: 8px;
+}
 
 
 .profile__tabs .slick-track{

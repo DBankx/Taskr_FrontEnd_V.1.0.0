@@ -13,6 +13,8 @@ import {toast} from "react-toastify";
 import {CheckmarkIcon} from "../../infrastructure/icons/Icons";
 import Alert from "../common/Alert";
 import React from "react";
+import {IPaginatedNotificationsResponse} from "../../infrastructure/models/notification";
+import {NotificationStatus} from "../../infrastructure/enums/notification";
 
 export class ProfileStore{
     rootStore: RootStore
@@ -25,7 +27,7 @@ export class ProfileStore{
     @observable profileInactiveTasks : ITask[] | null = null; 
     @observable loadingInitial = false;
     @observable privateProfile : IPrivateProfile | null = null;
-    
+    @observable userNotifications : IPaginatedNotificationsResponse | null = null;
     
     @action getProfileTasks = async (taskStatus: TaskStatus) => {
         this.loadingInitial = true;
@@ -136,5 +138,21 @@ export class ProfileStore{
             throw e;
         }
     }
+    
+    @action getUserNotifications = async (status?: NotificationStatus) => {
+        this.loadingInitial = true;
+        try{
+           const notifs = await profileRequest.getNotifications(status);
+           runInAction(() => {
+               this.userNotifications = notifs;
+               this.loadingInitial = false;
+           })
+        }catch (e) {
+            runInAction(() => this.loadingInitial = false);
+            alertErrors(e);
+            throw e;
+        }
+    }
+    
     
 }

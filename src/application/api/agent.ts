@@ -8,6 +8,8 @@ import {
     IPrivateProfile,
     ISkill, ISocials
 } from "../../infrastructure/models/profile";
+import {NotificationStatus} from "../../infrastructure/enums/notification";
+import {IPaginatedNotificationsResponse} from "../../infrastructure/models/notification";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
@@ -74,5 +76,6 @@ export const profileRequest = {
     addProfileSkills: (values: ISkill) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/skills", values),
     addProfileLanguages: (values: ILanguage) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/languages", values),
     updateProfile: (values: any) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/update", values),
-    updateSocials: (values: ISocials) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/socials", values) 
+    updateSocials: (values: ISocials) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/socials", values),
+    getNotifications: (status?: NotificationStatus) : Promise<IPaginatedNotificationsResponse> => ApiRequest.get("/profile/notifications", {params:{status}})
 }
