@@ -1,9 +1,10 @@
 ﻿import {RootStore} from "./rootstore";
 import {action, makeObservable, observable} from "mobx";
-// import React from "react";
+import React from "react";
 import {HubConnection, HubConnectionBuilder, LogLevel} from "@microsoft/signalr";
 import {INotification} from "../../infrastructure/models/notification";
 import {toast} from "react-toastify";
+import NotificationAlert from "../common/NotificationAlert";
 
 //-----------------------------------------------
 // General store for application
@@ -30,9 +31,11 @@ export class AppStore{
         this.notificationHubConnection.start().then(() => console.log(this.notificationHubConnection!.state))
         
         this.notificationHubConnection.on("ReceiveNotification", (notification: INotification) => {
-                toast(notification.message, {
+            this.rootStore.authStore.user!.hasUnReadNotifications = true;
+                toast(<NotificationAlert data={notification} />, {
                     position: "top-right",
-                    className: "notification"
+                    className: "notification",
+                    hideProgressBar: true,
                 })
         });
     }
