@@ -77,5 +77,6 @@ export const profileRequest = {
     addProfileLanguages: (values: ILanguage) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/languages", values),
     updateProfile: (values: any) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/update", values),
     updateSocials: (values: ISocials) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/socials", values),
-    getNotifications: (status?: NotificationStatus) : Promise<IPaginatedNotificationsResponse> => ApiRequest.get("/profile/notifications", {params:{status}})
+    getNotifications: (status?: NotificationStatus, pageNumber?: number, pageSize?: number) : Promise<IPaginatedNotificationsResponse> => ApiRequest.get("/profile/notifications", {params:{status,
+        pageNumber, pageSize}})
 }

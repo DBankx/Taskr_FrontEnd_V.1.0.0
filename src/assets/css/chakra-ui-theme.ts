@@ -13,6 +13,19 @@
             body: "#F8F9F9",
             fontSize: "1em"
         }
+    },
+    components: {
+        Popover: {
+            variants: {
+                responsive: {
+                    popper: {
+                        maxWidth: 'unset',
+                        width: 'unset'
+                    }
+                }
+            },
+            
+        }
     }
 }
 

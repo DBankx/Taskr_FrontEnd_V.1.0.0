@@ -33,6 +33,20 @@
   text-align: center !important;
   vertical-align: top !important;
   
+  &__ghost{
+    padding: 0 !important;
+    font-weight: 500 !important;
+    &:hover{
+      background: none !important;
+    }
+  }
+  
+  &__hover__grey{
+    &:hover{
+      color: #62646A !important;
+    }
+  }
+  
   &__grey{
     border: 1px solid #62646A;
     color: #62646A !important;

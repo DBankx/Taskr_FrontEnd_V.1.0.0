@@ -5,4 +5,29 @@
   &__icon{
     height: 100% !important;
   }
+  
+  &__item{
+    padding: 0.7rem;
+    cursor: pointer;
+    position: relative;
+    &:hover{
+      background-color: $color-secondary;
+      .notification__options{
+        display: flex !important;
+      }
+    }
+  }
+  
+  &__options{
+    display: none !important;
+    width: 30px !important;
+    border-radius:50% !important;
+    height: 30px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #fff !important;
+    position: absolute !important;
+    right: 5px !important;
+    top: 23px !important;
+  }
 }

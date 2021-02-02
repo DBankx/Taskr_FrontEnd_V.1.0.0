@@ -1,29 +1,68 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import {IUser} from "../../../infrastructure/models/auth";
 import {observer} from "mobx-react-lite";
-import {Box, HStack } from "@chakra-ui/react";
+import {Box, HStack, Popover, PopoverArrow,
+    PopoverBody,
+    PopoverCloseButton, PopoverContent, PopoverFooter, PopoverHeader, PopoverTrigger, Portal, Button } from "@chakra-ui/react";
 import ProfileMenu from "./ProfileMenu";
-import {BinocularsIcon, ChatIcon} from "../../../infrastructure/icons/Icons";
+import {
+    BinocularsIcon,
+    ChatIcon,
+    CheckmarkIcon,
+    NotificationIcon,
+    TrashIcon
+} from "../../../infrastructure/icons/Icons";
 import {history} from "../../../index";
-import NotificationBox from "./NotificationBox";
+import rootStoreContext from "../../../application/stores/rootstore";
+import NotificationsPage from "../../notifications/NotificationsPage";
 
 interface IProps{
     user: IUser
 }
 
+
+
 const AuthNavItems : React.FC<IProps> = ({user}) => {
+    const {stopHubConnection, createNotificationHubConnection} = useContext(rootStoreContext).appStore;
+    useEffect(() => {
+        createNotificationHubConnection();
+        return () => stopHubConnection();
+    }, [createNotificationHubConnection, stopHubConnection])
     return (
         <HStack spacing="30px" alignItems="center">
-            <Box>
+            <Box title="watchlist">
                 <BinocularsIcon boxSize={10} color="#3D3373" />
             </Box>
-            <Box>
-                <NotificationBox user={user} />
+            <Box title="My Notifications">
+                    <Popover isLazy={true} variant="responsive" placement="bottom">
+                        <PopoverTrigger>
+                            <Box style={{position: "relative"}}>
+                                <NotificationIcon boxSize={10} color="#3D3373" />
+                                {user.hasUnReadNotifications && <div className="notif__label" />}
+                            </Box>
+                        </PopoverTrigger>
+                        <Portal>
+                        <PopoverContent boxShadow="xs">
+                            <PopoverArrow />
+                            <PopoverCloseButton />
+                            <PopoverHeader className="text__darker">Notifications</PopoverHeader>
+                            <PopoverBody p={0} style={{position: "relative"}}>
+                                <NotificationsPage />
+                            </PopoverBody>
+                            <PopoverFooter>
+                                <HStack justifyContent="space-between">
+                                    <Button variant="ghost" leftIcon={<CheckmarkIcon />} className="btn text__silent btn__ghost btn__hover__grey"> Mark all as read</Button>
+                                    <Button variant="ghost" leftIcon={<TrashIcon />} className="text__silent btn btn__ghost btn__hover__grey">Delete All</Button>
+                                </HStack>
+                            </PopoverFooter>
+                        </PopoverContent>
+                        </Portal>
+                    </Popover>
             </Box>
-            <Box>
+            <Box title="My Messages">
                 <ChatIcon boxSize={10} color="#3D3373" />
             </Box>
-            <Box>
+            <Box title="My profile">
                 <ProfileMenu user={user} />
             </Box>
             <Box>

@@ -12,6 +12,10 @@ body{
     color: $color-primary !important;
   }
   
+  &__heading{
+    font-size: 27px !important;
+  }
+  
   &__green{
     color: $color-green !important;
   }
@@ -127,6 +131,10 @@ body{
 @media (max-width: 600px){
   .text{
     &__lg{
+      font-size: 20px;
+    }
+    
+    &__heading{
       font-size: 20px;
     }
     

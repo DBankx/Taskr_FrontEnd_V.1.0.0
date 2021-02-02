@@ -5,6 +5,7 @@
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0,0,0,.05);
   }
+
   
   
   &__flex__top{
@@ -71,6 +72,7 @@
   }
 }
 
+
 @media (max-width: 1349px) {
   .navbar{
     &__search{
@@ -88,5 +90,21 @@
       width: 100px;
       height: 50px;
     }
+  }
+}
+
+.chakra-popover__content{
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2) !important;
+  width: 400px !important;
+  max-height: 60vh !important;
+}
+
+.chakra-popover__body{
+  overflow-y: scroll !important;  
+}
+
+@media (max-width: 500px){
+  .chakra-popover__content{
+    width: 100vw !important;
   }
 }

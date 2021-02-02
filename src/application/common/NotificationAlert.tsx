@@ -21,7 +21,7 @@ const NotificationAlert : React.FC<IProps> = ({data}) => {
                     <Image src={data.fromUserAvatar} alt="user-avatar" borderRadius="full" boxSize="60px"  />
                 </Box>
                 <Box >
-                    <p className="text__primary">{data.type === NotificationType.Bid ? "Bid Placed" : data.type === NotificationType.Follow ? "New follower" : data.type === NotificationType.Message ? "New Message" : data.type === NotificationType.Assign ? "You've been assigned" : ""}</p>
+                    {/*<p className="text__primary">{data.type === NotificationType.Bid ? "Bid Placed" : data.type === NotificationType.Follow ? "New follower" : data.type === NotificationType.Message ? "New Message" : data.type === NotificationType.Assign ? "You've been assigned" : ""}</p>*/}
                     <p style={{lineHeight: "1.2em"}} className="text__darker">{data.message}</p>
                     
                     <HStack spacing="10px">

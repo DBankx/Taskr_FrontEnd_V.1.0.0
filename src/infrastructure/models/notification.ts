@@ -1,6 +1,7 @@
 ﻿import {NotificationStatus, NotificationType} from "../enums/notification";
 
 export interface INotification{
+    id: string;
     toUserId: string;
     fromUserId: string;
     fromUserName: string 
