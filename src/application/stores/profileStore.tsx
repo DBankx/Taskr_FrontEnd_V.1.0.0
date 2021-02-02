@@ -4,11 +4,7 @@ import {ITask} from "../../infrastructure/models/task";
 import {profileRequest} from "../api/agent";
 import {alertErrors} from "../../infrastructure/utils/getErrors";
 import {TaskStatus} from "../../infrastructure/enums/taskStatus";
-import {
-    ILanguage,
-    IPrivateProfile,
-    ISkill, ISocials,
-} from "../../infrastructure/models/profile";
+import {ILanguage, IPrivateProfile, ISkill, ISocials,} from "../../infrastructure/models/profile";
 import {toast} from "react-toastify";
 import {CheckmarkIcon} from "../../infrastructure/icons/Icons";
 import Alert from "../common/Alert";
@@ -154,5 +150,56 @@ export class ProfileStore{
         }
     }
     
+    @action readNotification = async (notificationId: string) => {
+        try{
+            await profileRequest.markNotificationAsRead(notificationId);
+            runInAction(() => {
+                const notif = this.userNotifications?.data.find(x => x.id == notificationId);
+                notif!.status = NotificationStatus.Read;
+            })
+        }catch (errors){
+            alertErrors(errors);
+            throw errors;
+        }
+    }
+    
+    @action deleteNotification = async (notificationId: string) => {
+        try{
+            await profileRequest.deleteNotification(notificationId);
+            runInAction(() => {
+               this.userNotifications!.data = this.userNotifications!.data.filter(x => x.id !== notificationId); 
+            })
+        }catch (errors){
+            alertErrors(errors);
+            throw errors;
+        } 
+    }
+    
+    @action markAllNotificationsAsRead = async () => {
+        try{
+            await profileRequest.markAllNotificationsAsRead();
+            runInAction(() => {
+               this.userNotifications?.data.forEach((notification) => {
+                   notification.status = NotificationStatus.Read;
+               }) 
+                this.rootStore.authStore.user!.hasUnReadNotifications = false;
+            })
+        }catch (errors){
+            alertErrors(errors);
+            throw errors;
+        }
+    }
+    
+    @action deleteAllNotifications = async () => {
+        try{
+            await profileRequest.deleteAllNotifications();
+            runInAction(() => {
+                this.userNotifications!.data = [];
+            })
+        }catch(errors){
+            alertErrors(errors);
+            throw errors;
+        }
+    }
     
 }

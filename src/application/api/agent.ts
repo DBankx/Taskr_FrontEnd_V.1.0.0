@@ -78,5 +78,9 @@ export const profileRequest = {
     updateProfile: (values: any) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/update", values),
     updateSocials: (values: ISocials) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/socials", values),
     getNotifications: (status?: NotificationStatus, pageNumber?: number, pageSize?: number) : Promise<IPaginatedNotificationsResponse> => ApiRequest.get("/profile/notifications", {params:{status,
-        pageNumber, pageSize}})
+        pageNumber, pageSize}}),
+    markNotificationAsRead: (notificationId: string) : Promise<Record<string, unknown>> => ApiRequest.put(`profile/notifications/${notificationId}`),
+    deleteNotification: (notificationId: string) : Promise<Record<string, unknown>> => ApiRequest.delete(`profile/notifications/${notificationId}`),
+    markAllNotificationsAsRead: () : Promise<Record<string, unknown>> => ApiRequest.put("profile/notifications/read"),
+    deleteAllNotifications: () : Promise<Record<string, unknown>> => ApiRequest.delete("profile/notifications")
 }

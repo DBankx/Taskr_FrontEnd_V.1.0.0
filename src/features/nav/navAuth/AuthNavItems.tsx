@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {IUser} from "../../../infrastructure/models/auth";
 import {observer} from "mobx-react-lite";
 import {Box, HStack, Popover, PopoverArrow,
@@ -24,6 +24,9 @@ interface IProps{
 
 const AuthNavItems : React.FC<IProps> = ({user}) => {
     const {stopHubConnection, createNotificationHubConnection} = useContext(rootStoreContext).appStore;
+    const {markAllNotificationsAsRead, deleteAllNotifications, userNotifications} = useContext(rootStoreContext).profileStore;
+    const [isReadingNotifications, setIsReadingNotifications] = useState(false);
+    const [isDeletingNotifications, setIsDeletingNotifications] = useState(false);
     useEffect(() => {
         createNotificationHubConnection();
         return () => stopHubConnection();
@@ -51,8 +54,14 @@ const AuthNavItems : React.FC<IProps> = ({user}) => {
                             </PopoverBody>
                             <PopoverFooter>
                                 <HStack justifyContent="space-between">
-                                    <Button variant="ghost" leftIcon={<CheckmarkIcon />} className="btn text__silent btn__ghost btn__hover__grey"> Mark all as read</Button>
-                                    <Button variant="ghost" leftIcon={<TrashIcon />} className="text__silent btn btn__ghost btn__hover__grey">Delete All</Button>
+                                    <Button disabled={userNotifications === null || userNotifications.data.length <= 0} isLoading={isReadingNotifications} variant="ghost" leftIcon={<CheckmarkIcon />} className="btn text__silent btn__ghost btn__hover__grey" onClick={() =>{
+                                        setIsReadingNotifications(true)
+                                        markAllNotificationsAsRead().finally(() => setIsReadingNotifications(false))
+                                    }}> Mark all as read</Button>
+                                    <Button disabled={userNotifications === null ||  userNotifications.data.length <= 0} isLoading={isDeletingNotifications} variant="ghost" leftIcon={<TrashIcon />} className="text__silent btn btn__ghost btn__hover__grey" onClick={() => {
+                                        setIsDeletingNotifications(true);
+                                        deleteAllNotifications().finally(() => setIsDeletingNotifications(false));
+                                    }}>Delete All</Button>
                                 </HStack>
                             </PopoverFooter>
                         </PopoverContent>

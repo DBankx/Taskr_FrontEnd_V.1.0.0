@@ -13,8 +13,8 @@ interface IProps{
 const ProfileMenu : React.FC<IProps> = ({user}) => {
     const {logOutUser} = useContext(rootStoreContext).authStore;
     return (
-        <Menu size="large" >
-            <MenuButton as={Box} isLazy={true}>
+        <Menu size="large" isLazy={true} >
+            <MenuButton as={Box} >
                 <HStack spacing="10px">
                     <Image src={user.avatar} alt="user_avatar" borderRadius="full" boxSize="40px" />
                     <ChevronDownIcon boxSize={8} />

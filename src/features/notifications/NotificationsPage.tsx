@@ -7,15 +7,15 @@ import NotificationsPlaceholder from "./NotificationsPlaceholder";
 import {INotification} from "../../infrastructure/models/notification";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import {NotificationStatus} from "../../infrastructure/enums/notification";
 
 dayjs.extend(relativeTime);
 
 const NotificationsPage = () => {
-    const {getUserNotifications, loadingInitial, userNotifications} = useContext(rootStoreContext).profileStore;
+    const {getUserNotifications, loadingInitial, userNotifications, readNotification, deleteNotification} = useContext(rootStoreContext).profileStore;
     useEffect(() => {
         getUserNotifications();
     }, [getUserNotifications])
-    
     if(loadingInitial || userNotifications === null) return <NotificationsPlaceholder /> 
     return (
         <div style={{width: "100%"}}> 
@@ -33,14 +33,22 @@ const NotificationsPage = () => {
                                                     <p className="text__silent">•••</p>
                                                 </MenuButton>
                                            <MenuList className="menu__list">
-                                               <MenuItem>
+                                               {notification.status === NotificationStatus.UnRead &&
+                                               <MenuItem onClick={() => {
+                                                   readNotification(notification.id);
+                                               }}>
                                                    Mark as read
                                                </MenuItem>
-                                               <MenuItem>
+                                               }
+                                               <MenuItem onClick={() => {
+                                                   deleteNotification(notification.id);
+                                               }}>
                                                    Delete Notification
                                                </MenuItem>
                                            </MenuList>
                                        </Menu>
+                                        
+                                        {notification.status === NotificationStatus.UnRead &&  <Box className="notifier" />}
 
                                     </Box>
                                 </HStack>

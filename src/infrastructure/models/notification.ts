@@ -7,9 +7,9 @@ export interface INotification{
     fromUserName: string 
     fromUserAvatar : string; 
     message: string;
-    notificationStatus : NotificationStatus;
+    status : NotificationStatus;
     createdAt : Date; 
-     type : NotificationType;
+    type : NotificationType;
     notifierObjectId : string;
 }
 
