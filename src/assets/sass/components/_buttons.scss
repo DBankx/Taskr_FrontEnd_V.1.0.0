@@ -33,6 +33,17 @@
   text-align: center !important;
   vertical-align: top !important;
   
+  &__red{
+    background-color: $error-color !important;
+    color: #fff !important;
+  }
+  
+  &__outlined{
+    background: none !important;
+    border: 1px solid $border-color !important;
+    color: $color-tetiary !important;
+  }
+  
   &__ghost{
     padding: 0 !important;
     font-weight: 500 !important;

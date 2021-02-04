@@ -44,9 +44,9 @@ const TaskBidItem : React.FC<IProps> = ({task}) => {
                 </SimpleGrid>
             </div>
             <Divider />
-            <div style={{margin: "1em 0"}}>
+            {!task.isOwner && <div style={{margin: "1em 0"}}>
                 <BidPageForm task={task} />
-            </div>
+            </div>}
         </div>
     )
 }

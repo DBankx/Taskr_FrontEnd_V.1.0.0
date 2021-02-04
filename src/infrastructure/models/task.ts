@@ -20,6 +20,7 @@ export interface ITask{
     isWatching: boolean;
     deliveryType: number;
     category: number;
+    isOwner: boolean;
 }
 
 export interface IPhoto{

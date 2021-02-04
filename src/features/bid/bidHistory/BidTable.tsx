@@ -1,14 +1,19 @@
-﻿import React from "react";
+﻿import React, {useState} from "react";
 import {IBid} from "../../../infrastructure/models/bid";
 import {observer} from "mobx-react-lite";
-import { Table, TableCaption, Tbody, Td, Th, Thead, Tr, Image, HStack } from "@chakra-ui/react";
-import getBidStatus from "../../../infrastructure/utils/getBidStatus";
+import {Table, TableCaption, Tbody, Td, Th, Thead, Tr, Image, HStack, Button, useDisclosure} from "@chakra-ui/react";
+import {ITask} from "../../../infrastructure/models/task";
+import BidModalDetails from "./BidModalDetails";
+import {BidStatus} from "../../../infrastructure/enums/bid";
 
 interface IProps{
-    bids: IBid[]
+    bids: IBid[];
+    task: ITask
 }
 
-const BidTable : React.FC<IProps> = ({bids}) => {
+const BidTable : React.FC<IProps> = ({bids, task}) => {
+    const {isOpen, onOpen, onClose} = useDisclosure();
+    const [bidId, setBidId] = useState<string>("");
     return (
         <div>
             <Table variant="simple" style={{position: "relative"}}>
@@ -19,6 +24,7 @@ const BidTable : React.FC<IProps> = ({bids}) => {
                         <Th>Bid amount</Th>
                         <Th>Submitted at</Th>
                         <Th>Status</Th>
+                        {task.isOwner && <Th>Action</Th>}
                     </Tr>
                 </Thead>
                 <Tbody>
@@ -32,11 +38,16 @@ const BidTable : React.FC<IProps> = ({bids}) => {
                              </Td>
                          <Td>${bid.price}</Td>
                          <Td>{new Date(bid.createdAt).toUTCString()}</Td>
-                         <Td>{getBidStatus(bid.status)}</Td>
+                         <Td>{BidStatus[bid.status]}</Td>
+                         {task.isOwner && <Td><Button className="btn btn__outlined" onClick={() => {
+                             onOpen();
+                             setBidId(bid.id);
+                         }}>view</Button></Td>}
                      </Tr>   
                     ))}
                 </Tbody>
             </Table> 
+            <BidModalDetails task={task} bidId={bidId} isOpen={isOpen} onClose={onClose} />
         </div>
     )
 }

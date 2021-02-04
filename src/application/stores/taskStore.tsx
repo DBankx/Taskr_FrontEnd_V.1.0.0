@@ -58,6 +58,9 @@ export class TaskStore{
           const taskResponse = await JobRequest.getTaskById(id);
           runInAction(() => {
               this.task = taskResponse;
+              if(this.rootStore.authStore.user?.id === this.task.creator.id){
+                  this.task.isOwner = true;
+              }
               this.loadingInitial = false;
           })
         } catch (error) {

@@ -369,3 +369,12 @@
   }
 }
 
+.chakra-modal__content{
+  max-width: 32em !important;
+} 
+
+.bid__description{
+  background-color: $color-secondary;
+  border-radius: 4px;
+  margin-top: 0.8em;
+}

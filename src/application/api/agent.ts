@@ -62,7 +62,9 @@ export const AuthRequest = {
 // Requests for bids
 export const BidRequest = {
     placeBid: (values: IBidSubmission, jobId: string) : Promise<IBid> => ApiRequest.post(`bids/${jobId}`, values),
-    getAllTaskBids: (taskId: string) : Promise<IBid[]> => ApiRequest.get(`/bids/${taskId}`)
+    getAllTaskBids: (taskId: string) : Promise<IBid[]> => ApiRequest.get(`/bids/${taskId}`),
+    getBidById: (bidId: string) : Promise<IBid> => ApiRequest.get(`/bids/get-bid/${bidId}`),
+    markBidAsSeen: (bidId: string) : Promise<IBid> => ApiRequest.put(`/bids/seen/${bidId}`),
 }
 
 // Requests for profile

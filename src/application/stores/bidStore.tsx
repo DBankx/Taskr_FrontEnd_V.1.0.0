@@ -1,11 +1,13 @@
 ﻿import {RootStore} from "./rootstore";
 import {action, makeObservable, observable, runInAction} from "mobx";
 import {IBid, IBidSubmission} from "../../infrastructure/models/bid";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 import {CheckmarkIcon, CloseIcon} from "../../infrastructure/icons/Icons";
 import Alert from "../common/Alert";
 import React from "react";
 import {BidRequest} from "../api/agent";
+import {alertErrors} from "../../infrastructure/utils/getErrors";
+import {BidStatus} from "../../infrastructure/enums/bid";
 
 export class BidStore{
     rootStore: RootStore
@@ -17,6 +19,8 @@ export class BidStore{
    @observable bid: IBid | null = null;
    @observable bids: IBid[] | null = null; 
    @observable loadingInitialBids = false; 
+   @observable loadingBid = false;
+   @observable markingBidAsSeen = false;
     
     // Actions
     @action createBid = async (values: IBidSubmission, jobId: string) => {
@@ -61,4 +65,38 @@ export class BidStore{
         }
     }
     
+    @action getBidById = async (bidId: string) => {
+        this.loadingBid = true;
+        try{
+            const bid = await BidRequest.getBidById(bidId);
+            runInAction(() => {
+                this.bid = bid;
+                this.loadingBid = false;
+            })
+        }catch(errors){
+            runInAction(() => this.loadingBid = false);
+            alertErrors(errors);
+            throw errors;
+        }
+    }
+    
+    
+    @action markBidAsSeen = async (bidId: string) => {
+        this.markingBidAsSeen = true;
+        try{
+            await BidRequest.markBidAsSeen(bidId);
+            runInAction(() => {
+                this.bid!.status = BidStatus.Seen;
+                if(this.bids){
+                    const bid = this.bids.find(x => x.id === bidId);
+                    bid!.status = BidStatus.Seen;
+                }
+                this.markingBidAsSeen = false;
+            })
+        } catch(errors){
+            runInAction(() => this.markingBidAsSeen = false);
+            alertErrors(errors);
+            throw errors;
+        }
+    }
 }

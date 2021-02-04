@@ -24,6 +24,7 @@ export class ProfileStore{
     @observable loadingInitial = false;
     @observable privateProfile : IPrivateProfile | null = null;
     @observable userNotifications : IPaginatedNotificationsResponse | null = null;
+    @observable loadingNotifications = false;
     
     @action getProfileTasks = async (taskStatus: TaskStatus) => {
         this.loadingInitial = true;
@@ -136,15 +137,15 @@ export class ProfileStore{
     }
     
     @action getUserNotifications = async (status?: NotificationStatus) => {
-        this.loadingInitial = true;
+        this.loadingNotifications = true;
         try{
            const notifs = await profileRequest.getNotifications(status);
            runInAction(() => {
                this.userNotifications = notifs;
-               this.loadingInitial = false;
+               this.loadingNotifications = false;
            })
         }catch (e) {
-            runInAction(() => this.loadingInitial = false);
+            runInAction(() => this.loadingNotifications = false);
             alertErrors(e);
             throw e;
         }

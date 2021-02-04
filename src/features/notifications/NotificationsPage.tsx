@@ -12,11 +12,11 @@ import {NotificationStatus} from "../../infrastructure/enums/notification";
 dayjs.extend(relativeTime);
 
 const NotificationsPage = () => {
-    const {getUserNotifications, loadingInitial, userNotifications, readNotification, deleteNotification} = useContext(rootStoreContext).profileStore;
+    const {getUserNotifications, loadingNotifications, userNotifications, readNotification, deleteNotification} = useContext(rootStoreContext).profileStore;
     useEffect(() => {
         getUserNotifications();
     }, [getUserNotifications])
-    if(loadingInitial || userNotifications === null) return <NotificationsPlaceholder /> 
+    if(loadingNotifications || userNotifications === null) return <NotificationsPlaceholder /> 
     return (
         <div style={{width: "100%"}}> 
                 {userNotifications.data.length > 0 ? (<div>

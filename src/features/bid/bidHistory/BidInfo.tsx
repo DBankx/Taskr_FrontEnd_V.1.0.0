@@ -99,7 +99,7 @@ const BidInfo : React.FC<IProps> = ({bids, task}) => {
             </div>
             
             {!isMobile ? <div style={{margin: "1em 0"}}>
-                {bids.length > 0 ? <BidTable bids={bids} /> : (<div className="text__middle">
+                {bids.length > 0 ? <BidTable task={task} bids={bids} /> : (<div className="text__middle">
                     <p>There are no bids on this task</p>
                     </div>)}
             </div>  : (

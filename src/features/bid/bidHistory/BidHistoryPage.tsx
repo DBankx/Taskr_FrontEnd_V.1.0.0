@@ -25,7 +25,8 @@ const BidHistoryPage : React.FC<RouteComponentProps<IBidHistoryPageRouteValues>>
         } else{
             getTaskBids(taskId);
         }
-    }, [taskId, getTaskBids])
+    }, [taskId, getTaskBids, getTaskById])
+    
     
     if(bids === null || loadingInitialBids || task === null) return <FullPageSpinner />
     

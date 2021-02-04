@@ -57,7 +57,7 @@ const ProfilePage = () => {
     return (
         <div>
            <Tabs isLazy>
-             <TabList className="profile__tabs">
+             <TabList className="profile__tabs" style={{zIndex: 0}}>
                  <Slider {...sliderSettings}>
                  <Tab>My Tasks</Tab>
                  <Tab>My Services</Tab>

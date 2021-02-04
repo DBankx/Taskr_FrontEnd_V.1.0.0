@@ -33,17 +33,18 @@
     padding: 0 9em !important;
     position: sticky !important;
     top: 0 !important;
-    z-index: 100 !important;
+    //z-index: 100 !important;
     .slick-slider{
       position: relative !important;
+      .slick-slide{
+        position: relative !important;
+      }
     }
     &__next__arr{
      position: absolute;
       right: -30px;
       top: 35%;
     }
-    
-  
     
     &__prev__arr{
       position: absolute;
@@ -62,6 +63,7 @@
 
       &[aria-selected="true"] {
         color: #3E4153 !important;
+        border-bottom: 4px solid #3E4153 !important;
       }
     }
   }

@@ -12,7 +12,7 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
 import {IBid} from "../../../infrastructure/models/bid";
-import getBidStatus from "../../../infrastructure/utils/getBidStatus";
+import {BidStatus} from "../../../infrastructure/enums/bid";
 
 interface IProps{
     bids: IBid[]
@@ -45,7 +45,7 @@ const BidAccordian : React.FC<IProps> = ({bids}) => {
 
                         <SimpleGrid templateColumns="0.5fr 1fr">
                             <p className="text__silent">Status:</p>
-                            <p className="text__darker">{getBidStatus(bid.status)}</p>
+                            <p className="text__darker">{BidStatus[bid.status]}</p>
                         </SimpleGrid>
                     </AccordionPanel>
                 </AccordionItem>  
