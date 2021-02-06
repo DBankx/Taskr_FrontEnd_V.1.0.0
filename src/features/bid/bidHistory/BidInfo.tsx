@@ -104,7 +104,7 @@ const BidInfo : React.FC<IProps> = ({bids, task}) => {
                     </div>)}
             </div>  : (
                 <div style={{margin: "1em 0"}}>
-                    {bids.length > 0 ? <BidAccordian bids={bids} /> : (<div className="text__middle">
+                    {bids.length > 0 ? <BidAccordian task={task} bids={bids} /> : (<div className="text__middle">
                         <p>There are no bids on this task</p>
                     </div>)}
                 </div>

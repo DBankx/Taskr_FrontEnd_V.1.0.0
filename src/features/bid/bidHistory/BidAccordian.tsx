@@ -5,20 +5,26 @@
     AccordionItem,
     AccordionPanel,
     Box,
+    Button,
     HStack,
     Image,
-    SimpleGrid
+    SimpleGrid, useDisclosure
 } from "@chakra-ui/react";
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, {useState} from "react";
 import {IBid} from "../../../infrastructure/models/bid";
 import {BidStatus} from "../../../infrastructure/enums/bid";
+import {ITask} from "../../../infrastructure/models/task";
+import BidModalDetails from "./BidModalDetails";
 
 interface IProps{
-    bids: IBid[]
+    bids: IBid[];
+    task: ITask;
 }
 
-const BidAccordian : React.FC<IProps> = ({bids}) => {
+const BidAccordian : React.FC<IProps> = ({bids, task}) => {
+    const {isOpen, onOpen, onClose} = useDisclosure();
+    const [bidId, setBidId] = useState<string>("");
     return (
         <Accordion allowToggle>
             {bids.map((bid) => (
@@ -47,10 +53,15 @@ const BidAccordian : React.FC<IProps> = ({bids}) => {
                             <p className="text__silent">Status:</p>
                             <p className="text__darker">{BidStatus[bid.status]}</p>
                         </SimpleGrid>
+                        
+                        {task.isOwner && <Button className="btn btn__outlined btn__full-width" onClick={() => {
+                            onOpen();
+                            setBidId(bid.id);
+                        }}>view</Button>}
                     </AccordionPanel>
                 </AccordionItem>  
             ))}
-            
+            <BidModalDetails task={task} bidId={bidId} isOpen={isOpen} onClose={onClose} />
         </Accordion>
     )
 }

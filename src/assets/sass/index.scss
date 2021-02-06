@@ -21,3 +21,11 @@
 @import "pages/auth";
 @import "pages/task";
 @import "pages/profile";
+
+@font-face {
+  font-family: 'Larsseit';
+  src: local("Larsseit"), url(../font/larsseit-webfont.woff) format("woff");
+  src: local("Larsseit"), url(../font/larsseit-webfont.woff2) format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}

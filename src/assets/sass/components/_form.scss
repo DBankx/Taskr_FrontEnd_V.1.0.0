@@ -59,6 +59,12 @@
     height: 48px !important;
     border: 1px solid $border-color;
     
+    &__sm{
+      height: 30px !important;
+      font-size: 1em !important;
+      border: 1px solid $border-color-darker !important;
+      color: $color-tetiary !important;
+    }
    
   }
   

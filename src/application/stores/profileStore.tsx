@@ -25,7 +25,7 @@ export class ProfileStore{
     @observable privateProfile : IPrivateProfile | null = null;
     @observable userNotifications : IPaginatedNotificationsResponse | null = null;
     @observable loadingNotifications = false;
-    
+    @observable watchList : ITask[] | null = null;
     @action getProfileTasks = async (taskStatus: TaskStatus) => {
         this.loadingInitial = true;
         try{
@@ -200,6 +200,21 @@ export class ProfileStore{
         }catch(errors){
             alertErrors(errors);
             throw errors;
+        }
+    }
+    
+    @action getWatchlist = async (sortBy: string) => {
+        this.loadingInitial = true;
+        try{
+            const watchlist = await profileRequest.getWatchlist(sortBy);
+            runInAction(() => {
+                this.watchList = watchlist;
+                this.loadingInitial = false;
+            })
+        }catch (e) {
+            runInAction(() => this.loadingInitial = false);
+           alertErrors(e);
+           throw e;
         }
     }
     

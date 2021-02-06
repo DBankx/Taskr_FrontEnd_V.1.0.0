@@ -41,7 +41,19 @@
   &__outlined{
     background: none !important;
     border: 1px solid $border-color !important;
-    color: $color-tetiary !important;
+    color: #000 !important;
+    font-weight: 500 !important;
+  }
+  
+  &__long{
+    height: 34px !important;
+    padding: 5px 22px !important;
+    border-radius: 4px !important;
+    text-align: center !important;
+    vertical-align: top !important;
+    font-size: 1em !important;
+    outline: none !important;
+    font-weight: 500 !important;
   }
   
   &__ghost{

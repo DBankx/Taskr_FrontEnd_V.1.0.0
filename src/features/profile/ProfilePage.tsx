@@ -5,6 +5,8 @@ import Slider from "react-slick";
 import TaskTab from "./myTasks/TaskTab";
 import {ChevronLeftIcon, ChevronRightIcon} from "../../infrastructure/icons/Icons";
 import MyProfile from "./myProfile/MyProfile";
+import WatchlistPage from "./myWatchlist/WatchlistPage";
+import {useQueryParam, NumberParam} from "use-query-params";
 
 const ProfilePage = () => {
     function NextArrow(props: any) {
@@ -20,6 +22,8 @@ const ProfilePage = () => {
                 <ChevronLeftIcon className="profile__tabs__prev__arr" onClick={onClick} boxSize={7} color="#A0AEC0" />
         );
     }
+    
+    const [tab, setTab] = useQueryParam("tab", NumberParam);
 
     const sliderSettings = {
         dots: false,
@@ -56,11 +60,10 @@ const ProfilePage = () => {
     }
     return (
         <div>
-           <Tabs isLazy>
+           <Tabs isLazy index={tab ? tab : 0} onChange={index => setTab(index)} >
              <TabList className="profile__tabs" style={{zIndex: 0}}>
                  <Slider {...sliderSettings}>
                  <Tab>My Tasks</Tab>
-                 <Tab>My Services</Tab>
                  <Tab>Bids / Offers</Tab>
                  <Tab>My Orders</Tab>
                  <Tab>Watchlist</Tab>
@@ -82,16 +85,16 @@ const ProfilePage = () => {
                        hey
                    </TabPanel>
                    <TabPanel>
-                       hey
-                   </TabPanel>
-                   <TabPanel>
-                       hey
+                       <WatchlistPage />
                    </TabPanel>
                    <TabPanel>
                        hey
                    </TabPanel>
                    <TabPanel>
                        <MyProfile />
+                   </TabPanel>
+                   <TabPanel>
+                       hey
                    </TabPanel>
                </TabPanels>
            </Tabs> 

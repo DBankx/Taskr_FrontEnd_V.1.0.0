@@ -84,5 +84,6 @@ export const profileRequest = {
     markNotificationAsRead: (notificationId: string) : Promise<Record<string, unknown>> => ApiRequest.put(`profile/notifications/${notificationId}`),
     deleteNotification: (notificationId: string) : Promise<Record<string, unknown>> => ApiRequest.delete(`profile/notifications/${notificationId}`),
     markAllNotificationsAsRead: () : Promise<Record<string, unknown>> => ApiRequest.put("profile/notifications/read"),
-    deleteAllNotifications: () : Promise<Record<string, unknown>> => ApiRequest.delete("profile/notifications")
+    deleteAllNotifications: () : Promise<Record<string, unknown>> => ApiRequest.delete("profile/notifications"),
+    getWatchlist: (sortBy: string) : Promise<ITask[]> => ApiRequest.get("/profile/watchlist", {params:{sortBy}})
 }

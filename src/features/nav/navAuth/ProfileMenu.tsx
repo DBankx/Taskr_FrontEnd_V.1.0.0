@@ -5,6 +5,7 @@ import {ChevronDownIcon} from "../../../infrastructure/icons/Icons";
 import { observer } from "mobx-react-lite";
 import rootStoreContext from "../../../application/stores/rootstore";
 import {history} from "../../../index";
+import {Link} from "react-router-dom";
 
 interface IProps{
     user: IUser
@@ -22,13 +23,12 @@ const ProfileMenu : React.FC<IProps> = ({user}) => {
             </MenuButton>
             <MenuList   minWidth="180px" className="nav__auth__box">
                     <MenuItem onClick={() => history.push("/profile")}>My Tasks</MenuItem>
-                    <MenuItem>My Services</MenuItem>
-                    <MenuItem>Bids / Offers</MenuItem>
-                    <MenuItem>My Orders </MenuItem>
-                    <MenuItem>Watchlist</MenuItem>
-                    <MenuItem>Saved runners</MenuItem>
-                    <MenuItem>My Profile</MenuItem>
-                    <MenuItem>Account Settings</MenuItem>
+                    <MenuItem as={Link} to="/profile?tab=1">Bids / Offers</MenuItem>
+                    <MenuItem as={Link} to="/profile?tab=2">My Orders </MenuItem>
+                    <MenuItem as={Link} to="/profile?tab=3">Watchlist</MenuItem>
+                    <MenuItem as={Link} to="/profile?tab=4">Saved runners</MenuItem>
+                    <MenuItem as={Link} to="/profile?tab=5">My Profile</MenuItem>
+                    <MenuItem as={Link} to="/profile?tab=6">Account Settings</MenuItem>
                     <MenuItem onClick={() => logOutUser()}>Logout</MenuItem>
             </MenuList>
         </Menu> 

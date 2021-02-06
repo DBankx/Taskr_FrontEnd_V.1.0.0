@@ -15,6 +15,7 @@ import {
 import {history} from "../../../index";
 import rootStoreContext from "../../../application/stores/rootstore";
 import NotificationsPage from "../../notifications/NotificationsPage";
+import {Link} from "react-router-dom";
 
 interface IProps{
     user: IUser
@@ -33,9 +34,9 @@ const AuthNavItems : React.FC<IProps> = ({user}) => {
     }, [createNotificationHubConnection, stopHubConnection])
     return (
         <HStack spacing="30px" alignItems="center">
-            <Box title="watchlist">
+            <Link to="/profile?tab=3" title="watchlist">
                 <BinocularsIcon boxSize={10} color="#3D3373" />
-            </Box>
+            </Link>
             <Box title="My Notifications">
                     <Popover isLazy={true} variant="responsive" placement="bottom">
                         <PopoverTrigger>

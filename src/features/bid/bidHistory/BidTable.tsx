@@ -39,7 +39,7 @@ const BidTable : React.FC<IProps> = ({bids, task}) => {
                          <Td>${bid.price}</Td>
                          <Td>{new Date(bid.createdAt).toUTCString()}</Td>
                          <Td>{BidStatus[bid.status]}</Td>
-                         {task.isOwner && <Td><Button className="btn btn__outlined" onClick={() => {
+                         {task.isOwner && <Td><Button className="btn btn__outlined" variant="outlined" onClick={() => {
                              onOpen();
                              setBidId(bid.id);
                          }}>view</Button></Td>}

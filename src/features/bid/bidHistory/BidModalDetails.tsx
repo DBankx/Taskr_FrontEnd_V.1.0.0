@@ -36,7 +36,7 @@ const BidModalDetails : React.FC<IProps> = ({bidId, onClose, isOpen, task}) => {
                 <ModalHeader><p className="text__darker text__bigger__md">{task.title}</p></ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                   <Stack direction={["column", "row"]} justifyContent="space-between" alignItems="flex-end">
+                   <Stack direction={["column", "row"]} justifyContent="space-between" alignItems={{xl: "flex-end", lg: "flex-end", sm: "flex-start"}}>
                        <Box>
                            <HStack spacing="10px">
                                <Image src={bid.bidCreator.avatar} alt="bidder-avatar" borderRadius="full" boxSize="60px" />
@@ -52,7 +52,7 @@ const BidModalDetails : React.FC<IProps> = ({bidId, onClose, isOpen, task}) => {
                            </HStack>
                        </Box>
 
-                       <VStack justifyContent="space-between">
+                       <VStack justifyContent={{xl: "space-between", md: "space-between", lg: "space-between", sm: "flex-start"}} alignItems="start">
                            <Tooltip hasArrow label="Let bidder know you have seen their bid but havent made a desicion yet" style={{background: "rgb(41, 43, 50)", fontSize: "0.8em"}} color="#fff" >
                                {bid.status === BidStatus.Seen ? <p className="text__silent">Marked as seen</p> :<Button isLoading={markingBidAsSeen} leftIcon={<EyeIcon />} variant="ghost" className="btn btn__ghost" onClick={() => markBidAsSeen(bid.id)}>
                                Mark as seen

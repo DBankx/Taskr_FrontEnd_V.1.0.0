@@ -8,6 +8,7 @@ import AccountBio from "./AccountBio";
 import ReviewSummary from "./ReviewSummary";
 import TagLine from "./TagLine";
 import ProfileReviews from "./ProfileReviews";
+import SEO from "../../../application/appLayout/SEO";
 
 const MyProfile = () => {
     const {loadingInitial, privateProfile, getPrivateProfile} = useContext(rootStoreContext).profileStore;
@@ -18,6 +19,7 @@ const MyProfile = () => {
     if(loadingInitial || privateProfile === null) return <Loader />
     return (
         <div className="container">
+            <SEO title="My private profile" />
             <div className="main">
                 <SimpleGrid templateColumns={{xl: "1fr 2fr", lg: "1fr 2fr", md: "1fr", sm: "1fr"}} spacing="20px">
                     <div>
