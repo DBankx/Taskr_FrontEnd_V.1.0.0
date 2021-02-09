@@ -34,10 +34,10 @@ const AuthNavItems : React.FC<IProps> = ({user}) => {
     }, [createNotificationHubConnection, stopHubConnection])
     return (
         <HStack spacing="30px" alignItems="center">
-            <Link to="/profile?tab=3" title="watchlist">
+            <Link to="/profile?tab=3" title="watchlist" className="auth__nav__item">
                 <BinocularsIcon boxSize={10} color="#3D3373" />
             </Link>
-            <Box title="My Notifications">
+            <Box title="My Notifications" className="auth__nav__item">
                     <Popover isLazy={true} variant="responsive" placement="bottom">
                         <PopoverTrigger>
                             <Box style={{position: "relative"}}>
@@ -69,10 +69,10 @@ const AuthNavItems : React.FC<IProps> = ({user}) => {
                         </Portal>
                     </Popover>
             </Box>
-            <Box title="My Messages">
+            <Box title="My Messages" className="auth__nav__item">
                 <ChatIcon boxSize={10} color="#3D3373" />
             </Box>
-            <Box title="My profile">
+            <Box title="My profile" className="auth__nav__item">
                 <ProfileMenu user={user} />
             </Box>
             <Box>

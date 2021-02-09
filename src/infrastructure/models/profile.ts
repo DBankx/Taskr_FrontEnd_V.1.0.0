@@ -9,6 +9,7 @@ export interface IPrivateProfile{
     city: string;
     createdAt: Date;
     avatar: string;
+    email: string;
     username: string;
     languages: ILanguage[],
     skillSet: ISkill[],

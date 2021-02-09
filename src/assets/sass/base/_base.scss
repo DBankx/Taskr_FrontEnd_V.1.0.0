@@ -36,6 +36,8 @@ body {
 }
 
 
+
+
 .middle_position{
   position: absolute;
   top: 50%;
@@ -63,6 +65,12 @@ body {
   text-transform: uppercase;
   font-size: 0.8em;
   color: #7a7d85;
+}
+
+.tooltip{
+  background: rgb(41, 43, 50) !important; 
+  font-size: 0.8em !important; 
+  color: #fff !important;
 }
 
 @media(max-width: 1200px){
@@ -105,7 +113,7 @@ body {
 
 .main{
   width: 100%;
-  margin: 3em 0;
+  margin: 1.5em 0;
 }
 
 .white__border{
@@ -117,6 +125,32 @@ body {
 
 .query__action__container  .slick-list:hover{
   overflow: visible !important;
+}
+
+.alert__helper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0px;
+  right: 0.1fr;
+}
+
+.alert__avatar{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.alert__notif{
+  position: relative;
+}
+
+@media(max-width: 500px){
+  .main{
+    width: 100%;
+    margin: 1em 0;
+  }
 }
 
 @media(min-width: 1100px){

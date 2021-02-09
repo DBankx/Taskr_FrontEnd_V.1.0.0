@@ -1,4 +1,19 @@
-﻿import {Box, Stack, Select, HStack, Table, Thead, Tr, Th, Button, Tbody, Checkbox, Td, Image} from "@chakra-ui/react";
+﻿import {
+    Box,
+    Stack,
+    Select,
+    HStack,
+    Table,
+    Thead,
+    Tr,
+    Th,
+    Button,
+    Tbody,
+    Checkbox,
+    Td,
+    Image,
+    useMediaQuery
+} from "@chakra-ui/react";
 import { observer } from "mobx-react-lite";
 import React, {useContext, useEffect} from "react";
 import rootStoreContext from "../../../application/stores/rootstore";
@@ -8,12 +23,14 @@ import {ITask} from "../../../infrastructure/models/task";
 import {Link} from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import {LocationIcon, WebIcon} from "../../../infrastructure/icons/Icons";
+import {BinocularsIcon, LocationIcon, WebIcon} from "../../../infrastructure/icons/Icons";
 import SEO from "../../../application/appLayout/SEO";
 dayjs.extend(relativeTime);
 
 const WatchlistPage = () => {
     const {loadingInitial, watchList, getWatchlist} = useContext(rootStoreContext).profileStore;
+    const {unWatchTask, watching} = useContext(rootStoreContext).taskStore;
+    const [isMobile] = useMediaQuery("(max-width: 500px)");
     const [sortBy, setSortBy] = useQueryParam("sortBy", StringParam); 
     useEffect(() => {
         getWatchlist(sortBy ? sortBy : "")
@@ -30,7 +47,8 @@ const WatchlistPage = () => {
         <Box className="container">
             <SEO title="watchlist" />
             <Box className="main">
-               <Stack direction={["column", "row"]} justifyContent="space-between" alignItems="center">
+                {watchList.length > 0 ? <Box>
+                <Stack direction={["column", "row"]} justifyContent="space-between" alignItems={{xl: "center", lg: "center", md: "center", sm: "start"}}>
                    <Box>
                        <h2 className="text__primary" style={{fontSize: "20px"}}>Showing {watchList.length} tasks</h2>
                    </Box>
@@ -56,20 +74,20 @@ const WatchlistPage = () => {
                     <Table>
                         <Thead>
                            <Tr>
-                               <Th><Checkbox isChecked={allChecked} isIndeterminate={isIndeterminate}  onChange={(e) => setCheckedItems([e.target.checked, e.target.checked])} /></Th>
-                               <Th className="watchlist__heading"><Button style={{fontSize: "1em"}} className="btn__primary btn__long">Delete</Button></Th>
-                               <Th className="watchlist__heading">Budget</Th>
-                               <Th className="watchlist__heading">Posted</Th>
-                               <Th className="watchlist__heading">Actions</Th>
+                               {!isMobile && <Th><Checkbox isChecked={allChecked} isIndeterminate={isIndeterminate}  onChange={(e) => setCheckedItems([e.target.checked, e.target.checked])} /></Th>}
+                               <Th className="watchlist__heading"><Button disabled={!allChecked} style={{fontSize: "1em"}} className="btn__primary btn__long">Delete</Button></Th>
+                               {!isMobile && <Th className="watchlist__heading">Budget</Th>}
+                               {!isMobile && <Th className="watchlist__heading">Posted</Th> }
+                               {!isMobile && <Th className="watchlist__heading">Actions</Th>}
                            </Tr> 
                         </Thead>
                         <Tbody>
                             {watchList.map((task: ITask, index) => (
                                 <Tr key={task.id}>
-                                    <Td>
+                                    {!isMobile && <Td>
                                         <Checkbox isChecked={checkedItems[index]}
                                                   onChange={(e) => setCheckedItems([e.target.checked, checkedItems[index]])} />
-                                    </Td>
+                                    </Td>}
                                     <Td>
                                         <HStack spacing="10px">
                                             <Box>
@@ -86,22 +104,31 @@ const WatchlistPage = () => {
                                             </Box>
                                         </HStack>
                                     </Td>
-                                    <Td>
+                                    {!isMobile &&  <Td>
                                         <p className="text__green text__md">${task.initialPrice}</p>
-                                    </Td>
-                                    <Td>
-                                        <p className="text__silent">&#60; {dayjs(task.createdAt).fromNow()}</p>
-                                        <small style={{marginTop: "0.5em", display: "block"}} className="text__silent">Ends {dayjs(task.deliveryDate).from(task.createdAt)}</small>
-                                    </Td>
-                                    <Td>
-                                        <Button variant="ghost" className="btn btn__ghost text__blue">Delete</Button>
-                                    </Td>
+                                    </Td>}
+                                    {!isMobile && <Td>
+                                        <p className="text__darker">&#60; {dayjs(task.createdAt).fromNow()}</p>
+                                        <small style={{marginTop: "0.5em", display: "block"}} className="text__light__grey">Ends {dayjs(task.deliveryDate).from(task.createdAt)}</small>
+                                    </Td>}
+                                    {!isMobile && <Td>
+                                        <Button isLoading={watching} onClick={() => unWatchTask(task.id)} variant="ghost" className="btn btn__ghost text__blue">Delete</Button>
+                                    </Td>}
                                 </Tr>
                             ))}
                         </Tbody>
                     </Table>
                 </Box>
-            </Box>
+            </Box> : (
+                <Box style={{width: "100%"}} className="text__middle middle_position">
+                    <BinocularsIcon boxSize={isMobile ? "40px" : "70px"} color="#373373" />
+                        <Box>
+                            <h1 className="text__primary text__heading">You havent watched any task</h1>
+                            <p style={{width: "80%", margin: "0 auto"}} className="text__silent">Found an interesting task? just click &quot;watch&quot; when viewing a task.</p>
+                        </Box>
+                    </Box>
+                    )}
+        </Box>
         </Box>
     )
 }

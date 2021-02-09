@@ -7,6 +7,7 @@ import {ChevronLeftIcon, ChevronRightIcon} from "../../infrastructure/icons/Icon
 import MyProfile from "./myProfile/MyProfile";
 import WatchlistPage from "./myWatchlist/WatchlistPage";
 import {useQueryParam, NumberParam} from "use-query-params";
+import ProfileSettingsPage from "./settings/ProfileSettingsPage";
 
 const ProfilePage = () => {
     function NextArrow(props: any) {
@@ -95,6 +96,9 @@ const ProfilePage = () => {
                    </TabPanel>
                    <TabPanel>
                        hey
+                   </TabPanel>
+                   <TabPanel>
+                       <ProfileSettingsPage />
                    </TabPanel>
                </TabPanels>
            </Tabs> 

@@ -1,0 +1,62 @@
+﻿.settings{
+  &__container{
+  margin: auto 15em;
+  }
+  
+  &__tab{
+    position: sticky !important;
+    top: 0 !important;
+    &__list{
+      font-family: Larsseit, sans-serif !important;
+      display: block !important;
+      border-bottom: none !important;
+      
+      button{
+        font-weight: 600 !important;
+        color: #999 !important;
+        font-size: 0.9em !important;
+        outline: none !important;
+        &:hover{
+          color: lighten(#999, 10%) !important;
+        }
+        &[aria-selected="true"] {
+          color: $color-primary !important;
+          border-bottom: none !important; 
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 1000px){
+  .settings {
+    &__container {
+      margin: auto 3em;
+    }
+  }
+}
+
+@media(max-width: 1200px){
+  .settings {
+    &__container {
+      margin: auto 2em;
+    }
+  }
+}
+
+
+@media (max-width: 500px){
+  .settings{
+    &__container{
+      margin: auto 0;
+    }
+    &__tab{
+      &__list{
+        display: flex !important;
+      }
+      &__panel{
+        padding: 0 !important;
+      }
+    }
+  }
+}

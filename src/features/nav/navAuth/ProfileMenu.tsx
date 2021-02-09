@@ -28,7 +28,8 @@ const ProfileMenu : React.FC<IProps> = ({user}) => {
                     <MenuItem as={Link} to="/profile?tab=3">Watchlist</MenuItem>
                     <MenuItem as={Link} to="/profile?tab=4">Saved runners</MenuItem>
                     <MenuItem as={Link} to="/profile?tab=5">My Profile</MenuItem>
-                    <MenuItem as={Link} to="/profile?tab=6">Account Settings</MenuItem>
+                <MenuItem as={Link} to="/profile?tab=6">My Reviews</MenuItem>
+                <MenuItem as={Link} to="/profile?tab=7">Account Settings</MenuItem>
                     <MenuItem onClick={() => logOutUser()}>Logout</MenuItem>
             </MenuList>
         </Menu> 

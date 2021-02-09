@@ -4,6 +4,7 @@ import {observer} from "mobx-react-lite";
 import {Box, Stack, Image, Link as Linker, SimpleGrid, Divider, Alert, AlertIcon} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import BidPageForm from "./BidPageForm";
+import {DeliveryTypes} from "../../../infrastructure/enums/deliveryTypes";
 
 interface IProps{
     task: ITask
@@ -31,7 +32,7 @@ const TaskBidItem : React.FC<IProps> = ({task}) => {
             </Stack>
             <div style={{margin: "1em 0"}}>
                 <SimpleGrid templateColumns="0.5fr 1fr">
-                    <p className="text__silent">Initial price:</p>
+                    <p className="text__silent">Taskr&apos;s Budget:</p>
                     <p className="text__darker">${task.initialPrice}</p>
                 </SimpleGrid>
                 <SimpleGrid templateColumns="0.5fr 1fr">
@@ -39,8 +40,8 @@ const TaskBidItem : React.FC<IProps> = ({task}) => {
                     <p className="text__darker">{task.address && `${task.address} / `}{task.postCode}</p>
                 </SimpleGrid>
                 <SimpleGrid templateColumns="0.5fr 1fr">
-                    <p className="text__silent">Item number:</p>
-                    <p className="text__darker">{task.id}</p>
+                    <p className="text__silent">Delivery:</p>
+                    <p className="text__darker">{task.deliveryType === DeliveryTypes.InPerson ? "In Person" : "Online"}</p>
                 </SimpleGrid>
             </div>
             <Divider />

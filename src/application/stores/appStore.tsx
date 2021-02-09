@@ -23,7 +23,7 @@ export class AppStore{
     
     
     @action createNotificationHubConnection = () => {
-        this.notificationHubConnection = new HubConnectionBuilder().withUrl("https://localhost:5001/notif", {
+        this.notificationHubConnection = new HubConnectionBuilder().withUrl("https://localhost:44351/notif", {
             accessTokenFactory : () => this.rootStore.authStore.token!
         }).configureLogging(LogLevel.Information).withAutomaticReconnect().build();
         

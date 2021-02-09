@@ -110,6 +110,10 @@ export class TaskStore{
                     this.task.isWatching = false;
                     this.task.watchCount--;
                 }
+                
+                if(this.rootStore.profileStore.watchList){
+                    this.rootStore.profileStore.watchList = this.rootStore.profileStore.watchList.filter(x => x.id !== taskId);
+                }
 
                 this.watching = false;
             })

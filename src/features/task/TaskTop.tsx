@@ -2,7 +2,14 @@ import React, {useContext} from "react";
 import { ITask } from "../../infrastructure/models/task";
 import {observer} from "mobx-react-lite";
 import {Box, HStack, Image, Spinner, useMediaQuery} from "@chakra-ui/react";
-import {BinocularsFilledIcon, BinocularsIcon, FlagIcon, ShareButtonIcon, StarIcon} from "../../infrastructure/icons/Icons";
+import {
+    BinocularsFilledIcon,
+    BinocularsIcon,
+    EditIcon,
+    FlagIcon,
+    ShareButtonIcon,
+    StarIcon, TrashIcon
+} from "../../infrastructure/icons/Icons";
 import rootStoreContext from "../../application/stores/rootstore";
 
 interface IProps{
@@ -20,12 +27,21 @@ const TaskTop : React.FC<IProps> = ({task}) => {
                 <Box className="task__action__button" onClick={() => task.isWatching ? unWatchTask(task.id) : watchTask(task.id)} title={task.isWatching ? "unwatch" : "watch"}>
                     {watching ? <Spinner color="#3D3373" boxSize={8} /> : task.isWatching ? <BinocularsFilledIcon boxSize={8} color="#3D3373" /> : <BinocularsIcon boxSize={8} color="#3D3373" />}
                 </Box>
-                <Box className="task__action__button">
+                <Box title="Report" className="task__action__button">
                     <FlagIcon boxSize={8} color="#F1454F" />
                 </Box>
-                <Box className="task__action__button">
+                <Box title="Share" className="task__action__button">
                     <ShareButtonIcon boxSize={8} color="#2DA3EB" />
                 </Box>
+                {task.isOwner && 
+                <Box title="Edit" className="task__action__button">
+                    <EditIcon boxSize={8} color="#3D3373" /> 
+                </Box>}
+                {task.isOwner && (
+                    <Box title="Delete" className="task__action__button">
+                        <TrashIcon boxSize={8} color="#E12120" />
+                    </Box>
+                )}
             </HStack>
         </div>
             <div style={isMobile ? {margin: "1em 0"} : {}}>
