@@ -73,6 +73,11 @@ body {
   color: #fff !important;
 }
 
+.flex__left{
+  display: flex;
+  justify-content: flex-end;
+}
+
 @media(max-width: 1200px){
   .container{
     margin: auto 2em;

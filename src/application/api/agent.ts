@@ -56,7 +56,8 @@ export const JobRequest = {
 // Requests for auth
 export const AuthRequest = {
     signIn: (signInValues: ISignInFormValues) : Promise<IAuthSuccessResponse> => ApiRequest.post("/auth/signin", signInValues),
-    getCurrentUser: () : Promise<IAuthSuccessResponse> => ApiRequest.get("/auth")
+    getCurrentUser: () : Promise<IAuthSuccessResponse> => ApiRequest.get("/auth"),
+    changePassword: (values: any) : Promise<Record<string, unknown>> => ApiRequest.put("/auth/change-password", values)
 }
 
 // Requests for bids

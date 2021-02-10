@@ -14,7 +14,8 @@ export interface IPrivateProfile{
     languages: ILanguage[],
     skillSet: ISkill[],
     tagline: string;
-    socials: ISocials
+    socials: ISocials;
+    emailConfirmed: boolean;
 }
 
 export interface ISocials{

@@ -4,8 +4,10 @@ import {ISignInFormValues, IUser} from "../../infrastructure/models/auth";
 import {AuthRequest} from "../api/agent";
 import React from "react";
 import Alert from "../common/Alert";
-import {CloseIcon} from "../../infrastructure/icons/Icons";
+import {CheckmarkIcon, CloseIcon} from "../../infrastructure/icons/Icons";
 import {toast} from "react-toastify";
+import {alertErrors} from "../../infrastructure/utils/getErrors";
+import {history} from "../../index";
 
 // -------------------------------------------
 // Auth store for all auth actions
@@ -64,6 +66,20 @@ export class AuthStore{
             })
         } catch(error){
             toast.error(<Alert subject="Error occurred" message="Problem getting tasks" icon={<CloseIcon boxSize={8} color="#73000c"/>} type="error" />)
+            throw error;
+        }
+    }
+    
+    @action changePassword = async (values: any) => {
+        try{
+            await AuthRequest.changePassword(values);
+            runInAction(() => {
+                toast.success(<Alert type="success" subject="Password changed" icon={<CheckmarkIcon boxSize={8} color="#224a23" />} message="You will be logged out" />);
+                history.push("/");
+                this.logOutUser();
+            })
+        }catch(error){
+            alertErrors(error);
             throw error;
         }
     }

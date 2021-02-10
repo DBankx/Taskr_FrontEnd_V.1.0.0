@@ -5,6 +5,7 @@ import AccountTab from "./account/AccountTab";
 import rootStoreContext from "../../../application/stores/rootstore";
 import Loader from "../../../application/appLayout/FullPageSpinner";
 import BillingInformation from "./billing/BillingInformation";
+import SecurityTab from "./security/SecurityTab";
 
 const ProfileSettingsPage = () => {
     const {user} = useContext(rootStoreContext).authStore;
@@ -32,7 +33,7 @@ const ProfileSettingsPage = () => {
                       <TabPanels>
                           <TabPanel className="settings__tab__panel"><AccountTab user={user!} privateProfile={privateProfile} /></TabPanel>
                           <TabPanel className="settings__tab__panel"><BillingInformation user={user!} privateProfile={privateProfile} /></TabPanel>
-                          <TabPanel className="settings__tab__panel">apple</TabPanel>
+                          <TabPanel className="settings__tab__panel"><SecurityTab user={user!} privateProfile={privateProfile} /></TabPanel>
                           <TabPanel className="settings__tab__panel">apple</TabPanel>
                       </TabPanels>  
                     </Box>
