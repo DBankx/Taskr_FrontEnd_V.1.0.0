@@ -196,6 +196,7 @@ export class ProfileStore{
             await profileRequest.deleteAllNotifications();
             runInAction(() => {
                 this.userNotifications!.data = [];
+                this.rootStore.authStore.user!.hasUnReadNotifications = false;
             })
         }catch(errors){
             alertErrors(errors);

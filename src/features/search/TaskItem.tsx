@@ -30,7 +30,7 @@ const TaskItem : React.FC<IProps> = ({task}) => {
             </div>
                 <HStack spacing="10px" style={{margin: "0.5em 0"}}>
                     <Image borderRadius="full" boxSize="30px" alt="tasker-avatar" src={`https://ui-avatars.com/api/?name=${task.creator.userName}&rounded=true&bold=true`} />
-                    <span>{task.creator.userName}</span>
+                    <Link className="text__blue" to={`/public-profile/${task.creator.id}`}>{task.creator.userName}</Link>
                     <div>
                         <span className="text__sm text__silent">•</span>
                         <span className="text__sm text__silent" style={{marginLeft: "0.5em"}}>{dayjs(task.createdAt).fromNow()}</span>

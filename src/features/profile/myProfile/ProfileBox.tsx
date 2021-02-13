@@ -5,6 +5,7 @@ import {Divider, HStack, Image, Link} from "@chakra-ui/react";
 import {EditIcon, LocationIcon, UserIcon} from "../../../infrastructure/icons/Icons";
 import {Link as Linker} from "react-router-dom";
 import dayjs from "dayjs";
+import {history} from "../../../index";
 
 interface IProps{
     profile: IPrivateProfile
@@ -18,7 +19,7 @@ const ProfileBox : React.FC<IProps> = ({profile}) => {
                 <p className="text__main text__lg">{profile.firstName} {profile.lastName}</p>
                 <p className="text__bold text__silent">{profile.username}</p>
                 <Link className="text__blue" as={Linker} to="/manage-profile"><EditIcon /> Edit Profile</Link>
-                <button className="btn btn__sm btn__grey">View public profile</button>
+                <button className="btn btn__sm btn__grey" onClick={() => history.push(`/public-profile/${profile.id}`)}>View public profile</button>
             </div>
             <Divider mt={3} mb={3} />
             <div>

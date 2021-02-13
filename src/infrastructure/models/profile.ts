@@ -3,6 +3,7 @@
 import {ExperienceLevel} from "../enums/skill";
 
 export interface IPrivateProfile{
+    id: string;
     firstName: string;
     lastName: string;
     bio: string;
@@ -16,6 +17,21 @@ export interface IPrivateProfile{
     tagline: string;
     socials: ISocials;
     emailConfirmed: boolean;
+}
+
+export interface IPublicProfile{
+    id: string;
+    bio: string;
+    city: string;
+    createdAt: Date;
+    avatar: string;
+    email: string;
+    username: string;
+    languages: ILanguage[],
+    skillSet: ISkill[],
+    tagline: string;
+    socials: ISocials; 
+    isUser: boolean;
 }
 
 export interface ISocials{

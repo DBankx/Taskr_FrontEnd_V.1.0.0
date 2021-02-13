@@ -15,6 +15,7 @@ This removes every margin or padding that browsers may add to elements.
 html {
   // This defines what 1 rem is (1rem = 10px).
   font-size: 62.5% !important;
+  scroll-behavior: smooth !important;
 }
 
 /* Define project type font elements. */

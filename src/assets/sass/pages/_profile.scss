@@ -10,6 +10,45 @@
     text-align: center;
   }
   
+  &__skill__list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: 0 0;
+  }
+  
+  &__skill__label{
+    display: inline-block;
+    border-radius: 15px;
+    min-width: 40px;
+    text-align: center;
+    text-transform: capitalize;
+    padding: 5px 12px;
+    margin: 0 10px 10px 0;
+    border: 1px solid #e5e5e5;
+    background-color: $color-secondary;
+    cursor: pointer;
+    -webkit-transition: background-color .2s ease-in-out;
+    -o-transition: background-color .2s ease-in-out;
+    transition: background-color .2s ease-in-out; 
+  }
+  
+  &__report{
+    position: absolute;
+    top: 20px;
+    left: 30px;
+  }
+  
+  &__edit{
+    position: absolute;
+    top: 20px; 
+    right: 20px;
+  }
+  
   &__review__summary__tab{
     button{
       font-size: 0.8em !important;

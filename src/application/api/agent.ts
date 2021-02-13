@@ -5,7 +5,7 @@ import {IBid, IBidSubmission} from "../../infrastructure/models/bid";
 import {TaskStatus} from "../../infrastructure/enums/taskStatus";
 import {
     ILanguage,
-    IPrivateProfile,
+    IPrivateProfile, IPublicProfile,
     ISkill, ISocials
 } from "../../infrastructure/models/profile";
 import {NotificationStatus} from "../../infrastructure/enums/notification";
@@ -27,13 +27,16 @@ axios.interceptors.request.use((config: AxiosRequestConfig) => {
 
 const responseBody = (response: AxiosResponse) => response.data;
 
+// DEV PURPOSES ONLY
+const sleep = (ms: number) => (response: AxiosResponse) =>
+    new Promise<AxiosResponse>(resolve => setTimeout(() => resolve(response), ms));
 
 // Axios request structure
 const ApiRequest = {
-    get: (url: string, config?: AxiosRequestConfig) => axios.get(url, config).then(responseBody),
-    post: (url: string, body?: any, config?: AxiosRequestConfig) => axios.post(url, body, config).then(responseBody),
-    put: (url: string, body?: Record<string, unknown>, config?: AxiosRequestConfig) => axios.put(url, body, config).then(responseBody),
-    delete: (url: string, config?: AxiosRequestConfig) => axios.delete(url, config).then(responseBody)
+    get: (url: string, config?: AxiosRequestConfig) => axios.get(url, config).then(sleep(1000)).then(responseBody),
+    post: (url: string, body?: any, config?: AxiosRequestConfig) => axios.post(url, body, config).then(sleep(1000)).then(responseBody),
+    put: (url: string, body?: Record<string, unknown>, config?: AxiosRequestConfig) => axios.put(url, body, config).then(sleep(1000)).then(responseBody),
+    delete: (url: string, config?: AxiosRequestConfig) => axios.delete(url, config).then(sleep(1000)).then(responseBody)
 }
 
 
@@ -87,4 +90,10 @@ export const profileRequest = {
     markAllNotificationsAsRead: () : Promise<Record<string, unknown>> => ApiRequest.put("profile/notifications/read"),
     deleteAllNotifications: () : Promise<Record<string, unknown>> => ApiRequest.delete("profile/notifications"),
     getWatchlist: (sortBy: string) : Promise<ITask[]> => ApiRequest.get("/profile/watchlist", {params:{sortBy}})
+}
+
+
+export const PublicProfileRequest = {
+    getPublicProfileDetails : (userId: string) : Promise<IPublicProfile> => ApiRequest.get(`/profile/public/details/${userId}`),
+    getPublicProfileTasks : (userId: string) : Promise<ITask[]> => ApiRequest.get(`/profile/public/tasks/${userId}`)
 }

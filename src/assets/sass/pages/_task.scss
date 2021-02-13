@@ -72,6 +72,82 @@
     }
   }
   
+  &__card{
+    &__img{
+      -o-object-fit: contain !important;
+      object-fit: contain !important;
+      width: 100%;
+      height: 100%;
+    }
+    &__image{
+      &__container{
+        box-sizing: border-box;
+        position: relative !important;
+        &:hover{
+          .task__card__carousel__next__arr{
+            display: flex;
+            transition: right .2s ease;
+          }
+
+          .task__card__carousel__prev__arr {
+            display: flex;
+            transition: left .2s ease;
+          }
+        }
+        .slick-slider{
+          width: auto !important;
+          height: 158px !important;
+          display: grid;
+          box-sizing: border-box !important;
+          text-align: center !important;
+        }
+      }
+    }
+    
+    &__carousel{
+      &__next__arr{
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        top: 40%;
+        right: 0;
+        background-color: #fff;
+        border: none;
+        border-top-left-radius: 50%;
+        border-bottom-left-radius: 50%;
+        outline: none;
+        width: 25px !important;
+        height: 25px !important;
+        color: #fff;
+        padding: 0.5em;
+        -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.15);
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,.15);
+        display: none;
+      }
+      
+      &__prev__arr{
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        top: 40%;
+        z-index: 500;
+        left: 0;
+        background-color: #fff;
+        border-top-right-radius: 50%;
+        border-bottom-right-radius: 50%;
+        border: none;
+        outline: none;
+        color: #fff;
+        width: 25px !important;
+        height: 25px !important;
+        padding: 0.5em;
+        -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.15);
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,.15);
+        display: none;
+      }
+    }
+  }
+  
   &__image{
     &__container{
       box-sizing: border-box;
@@ -123,7 +199,7 @@
 
   &__status__label__steady{
     padding: 0.3em 1em;
-    color: white;
+    color: #fff !important;
     background-color: #7DB343;
     width: fit-content;
     border-radius: 50px;
