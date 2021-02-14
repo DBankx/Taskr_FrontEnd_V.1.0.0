@@ -73,6 +73,14 @@
   }
   
   &__card{
+    position: relative;
+    width: fit-content;
+    &__high{
+      min-height: calc(100% - 50px) !important;
+    }
+    &__low{
+      height: 50px !important;
+    }
     &__img{
       -o-object-fit: contain !important;
       object-fit: contain !important;

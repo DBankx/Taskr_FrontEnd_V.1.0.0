@@ -10,6 +10,7 @@ import {
     ShareButtonIcon,
     StarIcon, TrashIcon
 } from "../../infrastructure/icons/Icons";
+import {Link} from "react-router-dom";
 import rootStoreContext from "../../application/stores/rootstore";
 
 interface IProps{
@@ -48,7 +49,7 @@ const TaskTop : React.FC<IProps> = ({task}) => {
                 <HStack spacing="9px">
                     <Image borderRadius="full" boxSize="30px" alt="tasker-avatar" src={task.creator.avatar} />
                     <div>
-                        <p style={{fontSize: "15px", lineHeight: "20px", textAlign: "left"}} className="text__darker">{task.creator.userName}</p>
+                        <Link className="text__blue" to={`/public-profile/${task.creator.id}`} style={{fontSize: "15px", lineHeight: "20px", textAlign: "left"}} >{task.creator.userName}</Link>
                     </div>
                     
                     <p style={{color: "#C9D7EC"}}>&#124;</p>

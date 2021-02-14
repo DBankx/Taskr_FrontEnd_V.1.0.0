@@ -13,7 +13,7 @@ const ProfileTaskSection : React.FC<IProps>  = ({profileTasks}) => {
     return (
         <Box>
             <HStack alignItems="center" justifyContent="space-between" mb={5}>
-            <h5 className="text__darker text__bigger__md">Recently uploaded tasks</h5>
+            <h5 className="text__darker text__bigger__md">Recent uploads</h5>
                 {profileTasks.length === 6 && <Link to="/" className="text__blue">view all</Link>}
             </HStack>
             {profileTasks.length > 0 ? (

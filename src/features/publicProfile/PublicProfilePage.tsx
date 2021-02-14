@@ -9,6 +9,8 @@ import ProfileDetailsTopPlaceholder from "./profileDetails/ProfileDetailsTopPlac
 import ProfileDetailsBottom from "./profileDetails/ProfileDetailsBottom";
 import ProfileDetailsBottomPlaceholder from "./profileDetails/ProfileDetailsBottomPlaceholder";
 import ProfileTaskSection from "./profileTasks/ProfileTaskSection";
+import ProfileTaskPlaceholder from "./profileTasks/ProfileTaskPlaceholder";
+import ProfileReviews from "./ProfileReviews/ProfileReviews";
 
 const PublicProfilePage : React.FC<RouteComponentProps<{userId: string}>> = ({match}) => {
     const {getPublicProfileDetails, loadingProfileDetails, publicProfileDetails, getPublicProfileTasks, loadingProfileTasks, publicProfileTasks} = useContext(rootStoreContext).publicProfileStore;
@@ -28,7 +30,8 @@ const PublicProfilePage : React.FC<RouteComponentProps<{userId: string}>> = ({ma
                         {publicProfileDetails === null || loadingProfileDetails ? <ProfileDetailsBottomPlaceholder /> : <ProfileDetailsBottom publicProfile={publicProfileDetails} /> }
                     </Box>
                     <Box>
-                        {publicProfileTasks === null || loadingProfileTasks ? "a" : <ProfileTaskSection profileTasks={publicProfileTasks} /> }
+                        {publicProfileTasks === null || loadingProfileTasks ? <ProfileTaskPlaceholder /> : <ProfileTaskSection profileTasks={publicProfileTasks} /> }
+                        <ProfileReviews />
                     </Box>
                 </SimpleGrid>
             </Box>

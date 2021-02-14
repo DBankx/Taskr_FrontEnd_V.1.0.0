@@ -254,7 +254,7 @@ const TaskDetailsForm = () => {
 
                     <Stack direction="row" spacing="20px">
                     <Button isLoading={isSubmitting} className="btn btn__primary btn__nm btn__bg btn__shadow " type="submit">List your task</Button>
-                        <Button className="btn btn__white btn__nm btn__bg " type="submit" onClick={togglePreviewWindow}>Preview</Button>
+                        <Button type="button" className="btn btn__white btn__nm btn__bg " onClick={togglePreviewWindow}>Preview</Button>
                     </Stack>
                 </form>
                     )}
