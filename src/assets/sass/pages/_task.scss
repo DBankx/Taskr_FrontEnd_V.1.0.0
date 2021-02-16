@@ -23,12 +23,13 @@
   }
   
   &__bid__form__card{
-    border: 1px solid $border-color;
+    //border: 1px solid $border-color;
     border-radius: 4px;
     background-color: #fff;
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
     margin-bottom: 20px;
     padding: 25px 20px;
+    max-width: 1250px;
     p{
       color: $color-primary;
     }

@@ -69,9 +69,9 @@ const AuthNavItems : React.FC<IProps> = ({user}) => {
                         </Portal>
                     </Popover>
             </Box>
-            <Box title="My Messages" className="auth__nav__item">
+            <Link to="/inbox" title="My Messages" className="auth__nav__item">
                 <ChatIcon boxSize={10} color="#3D3373" />
-            </Box>
+            </Link>
             <Box title="My profile" className="auth__nav__item">
                 <ProfileMenu user={user} />
             </Box>

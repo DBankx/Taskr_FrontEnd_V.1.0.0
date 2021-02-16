@@ -6,6 +6,7 @@ import {AuthStore} from "./authStore";
 import {BidStore} from "./bidStore";
 import {ProfileStore} from "./profileStore";
 import {PublicProfileStore} from "./PublicProfileStore";
+import {ChatStore} from "./chatStore";
 
 configure({enforceActions: "always"});
 
@@ -16,6 +17,7 @@ export class RootStore {
     bidStore: BidStore
     profileStore: ProfileStore
     publicProfileStore : PublicProfileStore
+    chatStore: ChatStore
     constructor() {
         this.appStore = new AppStore(this);
         this.taskStore = new TaskStore(this);
@@ -23,6 +25,7 @@ export class RootStore {
         this.bidStore = new BidStore(this);
         this.profileStore = new ProfileStore(this);
         this.publicProfileStore = new PublicProfileStore(this);
+        this.chatStore = new ChatStore(this);
     }
 }
 

@@ -25,9 +25,9 @@ const TaskTop : React.FC<IProps> = ({task}) => {
         <div className="task__top">
             <h1 className="task__title">{task.title}</h1>
             <HStack className="task__top__actions" alignItems="center" spacing="10px">
-                <Box className="task__action__button" onClick={() => task.isWatching ? unWatchTask(task.id) : watchTask(task.id)} title={task.isWatching ? "unwatch" : "watch"}>
-                    {watching ? <Spinner color="#3D3373" boxSize={8} /> : task.isWatching ? <BinocularsFilledIcon boxSize={8} color="#3D3373" /> : <BinocularsIcon boxSize={8} color="#3D3373" />}
-                </Box>
+                {!task.isOwner && <Box className="task__action__button" onClick={() => task.isWatching ? unWatchTask(task.id) : watchTask(task.id)} title={task.isWatching ? "unwatch" : "watch"}>
+                    { watching ? <Spinner color="#3D3373" boxSize={8} /> : task.isWatching ? <BinocularsFilledIcon boxSize={8} color="#3D3373" /> : <BinocularsIcon boxSize={8} color="#3D3373" />}
+                </Box>}
                 <Box title="Report" className="task__action__button">
                     <FlagIcon boxSize={8} color="#F1454F" />
                 </Box>

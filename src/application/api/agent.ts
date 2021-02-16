@@ -10,6 +10,7 @@ import {
 } from "../../infrastructure/models/profile";
 import {NotificationStatus} from "../../infrastructure/enums/notification";
 import {IPaginatedNotificationsResponse} from "../../infrastructure/models/notification";
+import {IChat} from "../../infrastructure/models/chat";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
@@ -96,4 +97,10 @@ export const profileRequest = {
 export const PublicProfileRequest = {
     getPublicProfileDetails : (userId: string) : Promise<IPublicProfile> => ApiRequest.get(`/profile/public/details/${userId}`),
     getPublicProfileTasks : (userId: string) : Promise<ITask[]> => ApiRequest.get(`/profile/public/tasks/${userId}`)
+}
+
+export const ChatRequest = {
+    getAllChats : (predicate: string) : Promise<IChat[]> => ApiRequest.get("/chat", {
+        params: {predicate}
+    })
 }

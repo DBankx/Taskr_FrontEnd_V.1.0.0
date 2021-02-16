@@ -119,17 +119,34 @@
     border-radius: 4px;
     
     button {
-      font-size: 0.9em !important;
+      font-size: 1em !important;
       color: #6F727F !important;
       outline: none !important;
-      padding: 0.7em !important;
+      padding: 1em !important;
+      height: 50px !important;
+      border: 1px solid #d2d3d7 !important;
+      min-width: 125px !important;
+      
+      &:first-child{
+        border-top-left-radius: 4px !important;
+        border-bottom-left-radius: 4px !important;
+      }
+      
+      &:nth-child(odd){
+        border-right: none !important;
+      }
+      
+      &:last-child{
+        border-top-right-radius: 4px !important;
+        border-bottom-right-radius: 4px !important; 
+      }
      
       &:hover {
         color: #3E4153 !important;
       }
       &[aria-selected="true"] {
         color: #3E4153 !important;
-        border-color: $color-blue;
+        border-bottom: 3px solid $color-blue !important;
       } 
     }
   }

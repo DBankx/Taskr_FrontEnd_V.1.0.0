@@ -36,7 +36,6 @@ const ActiveTasks = () => {
                 <div>
                     {profileActiveTasks.map((task) => (
                         <div  style={{position: "relative"}} key={task.id} className="profile__task__small__box task__bid__form__card text__darker">
-
                             <div className="task__status__label">OPEN</div>
                             <HStack spacing="10px">
                                 { task.photos.length > 0 && <Image src={ task.photos[0].url} boxSize="60px" />} 
