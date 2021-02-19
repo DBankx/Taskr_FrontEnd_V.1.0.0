@@ -4,6 +4,7 @@ import {Box, useMediaQuery} from "@chakra-ui/react";
 import rootStoreContext from "../../application/stores/rootstore";
 import ChatsPlaceholder from "./ChatsPlaceholder";
 import {ChatIcon} from "../../infrastructure/icons/Icons";
+import ChatContainer from "./ChatContainer";
 
 const RunnerChatTab = () => {
     const {loadingChats, getAllChats, chatsAsRunner} = useContext(rootStoreContext).chatStore;
@@ -16,7 +17,7 @@ const RunnerChatTab = () => {
 
     return (
         <Box>
-            {chatsAsRunner.length > 0 ? "there" : (
+            {chatsAsRunner.length > 0 ? <ChatContainer chats={chatsAsRunner} predicate="runner" /> : (
                 <Box style={{width: "100%"}} className="text__middle middle_position">
                     <ChatIcon boxSize={isMobile ? "40px" : "70px"} color="#373373" />
                     <Box>

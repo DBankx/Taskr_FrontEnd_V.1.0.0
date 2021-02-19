@@ -102,5 +102,6 @@ export const PublicProfileRequest = {
 export const ChatRequest = {
     getAllChats : (predicate: string) : Promise<IChat[]> => ApiRequest.get("/chat", {
         params: {predicate}
-    })
+    }),
+    getChatById: (chatId: string) : Promise<IChat> => ApiRequest.get(`/chat/${chatId}`)
 }

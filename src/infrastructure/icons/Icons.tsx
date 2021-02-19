@@ -1,6 +1,14 @@
 ﻿import React from "react";
 import {Icon} from "@chakra-ui/react";
 
+export function SendIcon(props: any){
+    return (
+        <Icon viewBox="0 0 510.869 510.869" {...props}>
+            <path fill="currentColor" d="m487.574 1.749-478.712 241.1c-11.488 5.786-11.792 22.156-.466 28.335l158.116 86.27 133.856-151.904c5.831-6.64 15.94-7.296 22.58-1.466s7.296 15.94 1.466 22.58l-129.099 146.506 165.314 90.197c8.958 4.888 20.16.242 23.022-9.562l126.479-433.283c3.91-13.394-10.084-25.055-22.556-18.773z"/><path fill="currentColor" d="m176.048 399.111v95.763c0 15.99 20.989 22.051 29.524 8.55l41.462-65.582z"/>
+        </Icon>
+    )
+}
+
 export function LocationIcon(props: any){
     return (
         <Icon x="0px" y="0px" viewBox="0 0 368.16 368.16" {...props}>

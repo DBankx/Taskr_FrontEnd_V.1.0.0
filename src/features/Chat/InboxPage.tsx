@@ -7,12 +7,12 @@ import RunnerChatTab from "./RunnerChatTab";
 const InboxPage = () => {
     const [isMobile] = useMediaQuery("(max-width: 500px)");
     return (
-        <Box class="container">
+        <Box className="container">
             <Box className="main">
                 <Tabs isFitted={isMobile} isLazy>
                     <TabList style={isMobile ? {width: "100px"} : {margin: "0 auto"}} className="profile__inner__tabs">
                         <Tab>As a Taskr</Tab>
-                        <Tab>As a Runer</Tab>
+                        <Tab>As a Runner</Tab>
                     </TabList>
                     <TabPanels>
                         <TabPanel>

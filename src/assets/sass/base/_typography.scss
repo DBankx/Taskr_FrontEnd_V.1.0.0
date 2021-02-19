@@ -6,6 +6,9 @@
 }
 
 .text {
+  &__nt{
+    color: #6F727F !important;
+  }
   &__primary {
     color: $color-primary !important;
   }
@@ -131,6 +134,14 @@
   white-space: nowrap;
   width: 100%;
   display: block;
+}
+
+.truncate__1{
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5em;
 }
 
 .truncate__2{

@@ -22,6 +22,7 @@ const TaskDetailsForm = lazy(() => import ("../../../features/createTask/TaskDet
 const ProfilePage = lazy(() => import("../../../features/profile/ProfilePage"));
 const PublicProfile = lazy(() => import("../../../features/publicProfile/PublicProfilePage"));
 const InboxPage = lazy(() => import("../../../features/Chat/InboxPage"));
+const MessagePage = lazy(() => import("../../../features/Chat/messages/MessagePage"));
 
 // Chakra ui theme
 const theme = extendTheme(customTheme);
@@ -61,6 +62,7 @@ function App() {
           <Route exact path="/profile" component={ProfilePage} />
           <Route exact path="/public-profile/:userId" component={PublicProfile} />
           <Route exact path="/inbox" component={InboxPage} />
+          <Route exact path="/conversation/:chatId" component={MessagePage} />
         </Switch>
       </Suspense>
     </div>

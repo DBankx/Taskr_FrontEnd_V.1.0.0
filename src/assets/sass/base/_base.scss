@@ -159,6 +159,21 @@ body {
   }
 }
 
+.avatar{
+  border-radius: 50% !important;
+  
+  &__message{
+    width: 30px !important;
+    height: 30px !important;
+  }
+  
+  &__chat{
+    width: 80px !important;
+    height: 80px !important;
+    margin: 0 auto !important;
+  }
+}
+
 @media(min-width: 1100px){
  .query__action__container .slick-track{
     width: 100% !important;
@@ -378,6 +393,13 @@ body {
     
     &:last-child{
       padding-left: 0.7em
+    }
+  }
+  
+  .avatar{
+    &__chat{
+      width: 80px;
+      height: 80px;
     }
   }
 }

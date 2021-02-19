@@ -219,6 +219,29 @@
     
     &__inner__tabs{
       width: 100% !important;
+      
+      
     }
+  }
+
+  .chakra-tabs__tab-panel{
+    padding: 1em 0 !important;
+  }
+}
+
+.chat__job__photo{
+  position: absolute;
+  bottom: 0;
+  right:0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.chat__box{
+  padding: 20px 20px !important;
+  cursor: pointer;
+  &:hover{
+    background-color: $color-secondary;
   }
 }

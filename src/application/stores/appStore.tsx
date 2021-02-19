@@ -38,7 +38,11 @@ export class AppStore{
                     hideProgressBar: true,
                 })
         });
+        
+        
     }
+
+   
     
     @action stopHubConnection = () => {
         this.notificationHubConnection!.stop().catch((err) => console.log(err));
