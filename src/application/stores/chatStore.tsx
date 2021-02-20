@@ -35,10 +35,10 @@ export class ChatStore{
         }).catch(error => console.log("error establishing connection", error));
 
         this.hubConnection.on("ReceiveMessage", message => {
-            console.log(message);
             runInAction(() => {
                 this.chat!.messages.push(message);
             })
+            document.getElementById("messagesEnd")!.scrollIntoView({ behavior: "smooth" });
         })
 
         this.hubConnection.on("Send", message => {
@@ -54,7 +54,7 @@ export class ChatStore{
     @action sendMessage = async (values: any) => {
         const messageData = {
             text: values.text,
-            receiverId: this.chat!.taskrId === this.rootStore.authStore.user!.id ? this.chat!.runnerId : this.chat!.taskrId,
+            receiverId: this.chat!.taskrId === this.rootStore.authStore.user!.id ? this.chat!.runner.id : this.chat!.taskr.id,
             chatId: this.chat!.id
         };
         try{
@@ -102,6 +102,15 @@ export class ChatStore{
            runInAction(() => this.loadingChat = false);
            alertErrors(e);
            throw e;
+        }
+    }
+    
+    @action startChatWithUser = async (jobId: string, taskrId: string, values: any) => {
+        try{
+            await ChatRequest.createChat(jobId, taskrId, values);
+        } catch (e){
+            alertErrors(e);
+            throw e;
         }
     }
 }

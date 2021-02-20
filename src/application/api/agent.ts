@@ -103,5 +103,6 @@ export const ChatRequest = {
     getAllChats : (predicate: string) : Promise<IChat[]> => ApiRequest.get("/chat", {
         params: {predicate}
     }),
-    getChatById: (chatId: string) : Promise<IChat> => ApiRequest.get(`/chat/${chatId}`)
+    getChatById: (chatId: string) : Promise<IChat> => ApiRequest.get(`/chat/${chatId}`),
+    createChat: (jobId: string, taskrId: string, values: any) => ApiRequest.post(`chat/create/${jobId}/${taskrId}`, values)
 }

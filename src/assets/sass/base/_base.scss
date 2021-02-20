@@ -79,7 +79,7 @@ body {
   justify-content: flex-end;
 }
 
-@media(max-width: 1200px){
+@media(max-width: 1470px){
   .container{
     margin: auto 2em;
   }
@@ -161,6 +161,11 @@ body {
 
 .avatar{
   border-radius: 50% !important;
+  
+  &__nm{
+    width: 40px !important;
+    height: 40px !important;
+  }
   
   &__message{
     width: 30px !important;
@@ -346,23 +351,11 @@ body {
   }
 }
 
-.reveal__box{
-  border-radius: 3px;
-  background-color: #f8f9f9;
-  border: 1px solid #ececee;
-  box-sizing: border-box;
-  display: block;
-  margin-top: 15px;
-  padding: 8px 15px;
-  text-align: left;
-  text-decoration: none;
-  width: 100%;
-}
-
-.reveal__message{
-  color: $color-tetiary !important;
-  font-size: 14px !important;
-  margin-right: 2em !important;
+.link{
+  &:hover{
+    text-decoration: underline !important;
+    color: $color-blue !important;
+  }
 }
 
 .label{

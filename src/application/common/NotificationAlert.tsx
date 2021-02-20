@@ -28,7 +28,7 @@ const NotificationAlert : React.FC<IProps> = ({data}) => {
                     <HStack spacing="10px">
                     <p className="text__sm text__light">{dayjs(data.createdAt).fromNow()}</p>
                         <p className="text__sm">•</p>
-                        <Link to={data.type === NotificationType.Bid ? `/view-bids/${data.notifierObjectId}` : "/"} className="text__sm text__blue">View</Link>
+                        <Link to={data.type === NotificationType.Bid ? `/view-bids/${data.notifierObjectId}` : data.type === NotificationType.Message ? `/conversation/${data.notifierObjectId}` : "/"} className="text__sm text__blue">View</Link>
                     </HStack>
                 </Box>
             </SimpleGrid>

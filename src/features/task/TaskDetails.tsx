@@ -24,7 +24,7 @@ const TaskDetails : React.FC<IProps> = ({task}) => {
     const [isMobile, isTablet] = useMediaQuery(["(max-width: 500px)", "(max-width: 991px)"]);
     return (
         <div className={`${task.photos.length > 0 && "task__details"} task__bid__form__card`}>
-            <SimpleGrid spacing="10px" templateColumns={{xl: "2.5fr 0.5fr", lg: "2fr 1fr", md: "1fr", sm: "1fr"}}>
+            <SimpleGrid spacing="10px" templateColumns={{xl: "2.5fr 0.5fr", lg: "2fr 0.4fr", md: "1fr", sm: "1fr"}}>
             <HStack>
                 <LocationIcon boxSize={8} color="#3D3373" />
                 <div>
@@ -32,8 +32,8 @@ const TaskDetails : React.FC<IProps> = ({task}) => {
                     <p className="text__light__dark task__posted">Posted about {dayjs(task.createdAt).fromNow()}</p>
                 </div>
             </HStack>
-                <Link style={isMobile ? {marginTop: "0.5em"} : isTablet ? {textAlign: "left"} : {textAlign: "right"}} to={`/view-bids/${task.id}`} className="text__blue">
-                    View all bids
+                <Link style={isMobile ? {marginTop: "0.5em"} : isTablet ? {textAlign: "left"} : {textAlign: "right"}} to={`/view-bids/${task.id}`} className="text__blue link">
+                    View bids
                 </Link>
             </SimpleGrid>   
             

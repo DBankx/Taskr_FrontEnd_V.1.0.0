@@ -1487,3 +1487,13 @@ export function AssignAlertIcon(props: any){
         </Icon>
     )
 }
+
+export function TaskListingIcon(props: any){
+    return (
+        <Icon {...props}>
+            <svg>
+            <path fill="none" stroke="#373373" strokeLinecap="round" strokeLinejoin="round" d="M17.5 13v2.3a2.25 2.25 0 0 1-2.25 2.25H4.75A2.25 2.25 0 0 1 2.5 15.25V4.75A2.25 2.25 0 0 1 4.75 2.5H14.83A2.67 2.67 0 0 1 17.5 5.17v5.34M5.01 13L13.5 13M2.78 10.51L17.41 10.51M5.01 15L9.5 15"></path>
+            </svg>
+        </Icon>
+    )
+}

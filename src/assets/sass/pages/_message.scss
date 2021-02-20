@@ -5,8 +5,13 @@
     min-height: 600px;
   }
   
+  &__receiver{
+    height: fit-content !important;
+  }
+  
   &__top{
-    height: 10vh;
+    height: calc(10vh + 1em);
+    padding: 0.5em;
   }
   
   &__bottom{

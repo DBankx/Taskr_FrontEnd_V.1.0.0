@@ -41,7 +41,7 @@ const BidHistoryPage : React.FC<RouteComponentProps<IBidHistoryPageRouteValues>>
                     <h3 className="text__darker text__lg">Bid history</h3>
                     
                     <div style={{marginTop: "1em"}}>
-                        <SimpleGrid spacing="20px" templateColumns={{xl: "2fr 1fr", lg:  "1fr", sm: "1fr", md: "1fr"}}>
+                        <SimpleGrid spacing="20px" templateColumns={{xl: "2fr 1fr", lg:  "2fr 1fr", sm: "1fr", md: "1fr"}}>
                             <Box>
                                <BidInfo bids={bids} task={task} />
                             </Box>

@@ -159,6 +159,12 @@
     color: #fff;
   }
   
+  &__silent{
+    background-color: #ECECEE !important;
+    color: $color-tetiary !important;
+    font-weight: 500 !important;
+  }
+  
   &__full-width{
     width: 100% !important;
   }

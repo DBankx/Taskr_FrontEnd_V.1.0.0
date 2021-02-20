@@ -20,13 +20,13 @@ const TaskItem : React.FC<IProps> = ({task}) => {
     const [isMobile] = useMediaQuery("(max-width: 400px)");
     return (
         <div className="query__task__card">
-            <SimpleGrid columns={{sm: 1, md: 2, lg: 2}} spacing="15px" templateColumns={{sm: "1fr", lg:!hasPhotos ? "1fr" : "0.5fr 2fr", md: !hasPhotos ? "1fr" : "0.5fr 2fr"}}>
+            <SimpleGrid columns={{sm: 1, md: 2, lg: 2}} spacing="15px" templateColumns={{sm: !hasPhotos ? "1fr" : "0.5fr 2fr", lg:!hasPhotos ? "1fr" : "0.5fr 2fr", md: !hasPhotos ? "1fr" : "0.5fr 2fr"}}>
                 {hasPhotos && <Box>
                     <Image objectFit="cover" style={{height: "150px", width: "100%"}} src={task.photos[0].url} alt="task-img" />
                 </Box> }
                 <Box>
             <div className="query__task__title">
-               <Link to={`/task/${task.id}`}><span className="truncate">{task.title}</span></Link>
+               <Link to={`/task/${task.id}`}><span className="truncate__1">{task.title}</span></Link>
             </div>
                 <HStack spacing="10px" style={{margin: "0.5em 0"}}>
                     <Image borderRadius="full" boxSize="30px" alt="tasker-avatar" src={`https://ui-avatars.com/api/?name=${task.creator.userName}&rounded=true&bold=true`} />

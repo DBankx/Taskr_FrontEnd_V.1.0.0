@@ -7,7 +7,7 @@ import RunnerChatTab from "./RunnerChatTab";
 const InboxPage = () => {
     const [isMobile] = useMediaQuery("(max-width: 500px)");
     return (
-        <Box className="container">
+        <Box>
             <Box className="main">
                 <Tabs isFitted={isMobile} isLazy>
                     <TabList style={isMobile ? {width: "100px"} : {margin: "0 auto"}} className="profile__inner__tabs">

@@ -22,7 +22,7 @@ const RunnerChatTab = () => {
                     <ChatIcon boxSize={isMobile ? "40px" : "70px"} color="#373373" />
                     <Box>
                         <h1 className="text__primary text__heading">You have no chats as a Runner</h1>
-                        <p style={{width: "80%", margin: "0 auto"}} className="text__silent">Message a taskr about their task or if you are assigned to compelete a task, your tasks are shown here! </p>
+                        <p style={{width: "80%", margin: "0 auto"}} className="text__silent">Message a taskr about their task or if you are assigned to compelete a task, your messages are shown here! </p>
                     </Box>
                 </Box>
             )}

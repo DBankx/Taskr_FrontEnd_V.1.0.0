@@ -1,4 +1,4 @@
-﻿import React, {useEffect, useRef} from "react";
+﻿import React, {useEffect} from "react";
 import {IChat} from "../../../../infrastructure/models/chat";
 import {observer} from "mobx-react-lite";
 import { Box } from "@chakra-ui/react";
@@ -9,9 +9,9 @@ interface IProps{
 }
 
 const MessageBodyContainer : React.FC<IProps> = ({chat}) => {
-    const messagesEnd = useRef<HTMLDivElement | null>(null);
+    // const messagesEnd = useRef<HTMLDivElement | null>(null);
     const scrollToBottom = () => {
-        messagesEnd.current?.scrollIntoView({ behavior: "smooth" })
+        document.getElementById("messagesEnd")!.scrollIntoView({ behavior: "smooth" })
     }
     useEffect(() => {
         scrollToBottom();
@@ -24,7 +24,7 @@ const MessageBodyContainer : React.FC<IProps> = ({chat}) => {
                     <TextMessage message={message} />
                 </Box>
             ))}
-            <div style={{ float:"left", clear: "both" }} ref={messagesEnd}>
+            <div style={{ float:"left", clear: "both" }} id="messagesEnd">
             </div>
         </Box>
     )
