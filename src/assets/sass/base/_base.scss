@@ -139,7 +139,7 @@ body {
   justify-content: center;
   position: absolute;
   bottom: 0px;
-  right: 0.1fr;
+  right: 0 !important;
 }
 
 .alert__avatar{
@@ -161,6 +161,11 @@ body {
 
 .avatar{
   border-radius: 50% !important;
+  
+  &__notif{
+    width: 60px !important;
+    height: 60px !important;
+  }
   
   &__nm{
     width: 40px !important;

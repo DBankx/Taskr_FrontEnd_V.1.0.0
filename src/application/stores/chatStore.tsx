@@ -108,6 +108,9 @@ export class ChatStore{
     @action startChatWithUser = async (jobId: string, taskrId: string, values: any) => {
         try{
             await ChatRequest.createChat(jobId, taskrId, values);
+            runInAction(() => {
+                this.rootStore.taskStore.task!.isChatActive = true;
+            })
         } catch (e){
             alertErrors(e);
             throw e;

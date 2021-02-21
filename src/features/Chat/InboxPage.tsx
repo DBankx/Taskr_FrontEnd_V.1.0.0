@@ -3,11 +3,13 @@ import {observer} from "mobx-react-lite";
 import {Box, Tab, TabList, TabPanel, TabPanels, Tabs, useMediaQuery} from "@chakra-ui/react";
 import TaskrChatTab from "./TaskrChatTab";
 import RunnerChatTab from "./RunnerChatTab";
+import SEO from "../../application/appLayout/SEO";
 
 const InboxPage = () => {
     const [isMobile] = useMediaQuery("(max-width: 500px)");
     return (
         <Box>
+            <SEO title="My inbox" />
             <Box className="main">
                 <Tabs isFitted={isMobile} isLazy>
                     <TabList style={isMobile ? {width: "100px"} : {margin: "0 auto"}} className="profile__inner__tabs">

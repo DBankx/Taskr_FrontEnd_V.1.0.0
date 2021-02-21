@@ -15,7 +15,7 @@ import {Category} from "../../infrastructure/enums/category";
 
 const TaskPage : React.FC<RouteComponentProps<{id: string}>> = ({match}) => {
     const {getTaskById, loadingInitial, task} = useContext(rootStoreContext).taskStore;
-    const [isMobile] = useMediaQuery(["(max-width: 650px)"]);
+    const [isMobile] = useMediaQuery(["(max-width: 800px)"]);
     const [isSmallerScreen] = useMediaQuery( "(max-width: 800px)");
     
     useEffect(() => {

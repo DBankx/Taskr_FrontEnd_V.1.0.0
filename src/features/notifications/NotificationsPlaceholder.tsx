@@ -1,48 +1,40 @@
-﻿import { Box, HStack, SkeletonCircle, Skeleton, Divider } from "@chakra-ui/react";
+﻿import {Box, SkeletonCircle, Skeleton, Divider, SimpleGrid} from "@chakra-ui/react";
 import React from "react";
 
 const NotificationsPlaceholder = () => {
     return (
         <Box style={{width: "inherit"}}>
-            <Box p="1em">
-                <HStack spacing="10px">
-                <SkeletonCircle size="20" />
+                    <SimpleGrid alignItems="flex-start" templateColumns="0.3fr 1.4fr" className="notification__item" spacing="10px">
+                        <SkeletonCircle width="60px" height="60px" />
                 <div style={{width: "100%"}}>
-                    <Skeleton height="15px" width="100%" mb="1.5em" />
+                    <Skeleton height="15px" width="100%" mb="1em" />
                     <Skeleton height="15px" width="70%" />
                 </div>
-                </HStack>
-            </Box>
+                    </SimpleGrid>
             <Divider />
-            <Box p="1em">
-                <HStack spacing="10px">
-                    <SkeletonCircle size="20" />
-                    <div style={{width: "100%"}}>
-                        <Skeleton height="15px" width="100%" mb="1.5em" />
-                        <Skeleton height="15px" width="70%" />
-                    </div>
-                </HStack>
-            </Box>
+            <SimpleGrid alignItems="flex-start" templateColumns="0.3fr 1.4fr" className="notification__item" spacing="10px">
+                <SkeletonCircle width="60px" height="60px" />
+                <div style={{width: "100%"}}>
+                    <Skeleton height="15px" width="100%" mb="1em" />
+                    <Skeleton height="15px" width="70%" />
+                </div>
+            </SimpleGrid>
             <Divider />
-            <Box p="1em">
-                <HStack spacing="10px">
-                    <SkeletonCircle size="20" />
-                    <div style={{width: "100%"}}>
-                        <Skeleton height="15px" width="100%" mb="1.5em" />
-                        <Skeleton height="15px" width="70%" />
-                    </div>
-                </HStack>
-            </Box>
+            <SimpleGrid alignItems="flex-start" templateColumns="0.3fr 1.4fr" className="notification__item" spacing="10px">
+                <SkeletonCircle width="60px" height="60px" />
+                <div style={{width: "100%"}}>
+                    <Skeleton height="15px" width="100%" mb="1em" />
+                    <Skeleton height="15px" width="70%" />
+                </div>
+            </SimpleGrid>
             <Divider />
-            <Box p="1em">
-                <HStack spacing="10px">
-                    <SkeletonCircle size="20" />
-                    <div style={{width: "100%"}}>
-                        <Skeleton height="15px" width="100%" mb="1.5em" />
-                        <Skeleton height="15px" width="70%" />
-                    </div>
-                </HStack>
-            </Box>
+            <SimpleGrid alignItems="flex-start" templateColumns="0.3fr 1.4fr" className="notification__item" spacing="10px">
+                <SkeletonCircle width="60px" height="60px" />
+                <div style={{width: "100%"}}>
+                    <Skeleton height="15px" width="100%" mb="1em" />
+                    <Skeleton height="15px" width="70%" />
+                </div>
+            </SimpleGrid>
         </Box>
     )
 }

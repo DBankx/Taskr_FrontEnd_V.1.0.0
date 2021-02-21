@@ -21,6 +21,7 @@ export interface ITask{
     deliveryType: number;
     category: number;
     isOwner: boolean;
+    isChatActive: boolean;
 }
 
 export interface IPhoto{

@@ -1,13 +1,19 @@
 ﻿import React, {useContext, useEffect} from "react";
 import {observer} from "mobx-react-lite";
 import rootStoreContext from "../../application/stores/rootstore";
-import {NotificationIcon} from "../../infrastructure/icons/Icons";
-import {Box, Button, Divider, HStack, Image, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react";
+import {
+    AssignAlertIcon,
+    BidAlertIcon,
+    ChatIcon,
+    HeartAlertIcon,
+    NotificationIcon
+} from "../../infrastructure/icons/Icons";
+import {Box, Button, Divider, Image, Menu, MenuButton, MenuItem, MenuList, SimpleGrid} from "@chakra-ui/react";
 import NotificationsPlaceholder from "./NotificationsPlaceholder";
 import {INotification} from "../../infrastructure/models/notification";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import {NotificationStatus} from "../../infrastructure/enums/notification";
+import {NotificationStatus, NotificationType} from "../../infrastructure/enums/notification";
 
 dayjs.extend(relativeTime);
 
@@ -23,11 +29,16 @@ const NotificationsPage = () => {
                     <Box> 
                         {userNotifications.data.map((notification: INotification) => (
                             <Box key={notification.id}>
-                                <HStack className="notification__item" alignItems="start" spacing="10px">
-                                    <Image src={notification.fromUserAvatar} alt="user-avatar" borderRadius="full" boxSize="60px" />
-                                    <Box>
+                                <SimpleGrid alignItems="flex-start" templateColumns="0.3fr 1.4fr" className="notification__item" spacing="10px">
+                                    <Box className="alert__notif">
+                                    <Image src={notification.fromUserAvatar} alt="user-avatar" borderRadius="full"  className="avatar avatar__notif" />
+                                    <Box className="alert__helper alert__helper__right" borderRadius="full" bg={notification.type === NotificationType.Bid ? "#37a864" : notification.type === NotificationType.Follow ? "#fff" : notification.type === NotificationType.Message ? "#1FA9FA" : "#2DA3EB"} boxSize="25px">
+                                        {notification.type === NotificationType.Bid ?  <BidAlertIcon boxSize="15px" color="#fff" /> : notification.type === NotificationType.Follow ? <HeartAlertIcon boxSize="15px" /> : notification.type === NotificationType.Message ? <ChatIcon boxSize="15px" color="#fff" /> : notification.type === NotificationType.Assign ? <AssignAlertIcon boxSize="15px" color="#fff" /> : ""}
+                                    </Box>
+                                    </Box>
+                                    <Box style={{minHeight: "60px"}}>
                                         <p className="text__darker" style={{lineHeight: "1.12em"}}>{notification.message}</p>
-                                        <small className="text__blue">{dayjs(notification.createdAt).fromNow()}</small>
+                                        <small style={{verticalAlign: "bottom"}} className="text__blue">{dayjs(notification.createdAt).fromNow()}</small>
                                        <Menu isLazy={true}>
                                                 <MenuButton as={Button} className="notification__options" boxShadow="md">
                                                     <p className="text__silent">•••</p>
@@ -51,7 +62,7 @@ const NotificationsPage = () => {
                                         {notification.status === NotificationStatus.UnRead &&  <Box className="notifier" />}
 
                                     </Box>
-                                </HStack>
+                                </SimpleGrid>
                                 <Divider />
                             </Box>
                         ))}

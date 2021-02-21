@@ -6,6 +6,8 @@ import {RouteComponentProps} from "react-router-dom";
 import MessageBox from "./MessageBox";
 import ReceiverProfile from "./ReceiverProfile";
 import {Link} from "react-router-dom";
+import MessagePagePlaceholder from "./MessagePagePlaceholder";
+import SEO from "../../../application/appLayout/SEO";
 
 const MessagePage : React.FC<RouteComponentProps<{chatId: string}>> = ({match}) => {
     const [isMobile] = useMediaQuery("(max-width: 600px)");
@@ -19,9 +21,10 @@ const MessagePage : React.FC<RouteComponentProps<{chatId: string}>> = ({match}) 
     
     return (
         <Box className="container">
+            <SEO title="My inbox" />
             <Box className="main">
                 {!isMobile && <Link className="text__blue" to="/inbox">&#60; Back to my inbox</Link>}
-                {loadingChat || chat == null ? "no here" : 
+                {loadingChat || chat == null ? <MessagePagePlaceholder /> : 
                     <Box style={{marginTop: isMobile ? "1em" : "3em"}}>
                     <SimpleGrid templateColumns={{xl: "2fr 0.8fr", lg: "2fr 1fr"}} spacing="20px" >
                     <MessageBox chat={chat} />
