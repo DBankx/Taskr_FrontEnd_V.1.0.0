@@ -8,6 +8,7 @@ import React from "react";
 import {BidRequest} from "../api/agent";
 import {alertErrors} from "../../infrastructure/utils/getErrors";
 import {BidStatus} from "../../infrastructure/enums/bid";
+import {IOrder} from "../../infrastructure/models/order";
 
 export class BidStore{
     rootStore: RootStore
@@ -21,6 +22,8 @@ export class BidStore{
    @observable loadingInitialBids = false; 
    @observable loadingBid = false;
    @observable markingBidAsSeen = false;
+   @observable order: IOrder | null = null;
+   @observable acceptingBid = false;
     
     // Actions
     @action createBid = async (values: IBidSubmission, jobId: string) => {
@@ -97,6 +100,21 @@ export class BidStore{
             runInAction(() => this.markingBidAsSeen = false);
             alertErrors(errors);
             throw errors;
+        }
+    }
+    
+    @action acceptBidAndPay = async (bidId: string, jobId: string) => {
+        this.acceptingBid = true;
+        try{
+            const order = await BidRequest.AcceptBidAndPay(bidId, jobId);
+            runInAction(() => {
+                this.order = order;
+                this.acceptingBid = false;
+            })
+        }catch (e) {
+            runInAction(() => this.acceptingBid = false);
+           alertErrors(e);
+           throw e;
         }
     }
 }

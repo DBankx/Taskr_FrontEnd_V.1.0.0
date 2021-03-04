@@ -17,10 +17,13 @@ const TaskBidItem : React.FC<IProps> = ({task}) => {
                 <h3 className="text__darker">Task details</h3>
             </div>
                 <div style={{margin: "1em 0"}}>
-                    {task.isBidActive && <Alert status="info" variant="left-accent">
+                    {task.isBidActive ? <Alert status="info" variant="left-accent">
                         <AlertIcon/>
                         You have an active bid on this task 
-                    </Alert>}
+                    </Alert> : task.assignedUser ? <Alert status="success" variant="left-accent">
+                        <AlertIcon/>
+                        This task has been assigned to a runner 
+                    </Alert> : ""}
                 </div>
             <Stack direction={["column", "row"]} spacing="20px">
                 {task.photos.length > 0 && <Box>

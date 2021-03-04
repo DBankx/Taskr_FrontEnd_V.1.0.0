@@ -23,6 +23,8 @@ const ProfilePage = lazy(() => import("../../../features/profile/ProfilePage"));
 const PublicProfile = lazy(() => import("../../../features/publicProfile/PublicProfilePage"));
 const InboxPage = lazy(() => import("../../../features/Chat/InboxPage"));
 const MessagePage = lazy(() => import("../../../features/Chat/messages/MessagePage"));
+const CheckoutPage = lazy(() => import("../../../features/checkout/checkoutPage"));
+const OrderPage = lazy(() => import("../../../features/order/OrdersPage"));
 
 // Chakra ui theme
 const theme = extendTheme(customTheme);
@@ -63,6 +65,8 @@ function App() {
           <Route exact path="/public-profile/:userId" component={PublicProfile} />
           <Route exact path="/inbox" component={InboxPage} />
           <Route exact path="/conversation/:chatId" component={MessagePage} />
+          <Route exact path="/checkout/:orderId" component={CheckoutPage} />
+          <Route exact path="/order/:orderNumber" component={OrderPage} />
         </Switch>
       </Suspense>
     </div>

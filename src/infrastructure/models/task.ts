@@ -1,6 +1,8 @@
 ﻿import {IUser} from "./auth";
 import {Category} from "../enums/category";
 import {DeliveryTypes} from "../enums/deliveryTypes";
+import {TaskStatus} from "../enums/taskStatus";
+import {IBid} from "./bid";
 
 export interface ITask{
     id: string;
@@ -22,6 +24,9 @@ export interface ITask{
     category: number;
     isOwner: boolean;
     isChatActive: boolean;
+    jobStatus: TaskStatus;
+    assignedUser: IUser;
+    acceptedBid: IBid;
 }
 
 export interface IPhoto{

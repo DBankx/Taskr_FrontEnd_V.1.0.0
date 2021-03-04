@@ -70,7 +70,7 @@ const WatchlistPage = () => {
                        </HStack>
                </Stack>
                 
-                <Box className="task__bid__form__card watchlist__table" mt={4}>
+                <Box className="task__bid__form__card watchlist__table nm__heading" mt={4}>
                     <Table>
                         <Thead>
                            <Tr>

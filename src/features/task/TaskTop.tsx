@@ -12,6 +12,7 @@ import {
 } from "../../infrastructure/icons/Icons";
 import {Link} from "react-router-dom";
 import rootStoreContext from "../../application/stores/rootstore";
+import TaskStatus from "../../application/common/TaskStatus";
 
 interface IProps{
     task: ITask
@@ -58,9 +59,7 @@ const TaskTop : React.FC<IProps> = ({task}) => {
 
                     <p style={{color: "#C9D7EC"}}>&#124;</p>
 
-                    <div className="task__status__label__steady">
-                        OPEN
-                    </div>
+                   <TaskStatus taskStatus={task.jobStatus} /> 
                 </HStack>
             </div>
         </div>

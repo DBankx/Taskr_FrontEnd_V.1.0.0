@@ -1,4 +1,4 @@
-﻿import React, {useContext, useEffect, Fragment} from "react";
+﻿import React, {useContext, useEffect, Fragment, useState} from "react";
 import rootStoreContext from "../../../application/stores/rootstore";
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, Stack, Box, HStack, Image, VStack, Tooltip } from "@chakra-ui/react";
 import {Link} from "react-router-dom";
@@ -10,6 +10,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import {ITask} from "../../../infrastructure/models/task";
 import {CheckmarkIcon, EyeIcon} from "../../../infrastructure/icons/Icons";
 import {BidStatus} from "../../../infrastructure/enums/bid";
+import {loadStripe} from "@stripe/stripe-js/pure";
 
 dayjs.extend(relativeTime);
 
@@ -20,11 +21,27 @@ interface IProps{
     task: ITask
 }
 
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!);
+
 const BidModalDetails : React.FC<IProps> = ({bidId, onClose, isOpen, task}) => {
     const {bid, getBidById, loadingBid, markingBidAsSeen, markBidAsSeen} = useContext(rootStoreContext).bidStore;
+    const {token} = useContext(rootStoreContext).authStore;
+    const {deleteOrderById} = useContext(rootStoreContext).orderStore;
+    const [message, setMessage] = useState("");
+    
     useEffect(() => {
         isOpen && getBidById(bidId);
+        const query = new URLSearchParams(window.location.search);
+        if(query.get("success")){
+            setMessage("Order placed! you will enjoy now")
+        }
+        if (query.get("canceled")) {
+            setMessage(
+                "Order canceled -- continue to shop around and checkout when you're ready."
+            );
+        }
     }, [getBidById, bidId, isOpen]);
+    
     
     
     return (
@@ -36,6 +53,7 @@ const BidModalDetails : React.FC<IProps> = ({bidId, onClose, isOpen, task}) => {
                 <ModalHeader><p className="text__darker text__bigger__md">{task.title}</p></ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
+                    {message}
                    <Stack direction={["column", "row"]} justifyContent="space-between" alignItems={{xl: "flex-end", lg: "flex-end", sm: "flex-start"}}>
                        <Box>
                            <HStack spacing="10px">
@@ -76,7 +94,27 @@ const BidModalDetails : React.FC<IProps> = ({bidId, onClose, isOpen, task}) => {
                     <Button className="btn" mr={3} onClick={onClose}>
                         Close
                     </Button>
-                    <Button className="btn btn__green" leftIcon={<CheckmarkIcon />}>Accept Bid</Button>
+                    <Button onClick={async () => {
+                        const stripe = await stripePromise;
+                       const response = await fetch(`https://localhost:44351/api/v1/bids/accept/${task.id}/${bid.id}`, {
+                           method: "POST",
+                           headers: {
+                               "Accept": "application/json",
+                               "Authorization": "Bearer " + token,
+                               "Content-Type": "application/json"
+                           }
+                       });
+                        const session = await response.json();
+                        // When the customer clicks on the button, redirect them to Checkout.
+                        const result = await stripe!.redirectToCheckout({
+                            sessionId: session.checkoutSessionId,
+                        });
+                        
+                        if(result.error){
+                           await deleteOrderById(session.id); 
+                        }
+
+                    }} type="button" id="checkout-button" role="link" className="btn btn__green" leftIcon={<CheckmarkIcon />}>Accept Bid and pay</Button>
                 </ModalFooter>
                     </Fragment>
                     )}

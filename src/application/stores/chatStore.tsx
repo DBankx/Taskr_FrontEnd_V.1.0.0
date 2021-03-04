@@ -19,6 +19,8 @@ export class ChatStore{
     @observable loadingChat = false;
     @observable chat : IChat | null = null;
     @observable.ref hubConnection: HubConnection | null = null;
+    @observable chatTarget = "";
+    @observable deletingChat = false;
 
     // creating a new hub connnection
     @action createHubConnection = (chatId: string) => {
@@ -114,6 +116,44 @@ export class ChatStore{
         } catch (e){
             alertErrors(e);
             throw e;
+        }
+    }
+
+    @action sendChatToRunner = async (jobId: string, runnerId: string, values: any) => {
+        try{
+           const chat = await ChatRequest.sendChatToRunner(jobId, runnerId, values);
+            runInAction(() => {
+                this.rootStore.orderStore.order!.chat = chat; 
+            })
+        } catch (e){
+            alertErrors(e);
+            throw e;
+        }
+    }
+    
+    
+    @action deleteChat = async (chatId: string, predicate: string) => {
+        this.chatTarget = chatId;
+        this.deletingChat = true;
+        try{
+            await ChatRequest.deleteChat(chatId);
+            runInAction(() => {
+                switch (predicate){
+                    case "taskr":
+                        this.chatsAsTaskr = this.chatsAsTaskr!.filter(x => x.id !== chatId);
+                        break;
+                    case "runner":
+                        this.chatsAsRunner = this.chatsAsRunner!.filter(x => x.id !== chatId);
+                        break;
+                    default:
+                        break;
+                }
+                this.deletingChat = false;
+            })
+        }catch (e) {
+           runInAction(() => this.deletingChat = false);
+           alertErrors(e);
+           throw e;
         }
     }
 }

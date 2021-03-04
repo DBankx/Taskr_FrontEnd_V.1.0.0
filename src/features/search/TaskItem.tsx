@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import {CalendarIcon, LocationIcon} from "../../infrastructure/icons/Icons";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
+import TaskStatus from "../../application/common/TaskStatus";
 
 interface IProps{
     task: ITask
@@ -41,9 +42,12 @@ const TaskItem : React.FC<IProps> = ({task}) => {
                                 {task.description}
                             </span>
                         </div>
+                    <HStack spacing="20px">
                     <div className="query__task__endDate">
                         <small className="text__primary"><CalendarIcon color="#3D3373" /> Ends {dayjs(task.deliveryDate).from(Date.now())} </small>
                     </div>
+                        <TaskStatus taskStatus={task.jobStatus} />
+                    </HStack>
                 </Box>
             </SimpleGrid>
             <Divider mt={3} mb={3} />
@@ -58,9 +62,7 @@ const TaskItem : React.FC<IProps> = ({task}) => {
                     <span>${task.initialPrice}</span>
                 </div>
             </Flex>
-            <div className="task__status__label">
-                OPEN
-            </div>
+            
         </div>
     )
 } 

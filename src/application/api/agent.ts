@@ -11,6 +11,7 @@ import {
 import {NotificationStatus} from "../../infrastructure/enums/notification";
 import {IPaginatedNotificationsResponse} from "../../infrastructure/models/notification";
 import {IChat} from "../../infrastructure/models/chat";
+import {IOrder} from "../../infrastructure/models/order";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
@@ -49,27 +50,54 @@ export const JobRequest = {
             maxPrice: queryValues?.maxPrice,
             pageSize: queryValues?.pageSize,
             pageNumber: queryValues?.pageNumber
-        }}),
-    getTaskById: (id: string): Promise<ITask> => ApiRequest.get(`/jobs/${id}`),
-    watchTask: (taskId: string) : Promise<Record<string, unknown>> => ApiRequest.post(`/jobs/watch/${taskId}`),
-    unwatchTask: (taskId: string) : Promise<Record<string,  unknown>> => ApiRequest.delete(`/jobs/watch/${taskId}`),
-    createTask: (taskSubmission: FormData) : Promise<Record<string, unknown>> => ApiRequest.post("/jobs", taskSubmission)
+        }, 
+    cancelToken: axios.CancelToken.source().token
+}),
+    getTaskById: (id: string): Promise<ITask> => ApiRequest.get(`/jobs/${id}`, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    watchTask: (taskId: string) : Promise<Record<string, unknown>> => ApiRequest.post(`/jobs/watch/${taskId}`, undefined, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    unwatchTask: (taskId: string) : Promise<Record<string,  unknown>> => ApiRequest.delete(`/jobs/watch/${taskId}`, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    createTask: (taskSubmission: FormData) : Promise<Record<string, unknown>> => ApiRequest.post("/jobs", taskSubmission, {
+        cancelToken: axios.CancelToken.source().token
+    })
 }
 
 
 // Requests for auth
 export const AuthRequest = {
-    signIn: (signInValues: ISignInFormValues) : Promise<IAuthSuccessResponse> => ApiRequest.post("/auth/signin", signInValues),
-    getCurrentUser: () : Promise<IAuthSuccessResponse> => ApiRequest.get("/auth"),
-    changePassword: (values: any) : Promise<Record<string, unknown>> => ApiRequest.put("/auth/change-password", values)
+    signIn: (signInValues: ISignInFormValues) : Promise<IAuthSuccessResponse> => ApiRequest.post("/auth/signin", signInValues, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    getCurrentUser: () : Promise<IAuthSuccessResponse> => ApiRequest.get("/auth", {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    changePassword: (values: any) : Promise<Record<string, unknown>> => ApiRequest.put("/auth/change-password", values, {
+        cancelToken: axios.CancelToken.source().token
+    })
 }
 
 // Requests for bids
 export const BidRequest = {
-    placeBid: (values: IBidSubmission, jobId: string) : Promise<IBid> => ApiRequest.post(`bids/${jobId}`, values),
-    getAllTaskBids: (taskId: string) : Promise<IBid[]> => ApiRequest.get(`/bids/${taskId}`),
-    getBidById: (bidId: string) : Promise<IBid> => ApiRequest.get(`/bids/get-bid/${bidId}`),
-    markBidAsSeen: (bidId: string) : Promise<IBid> => ApiRequest.put(`/bids/seen/${bidId}`),
+    placeBid: (values: IBidSubmission, jobId: string) : Promise<IBid> => ApiRequest.post(`bids/${jobId}`, values, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    getAllTaskBids: (taskId: string) : Promise<IBid[]> => ApiRequest.get(`/bids/${taskId}`, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    getBidById: (bidId: string) : Promise<IBid> => ApiRequest.get(`/bids/get-bid/${bidId}`, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    markBidAsSeen: (bidId: string) : Promise<IBid> => ApiRequest.put(`/bids/seen/${bidId}`, undefined, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    AcceptBidAndPay: (bidId: string, jobId: string) : Promise<IOrder> => ApiRequest.post(`/bids/accept/${jobId}/${bidId}`, undefined, {
+        cancelToken: axios.CancelToken.source().token
+    })
 }
 
 // Requests for profile
@@ -77,32 +105,72 @@ export const profileRequest = {
     getAllTasks: (taskStatus: TaskStatus) : Promise<ITask[]> => ApiRequest.get("/profile/jobs", {
         params:{
             status: taskStatus
-        }
+        },
+        cancelToken: axios.CancelToken.source().token
     }),
     getProfile: () : Promise<IPrivateProfile> => ApiRequest.get("/profile"),
-    addProfileSkills: (values: ISkill) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/skills", values),
-    addProfileLanguages: (values: ILanguage) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/languages", values),
-    updateProfile: (values: any) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/update", values),
-    updateSocials: (values: ISocials) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/socials", values),
-    getNotifications: (status?: NotificationStatus, pageNumber?: number, pageSize?: number) : Promise<IPaginatedNotificationsResponse> => ApiRequest.get("/profile/notifications", {params:{status,
-        pageNumber, pageSize}}),
-    markNotificationAsRead: (notificationId: string) : Promise<Record<string, unknown>> => ApiRequest.put(`profile/notifications/${notificationId}`),
-    deleteNotification: (notificationId: string) : Promise<Record<string, unknown>> => ApiRequest.delete(`profile/notifications/${notificationId}`),
-    markAllNotificationsAsRead: () : Promise<Record<string, unknown>> => ApiRequest.put("profile/notifications/read"),
-    deleteAllNotifications: () : Promise<Record<string, unknown>> => ApiRequest.delete("profile/notifications"),
-    getWatchlist: (sortBy: string) : Promise<ITask[]> => ApiRequest.get("/profile/watchlist", {params:{sortBy}})
+    addProfileSkills: (values: ISkill) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/skills", values, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    addProfileLanguages: (values: ILanguage) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/languages", values, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    updateProfile: (values: any) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/update", values, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    updateSocials: (values: ISocials) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/socials", values, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    getNotifications: (status?: NotificationStatus, pageNumber?: number, pageSize?: number) : Promise<IPaginatedNotificationsResponse> => ApiRequest.get("/profile/notifications", {params:{status, pageNumber, pageSize}, cancelToken: axios.CancelToken.source().token}),
+    markNotificationAsRead: (notificationId: string) : Promise<Record<string, unknown>> => ApiRequest.put(`profile/notifications/${notificationId}`, undefined, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    deleteNotification: (notificationId: string) : Promise<Record<string, unknown>> => ApiRequest.delete(`profile/notifications/${notificationId}`, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    markAllNotificationsAsRead: () : Promise<Record<string, unknown>> => ApiRequest.put("profile/notifications/read", undefined, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    deleteAllNotifications: () : Promise<Record<string, unknown>> => ApiRequest.delete("profile/notifications", {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    getWatchlist: (sortBy: string) : Promise<ITask[]> => ApiRequest.get("/profile/watchlist", {params:{sortBy}, cancelToken: axios.CancelToken.source().token})
 }
 
 
 export const PublicProfileRequest = {
-    getPublicProfileDetails : (userId: string) : Promise<IPublicProfile> => ApiRequest.get(`/profile/public/details/${userId}`),
-    getPublicProfileTasks : (userId: string) : Promise<ITask[]> => ApiRequest.get(`/profile/public/tasks/${userId}`)
+    getPublicProfileDetails : (userId: string) : Promise<IPublicProfile> => ApiRequest.get(`/profile/public/details/${userId}`, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    getPublicProfileTasks : (userId: string) : Promise<ITask[]> => ApiRequest.get(`/profile/public/tasks/${userId}`, {
+        cancelToken: axios.CancelToken.source().token
+    })
 }
 
 export const ChatRequest = {
     getAllChats : (predicate: string) : Promise<IChat[]> => ApiRequest.get("/chat", {
-        params: {predicate}
+        params: {predicate},
+        cancelToken: axios.CancelToken.source().token
     }),
-    getChatById: (chatId: string) : Promise<IChat> => ApiRequest.get(`/chat/${chatId}`),
-    createChat: (jobId: string, taskrId: string, values: any) => ApiRequest.post(`chat/create/${jobId}/${taskrId}`, values)
+    getChatById: (chatId: string) : Promise<IChat> => ApiRequest.get(`/chat/${chatId}`, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    createChat: (jobId: string, taskrId: string, values: any) => ApiRequest.post(`chat/create/${jobId}/${taskrId}`, values, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    deleteChat: (chatId: string) : Promise<Record<string, unknown>> => ApiRequest.delete(`/chat/${chatId}`, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    sendChatToRunner : (jobId: string, runnerId: string, values: any) : Promise<IChat> => ApiRequest.post(`/chat/send/${jobId}/${runnerId}`, values, {
+        cancelToken: axios.CancelToken.source().token
+    })
+}
+
+export const OrderRequest = {
+    deleteOrderByNumber: (orderNumber:string) : Promise<Record<string, unknown>> => ApiRequest.delete(`/order/${orderNumber}`),
+    confirmOrderByNumber: (orderNumber: string) : Promise<Record<string, unknown>> => ApiRequest.put(`/order/confirm/${orderNumber}`),
+    getAllOrders: (predicate: string) : Promise<IOrder[]> => ApiRequest.get(`/order`, {
+        params:{predicate}
+    }),
+    getOrderByNumber : (orderNumber: string) : Promise<IOrder> => ApiRequest.get(`/order/${orderNumber}`)
 }

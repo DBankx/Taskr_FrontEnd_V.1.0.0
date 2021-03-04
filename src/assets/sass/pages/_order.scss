@@ -1,0 +1,71 @@
+﻿.order{
+  &__box__icon{
+    border-radius: 50% !important;
+    width: 50px !important;
+    height: 50px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  &__job{
+    &__photo{
+      border: 1px solid $border-color !important;
+      border-radius: 4px !important;
+    }
+  }
+  
+  &__info{
+    &__background{
+      background-color: $color-secondary !important;
+    }
+  }
+  
+  &__info{
+    &__tabs {
+      .chakra-tabs__tab {
+        font-size: 1em !important;
+        color: #6F727F !important;
+        outline: none !important;
+        padding: 1em !important;
+        height: 50px !important;
+        text-transform: uppercase;
+
+        &[aria-selected="true"] {
+          color: $color-blue !important;
+          border-bottom: 3px solid $color-blue !important;
+        }
+      }
+    }
+  }
+  
+  &__time-stamp{
+    color: #95979d;
+    font-size: 17px;
+    line-height: 130%;
+    padding: 5px 20px 0 0;
+    display: inline-block;
+    margin-left: 1em;
+  }
+}
+
+.border__liner{
+  border: 1px solid $border-color !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+  padding: 0.7em 0 !important;
+}
+
+@media (max-width: 600px){
+  .order{
+    &__time-stamp{
+      font-size: 15px !important;
+      font-style: normal !important;
+    }
+
+    &__box__icon {
+      border-radius: 50% !important;
+      width: 20px !important;
+      height: 0 !important;
+    }
+  }
+}

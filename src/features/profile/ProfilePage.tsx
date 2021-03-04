@@ -8,6 +8,7 @@ import MyProfile from "./myProfile/MyProfile";
 import WatchlistPage from "./myWatchlist/WatchlistPage";
 import {useQueryParam, NumberParam} from "use-query-params";
 import ProfileSettingsPage from "./settings/ProfileSettingsPage";
+import Orders from "./myOrders/Orders";
 
 const ProfilePage = () => {
     function NextArrow(props: any) {
@@ -83,7 +84,7 @@ const ProfilePage = () => {
                        hey
                    </TabPanel>
                    <TabPanel>
-                       hey
+                       <Orders />
                    </TabPanel>
                    <TabPanel>
                        <WatchlistPage />

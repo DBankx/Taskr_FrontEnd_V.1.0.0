@@ -99,7 +99,7 @@ const TaskDetailsForm = () => {
                       <Stack direction={["column", "row"]} spacing={{xl: "15px", lg: "15px", md: "15px", sm: "8px"}}>
                           <p className="form__detail">Task title:</p>
                           <div style={{width: "100%"}}>
-                          <Textarea name="title" className="form__textarea form__textarea__no__label" id="title" rows={3} onChange={handleChange} onBlur={handleBlur} value={values.title} />
+                          <Textarea  name="title" className="form__textarea form__textarea__no__label" id="title" rows={3} onChange={handleChange} onBlur={handleBlur} value={values.title} />
                           {errors.title && touched.title && (
                               <small className="form__error">{errors.title}</small>
                           )}

@@ -12,6 +12,8 @@ import TaskDescription from "./TaskDescription";
 import BidForm from "../bid/BidForm";
 import TaskCreatorDetails from "./TaskCreatorDetails";
 import {Category} from "../../infrastructure/enums/category";
+import {TaskStatus} from "../../infrastructure/enums/taskStatus";
+import TaskAssignedDetails from "./TaskAssignedDetails";
 
 const TaskPage : React.FC<RouteComponentProps<{id: string}>> = ({match}) => {
     const {getTaskById, loadingInitial, task} = useContext(rootStoreContext).taskStore;
@@ -56,13 +58,19 @@ const TaskPage : React.FC<RouteComponentProps<{id: string}>> = ({match}) => {
                         <TaskDescription task={task} />
                         <TaskCreatorDetails task={task} />
                     </Box>
-                    <Box>
+                    {task.jobStatus === TaskStatus.Active ? <Box>
                         {!isSmallerScreen && 
                         <div className="task__fixed__box">
                             <BidForm task={task}/>
                         </div>
                         }
-                    </Box>
+                    </Box> : task.jobStatus === TaskStatus.Assigned ? (
+                        <Box>
+                            <Box className="task__fixed__box">
+                                <TaskAssignedDetails task={task} />
+                            </Box>
+                        </Box>
+                    ) : "hey"}
                 </SimpleGrid>
                 </div>
                 </div>

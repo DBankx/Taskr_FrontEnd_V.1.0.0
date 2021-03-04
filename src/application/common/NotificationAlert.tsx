@@ -16,7 +16,7 @@ interface IProps{
 const NotificationAlert : React.FC<IProps> = ({data}) => {
     return (
         <Box>
-            <SimpleGrid alignItems="flex-start" templateColumns="0.5fr 1.4fr">
+            <SimpleGrid spacing="10px" alignItems="flex-start" templateColumns="0.3fr 1.4fr">
                 <Box className="alert__notif">
                     <Image src={data.fromUserAvatar} alt="user-avatar" className="alert__avatar"  />
                     <Box className="alert__helper" borderRadius="full" bg={data.type === NotificationType.Bid ? "#37a864" : data.type === NotificationType.Follow ? "#fff" : data.type === NotificationType.Message ? "#1FA9FA" : "#2DA3EB"} boxSize="25px">

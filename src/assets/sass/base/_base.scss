@@ -379,7 +379,13 @@ body {
 
 .chakra-alert{
   padding: 1rem !important;
-  color: #3E4177;
+}
+
+.hover__secondary{
+  &:hover{
+    background-color: $color-secondary !important;
+    cursor: pointer !important;
+  }
 }
 
 @media (max-width: 500px) {
@@ -532,3 +538,31 @@ body {
   padding: 0.4em
 }
 
+.checkout{
+  color: #2D3748 !important;
+  .chakra-alert__title{
+    font-size: 1.125em !important;
+    line-height: 2em !important;
+    color: #2D3748 !important;
+  }
+  .chakra-alert__desc{
+    color: #2D3748 !important;
+    max-width: 30rem !important;
+    line-height: 2rem !important;
+  }
+  
+  .chakra-alert{
+    height: 250px !important;
+  }
+}
+
+.small__heading .chakra-table th{
+  padding: 1.5em !important;
+  font-size: 0.8em !important;
+  font-weight: bold !important;
+}
+
+.nm__heading .chakra-table th{
+  font-size: 0.9em !important;
+  font-weight: 500 !important;
+}

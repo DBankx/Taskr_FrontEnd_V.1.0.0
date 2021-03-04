@@ -26,7 +26,8 @@
     //border: 1px solid $border-color;
     border-radius: 4px;
     background-color: #fff;
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+    //box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+    box-shadow: 0 1px 21px 0 rgba(135, 140, 157, 0.2);
     margin-bottom: 20px;
     padding: 25px 20px;
     max-width: 1250px;
@@ -165,6 +166,7 @@
         width: auto;
         height: 527px !important;
         display: grid;
+        position: relative;
         box-sizing: border-box !important;
         border: 0.5px solid $border-color;
         text-align: center;
@@ -193,28 +195,7 @@
     }
   }
   
-  &__status__label{
-    padding: 0.3em 1em;
-    color: white;
-    background-color: #7DB343;
-    width: fit-content;
-    border-radius: 50px;
-    font-size: 10px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-weight: 700;
-  }
-
-  &__status__label__steady{
-    padding: 0.3em 1em;
-    color: #fff !important;
-    background-color: #7DB343;
-    width: fit-content;
-    border-radius: 50px;
-    font-size: 10px;
-    font-weight: 700;
-  }
+  
   
   &__form__preview__card{
     border: 2px solid $border-color;
@@ -470,4 +451,63 @@
   background-color: $color-secondary;
   border-radius: 4px;
   margin-top: 0.8em;
+}
+
+.chakra-badge{
+  font-size: 0.65em !important;
+  padding-left: 0.45em !important;
+  padding-right: 0.45rem !important;
+}
+
+.ribbon{
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.ribbon::before,
+.ribbon::after {
+  position: absolute;
+  z-index: -1;
+  content: '';
+  display: block;
+  border: 5px solid #2980b9;
+}
+.ribbon span {
+  position: absolute;
+  display: block;
+  width: 225px;
+  padding: 15px 0;
+  background-color: #3498db;
+  box-shadow: 0 5px 10px rgba(0,0,0,.1);
+  color: #fff;
+  font: 500 18px/1 'Larsseit', sans-serif;
+  text-shadow: 0 1px 1px rgba(0,0,0,.2);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* top left*/
+.ribbon-top-left {
+  top: -10px;
+  left: -10px;
+}
+.ribbon-top-left::before,
+.ribbon-top-left::after {
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+.ribbon-top-left::before {
+  top: 0;
+  right: 0;
+}
+.ribbon-top-left::after {
+  bottom: 0;
+  left: 0;
+}
+.ribbon-top-left span {
+  right: -25px;
+  top: 30px;
+  transform: rotate(-45deg);
 }

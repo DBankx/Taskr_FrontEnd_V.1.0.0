@@ -25,7 +25,7 @@ const MessagePage : React.FC<RouteComponentProps<{chatId: string}>> = ({match}) 
             <Box className="main">
                 {!isMobile && <Link className="text__blue" to="/inbox">&#60; Back to my inbox</Link>}
                 {loadingChat || chat == null ? <MessagePagePlaceholder /> : 
-                    <Box style={{marginTop: isMobile ? "1em" : "3em"}}>
+                    <Box style={{marginTop: isMobile ? "1em" : "2em"}}>
                     <SimpleGrid templateColumns={{xl: "2fr 0.8fr", lg: "2fr 1fr"}} spacing="20px" >
                     <MessageBox chat={chat} />
                         {!isMobile && <ReceiverProfile user={chat.taskr.id === user!.id ? chat.runner : chat.taskr} /> }

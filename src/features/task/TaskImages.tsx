@@ -6,6 +6,7 @@ import 'react-medium-image-zoom/dist/styles.css';
 import Zoom from 'react-medium-image-zoom';
 import Slider from "react-slick";
 import {ChevronLeftIcon, ChevronRightIcon, PriceTagIcon} from "../../infrastructure/icons/Icons";
+import {TaskStatus} from "../../infrastructure/enums/taskStatus";
 
 interface IProps{
     task: ITask
@@ -79,6 +80,10 @@ const TaskImages : React.FC<IProps> = ({task}) => {
             <div style={{textAlign: "center", marginTop: "0.3em"}}>
                 <small><PriceTagIcon boxSize={6} color="#3D3373"/> Have a similar task? <span className="text__blue">Post it yourself</span> </small>
             </div>
+            
+            {task.jobStatus === TaskStatus.Assigned && <div className="ribbon ribbon-top-left">
+                <span>Assigned</span>
+            </div>}
         </div>
     )
 }
