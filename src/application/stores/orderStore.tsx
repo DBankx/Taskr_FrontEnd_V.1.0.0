@@ -15,6 +15,7 @@ export class OrderStore{
     @observable loadingOrders = false;
     @observable activeOrders : IOrder[] | null = null;
     @observable order : IOrder | null = null;
+    @observable runnerOrders : IOrder[] | null = null;
     
     @action deleteOrderById = async (orderNumber: string) => {
         try{
@@ -48,6 +49,9 @@ export class OrderStore{
                     case "ACTIVE":
                         this.activeOrders = orders;
                         break;
+                    case "RUNNER":    
+                        this.runnerOrders = orders;
+                        break;
                     default:
                         break;
                 }
@@ -66,6 +70,9 @@ export class OrderStore{
             const order = await OrderRequest.getOrderByNumber(orderNumber);
             runInAction(() => {
                 this.order = order;
+                if(this.rootStore.authStore.user!.id === order.payTo.id){
+                    this.order.isRunner = true;
+                }
                 this.loadingOrders = false;
             })
         }catch (e) {

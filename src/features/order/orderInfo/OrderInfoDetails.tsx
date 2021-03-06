@@ -1,6 +1,6 @@
 ﻿import React from "react";
 import {observer} from "mobx-react-lite";
-import {Box, Divider, HStack, Table, Tbody, Th, Thead, Tr, Td, useMediaQuery} from "@chakra-ui/react";
+import {Box, Divider, HStack, Table, Tbody, Th, Thead, Tr, Td, useMediaQuery, Center} from "@chakra-ui/react";
 import {IOrder} from "../../../infrastructure/models/order";
 import OrderDetails from "../OrderDetails";
 import { Link } from "react-router-dom";
@@ -48,8 +48,8 @@ const OrderInfoDetails = ({order} : IProps) => {
                     </Box>
                     
                     <Box mt="2em" className="white__border no__padding">
-                        <Box p="0.5em" className="order__info__background" style={{borderBottom: "1px solid #E5E5E5"}}>
-                            <p className="text__darker"><FileIcon boxSize={8} /> Your order <i className="order__time-stamp">{dayjs(order.orderPlacementDate).format("MMM DD, hh:mm A")}</i></p>
+                        <Box p="0.5em 1em" className="order__info__background" style={{borderBottom: "1px solid #E5E5E5"}}>
+                            <p className="text__darker"><FileIcon boxSize={6} /> {order.isRunner ? `${order.user.username}'s` : "Your"} order <i className="order__time-stamp">{dayjs(order.orderPlacementDate).format("MMM DD, hh:mm A")}</i></p>
                            
                         </Box>
                         <Box className="watchlist__table small__heading" >
@@ -64,7 +64,10 @@ const OrderInfoDetails = ({order} : IProps) => {
                             </Thead>
                             <Tbody>
                                 <Tr>
-                                    <Td><p className="text__darker">{order.job.title}</p></Td>
+                                    <Td><Box style={{lineHeight: "2em"}}>
+                                        <p className="text__darker text__md">{order.job.title}</p>
+                                        <p className="text__silent">Delivery by {dayjs(order.job.deliveryDate).format("MMM DD, hh:mm A")}</p>
+                                    </Box></Td>
                                     <Td>{order.job.address ? <p className="text__darker">In person</p>
                                         : <p className="text__darker">Online</p>}</Td>
                                     <Td>{dayjs(Date.now()).to(order.job.deliveryDate, true)}</Td>
@@ -75,7 +78,34 @@ const OrderInfoDetails = ({order} : IProps) => {
 
                         </Table>
                         </Box>
+                        <Box p="0.5em 1em" className="order__info__background" style={{borderBottom: "1px solid #E5E5E5"}}>
+                            <HStack justifyContent="space-between">
+                                <p className="text__darker">SUBTOTAL</p>
+                                <p className="text__darker">${order.totalAmount - 2.50}</p>
+                            </HStack>
+                        </Box>
+                        <Box p="0.5em 1em" className="order__info__background" style={{borderBottom: "1px solid #E5E5E5"}}>
+                            <HStack justifyContent="space-between">
+                                <p className="text__darker">SERVICE FEE</p>
+                                <p className="text__darker">$1.50</p>
+                            </HStack>
+                        </Box>
+                        <Box p="0.5em 1em" className="order__info__background" style={{borderBottom: "1px solid #E5E5E5"}}>
+                            <HStack justifyContent="space-between">
+                                <p className="text__darker">TAX</p>
+                                <p className="text__darker">$0.50</p>
+                            </HStack>
+                        </Box>
+                        <Box p="0.5em 1em" className="order__info__background" style={{borderBottom: "1px solid #E5E5E5"}}>
+                            <HStack justifyContent="space-between">
+                                <p className="text__darker">TOTAL</p>
+                                <p className="text__darker">${order.totalAmount}</p>
+                            </HStack>
+                        </Box>
                     </Box>
+                    <Center mt={4}>
+                        <p className="text__silent">If your order appears to be missing or incorrect, please contact our <Link className="text__blue link" to="/support">customer care</Link></p>
+                    </Center>
                 </Box>
                 )}
         </Box>

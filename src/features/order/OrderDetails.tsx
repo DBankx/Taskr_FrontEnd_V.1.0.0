@@ -53,10 +53,10 @@ const OrderDetails = ({order, showBox}: IProps) => {
             
             <Box mt={7}>
                     <HStack mb={3} alignItems="center" justifyContent="space-between">
-                        <p className="text__silent">Assinged Runner</p>
+                        <p className="text__silent">{order.isRunner ? "Taskr" : "Assinged Runner"}</p>
                         <HStack spacing="5px">
-                            <Image src={order.payTo.avatar} alt="runner-avatar" width="20px" height="20px" className="avatar" />
-                        <Link className="link text__blue" to={`/public-profile/${order.payTo.id}`}>{order.payTo.username}</Link>
+                            <Image src={order.isRunner ? order.user.avatar : order.payTo.avatar} alt="runner-avatar" width="20px" height="20px" className="avatar" />
+                        <Link className="link text__blue" to={`/public-profile/${order.isRunner ? order.user.id : order.payTo.id}`}>{order.isRunner ? order.user.username : order.payTo.username}</Link>
                         </HStack>
                     </HStack>
                 <HStack mb={3}  alignItems="center" justifyContent="space-between">
@@ -72,9 +72,11 @@ const OrderDetails = ({order, showBox}: IProps) => {
                     <p className="text__darker">#{order.orderNumber}</p>
                 </HStack>
             </Box>
-            <Button mt={7} className="btn btn__nm btn__error btn__full-width">
+            {order.isRunner ? <Button mt={7} className="btn btn__nm btn__primary btn__full-width">
+               Mark as started 
+            </Button> : <Button mt={7} className="btn btn__nm btn__error btn__full-width">
                 Cancel order
-            </Button>
+            </Button> }
         </Box>
     )
 }

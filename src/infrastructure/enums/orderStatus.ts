@@ -3,5 +3,6 @@
     Completed,
     Cancelled,
     Confirmed,
-    AwaitingPayout
+    AwaitingPayout,
+    Started
 }

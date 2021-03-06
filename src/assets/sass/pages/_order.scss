@@ -69,3 +69,16 @@
     }
   }
 }
+
+.circle-question{
+  border-radius: 50% !important;
+  background-color: #2D3748 !important;
+  font-size: 0.8em !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  width: 20px !important;
+  height: 20px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

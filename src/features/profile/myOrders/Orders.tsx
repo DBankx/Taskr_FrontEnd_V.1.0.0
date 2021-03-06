@@ -3,6 +3,7 @@ import {observer} from "mobx-react-lite";
 import {Box, Tab, TabList, TabPanel, TabPanels, Tabs, useMediaQuery} from "@chakra-ui/react";
 import SEO from "../../../application/appLayout/SEO";
 import ActiveOrders from "./ActiveOrders";
+import RunnerOrders from "./RunnerOrders";
 
 const Orders = () => {
     const [isMobile] = useMediaQuery("(max-width: 500px)");
@@ -14,6 +15,7 @@ const Orders = () => {
                   <TabList style={isMobile ? {width: "100px"} : {margin: "0 auto"}} className="profile__inner__tabs">
                       {/*confirmed*/}
                       <Tab>Active</Tab>
+                      <Tab>Runner</Tab>
                       {/*Awaiting payout*/}
                       <Tab>Awaiting Payout</Tab>
                       {/*Completed*/}
@@ -25,6 +27,9 @@ const Orders = () => {
                   <TabPanels>
                       <TabPanel>
                           <ActiveOrders />
+                      </TabPanel>
+                      <TabPanel>
+                          <RunnerOrders />
                       </TabPanel>
                   </TabPanels>
               </Tabs>

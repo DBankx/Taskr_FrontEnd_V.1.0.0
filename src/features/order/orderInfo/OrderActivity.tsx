@@ -26,7 +26,7 @@ const OrderActivity = ({order} : IProps) => {
     const validationSchema = yup.object().shape({
         text: yup.string().required("message is required")
     });
-    const {sendChatToRunner} = useContext(rootStoreContext).chatStore;
+    const {sendChatToRunner, startChatWithUser} = useContext(rootStoreContext).chatStore;
     
     return (
         <Box>
@@ -36,7 +36,7 @@ const OrderActivity = ({order} : IProps) => {
                     <FileIcon boxSize={8} color="#6296D4" />
                 </Box>
                 
-                <p className="text__md">Your order was placed <i className="order__time-stamp">{dayjs(order.orderPlacementDate).format("MMM DD, hh:mm A")}</i></p>
+                <p className="text__md">{order.isRunner ? `${order.user.username}'s` : "Your"} order was placed <i className="order__time-stamp">{dayjs(order.orderPlacementDate).format("MMM DD, hh:mm A")}</i></p>
             </HStack>
             <Divider />
             <HStack spacing="20px" p="1em">
@@ -44,7 +44,7 @@ const OrderActivity = ({order} : IProps) => {
                     <CreditCardIcon boxSize={8} color="#39C785" /> 
                 </Box>
 
-                <p className="text__md">Your payment was processed <i className="order__time-stamp">{dayjs(order.paymentCompletedDate).format("MMM DD, hh:mm A")}</i></p>
+                <p className="text__md">{order.isRunner ? `${order.user.username}'s` : "Your"} payment was processed <i className="order__time-stamp">{dayjs(order.paymentCompletedDate).format("MMM DD, hh:mm A")}</i></p>
             </HStack>
             <Divider/>
             <HStack spacing="20px" p="1em">
@@ -52,7 +52,7 @@ const OrderActivity = ({order} : IProps) => {
                     <CheckmarkIcon boxSize={8} color="#9188E0" />
                 </Box>
 
-                <p className="text__md">You assinged your task to <Link className="link text__blue" to={`/public-profile/${order.payTo.id}`}>{order.payTo.username}</Link> <i className="order__time-stamp">{dayjs(order.orderPlacementDate).format("MMM DD, hh:mm A")}</i></p>
+                <p className="text__md">{order.isRunner ? <span>{order.user.username} assigned you <i className="order__time-stamp">{dayjs(order.orderPlacementDate).format("MMM DD, hh:mm A")}</i></span> : <span> assinged your task to <Link className="link text__blue" to={`/public-profile/${order.payTo.id}`}>{order.payTo.username}</Link> <i className="order__time-stamp">{dayjs(order.orderPlacementDate).format("MMM DD, hh:mm A")}</i></span>}</p>
             </HStack>
             <Divider/>
             <HStack spacing="20px" p="1em">
@@ -60,14 +60,16 @@ const OrderActivity = ({order} : IProps) => {
                     <RocketIcon boxSize={8} color="#39C785" />
                 </Box>
 
-                <p className="text__md">Your order started <i className="order__time-stamp">{dayjs(order.orderPlacementDate).format("MMM DD, hh:mm A")}</i></p>
+                <p className="text__md">{order.isRunner ? `${order.user.username}'s` : "Your"} order started <i className="order__time-stamp">{dayjs(order.orderPlacementDate).format("MMM DD, hh:mm A")}</i></p>
             </HStack>
             <Divider />
             {order.chat === null ? (<Box>
                 <HStack p="1em" spacing="20px" alignItems="start">
-                    <Image src={order.user.avatar} alt="user" width="50px" height="50px" className="avatar"/>
+                    <Image src={order.isRunner ? order.payTo.avatar : order.user.avatar} alt="user" width="50px" height="50px" className="avatar"/>
                     <Box width="100%">
-                        <Formik validationSchema={validationSchema} initialValues={{text: ""}} onSubmit={values => sendChatToRunner(order.job.id, order.payTo.id, values)}>
+                        <Formik validationSchema={validationSchema} initialValues={{text: ""}} onSubmit={values => {
+                         order.isRunner ? sendChatToRunner(order.job.id, order.payTo.id, values) : startChatWithUser(order.job.id, order.user.id, values);
+                        }}>
                             {({
                                 handleSubmit,
                                 values,
@@ -99,11 +101,11 @@ const OrderActivity = ({order} : IProps) => {
                     <ChatIcon boxSize={8} color="#6296D4" />
                 </Box>
 
-                <p className="text__md">You started a chat with {order.payTo.username} <i className="order__time-stamp">{dayjs(order.chat.createdAt).format("MMM DD, hh:mm A")}</i></p>
+                <p className="text__md">You started a chat with {order.isRunner ? order.user.username : order.payTo.username} <i className="order__time-stamp">{dayjs(order.chat.createdAt).format("MMM DD, hh:mm A")}</i></p>
             </HStack>)}
         </Box>
             {order.chat !== null &&
-                <p className="text__silent text__middle">View <Link to={`/conversation/${order.chat.id}`} className="text__blue link">conversation</Link> with {order.payTo.username} in your inbox</p>
+                <p className="text__silent text__middle">View <Link to={`/conversation/${order.chat.id}`} className="text__blue link">conversation</Link> with {order.isRunner ? order.user.username : order.payTo.username} in your inbox</p>
             }
         </Box>
     )
