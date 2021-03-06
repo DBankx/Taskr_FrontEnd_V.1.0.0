@@ -17,6 +17,7 @@ export interface IOrder{
     totalAmount: number;
     orderCompletedDate: Date;
     checkoutSessionId: string;
+    orderStartedDate: Date;
     chat: IChat;
     isRunner: boolean;
 }

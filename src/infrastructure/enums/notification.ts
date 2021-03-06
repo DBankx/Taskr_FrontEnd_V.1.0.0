@@ -4,6 +4,7 @@
     Message,
     Follow,
     Assign,
+    Order 
 }
 
 export enum NotificationStatus {

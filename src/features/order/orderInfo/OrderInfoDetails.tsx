@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
 import {FileIcon} from "../../../infrastructure/icons/Icons";
+import TaskTimer from "../../bid/bidHistory/TaskTimer";
 
 dayjs.extend(relativeTime);
 
@@ -28,7 +29,7 @@ const OrderInfoDetails = ({order} : IProps) => {
                                 <Box height="30px">
                                     <Divider  orientation="vertical" />
                                 </Box>
-                                <p className="text__silent text__md">Due to deliver <span className="text__light__grey text__bold">{dayjs(order.job.deliveryDate).format("MMM DD, hh:mm A")}</span></p>
+                                {dayjs(new Date(Date.now())).isAfter(dayjs(order.job.deliveryDate)) ? <p className="text__silent text__md">Delivery Date has passed</p> : <p className="text__silent text__md">Due to deliver in <span className="text__light__grey text__bold"><TaskTimer task={order.job} /></span></p>}
                             </HStack>
                         </Box>
                         <Box>

@@ -59,7 +59,7 @@ const RunnerOrders = () => {
                                         ${order.totalAmount}
                                     </Td>
                                     <Td>
-                                        <Button as={Link} to={`/order/${order.orderNumber}`} className="btn btn__nm btn__primary">Mark as started</Button>
+                                        <Button as={Link} to={`/order/${order.orderNumber}`} className="btn btn__nm btn__primary">View</Button>
                                     </Td>
                                 </Tr>
                             ))}

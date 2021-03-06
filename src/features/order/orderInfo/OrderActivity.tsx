@@ -3,6 +3,7 @@ import {observer} from "mobx-react-lite";
 import { Box, Button, Divider, HStack, Image, Textarea } from "@chakra-ui/react";
 import {IOrder} from "../../../infrastructure/models/order";
 import {
+    BoxIcon,
     ChatIcon,
     CheckmarkIcon,
     CreditCardIcon,
@@ -103,6 +104,18 @@ const OrderActivity = ({order} : IProps) => {
 
                 <p className="text__md">You started a chat with {order.isRunner ? order.user.username : order.payTo.username} <i className="order__time-stamp">{dayjs(order.chat.createdAt).format("MMM DD, hh:mm A")}</i></p>
             </HStack>)}
+            {dayjs(order.orderPlacementDate).isBefore(dayjs(order.orderStartedDate)) && (
+                <Box>
+                    <Divider />
+                <HStack spacing="20px" p="1em">
+                    <Box style={{backgroundColor: "#FFE9F7"}} className="order__box__icon">
+                        <BoxIcon boxSize={8} color="#E774BA" />
+                    </Box>
+
+                    <p className="text__md">{order.isRunner ? <span>You marked this order as started</span> : <span>{order.payTo.username} marked this order as started</span>} <i className="order__time-stamp">{dayjs(order.orderStartedDate).format("MMM DD, hh:mm A")}</i></p>
+                </HStack>
+                    </Box>
+            )}
         </Box>
             {order.chat !== null &&
                 <p className="text__silent text__middle">View <Link to={`/conversation/${order.chat.id}`} className="text__blue link">conversation</Link> with {order.isRunner ? order.user.username : order.payTo.username} in your inbox</p>

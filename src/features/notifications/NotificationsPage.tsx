@@ -3,7 +3,7 @@ import {observer} from "mobx-react-lite";
 import rootStoreContext from "../../application/stores/rootstore";
 import {
     AssignAlertIcon,
-    BidAlertIcon,
+    BidAlertIcon, BoxIcon,
     ChatIcon,
     HeartAlertIcon,
     NotificationIcon
@@ -32,8 +32,8 @@ const NotificationsPage = () => {
                                 <SimpleGrid alignItems="flex-start" templateColumns="0.3fr 1.4fr" className="notification__item" spacing="10px">
                                     <Box className="alert__notif">
                                     <Image src={notification.fromUserAvatar} alt="user-avatar" borderRadius="full"  className="avatar avatar__notif" />
-                                    <Box className="alert__helper alert__helper__right" borderRadius="full" bg={notification.type === NotificationType.Bid ? "#37a864" : notification.type === NotificationType.Follow ? "#fff" : notification.type === NotificationType.Message ? "#1FA9FA" : "#2DA3EB"} boxSize="25px">
-                                        {notification.type === NotificationType.Bid ?  <BidAlertIcon boxSize="15px" color="#fff" /> : notification.type === NotificationType.Follow ? <HeartAlertIcon boxSize="15px" /> : notification.type === NotificationType.Message ? <ChatIcon boxSize="15px" color="#fff" /> : notification.type === NotificationType.Assign ? <AssignAlertIcon boxSize="15px" color="#fff" /> : ""}
+                                    <Box className="alert__helper alert__helper__right" borderRadius="full" bg={notification.type === NotificationType.Bid ? "#37a864" : notification.type === NotificationType.Follow ? "#fff" : notification.type === NotificationType.Message ? "#1FA9FA" : notification.type === NotificationType.Order ? "#6A0DAD" : "#2DA3EB"} boxSize="25px">
+                                        {notification.type === NotificationType.Bid ?  <BidAlertIcon boxSize="15px" color="#fff" /> : notification.type === NotificationType.Follow ? <HeartAlertIcon boxSize="15px" /> : notification.type === NotificationType.Message ? <ChatIcon boxSize="15px" color="#fff" /> : notification.type === NotificationType.Assign ? <AssignAlertIcon boxSize="15px" color="#fff" /> : notification.type === NotificationType.Order ? <BoxIcon boxSize="15px" color="#fff" /> : ""}
                                     </Box>
                                     </Box>
                                     <Box style={{minHeight: "60px"}}>

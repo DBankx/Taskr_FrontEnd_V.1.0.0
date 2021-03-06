@@ -172,5 +172,6 @@ export const OrderRequest = {
     getAllOrders: (predicate: string) : Promise<IOrder[]> => ApiRequest.get(`/order`, {
         params:{predicate}
     }),
-    getOrderByNumber : (orderNumber: string) : Promise<IOrder> => ApiRequest.get(`/order/${orderNumber}`)
+    getOrderByNumber : (orderNumber: string) : Promise<IOrder> => ApiRequest.get(`/order/${orderNumber}`),
+    markOrderAsStarted : (orderNumber: string) : Promise<Record<string, unknown>> => ApiRequest.put(`/order/start/${orderNumber}`)
 }

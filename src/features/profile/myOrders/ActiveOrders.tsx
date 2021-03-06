@@ -1,6 +1,6 @@
 ﻿import React, {useContext, useEffect} from "react";
 import {observer} from "mobx-react-lite";
-import { Box, Divider, Table, Tr, Thead, Th, Tbody, Td, HStack, Image, Button } from "@chakra-ui/react";
+import {Box, Divider, Table, Tr, Thead, Th, Tbody, Td, HStack, Image, Button, Tooltip} from "@chakra-ui/react";
 import rootStoreContext from "../../../application/stores/rootstore";
 import Loader from "../../../application/appLayout/FullPageSpinner";
 import {Link} from "react-router-dom";
@@ -14,9 +14,12 @@ const ActiveOrders = () => {
     if(loadingOrders || activeOrders === null) return <Loader />
     return (
         <Box className="task__bid__form__card no__padding">
-            <Box p="1em">
+            <HStack spacing="10px" p="1em">
                 <p className="text__darker text__upper text__bold">Active orders</p>
-            </Box>
+                <Tooltip hasArrow style={{background: "rgb(41, 43, 50)", fontSize: "0.8em"}} label="These are orders that have been paid for and confirmed" aria-label="A tooltip">
+                    <Box className="circle-question">?</Box>
+                </Tooltip>
+            </HStack>
             <Divider mb={0} />
             {activeOrders.length > 0 ? (
                 <Box className="watchlist__table small__heading">

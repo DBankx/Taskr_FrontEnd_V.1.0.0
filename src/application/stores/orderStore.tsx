@@ -3,6 +3,7 @@ import {action, makeAutoObservable, observable, runInAction} from "mobx";
 import {alertErrors} from "../../infrastructure/utils/getErrors";
 import {OrderRequest} from "../api/agent";
 import {IOrder} from "../../infrastructure/models/order";
+import {OrderStatus} from "../../infrastructure/enums/orderStatus";
 
 export class OrderStore{
     rootStore: RootStore;
@@ -79,6 +80,22 @@ export class OrderStore{
             runInAction(() => this.loadingOrders = false);
             alertErrors(e);
             throw e;
+        }
+    }
+    
+    @action markOrderAsStarted = async (orderNumber: string) => {
+        this.confirmingOrder = true;
+        try{
+            await OrderRequest.markOrderAsStarted(orderNumber);
+            runInAction(() => {
+                this.order!.status = OrderStatus.Started;
+                this.order!.orderStartedDate = new Date(Date.now());
+                this.confirmingOrder = false;
+            })
+        }catch (e) {
+           runInAction(() => this.confirmingOrder = false);
+           alertErrors(e);
+           throw e;
         }
     }
 }

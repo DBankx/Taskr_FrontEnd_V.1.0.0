@@ -1,10 +1,12 @@
-﻿import React from "react";
+﻿import React, {useContext} from "react";
 import {IOrder} from "../../infrastructure/models/order";
 import {observer} from "mobx-react-lite";
-import {Badge, Box, Button, HStack, Image, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react";
+import {Badge, Box, Button, HStack, Image, Menu, MenuButton, MenuItem, MenuList, Center} from "@chakra-ui/react";
 import {OrderStatus} from "../../infrastructure/enums/orderStatus";
 import {Link} from "react-router-dom";
 import dayjs from "dayjs";
+import rootStoreContext from "../../application/stores/rootstore";
+import {PadLockIcon} from "../../infrastructure/icons/Icons";
 
 interface IProps{
     order: IOrder;
@@ -12,6 +14,7 @@ interface IProps{
 }
 
 const OrderDetails = ({order, showBox}: IProps) => {
+    const {confirmingOrder, markOrderAsStarted} = useContext(rootStoreContext).orderStore;
     return (
         <Box className={showBox ? "task__bid__form__card" : ""} mt="3.8em">
             <HStack justifyContent="space-between" alignItems="center">
@@ -67,16 +70,37 @@ const OrderDetails = ({order, showBox}: IProps) => {
                     <p className="text__silent">Total price</p>
                     <p className="text__darker">${order.totalAmount}</p>
                 </HStack>
+                {order.isRunner &&
+                <HStack mb={3} alignItems="center" justifyContent="space-between">
+                    <p className="text__silent">You&apos;ll recieve</p>
+                    <p className="text__darker">${order.totalAmount - 5.50}</p>
+                </HStack>
+                }
                 <HStack mb={3}  alignItems="center" justifyContent="space-between">
                     <p className="text__silent">Order number</p>
                     <p className="text__darker">#{order.orderNumber}</p>
                 </HStack>
             </Box>
-            {order.isRunner ? <Button mt={7} className="btn btn__nm btn__primary btn__full-width">
+            {order.isRunner ? order.status === OrderStatus.Started ? 
+                <Box mt={7}>
+                <Button  className="btn btn__nm btn__green btn__full-width">
+                Request payout
+            </Button>
+                    <Center mt={2}>
+                        <p className="text__silent"><PadLockIcon boxSize="16px" /> Secure Payment</p>
+                    </Center>
+                </Box>
+                    : <Button isLoading={confirmingOrder} onClick={() => markOrderAsStarted(order.orderNumber)} mt={7} className="btn btn__nm btn__primary btn__full-width">
                Mark as started 
-            </Button> : <Button mt={7} className="btn btn__nm btn__error btn__full-width">
+            </Button> : <Box>
+                <Button disabled={order.status === OrderStatus.Started} mt={7} className="btn btn__nm btn__error btn__full-width">
                 Cancel order
-            </Button> }
+            </Button>
+                <Center mt={2}>
+                    <small className="text__silent">You can&apos;t cancel an order that has been started</small>
+                </Center>
+            </Box>
+                }
         </Box>
     )
 }

@@ -5,7 +5,7 @@ import {INotification} from "../../infrastructure/models/notification";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import {NotificationType} from "../../infrastructure/enums/notification";
-import {AssignAlertIcon, BidAlertIcon, ChatIcon, HeartAlertIcon} from "../../infrastructure/icons/Icons";
+import {AssignAlertIcon, BidAlertIcon, BoxIcon, ChatIcon, HeartAlertIcon} from "../../infrastructure/icons/Icons";
 
 dayjs.extend(relativeTime);
 
@@ -19,8 +19,8 @@ const NotificationAlert : React.FC<IProps> = ({data}) => {
             <SimpleGrid spacing="10px" alignItems="flex-start" templateColumns="0.3fr 1.4fr">
                 <Box className="alert__notif">
                     <Image src={data.fromUserAvatar} alt="user-avatar" className="alert__avatar"  />
-                    <Box className="alert__helper" borderRadius="full" bg={data.type === NotificationType.Bid ? "#37a864" : data.type === NotificationType.Follow ? "#fff" : data.type === NotificationType.Message ? "#1FA9FA" : "#2DA3EB"} boxSize="25px">
-                        {data.type === NotificationType.Bid ?  <BidAlertIcon boxSize="15px" color="#fff" /> : data.type === NotificationType.Follow ? <HeartAlertIcon boxSize="15px" /> : data.type === NotificationType.Message ? <ChatIcon boxSize="15px" color="#fff" /> : data.type === NotificationType.Assign ? <AssignAlertIcon boxSize="15px" color="#fff" /> : ""}
+                    <Box className="alert__helper" borderRadius="full" bg={data.type === NotificationType.Bid ? "#37a864" : data.type === NotificationType.Follow ? "#fff" : data.type === NotificationType.Message ? "#1FA9FA" : data.type === NotificationType.Order ? "#6A0DAD" : "#2DA3EB"} boxSize="25px">
+                        {data.type === NotificationType.Bid ?  <BidAlertIcon boxSize="15px" color="#fff" /> : data.type === NotificationType.Follow ? <HeartAlertIcon boxSize="15px" /> : data.type === NotificationType.Message ? <ChatIcon boxSize="15px" color="#fff" /> : data.type === NotificationType.Assign ? <AssignAlertIcon boxSize="15px" color="#fff" /> : data.type === NotificationType.Order ? <BoxIcon boxSize="15px" color="#fff" /> : ""}
                     </Box>
                 </Box>
                 <Box >
