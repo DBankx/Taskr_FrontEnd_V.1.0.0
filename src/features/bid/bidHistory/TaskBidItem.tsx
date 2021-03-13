@@ -1,10 +1,11 @@
 ﻿import React from "react";
 import {ITask} from "../../../infrastructure/models/task";
 import {observer} from "mobx-react-lite";
-import {Box, Stack, Image, Link as Linker, SimpleGrid, Divider, Alert, AlertIcon} from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import {Alert, AlertIcon, Box, Divider, Image, Link as Linker, SimpleGrid, Stack} from "@chakra-ui/react";
+import {Link} from "react-router-dom";
 import BidPageForm from "./BidPageForm";
 import {DeliveryTypes} from "../../../infrastructure/enums/deliveryTypes";
+import {TaskStatus} from "../../../infrastructure/enums/taskStatus";
 
 interface IProps{
     task: ITask
@@ -17,10 +18,10 @@ const TaskBidItem : React.FC<IProps> = ({task}) => {
                 <h3 className="text__darker">Task details</h3>
             </div>
                 <div style={{margin: "1em 0"}}>
-                    {task.isBidActive ? <Alert status="info" variant="left-accent">
+                    {task.isBidActive && task.jobStatus === TaskStatus.Active ?  <Alert status="info" variant="left-accent">
                         <AlertIcon/>
                         You have an active bid on this task 
-                    </Alert> : task.assignedUser ? <Alert status="success" variant="left-accent">
+                    </Alert> : task.assignedUser &&  task.jobStatus === TaskStatus.Assigned ? <Alert status="success" variant="left-accent">
                         <AlertIcon/>
                         This task has been assigned to a runner 
                     </Alert> : ""}
@@ -48,7 +49,7 @@ const TaskBidItem : React.FC<IProps> = ({task}) => {
                 </SimpleGrid>
             </div>
             <Divider />
-            {!task.isOwner && <div style={{margin: "1em 0"}}>
+            {!task.isOwner && task.jobStatus == TaskStatus.Active && <div style={{margin: "1em 0"}}>
                 <BidPageForm task={task} />
             </div>}
         </div>

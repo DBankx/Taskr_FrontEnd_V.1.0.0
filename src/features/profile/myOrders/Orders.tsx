@@ -4,6 +4,8 @@ import {Box, Tab, TabList, TabPanel, TabPanels, Tabs, useMediaQuery} from "@chak
 import SEO from "../../../application/appLayout/SEO";
 import ActiveOrders from "./ActiveOrders";
 import RunnerOrders from "./RunnerOrders";
+import PayoutOrders from "./PayoutOrders";
+import CompletedOrders from "./CompletedOrders";
 
 const Orders = () => {
     const [isMobile] = useMediaQuery("(max-width: 500px)");
@@ -30,6 +32,12 @@ const Orders = () => {
                       </TabPanel>
                       <TabPanel>
                           <RunnerOrders />
+                      </TabPanel>
+                      <TabPanel>
+                          <PayoutOrders />
+                      </TabPanel>
+                      <TabPanel>
+                          <CompletedOrders />
                       </TabPanel>
                   </TabPanels>
               </Tabs>

@@ -4,6 +4,7 @@ import {ITask} from "../../infrastructure/models/task";
 import {observer} from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
+import {TaskStatus} from "../../infrastructure/enums/taskStatus";
 
 interface IProps{
     task: ITask
@@ -14,7 +15,7 @@ const TaskAssignedDetails = ({task}: IProps) => {
         <Box className="task__bid__form__card">
             <HStack spacing="20px">
             <p className="text__silent text__upper">Accepted Bid</p>
-            <Badge colorScheme="orange">Pending completion</Badge>
+                {task.jobStatus === TaskStatus.Completed ? <Badge colorScheme="green">Completed</Badge> : <Badge colorScheme="orange">Pending completion</Badge>}
             </HStack>
             <HStack spacing="10px" mt={5}>
                 <Image src={task.assignedUser.avatar} alt="avatar" className="avatar avatar__nm" />

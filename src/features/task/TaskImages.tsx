@@ -81,9 +81,11 @@ const TaskImages : React.FC<IProps> = ({task}) => {
                 <small><PriceTagIcon boxSize={6} color="#3D3373"/> Have a similar task? <span className="text__blue">Post it yourself</span> </small>
             </div>
             
-            {task.jobStatus === TaskStatus.Assigned && <div className="ribbon ribbon-top-left">
-                <span>Assigned</span>
-            </div>}
+            {task.jobStatus === TaskStatus.Assigned ? <div className="ribbon ribbon-top-left rib-a-tl">
+                <span className="rib-a">Assigned</span>
+            </div> : task.jobStatus === TaskStatus.Completed ? <div className="ribbon ribbon-top-left rib-c-tl">
+                <span className="rib-c">Completed</span>
+            </div> : ""}
         </div>
     )
 }

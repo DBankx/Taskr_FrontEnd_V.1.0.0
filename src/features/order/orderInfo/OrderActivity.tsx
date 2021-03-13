@@ -116,6 +116,18 @@ const OrderActivity = ({order} : IProps) => {
                 </HStack>
                     </Box>
             )}
+            {dayjs(order.orderPlacementDate).isBefore(dayjs(order.orderCompletedDate)) && (
+                <Box>
+                    <Divider />
+                    <HStack spacing="20px" p="1em">
+                        <Box style={{backgroundColor: "#D7F7E9"}} className="order__box__icon">
+                            <FileIcon boxSize={8} color="#39C785" />
+                        </Box>
+
+                        <p className="text__md">{order.isRunner ? <span>{order.user.username}&apos;s order is completed</span> : <span>Your order is complete</span>} <i className="order__time-stamp">{dayjs(order.orderCompletedDate).format("MMM DD, hh:mm A")}</i></p>
+                    </HStack>
+                </Box>
+            )}
         </Box>
             {order.chat !== null &&
                 <p className="text__silent text__middle">View <Link to={`/conversation/${order.chat.id}`} className="text__blue link">conversation</Link> with {order.isRunner ? order.user.username : order.payTo.username} in your inbox</p>

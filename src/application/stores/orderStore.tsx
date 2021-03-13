@@ -13,6 +13,8 @@ export class OrderStore{
     }
     
     @observable confirmingOrder = false;
+    @observable payoutOrders: IOrder[] | null = null;
+    @observable completedOrders: IOrder[] | null = null;
     @observable loadingOrders = false;
     @observable activeOrders : IOrder[] | null = null;
     @observable order : IOrder | null = null;
@@ -54,6 +56,12 @@ export class OrderStore{
                     case "RUNNER":    
                         this.runnerOrders = orders;
                         break;
+                    case "PAYOUT":
+                        this.payoutOrders = orders;
+                        break;
+                    case "COMPLETED":
+                        this.completedOrders = orders;
+                        break;
                     default:
                         break;
                 }
@@ -90,7 +98,7 @@ export class OrderStore{
             await OrderRequest.markOrderAsStarted(orderNumber);
             runInAction(() => {
                 this.order!.status = OrderStatus.Started;
-                this.order!.orderStartedDate = new Date(Date.now());
+                this.order!.orderStartedDate = new Date();
                 this.confirmingOrder = false;
             })
         }catch (e) {
@@ -106,6 +114,7 @@ export class OrderStore{
             await OrderRequest.requestPayout(orderNumber);
             runInAction(() => {
                 this.order!.status = OrderStatus.AwaitingPayout;
+                this.loadingOrderAction = false;
             })
         }catch(error){
             runInAction(() => this.loadingOrderAction = false);
@@ -119,7 +128,24 @@ export class OrderStore{
         try{
             await OrderRequest.rejectPayout(orderNumber);
             runInAction(() => {
-                this.order!.status = OrderStatus.Confirmed;
+                this.order!.status = OrderStatus.Started;
+                this.loadingOrderAction = false;
+            })
+        }catch(error){
+            runInAction(() => this.loadingOrderAction = false);
+            alertErrors(error);
+            throw error;
+        }
+    }
+
+    @action acceptPayout = async (orderNumber: string) => {
+        this.loadingOrderAction = true;
+        try{
+            await OrderRequest.acceptPayout(orderNumber);
+            runInAction(() => {
+                this.order!.status = OrderStatus.Completed;
+                this.order!.orderCompletedDate = new Date();
+                this.loadingOrderAction = false;
             })
         }catch(error){
             runInAction(() => this.loadingOrderAction = false);

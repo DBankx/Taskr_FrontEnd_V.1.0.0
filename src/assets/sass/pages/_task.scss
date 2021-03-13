@@ -472,20 +472,35 @@
   z-index: -1;
   content: '';
   display: block;
+}
+
+.rib-a-tl::after{
   border: 5px solid #2980b9;
 }
+
+.rib-c-tl::after{
+  border: 5px solid darken($color-green, 10%);
+}
+
 .ribbon span {
   position: absolute;
   display: block;
   width: 225px;
   padding: 15px 0;
-  background-color: #3498db;
   box-shadow: 0 5px 10px rgba(0,0,0,.1);
   color: #fff;
   font: 500 18px/1 'Larsseit', sans-serif;
   text-shadow: 0 1px 1px rgba(0,0,0,.2);
   text-transform: uppercase;
   text-align: center;
+}
+
+.rib-a{
+  background-color: #3498db; 
+}
+
+.rib-c{
+  background-color: $color-green;
 }
 
 /* top left*/

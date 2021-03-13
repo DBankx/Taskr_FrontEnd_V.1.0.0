@@ -9,7 +9,7 @@ interface IProps{
 
 const TaskStatus = ({taskStatus}: IProps) => {
     return (
-       taskStatus === Status.Active ? <Badge colorScheme="green">Open</Badge> : taskStatus === Status.Assigned ? <Badge colorScheme="facebook">Assigned</Badge> : taskStatus === Status.Completed ? <Badge colorScheme="green">Open</Badge> : <Badge colorScheme="red">Ended</Badge>
+       taskStatus === Status.Active ? <Badge colorScheme="green">Open</Badge> : taskStatus === Status.Assigned ? <Badge colorScheme="facebook">Assigned</Badge> : taskStatus === Status.Completed ? <Badge colorScheme="green">Completed</Badge> : <Badge colorScheme="red">Ended</Badge>
     )
 }
 

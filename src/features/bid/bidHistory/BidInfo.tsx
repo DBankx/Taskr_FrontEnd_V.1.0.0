@@ -8,9 +8,9 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { Link } from "react-router-dom";
 import BidTable from "./BidTable";
 import Slider from "react-slick";
-import { Menu, MenuItem, MenuDivider, MenuList, MenuButton, MenuGroup, useMediaQuery } from "@chakra-ui/react";
-import { ChevronDownIcon } from "../../../infrastructure/icons/Icons";
+import { useMediaQuery } from "@chakra-ui/react";
 import BidAccordian from "./BidAccordian";
+import {TaskStatus} from "../../../infrastructure/enums/taskStatus";
 
 dayjs.extend(relativeTime);
 
@@ -19,8 +19,6 @@ interface IProps{
     task: ITask
 }
 
-// TODO - filter bids
-// TODO - owner of task view
 
 const BidInfo : React.FC<IProps> = ({bids, task}) => {
     const [isMobile] = useMediaQuery("(max-width: 500px)");
@@ -58,7 +56,7 @@ const BidInfo : React.FC<IProps> = ({bids, task}) => {
               </div>
               
               <div className="navbar__list_bottom">
-                  <p className="text__silent text__sm">Time left:  <span className="text__darker text__md"><TaskTimer task={task} /></span></p>
+                  <p className="text__silent text__sm">Time left: {task.jobStatus === TaskStatus.Completed ? <span className="text__green text__bold">Completed</span> : <span className="text__darker text__md"><TaskTimer task={task} /></span>}</p>
               </div>
 
               <div className="navbar__list_bottom">
@@ -68,34 +66,6 @@ const BidInfo : React.FC<IProps> = ({bids, task}) => {
           
             <div className="text__info__box" style={{margin: "1em 0"}}>
           <small className="text__darker text__small__info">All bids shown here are bids placed from the start of the task date till the end. Bids are held with legal actions, so please when making a bid be ready and sure to abide by that price point. <Link to="/" className="text__blue">Learn more about bidding</Link></small>
-            </div>
-            
-            <div style={{margin: "1em 0"}}>
-                <Menu>
-                    <MenuButton
-                        px={4}
-                        py={2}
-                        borderRadius="md"
-                        borderWidth="1px"
-                        _hover={{ bg: "gray.100" }}
-                        _focus={{ outline: 0, boxShadow: "outline" }}
-                    >
-                        Filter bids <ChevronDownIcon />
-                    </MenuButton>
-                    <MenuList>
-                        <MenuGroup title="Status">
-                        <MenuItem>Approved</MenuItem>
-                        <MenuItem>Submitted</MenuItem>
-                            <MenuItem>Seen</MenuItem>
-                            <MenuItem>Rejected</MenuItem>
-                        </MenuGroup>
-                        <MenuDivider />
-                        <MenuGroup title="Price">
-                        <MenuItem>Highest price</MenuItem>
-                        <MenuItem>Lowest price</MenuItem>
-                        </MenuGroup>
-                    </MenuList>
-                </Menu>
             </div>
             
             {!isMobile ? <div style={{margin: "1em 0"}}>

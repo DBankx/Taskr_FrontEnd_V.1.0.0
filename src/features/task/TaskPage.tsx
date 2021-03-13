@@ -1,7 +1,7 @@
-import {useMediaQuery, Alert ,AlertIcon, Box, SimpleGrid } from "@chakra-ui/react";
-import { observer } from "mobx-react-lite";
+import {Alert, AlertIcon, Box, SimpleGrid, useMediaQuery} from "@chakra-ui/react";
+import {observer} from "mobx-react-lite";
 import React, {useContext, useEffect} from "react";
-import {Link, RouteComponentProps } from "react-router-dom";
+import {RouteComponentProps} from "react-router-dom";
 import FullPageSpinner from "../../application/appLayout/FullPageSpinner";
 import SEO from "../../application/appLayout/SEO";
 import rootStoreContext from "../../application/stores/rootstore";
@@ -37,9 +37,9 @@ const TaskPage : React.FC<RouteComponentProps<{id: string}>> = ({match}) => {
            </div> 
             <div className="main">
                 <div style={{marginBottom: "1em"}}>
-                    {task.isBidActive && <Alert status="info" variant="left-accent">
+                    {task.isBidActive && task.jobStatus === TaskStatus.Active && <Alert status="info" variant="left-accent">
                         <AlertIcon/>
-                        You have an active bid on this task. <Link to="/" className="text__blue" style={{marginLeft: "0.3em"}}>View &#8594;</Link>
+                        You have an active bid on this task. 
                     </Alert>}
                 </div>
                 <div style={isMobile ? {} : {padding: "0 4em 0 4em"}}>
@@ -70,7 +70,13 @@ const TaskPage : React.FC<RouteComponentProps<{id: string}>> = ({match}) => {
                                 <TaskAssignedDetails task={task} />
                             </Box>
                         </Box>
-                    ) : "hey"}
+                    ) : (
+                        <Box>
+                            <Box className="task__fixed__box">
+                                <TaskAssignedDetails task={task} />
+                            </Box>
+                        </Box>
+                    )}
                 </SimpleGrid>
                 </div>
                 </div>
