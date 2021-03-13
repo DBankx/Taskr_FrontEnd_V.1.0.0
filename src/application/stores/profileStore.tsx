@@ -219,4 +219,17 @@ export class ProfileStore{
         }
     }
     
+    @action addBankAccount = async (values: any) => {
+        try {
+            await profileRequest.addBankAccount(values);
+            runInAction(() => {
+                this.privateProfile!.bankAccount = values;
+            })
+            toast.success(<Alert type="success" subject="Bank account added Successfully" icon={<CheckmarkIcon boxSize={8} color="#224a23" />} message="" />)
+        } catch(e){
+            alertErrors(e);
+            throw e;
+        }
+    }
+    
 }

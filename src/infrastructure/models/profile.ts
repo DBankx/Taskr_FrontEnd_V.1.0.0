@@ -17,6 +17,7 @@ export interface IPrivateProfile{
     tagline: string;
     socials: ISocials;
     emailConfirmed: boolean;
+    bankAccount: IBankAccount;
 }
 
 export interface IPublicProfile{
@@ -50,6 +51,15 @@ export interface ISkill {
 export interface ILanguage{
     languageName: string;
     experienceLevel: ExperienceLevel;
+}
+
+export interface IBankAccount{
+    id: string;
+    accountNumber: string;
+    accountHolderName: string;
+    accountHolderType: string;
+    bankName: string;
+    routingNumber: string;
 }
 
 

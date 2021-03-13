@@ -1,7 +1,7 @@
 ﻿import React, {useContext} from "react";
 import {IOrder} from "../../infrastructure/models/order";
 import {observer} from "mobx-react-lite";
-import {Badge, Box, Button, HStack, Image, Menu, MenuButton, MenuItem, MenuList, Center} from "@chakra-ui/react";
+import {Badge, Box, Button, HStack, VStack, Image, Menu, MenuButton, MenuItem, MenuList, Center} from "@chakra-ui/react";
 import {OrderStatus} from "../../infrastructure/enums/orderStatus";
 import {Link} from "react-router-dom";
 import dayjs from "dayjs";
@@ -14,9 +14,9 @@ interface IProps{
 }
 
 const OrderDetails = ({order, showBox}: IProps) => {
-    const {confirmingOrder, markOrderAsStarted} = useContext(rootStoreContext).orderStore;
+    const {confirmingOrder, markOrderAsStarted, loadingOrderAction, rejectPayout, requestPayout} = useContext(rootStoreContext).orderStore;
     return (
-        <Box className={showBox ? "task__bid__form__card" : ""} mt="3.8em">
+        <Box className={showBox ? "task__bid__form__card" : ""} mt={showBox ? "3.8em" : ""}>
             <HStack justifyContent="space-between" alignItems="center">
             <h3 className="text__darker text__md">Order Details</h3>
 
@@ -83,16 +83,25 @@ const OrderDetails = ({order, showBox}: IProps) => {
             </Box>
             {order.isRunner ? order.status === OrderStatus.Started ? 
                 <Box mt={7}>
-                <Button  className="btn btn__nm btn__green btn__full-width">
+                <Button isLoading={loadingOrderAction} onClick={() => requestPayout(order.orderNumber)} disabled={!order.payTo.hasActiveBankAccount}  className="btn btn__nm btn__green btn__full-width">
                 Request payout
             </Button>
                     <Center mt={2}>
-                        <p className="text__silent"><PadLockIcon boxSize="16px" /> Secure Payment</p>
+                        {order.payTo.hasActiveBankAccount ? <p className="text__silent"><PadLockIcon boxSize="16px" /> Secure Payment</p> : <small className="form__error">You havent added a bank account to get paid</small>}
                     </Center>
                 </Box>
                     : <Button isLoading={confirmingOrder} onClick={() => markOrderAsStarted(order.orderNumber)} mt={7} className="btn btn__nm btn__primary btn__full-width">
                Mark as started 
-            </Button> : <Box>
+            </Button> : order.status === OrderStatus.AwaitingPayout ? (
+                <VStack spacing="1em">
+                    <Button mt={7} className="btn btn__nm btn__green btn__full-width">
+                        Accept payout
+                    </Button>
+                    <Button isLoading={loadingOrderAction} onClick={() => rejectPayout(order.orderNumber)}  mt={7} className="btn btn__nm btn__error btn__full-width">
+                       Reject Payout 
+                    </Button>
+                </VStack>
+            ) : <Box>
                 <Button disabled={order.status === OrderStatus.Started} mt={7} className="btn btn__nm btn__error btn__full-width">
                 Cancel order
             </Button>

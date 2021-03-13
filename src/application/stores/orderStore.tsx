@@ -17,6 +17,7 @@ export class OrderStore{
     @observable activeOrders : IOrder[] | null = null;
     @observable order : IOrder | null = null;
     @observable runnerOrders : IOrder[] | null = null;
+    @observable loadingOrderAction = false;
     
     @action deleteOrderById = async (orderNumber: string) => {
         try{
@@ -96,6 +97,34 @@ export class OrderStore{
            runInAction(() => this.confirmingOrder = false);
            alertErrors(e);
            throw e;
+        }
+    }
+    
+    @action requestPayout = async (orderNumber: string) => {
+        this.loadingOrderAction = true;
+        try{
+            await OrderRequest.requestPayout(orderNumber);
+            runInAction(() => {
+                this.order!.status = OrderStatus.AwaitingPayout;
+            })
+        }catch(error){
+            runInAction(() => this.loadingOrderAction = false);
+            alertErrors(error);
+            throw error;
+        }
+    }
+
+    @action rejectPayout = async (orderNumber: string) => {
+        this.loadingOrderAction = true;
+        try{
+            await OrderRequest.rejectPayout(orderNumber);
+            runInAction(() => {
+                this.order!.status = OrderStatus.Confirmed;
+            })
+        }catch(error){
+            runInAction(() => this.loadingOrderAction = false);
+            alertErrors(error);
+            throw error;
         }
     }
 }

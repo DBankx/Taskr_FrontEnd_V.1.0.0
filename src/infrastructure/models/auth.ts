@@ -20,4 +20,5 @@ export interface IUser{
     createdAt: Date;
     avatar: string;
     hasUnReadNotifications: boolean;
+    hasActiveBankAccount: boolean;
 }

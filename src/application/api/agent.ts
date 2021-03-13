@@ -134,7 +134,8 @@ export const profileRequest = {
     deleteAllNotifications: () : Promise<Record<string, unknown>> => ApiRequest.delete("profile/notifications", {
         cancelToken: axios.CancelToken.source().token
     }),
-    getWatchlist: (sortBy: string) : Promise<ITask[]> => ApiRequest.get("/profile/watchlist", {params:{sortBy}, cancelToken: axios.CancelToken.source().token})
+    getWatchlist: (sortBy: string) : Promise<ITask[]> => ApiRequest.get("/profile/watchlist", {params:{sortBy}, cancelToken: axios.CancelToken.source().token}),
+    addBankAccount: (values: any) : Promise<Record<string, unknown>> => ApiRequest.post("/profile/bank", values)
 }
 
 
@@ -173,5 +174,7 @@ export const OrderRequest = {
         params:{predicate}
     }),
     getOrderByNumber : (orderNumber: string) : Promise<IOrder> => ApiRequest.get(`/order/${orderNumber}`),
-    markOrderAsStarted : (orderNumber: string) : Promise<Record<string, unknown>> => ApiRequest.put(`/order/start/${orderNumber}`)
+    markOrderAsStarted : (orderNumber: string) : Promise<Record<string, unknown>> => ApiRequest.put(`/order/start/${orderNumber}`),
+    requestPayout: (orderNumber: string) : Promise<Record<string, unknown>> => ApiRequest.put(`/request-payout/${orderNumber}`),
+    rejectPayout: (orderNumber: string) : Promise<Record<string, unknown>> => ApiRequest.put(`/reject-payout/${orderNumber}`)
 }
