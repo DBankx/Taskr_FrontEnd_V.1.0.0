@@ -2,8 +2,9 @@
 import {action, makeAutoObservable, observable, runInAction} from "mobx";
 import {alertErrors} from "../../infrastructure/utils/getErrors";
 import {OrderRequest} from "../api/agent";
-import {IOrder} from "../../infrastructure/models/order";
+import {IOrder, IReview} from "../../infrastructure/models/order";
 import {OrderStatus} from "../../infrastructure/enums/orderStatus";
+import {v4} from "uuid";
 
 export class OrderStore{
     rootStore: RootStore;
@@ -149,6 +150,26 @@ export class OrderStore{
             })
         }catch(error){
             runInAction(() => this.loadingOrderAction = false);
+            alertErrors(error);
+            throw error;
+        }
+    }
+    
+    @action addReview = async (values: any, orderId: string) => {
+        try{
+            await OrderRequest.addReview(values, orderId);
+            runInAction(() => {
+                const review: IReview = {
+                    reviewer: this.rootStore.authStore.user!,
+                    id: v4(),
+                    job: this.order!.job,
+                    postedAt: new Date(),
+                    rating: values.rating,
+                    text: values.text
+                };
+                this.order!.reviews.push(review)
+            })
+        }catch (error) {
             alertErrors(error);
             throw error;
         }

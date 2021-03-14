@@ -30,7 +30,7 @@ interface IProps{
 const OrderDetails = ({order, showBox}: IProps) => {
     const {confirmingOrder, markOrderAsStarted, loadingOrderAction, rejectPayout, requestPayout, acceptPayout} = useContext(rootStoreContext).orderStore;
     return (
-        <Box className={showBox ? "task__bid__form__card" : ""} mt={showBox ? "3.8em" : ""}>
+        <Box className={showBox ? "task__bid__form__card card__sticky" : ""} mt={showBox ? "3.8em" : ""}>
             <HStack justifyContent="space-between" alignItems="center">
             <h3 className="text__darker text__md">Order Details</h3>
 

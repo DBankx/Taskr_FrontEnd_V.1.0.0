@@ -177,5 +177,7 @@ export const OrderRequest = {
     markOrderAsStarted : (orderNumber: string) : Promise<Record<string, unknown>> => ApiRequest.put(`/order/start/${orderNumber}`),
     requestPayout: (orderNumber: string) : Promise<Record<string, unknown>> => ApiRequest.put(`order/request-payout/${orderNumber}`),
     rejectPayout: (orderNumber: string) : Promise<Record<string, unknown>> => ApiRequest.put(`order/reject-payout/${orderNumber}`),
-    acceptPayout: (orderNumber: string) : Promise<Record<string, unknown>> => ApiRequest.put(`order/accept-payout/${orderNumber}`)
+    acceptPayout: (orderNumber: string) : Promise<Record<string, unknown>> => ApiRequest.put(`order/accept-payout/${orderNumber}`),
+    addReview: (values: any, orderId: string) : Promise<Record<string, unknown>> => ApiRequest.post(`/review/${orderId}`, values)
 }
+

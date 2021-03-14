@@ -20,4 +20,14 @@ export interface IOrder{
     orderStartedDate: Date;
     chat: IChat;
     isRunner: boolean;
+    reviews: IReview[];
+}
+
+export interface IReview{
+    id: string;
+    rating: number;
+    postedAt: Date;
+    job: ITask;
+    text: string;
+    reviewer: IUser;
 }

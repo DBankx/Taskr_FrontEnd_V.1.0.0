@@ -9,13 +9,16 @@ import {
     CreditCardIcon,
     FileIcon,
     RocketIcon,
-    SendIcon
+    SendIcon, StarIcon
 } from "../../../infrastructure/icons/Icons";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import * as yup from "yup";
 import rootStoreContext from "../../../application/stores/rootstore";
+import {OrderStatus} from "../../../infrastructure/enums/orderStatus";
+import ReviewForm from "./ReviewForm";
+import Rater from "../../../application/common/Rater";
 
 interface IProps{
     order: IOrder;
@@ -28,6 +31,7 @@ const OrderActivity = ({order} : IProps) => {
         text: yup.string().required("message is required")
     });
     const {sendChatToRunner, startChatWithUser} = useContext(rootStoreContext).chatStore;
+    const {user} = useContext(rootStoreContext).authStore;
     
     return (
         <Box>
@@ -128,6 +132,43 @@ const OrderActivity = ({order} : IProps) => {
                     </HStack>
                 </Box>
             )}
+            {order.reviews.map((review) => (
+                <Box key={review.id}>
+                    <Divider />
+                        <HStack alignItems="flex-start" spacing="20px" p="1em">
+                            <Box style={{backgroundColor: "#EFF1F6"}} className="order__box__icon">
+                                <StarIcon boxSize={8} color="#79899E" />
+                            </Box>
+                            
+                            <Box width="100%">
+                                <p>{review.reviewer.id === user!.id ? "You" : <Link className="link text__blue" to={`/public-profile/${review.reviewer.id}`}>{review.reviewer.username}</Link>} left a {review.rating} star review <i className="order__time-stamp">{dayjs(review.postedAt).format("MMM DD, hh:mm A")}</i></p>
+                                
+                                <Box mt={8} className="white__border no__padding">
+                                    <Box p="0.5em 1em" className="order__info__background" style={{borderBottom: "1px solid #E5E5E5"}}>
+                                        <p className="text__darker text__upper">{review.reviewer.id === user!.id ? "Your" : review.reviewer.username} review</p>
+                                    </Box>
+                                    <Box p="1em 1em">
+                                       <HStack alignItems="flex-start">
+                                           <Image src={review.reviewer.avatar} alt="reviewer" className="avatar" width="50px" height="50px" />
+                                           <Box>
+                                               <HStack spacing="1em">
+                                               <p className="text__darker">{review.reviewer.id === user!.id ? "You" : <span><Link className="text__blue link" to={`/public-profile/${review.reviewer.username}`}>{review.reviewer.username}</Link>&apos;s Message</span>}</p>
+                                                   <Rater boxSize={6} rating={review.rating} justifyContent="flex-start" />
+                                               </HStack>
+                                               <p className="text__darker">{review.text}</p>
+                                           </Box>
+                                       </HStack> 
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </HStack>
+                </Box>
+            ))}
+            <Divider />
+            {order.status === OrderStatus.Completed && !order.reviews.some((ord) => ord.reviewer.id === user!.id) && (
+                 <Box p="1em">
+                     <ReviewForm order={order} />
+                </Box> )}
         </Box>
             {order.chat !== null &&
                 <p className="text__silent text__middle">View <Link to={`/conversation/${order.chat.id}`} className="text__blue link">conversation</Link> with {order.isRunner ? order.user.username : order.payTo.username} in your inbox</p>
