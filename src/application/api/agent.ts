@@ -5,7 +5,7 @@ import {IBid, IBidSubmission} from "../../infrastructure/models/bid";
 import {TaskStatus} from "../../infrastructure/enums/taskStatus";
 import {
     ILanguage,
-    IPrivateProfile, IPublicProfile,
+    IPrivateProfile, IPublicProfile, IReturnReviews,
     ISkill, ISocials
 } from "../../infrastructure/models/profile";
 import {NotificationStatus} from "../../infrastructure/enums/notification";
@@ -145,7 +145,8 @@ export const PublicProfileRequest = {
     }),
     getPublicProfileTasks : (userId: string) : Promise<ITask[]> => ApiRequest.get(`/profile/public/tasks/${userId}`, {
         cancelToken: axios.CancelToken.source().token
-    })
+    }),
+    getUserReviews: (userId: string, predicate: string) : Promise<IReturnReviews> => ApiRequest.get(`/profile/reviews/${userId}`, {params:{predicate}}) 
 }
 
 export const ChatRequest = {
@@ -178,6 +179,7 @@ export const OrderRequest = {
     requestPayout: (orderNumber: string) : Promise<Record<string, unknown>> => ApiRequest.put(`order/request-payout/${orderNumber}`),
     rejectPayout: (orderNumber: string) : Promise<Record<string, unknown>> => ApiRequest.put(`order/reject-payout/${orderNumber}`),
     acceptPayout: (orderNumber: string) : Promise<Record<string, unknown>> => ApiRequest.put(`order/accept-payout/${orderNumber}`),
-    addReview: (values: any, orderId: string) : Promise<Record<string, unknown>> => ApiRequest.post(`/review/${orderId}`, values)
+    addReview: (values: any, orderId: string) : Promise<Record<string, unknown>> => ApiRequest.post(`/review/${orderId}`, values),
+    cancelOrder: (orderNumber: string) : Promise<Record<string, unknown>> => ApiRequest.put(`/order/cancel/${orderNumber}`)
 }
 

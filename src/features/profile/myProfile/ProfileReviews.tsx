@@ -1,7 +1,6 @@
 ﻿import React from "react";
 import {observer} from "mobx-react-lite";
 import {Box, Tab, TabList, TabPanel, TabPanels, Tabs, useMediaQuery} from "@chakra-ui/react";
-import TaskrReviews from "./reviews/TaskrReviews";
 
 const ProfileReviews = () => {
     const [isMobile] = useMediaQuery("(max-width: 600px)");
@@ -17,7 +16,8 @@ const ProfileReviews = () => {
                 <TabPanels>
                     <TabPanel>
                         <Box className="task__bid__form__card">
-                           <TaskrReviews /> 
+                           {/*<TaskrReviews /> */}
+                           <p>Apple</p>
                         </Box>
                     </TabPanel>
                 </TabPanels>

@@ -68,7 +68,7 @@ const OrderInfoDetails = ({order} : IProps) => {
                             </Thead>
                             <Tbody>
                                 <Tr>
-                                    <Td><Box style={{lineHeight: "2em"}}>
+                                    <Td style={{maxWidth: "350px"}}><Box style={{lineHeight: "2em"}}>
                                         <p className="text__darker text__md">{order.job.title}</p>
                                         <p className="text__silent">Delivery by {dayjs(order.job.deliveryDate).format("MMM DD, hh:mm A")}</p>
                                     </Box></Td>

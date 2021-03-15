@@ -17,7 +17,6 @@ const OrderInfo = ({order} : IProps) => {
                 <TabList>
                     <Tab>Activity</Tab>
                     <Tab>Details</Tab>
-                    <Tab>Delivery</Tab>
                 </TabList>
 
                 <TabPanels>

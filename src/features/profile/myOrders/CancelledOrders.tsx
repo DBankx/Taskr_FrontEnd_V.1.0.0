@@ -6,22 +6,22 @@ import Loader from "../../../application/appLayout/FullPageSpinner";
 import {Link} from "react-router-dom";
 import dayjs from "dayjs";
 
-const PayoutOrders = () => {
-    const {getAllOrders, loadingOrders, payoutOrders} = useContext(rootStoreContext).orderStore;
+const CancelledOrders = () => {
+    const {getAllOrders, loadingOrders, cancelledOrders} = useContext(rootStoreContext).orderStore;
     useEffect(() => {
-        getAllOrders("PAYOUT");
+        getAllOrders("CANCELLED");
     }, [getAllOrders])
-    if(loadingOrders || payoutOrders === null) return <Loader />
+    if(loadingOrders || cancelledOrders === null) return <Loader />
     return (
         <Box className="task__bid__form__card no__padding">
             <HStack spacing="10px" p="1em">
-                <p className="text__darker text__upper text__bold">Orders awaiting payout</p>
-                <Tooltip hasArrow style={{background: "rgb(41, 43, 50)", fontSize: "0.8em"}} label="These are orders that are waiting to be paid out" aria-label="A tooltip">
+                <p className="text__darker text__upper text__bold">Cancelled orders</p>
+                <Tooltip hasArrow style={{background: "rgb(41, 43, 50)", fontSize: "0.8em"}} label="These are orders that have been cancelled either by you or the other user" aria-label="A tooltip">
                     <Box className="circle-question">?</Box>
                 </Tooltip>
             </HStack>
             <Divider mb={0} />
-            {payoutOrders.length > 0 ? (
+            {cancelledOrders.length > 0 ? (
                 <Box className="watchlist__table small__heading">
                     <Table size="md">
                         <Thead >
@@ -35,7 +35,7 @@ const PayoutOrders = () => {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {payoutOrders.map((order) => (
+                            {cancelledOrders.map((order) => (
                                 <Tr className="hover__secondary" key={order.orderNumber}>
                                     <Td style={{maxWidth: "400px"}}>
                                         <HStack spacing="20px">
@@ -69,7 +69,7 @@ const PayoutOrders = () => {
                 </Box>
             ) : (
                 <Box p="1em">
-                    <p className="text__darker">There are no orders awaiting payout to show</p>
+                    <p className="text__darker">There are no completed orders to show</p>
                 </Box>
             )
             }
@@ -77,4 +77,4 @@ const PayoutOrders = () => {
     )
 }
 
-export default observer(PayoutOrders);
+export default observer(CancelledOrders);

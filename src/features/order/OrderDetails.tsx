@@ -28,7 +28,7 @@ interface IProps{
 }
 
 const OrderDetails = ({order, showBox}: IProps) => {
-    const {confirmingOrder, markOrderAsStarted, loadingOrderAction, rejectPayout, requestPayout, acceptPayout} = useContext(rootStoreContext).orderStore;
+    const {confirmingOrder, markOrderAsStarted, loadingOrderAction, cancelOrder, rejectPayout, requestPayout, acceptPayout} = useContext(rootStoreContext).orderStore;
     return (
         <Box className={showBox ? "task__bid__form__card card__sticky" : ""} mt={showBox ? "3.8em" : ""}>
             <HStack justifyContent="space-between" alignItems="center">
@@ -62,7 +62,7 @@ const OrderDetails = ({order, showBox}: IProps) => {
                         <Link to={`/task/${order.job.id}`} className="text__darker link truncate__1">{order.job.title}</Link>
                         
                         <Box style={{verticalAlign: "end"}}>
-                        {order.status === OrderStatus.Completed ? <Badge colorScheme="green">Completed</Badge> : order.status === OrderStatus.AwaitingPayout ? <Badge colorScheme="facebook">Awaiting payout</Badge> : order.status === OrderStatus.Cancelled ? <Badge colorScheme="red">Ended</Badge> : <Badge colorScheme="orange">Pending</Badge>}
+                        {order.status === OrderStatus.Completed ? <Badge colorScheme="green">Completed</Badge> : order.status === OrderStatus.AwaitingPayout ? <Badge colorScheme="facebook">Awaiting payout</Badge> : order.status === OrderStatus.Cancelled ? <Badge colorScheme="red">Cancelled</Badge> : <Badge colorScheme="orange">Pending</Badge>}
                         </Box>
                     </Box>
                 </HStack>
@@ -108,9 +108,14 @@ const OrderDetails = ({order, showBox}: IProps) => {
                         <Box>
                             <p></p>
                         </Box>
-                ) :  <Button isLoading={confirmingOrder} onClick={() => markOrderAsStarted(order.orderNumber)} mt={7} className="btn btn__nm btn__primary btn__full-width">
+                ) : order.status === OrderStatus.Confirmed ?   <Button isLoading={confirmingOrder} onClick={() => markOrderAsStarted(order.orderNumber)} mt={7} className="btn btn__nm btn__primary btn__full-width">
                Mark as started 
-            </Button> : order.status === OrderStatus.AwaitingPayout ? (
+            </Button> : (
+                    <Alert status="error" variant="left-accent">
+                        <AlertIcon/>
+                        This order has been cancelled
+                    </Alert>
+                ) :  order.status === OrderStatus.AwaitingPayout ? (
                 <VStack spacing="1em">
                     <Button isLoading={loadingOrderAction} onClick={() => acceptPayout(order.orderNumber)} mt={7} className="btn btn__nm btn__green btn__full-width">
                         Accept payout
@@ -120,20 +125,22 @@ const OrderDetails = ({order, showBox}: IProps) => {
                     </Button>
                 </VStack>
             ) : order.status === OrderStatus.Confirmed || order.status === OrderStatus.Started ? (<Box>
-                <Button disabled={order.status === OrderStatus.Started} mt={7} className="btn btn__nm btn__error btn__full-width">
+                <Button onClick={() => cancelOrder(order.orderNumber)} isLoading={loadingOrderAction} disabled={order.status === OrderStatus.Started} mt={7} className="btn btn__nm btn__error btn__full-width">
                 Cancel order
             </Button>
                     {order.status === OrderStatus.Started && <Center mt={3}>
                         <small className="text__silent">You can&apos;t cancel an order that has been started</small>
                     </Center>} 
             </Box>)
-                :(
+                : order.status === OrderStatus.Completed  ? (
                     <Alert status="success" variant="left-accent">
                         <AlertIcon/>
                        Order is complete 
                     </Alert>
-                )
-                }
+                ) : order.status === OrderStatus.Cancelled ? <Alert status="error" variant="left-accent">
+                <AlertIcon/>
+               This order has been cancelled 
+            </Alert> : ""}
         </Box>
     )
 }

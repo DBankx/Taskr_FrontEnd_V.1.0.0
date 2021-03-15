@@ -31,7 +31,7 @@ const PublicProfilePage : React.FC<RouteComponentProps<{userId: string}>> = ({ma
                     </Box>
                     <Box>
                         {publicProfileTasks === null || loadingProfileTasks ? <ProfileTaskPlaceholder /> : <ProfileTaskSection profileTasks={publicProfileTasks} /> }
-                        <ProfileReviews />
+                        <ProfileReviews userId={match.params.userId} />
                     </Box>
                 </SimpleGrid>
             </Box>

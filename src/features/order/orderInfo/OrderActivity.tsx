@@ -5,7 +5,7 @@ import {IOrder} from "../../../infrastructure/models/order";
 import {
     BoxIcon,
     ChatIcon,
-    CheckmarkIcon,
+    CheckmarkIcon, CloseIcon,
     CreditCardIcon,
     FileIcon,
     RocketIcon,
@@ -120,7 +120,7 @@ const OrderActivity = ({order} : IProps) => {
                 </HStack>
                     </Box>
             )}
-            {dayjs(order.orderPlacementDate).isBefore(dayjs(order.orderCompletedDate)) && (
+            {dayjs(order.orderPlacementDate).isBefore(dayjs(order.orderCompletedDate)) && order.status !== OrderStatus.Cancelled && (
                 <Box>
                     <Divider />
                     <HStack spacing="20px" p="1em">
@@ -137,7 +137,7 @@ const OrderActivity = ({order} : IProps) => {
                     <Divider />
                         <HStack alignItems="flex-start" spacing="20px" p="1em">
                             <Box style={{backgroundColor: "#EFF1F6"}} className="order__box__icon">
-                                <StarIcon boxSize={8} color="#79899E" />
+                                <StarIcon boxSize={6} color="#79899E" />
                             </Box>
                             
                             <Box width="100%">
@@ -152,7 +152,7 @@ const OrderActivity = ({order} : IProps) => {
                                            <Image src={review.reviewer.avatar} alt="reviewer" className="avatar" width="50px" height="50px" />
                                            <Box>
                                                <HStack spacing="1em">
-                                               <p className="text__darker">{review.reviewer.id === user!.id ? "You" : <span><Link className="text__blue link" to={`/public-profile/${review.reviewer.username}`}>{review.reviewer.username}</Link>&apos;s Message</span>}</p>
+                                               <p className="text__darker">{review.reviewer.id === user!.id ? "You" : <span><Link className="text__blue link" to={`/public-profile/${review.reviewer.id}`}>{review.reviewer.username}</Link>&apos;s Message</span>}</p>
                                                    <Rater boxSize={6} rating={review.rating} justifyContent="flex-start" />
                                                </HStack>
                                                <p className="text__darker">{review.text}</p>
@@ -169,6 +169,18 @@ const OrderActivity = ({order} : IProps) => {
                  <Box p="1em">
                      <ReviewForm order={order} />
                 </Box> )}
+            {order.status === OrderStatus.Cancelled && (
+                <Box>
+                    <Divider />
+                    <HStack spacing="20px" p="1em">
+                        <Box style={{backgroundColor: "#FED7D7"}} className="order__box__icon">
+                            <CloseIcon boxSize={8} color="#E53E3E" />
+                        </Box>
+
+                        <p className="text__md">{order.isRunner ? <span>{order.user.username}&apos;s order was cancelled</span> : <span>Your order was cancelled</span>} <i className="order__time-stamp">{dayjs(order.orderPlacementDate).format("MMM DD, hh:mm A")}</i></p>
+                    </HStack>
+                </Box>
+            ) } 
         </Box>
             {order.chat !== null &&
                 <p className="text__silent text__middle">View <Link to={`/conversation/${order.chat.id}`} className="text__blue link">conversation</Link> with {order.isRunner ? order.user.username : order.payTo.username} in your inbox</p>

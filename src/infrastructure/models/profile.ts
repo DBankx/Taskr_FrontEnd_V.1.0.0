@@ -1,6 +1,7 @@
 ﻿
 // TODO - ADD REVIEWS
 import {ExperienceLevel} from "../enums/skill";
+import {IReview} from "./order";
 
 export interface IPrivateProfile{
     id: string;
@@ -62,4 +63,8 @@ export interface IBankAccount{
     routingNumber: string;
 }
 
-
+export interface IReturnReviews{
+    avgReviews: number;
+    reviewsCount: number;
+    reviews: IReview[];
+}

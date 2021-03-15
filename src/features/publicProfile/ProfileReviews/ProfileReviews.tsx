@@ -1,9 +1,13 @@
 ﻿import {Box, HStack, Tab, TabList, TabPanel, TabPanels, Tabs, useMediaQuery} from "@chakra-ui/react";
 import React from "react";
-import TaskrReviews from "../../profile/myProfile/reviews/TaskrReviews";
 import Rater from "../../../application/common/Rater";
+import ReviewPane from "../../profile/myProfile/reviews/ReviewPane";
 
-const ProfileReviews = () => {
+interface IProps{
+    userId: string;
+}
+
+const ProfileReviews = ({userId}: IProps) => {
     const [isMobile] = useMediaQuery("(max-width: 600px)");
     return (
         <Box style={{marginTop: "2em"}}>
@@ -22,7 +26,12 @@ const ProfileReviews = () => {
                 <TabPanels>
                     <TabPanel>
                         <Box className="task__bid__form__card">
-                            <TaskrReviews />
+                            <ReviewPane userId={userId} predicate="Taskr" />
+                        </Box>
+                    </TabPanel>
+                    <TabPanel>
+                        <Box className="task__bid__form__card">
+                            <ReviewPane userId={userId} predicate="Runner" />
                         </Box>
                     </TabPanel>
                 </TabPanels>

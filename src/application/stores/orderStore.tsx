@@ -16,6 +16,7 @@ export class OrderStore{
     @observable confirmingOrder = false;
     @observable payoutOrders: IOrder[] | null = null;
     @observable completedOrders: IOrder[] | null = null;
+    @observable cancelledOrders: IOrder[] | null = null;
     @observable loadingOrders = false;
     @observable activeOrders : IOrder[] | null = null;
     @observable order : IOrder | null = null;
@@ -62,6 +63,9 @@ export class OrderStore{
                         break;
                     case "COMPLETED":
                         this.completedOrders = orders;
+                        break;
+                    case "CANCELLED":
+                        this.cancelledOrders = orders;
                         break;
                     default:
                         break;
@@ -170,6 +174,21 @@ export class OrderStore{
                 this.order!.reviews.push(review)
             })
         }catch (error) {
+            alertErrors(error);
+            throw error;
+        }
+    }
+    
+    @action cancelOrder = async (orderNumber: string) => {
+        this.loadingOrderAction = true;
+        try{
+            await OrderRequest.cancelOrder(orderNumber);
+            runInAction(() => {
+                this.order!.status = OrderStatus.Cancelled;
+                this.loadingOrderAction = false;
+            })
+        }catch (error) {
+            runInAction(() => this.loadingOrderAction = false);
             alertErrors(error);
             throw error;
         }

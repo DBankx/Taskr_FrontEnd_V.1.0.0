@@ -6,6 +6,7 @@ import ActiveOrders from "./ActiveOrders";
 import RunnerOrders from "./RunnerOrders";
 import PayoutOrders from "./PayoutOrders";
 import CompletedOrders from "./CompletedOrders";
+import CancelledOrders from "./CancelledOrders";
 
 const Orders = () => {
     const [isMobile] = useMediaQuery("(max-width: 500px)");
@@ -38,6 +39,9 @@ const Orders = () => {
                       </TabPanel>
                       <TabPanel>
                           <CompletedOrders />
+                      </TabPanel>
+                      <TabPanel>
+                          <CancelledOrders />
                       </TabPanel>
                   </TabPanels>
               </Tabs>

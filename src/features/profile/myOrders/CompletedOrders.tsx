@@ -37,7 +37,7 @@ const CompletedOrders = () => {
                         <Tbody>
                             {completedOrders.map((order) => (
                                 <Tr className="hover__secondary" key={order.orderNumber}>
-                                    <Td>
+                                    <Td style={{maxWidth: "400px"}}>
                                         <HStack spacing="20px">
                                             <Image src={order.job.photos[0].url} alt="job-photo" width="45px" height="32px" />
                                             <Box style={{lineHeight: "2em"}}>

@@ -3,25 +3,32 @@ import {observer} from "mobx-react-lite";
 import { HStack, Image } from "@chakra-ui/react";
 import Rater from "./Rater";
 import { Link } from "react-router-dom";
+import {IReview} from "../../infrastructure/models/order";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
-const Review = () => {
+dayjs.extend(relativeTime);
+
+interface IProps{
+    review: IReview
+}
+
+const Review = ({review}: IProps) => {
     return (
         <div>
             <HStack alignItems="start" spacing="10px">
-                <Image boxSize="50px" borderRadius="full" src="https://ui-avatars.com/api/?name=$SandraBull_ock&rounded=true&bold=true&background=FCDADC&color=3D3373" alt="user-avatar" />
+                <Image width="50px" height="50px" className="avatar" borderRadius="full" src={review.reviewer.avatar} alt="user-avatar" />
                 <div>
-                    <Link to="/" className="text__blue">Merge and edit videos</Link>
+                    <Link to={`/task/${review.job.id}`} className="text__blue">{review.job.title}</Link>
                     <HStack spacing="5px">
-                        <Rater justifyContent="flex-start" rating={3} boxSize={5} />
-                        <p>3</p>
+                        <Rater justifyContent="flex-start" rating={review.rating} boxSize={5} />
+                        <p>{review.rating}</p>
                     </HStack>
-                    <p className="text__light__dark">&quot;Thanks Marion brilliant job.
-                        Prompt and excellent work.
-                        Would use again anytime &quot;</p>
+                    <p className="text__light__dark">&quot;{review.text}&quot;</p>
                     <HStack spacing="10px">
-                    <Link to="/" className="text__blue text__sm text__bold">- SandraBull_ock</Link>
+                    <Link to={`/public-profile/${review.reviewer.id}`} className="text__blue text__sm text__bold">- {review.reviewer.username}</Link>
                         <p>•</p>
-                        <small className="text__silent">4 days ago</small>
+                        <small className="text__silent">{dayjs(review.postedAt).fromNow()}</small>
                     </HStack>
                 </div>
             </HStack>
