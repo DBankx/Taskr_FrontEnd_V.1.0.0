@@ -45,11 +45,14 @@ const ApiRequest = {
 // Requests for Jobs
 export const JobRequest = {
     getAllTasks: (queryValues: ITaskQueryValues) : Promise<IPaginatedTaskResponse> => ApiRequest.get("/jobs", {params: {
-        title: queryValues?.title,
+            title: queryValues?.title,
             minPrice: queryValues?.minPrice,
             maxPrice: queryValues?.maxPrice,
             pageSize: queryValues?.pageSize,
-            pageNumber: queryValues?.pageNumber
+            pageNumber: queryValues?.pageNumber,
+            deliveryType: queryValues?.deliveryType,
+            category: queryValues?.category,
+            sortBy: queryValues?.sortBy
         }, 
     cancelToken: axios.CancelToken.source().token
 }),

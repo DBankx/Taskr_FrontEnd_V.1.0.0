@@ -24,13 +24,13 @@
   
   &__bid__form__card{
     //border: 1px solid $border-color;
-    border-radius: 4px;
-    background-color: #fff;
+    border-radius: 4px !important;
+    background-color: #fff !important;
     //box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
-    box-shadow: 0 1px 21px 0 rgba(135, 140, 157, 0.2);
-    margin-bottom: 20px;
-    padding: 25px 20px;
-    max-width: 1250px;
+    box-shadow: 0 1px 21px 0 rgba(135, 140, 157, 0.2) !important;
+    margin-bottom: 20px !important;
+    padding: 25px 20px !important;
+    max-width: 1250px !important;
     p{
       color: $color-primary;
     }
@@ -525,4 +525,19 @@
   right: -25px;
   top: 30px;
   transform: rotate(-45deg);
+}
+
+.filter__tags{
+  color: #7a7d85 !important;
+  font-size: 14px !important;
+  line-height: 22px !important;
+  font-weight: 600 !important;
+  background-color: #efeff0 !important;
+  margin: 0 10px 10px 0 !important;
+  padding: 3px 12px !important;
+  border: none !important;
+  border-radius: 50px !important;
+  -webkit-transition: border-color .35s ease !important;
+  -o-transition: border-color .35s ease !important;
+  transition: border-color .35s ease !important;
 }

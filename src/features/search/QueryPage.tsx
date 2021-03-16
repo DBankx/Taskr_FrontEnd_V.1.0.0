@@ -4,16 +4,23 @@ import rootStoreContext from "../../application/stores/rootstore";
 import {observer} from "mobx-react-lite";
 import InlineLoader from "../../application/appLayout/InlineLoader";
 import QueryBody from "./QueryBody";
-import {StringParam, useQueryParams} from "use-query-params";
+import {NumberParam, StringParam, useQueryParams} from "use-query-params";
+import { Box, Tag, TagCloseButton, TagLabel } from "@chakra-ui/react";
+import {Category} from "../../infrastructure/enums/category";
+import {DeliveryTypes} from "../../infrastructure/enums/deliveryTypes";
 
 const QueryPage = () => {
     const {loadingInitial, tasks, getAllJobs, taskQueryValues, setTasksQueryParams} = useContext(rootStoreContext).taskStore;
-    const [queryParams] = useQueryParams({
+    const [queryParams, setParams] = useQueryParams({
         title: StringParam,
-        city: StringParam
+        deliveryType: NumberParam,
+        category: NumberParam,
+        sortBy: StringParam,
+        minPrice: NumberParam,
+        maxPrice: NumberParam
     }) 
     
-    setTasksQueryParams(queryParams.title!);
+    setTasksQueryParams(queryParams.title!, queryParams.maxPrice!, queryParams.minPrice!, 1, 20, queryParams.sortBy!, queryParams.category!, queryParams.deliveryType!);
     useEffect(() => {
         getAllJobs();
     }, [getAllJobs, taskQueryValues, queryParams])
@@ -22,11 +29,27 @@ const QueryPage = () => {
         <div className="container">
             <div className="main">
                 <div>
-                <h1 className="text__lg">Results for {`"${queryParams.title}"`}</h1>
+                    {queryParams.title && <h1 className="text__lg">Results for {`"${queryParams.title}"`}</h1>}
                     <div className="query__body">
                     <QueryActions />
                         {loadingInitial || tasks === null ? <InlineLoader /> : (
                             <div>
+                                <Box mt={8}>
+                                    <ul className="profile__skill__list">
+                                        {Object.entries(queryParams).map(([queryParam, queryKey], index) => (
+                                            queryKey !== undefined && <Tag
+                                                size="lg"
+                                                key={index}
+                                                borderRadius="full"
+                                                variant="solid"
+                                                className="filter__tags"
+                                            >
+                                                <TagLabel>{queryParam === "category" && typeof(queryKey) === "number" ? Category[queryKey!] : queryParam === "deliveryType" && typeof(queryKey) === "number" ? DeliveryTypes[queryKey!] : queryParam === "minPrice" || queryParam === "maxPrice" ? `$${queryKey}` :  queryKey}</TagLabel>
+                                                <TagCloseButton onClick={() => setParams({...queryParams, [queryParam]: undefined})} />
+                                            </Tag> 
+                                        ))}
+                                    </ul>
+                                </Box>
                                 <QueryBody tasks={tasks} taskQueryValues={taskQueryValues}/>
                             </div>
                         )}                   

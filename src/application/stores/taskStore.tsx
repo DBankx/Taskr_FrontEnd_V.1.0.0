@@ -21,7 +21,7 @@ export class TaskStore{
     
     @observable tasks: IPaginatedTaskResponse | null = null;
     @observable loadingInitial = false;
-    @observable taskQueryValues: ITaskQueryValues = {title: "", pageNumber: 1, pageSize: 20, maxPrice: 0, minPrice: 0};
+    @observable taskQueryValues: ITaskQueryValues = {title: "", pageNumber: 1, pageSize: 20, maxPrice: 0, minPrice: 0, sortBy: undefined, category: undefined, deliveryType: undefined};
     @observable task: ITask | null = null;
     @observable watching = false;
     
@@ -44,12 +44,15 @@ export class TaskStore{
         }
     }
     
-    @action setTasksQueryParams = (title?: string, maxPrice?: number, minPrice?: number, pageNumber?: number, pageSize?: number) => {
-        this.taskQueryValues.title = title ? title : "";
+    @action setTasksQueryParams = (title?: string | undefined, maxPrice?: number | undefined, minPrice?: number | undefined, pageNumber?: number | undefined, pageSize?: number | undefined, sortBy?: string | undefined, category?: number | undefined, deliveryType?: number | undefined) => {
+        this.taskQueryValues.title = title ? title : undefined;
         this.taskQueryValues.maxPrice = maxPrice ? maxPrice : 0;
         this.taskQueryValues.minPrice = minPrice ? minPrice : 0 ; 
         this.taskQueryValues.pageNumber = pageNumber ? pageNumber : 1;
         this.taskQueryValues.pageSize = pageSize ? pageSize : 20;
+        this.taskQueryValues.sortBy = sortBy ? sortBy : undefined;
+        this.taskQueryValues.category = category ? category : undefined;
+        this.taskQueryValues.deliveryType = deliveryType ? deliveryType : undefined;
     }
     
     @action getTaskById = async (id: string) => {

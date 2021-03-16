@@ -1,26 +1,28 @@
-﻿import {IconButton, InputGroup, InputLeftElement, Input} from "@chakra-ui/react";
+﻿import {IconButton, InputGroup, Select} from "@chakra-ui/react";
 import React from "react";
-import {LocationIcon, SearchIcon} from "../../infrastructure/icons/Icons";
+import {SearchIcon} from "../../infrastructure/icons/Icons";
 import {observer} from "mobx-react-lite";
 import { Formik } from "formik";
-import {StringParam, useQueryParams} from "use-query-params";
+import {NumberParam, StringParam, useQueryParams} from "use-query-params";
 import {history} from "../../index";
 import {useLocation} from "react-router-dom";
+import {Category} from "../../infrastructure/enums/category";
+import {getAllEnumKeys} from "../../infrastructure/enums/enumFunctions";
 
 const NavSearchInput = () => {
    const [navQuery, setNavQuery] = useQueryParams({
        title: StringParam,
-       city: StringParam
+       category: NumberParam
    });
    const location = useLocation();
     return (
-        <Formik initialValues={{title: navQuery.title ? navQuery.title : "", city: navQuery.city ? navQuery.city : ""}} onSubmit={(values, action) => {
+        <Formik initialValues={{title: navQuery.title ? navQuery.title : "", category:  navQuery.category ? navQuery.category : undefined}} onSubmit={(values, action) => {
             if(location.pathname !== "/tasks"){
                 history.push("/tasks")
             }
             setNavQuery({
                 title: values.title,
-                city: values.city
+                category: values.category
             });
             action.setSubmitting(false);
         }}>
@@ -34,10 +36,11 @@ const NavSearchInput = () => {
                 <form className="navbar__search" onSubmit={handleSubmit}>
                     <input autoComplete="off"  placeholder="Find services..." name="title" onChange={handleChange} onBlur={handleBlur} value={values.title} className="navbar__search__input search__main" />
                     <InputGroup className="navbar__input__group">
-                        <InputLeftElement style={{zIndex: 0}} className="navbar__input__group__right">
-                            <LocationIcon boxSize={8} />
-                        </InputLeftElement>
-                        <Input name="city" onBlur={handleBlur} onChange={handleChange} value={values.city} placeholder="Location" className="navbar__search__input search__location" />
+                        <Select name="category" value={values.category} onBlur={handleBlur} onChange={handleChange}  placeholder="Please select a category" className="navbar__search__input search__location">
+                            {getAllEnumKeys(Category).map((category: string, i) => (
+                                <option key={i} value={`${i}`}>{category}</option>
+                            ))}
+                        </Select>
                     </InputGroup>
                     <IconButton type="submit" isLoading={isSubmitting} className="navbar__search__button" aria-label="Search anything..." icon={<SearchIcon boxSize={8} />} />
                 </form>         

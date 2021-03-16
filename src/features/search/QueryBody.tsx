@@ -1,10 +1,11 @@
-import React, {lazy, Suspense} from "react";
+import React, {lazy, Suspense, useContext} from "react";
 import {observer} from "mobx-react-lite";
 import {IPaginatedTaskResponse, ITaskQueryValues} from "../../infrastructure/models/task";
 import TaskItem from "./TaskItem";
 import {Box, SimpleGrid, useMediaQuery} from "@chakra-ui/react";
 import Pagination from "../../infrastructure/paging/Pagination";
 import InlineLoader from "../../application/appLayout/InlineLoader";
+import rootStoreContext from "../../application/stores/rootstore";
 
 const SignUpReminder = lazy(() => import("../../infrastructure/reminders/SignUpReminder"));
 
@@ -15,6 +16,7 @@ interface IProps{
 
 const QueryBody : React.FC<IProps> = ({tasks, taskQueryValues}) => {
     const [isSmallScreen] = useMediaQuery("(max-width: 1000px)");
+    const {isLoggedIn} = useContext(rootStoreContext).authStore;
     return (
         <div>
             <SimpleGrid columns={{sm: 1, md: 1, lg: 2, xl: 2}} spacing="15px" templateColumns={{lg: "2fr 0.5fr", sm: "1fr", md: "1fr", xl: "2fr 0.4fr"}}>
@@ -32,7 +34,7 @@ const QueryBody : React.FC<IProps> = ({tasks, taskQueryValues}) => {
                     <Pagination pageNumber={taskQueryValues.pageNumber} pageSize={taskQueryValues.pageSize} totalPages={tasks.totalPages} totalRecords={tasks.totalRecords} />
                 </Box>
                  <Suspense fallback={<InlineLoader />}>
-                     {!isSmallScreen &&<Box>
+                     {!isSmallScreen && !isLoggedIn &&<Box>
                     <SignUpReminder />
                 </Box> }
                 </Suspense>

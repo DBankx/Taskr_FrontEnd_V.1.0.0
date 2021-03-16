@@ -49,6 +49,9 @@ export interface ITaskQueryValues{
     pageSize: number;
     pageNumber: number;
     city?: string;
+    category?: Category;
+    sortBy?: string;
+    deliveryType?: DeliveryTypes;
 } 
 
 export interface ITaskSubmission{

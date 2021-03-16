@@ -29,7 +29,6 @@
   
   &__action{
     margin-right: 24px;
-   
   }
   
   &__info{
@@ -84,8 +83,18 @@
   }
 }
 
+.query__action__container > .slick-slider > .slick-list{
+  overflow: visible !important;
+}
 
+.query__action__container > .slick-slider{
+  z-index: 300 !important;
+}
 
 @media(max-width: 600px){
- 
+
+  .query__action__container > .slick-slider > .slick-list{
+    overflow: hidden !important;
+
+  }
 }
