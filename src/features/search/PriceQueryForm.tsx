@@ -1,14 +1,19 @@
-﻿import {FormControl, FormLabel, HStack, InputLeftElement, InputGroup, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, MenuDivider, Flex, Spacer } from "@chakra-ui/react";
+﻿import {FormControl, FormLabel, HStack, InputLeftElement, InputGroup, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, MenuDivider, Flex, Spacer, FormErrorMessage, Button } from "@chakra-ui/react";
 import { Formik } from "formik";
 import React from "react";
 import {NumberParam, StringParam, useQueryParams} from "use-query-params";
 import {observer} from "mobx-react-lite";
+import * as yup from "yup";
 
 interface IProps{
     onClose: any;
 }
 
 const PriceQueryForm = ({onClose}: IProps) => {
+    const validationSchema = yup.object().shape({
+         maxPrice: yup.number().required("Max price is required")   
+    })
+    
     const [queryParams, setParams] = useQueryParams({
         title: StringParam,
         deliveryType: NumberParam,
@@ -19,7 +24,7 @@ const PriceQueryForm = ({onClose}: IProps) => {
     })
     
     return (
-        <Formik initialValues={{minPrice: 0, maxPrice: 0}} onSubmit={values => {
+        <Formik validationSchema={validationSchema} initialValues={{minPrice: 0, maxPrice: 0}} onSubmit={values => {
             setParams({...queryParams, minPrice: values.minPrice, maxPrice: values.maxPrice});
             onClose();
         }}>
@@ -28,7 +33,11 @@ const PriceQueryForm = ({onClose}: IProps) => {
                 values,
                 handleChange,
                 handleBlur,
-                resetForm
+                resetForm,
+                errors,
+                touched,
+                isValid,
+                dirty
               }) => (
            <form onSubmit={handleSubmit} className="">
             <div style={{padding: "1em"}}>
@@ -43,7 +52,7 @@ const PriceQueryForm = ({onClose}: IProps) => {
                         >
                             $
                         </InputLeftElement>
-                        <NumberInput value={values.minPrice} name="minPrice"  defaultValue={0} size="md" precision={2} min={0}>
+                        <NumberInput max={values.maxPrice} value={values.minPrice} name="minPrice"  defaultValue={0} size="md" precision={2} min={0}>
                                 <NumberInputField type="number" value={values.minPrice} onBlur={handleBlur} onChange={handleChange} className="query__price__input" name="minPrice" />
                             <NumberInputStepper>
                                 <NumberIncrementStepper />
@@ -70,14 +79,17 @@ const PriceQueryForm = ({onClose}: IProps) => {
                             </NumberInputStepper>
                         </NumberInput>
                     </InputGroup>
+                    {errors.maxPrice && touched.maxPrice && (
+                        <FormErrorMessage>{errors.maxPrice}</FormErrorMessage>
+                    )}
                 </FormControl> 
             </HStack>
             </div>
             <MenuDivider />
             <Flex alignItems="center" style={{padding: "0.5em 1em"}}>
-                <button onClick={() => resetForm()} type="button" className="btn btn__none">Clear All</button>
+                <Button onClick={() => resetForm()} type="button" className="btn btn__none">Clear All</Button>
                 <Spacer />
-                <button type="submit" className="btn btn__primary btn__sm">Apply</button>
+                <Button disabled={!isValid || !dirty} type="submit" className="btn btn__primary btn__sm">Apply</Button>
             </Flex>
         </form>
             )}

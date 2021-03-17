@@ -5,9 +5,11 @@ import {observer} from "mobx-react-lite";
 import InlineLoader from "../../application/appLayout/InlineLoader";
 import QueryBody from "./QueryBody";
 import {NumberParam, StringParam, useQueryParams} from "use-query-params";
-import { Box, Tag, TagCloseButton, TagLabel } from "@chakra-ui/react";
+import {Box, Center, Tag, TagCloseButton, TagLabel, Image} from "@chakra-ui/react";
 import {Category} from "../../infrastructure/enums/category";
 import {DeliveryTypes} from "../../infrastructure/enums/deliveryTypes";
+import SEO from "../../application/appLayout/SEO";
+import notFoundImage from "../../assets/images/undraw_page_not_found_su7k.svg";
 
 const QueryPage = () => {
     const {loadingInitial, tasks, getAllJobs, taskQueryValues, setTasksQueryParams} = useContext(rootStoreContext).taskStore;
@@ -27,6 +29,7 @@ const QueryPage = () => {
     
     return (
         <div className="container">
+            <SEO title={`search results for ${queryParams.title}`} />
             <div className="main">
                 <div>
                     {queryParams.title && <h1 className="text__lg">Results for {`"${queryParams.title}"`}</h1>}
@@ -50,9 +53,17 @@ const QueryPage = () => {
                                         ))}
                                     </ul>
                                 </Box>
-                                <QueryBody tasks={tasks} taskQueryValues={taskQueryValues}/>
+                                {tasks.data.length > 0 ? <QueryBody tasks={tasks} taskQueryValues={taskQueryValues}/> : (
+                                    <Center mt="2em">
+                                        <Box>
+                                            <Center><Image src={notFoundImage} alt="404" maxW="600px" width="80%"/></Center>
+                                            <Center mt={5}><h1 className="text__lg">No task was found for your search</h1></Center>
+                                            <Center><p className="text__md text__darker">Try new search or post a task now</p></Center>
+                                        </Box>
+                                    </Center>
+                                )}
                             </div>
-                        )}                   
+                        )} 
                     </div>
                 </div>
             </div>
