@@ -85,6 +85,8 @@ const TaskImages : React.FC<IProps> = ({task}) => {
                 <span className="rib-a">Assigned</span>
             </div> : task.jobStatus === TaskStatus.Completed ? <div className="ribbon ribbon-top-left rib-c-tl">
                 <span className="rib-c">Completed</span>
+            </div> : task.jobStatus === TaskStatus.InActive ? <div className="ribbon ribbon-top-left rib-i-tl">
+                <span className="rib-i">Ended</span>
             </div> : ""}
         </div>
     )

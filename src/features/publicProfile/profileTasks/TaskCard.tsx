@@ -14,7 +14,7 @@ interface IProps{
 
 const TaskCard : React.FC<IProps> = ({task}) => {
     return (
-        <Box className="task__bid__form__card" style={{marginBottom: "0", padding: "0", borderRadius: "0", position: "relative"}}>
+        <Box className="task__bid__form__card no__padding" style={{marginBottom: "0", padding: "0", borderRadius: "0", position: "relative"}}>
             <Box className="task__card__high">
             <Link to={`/task/${task.id}`}>
                 {task.photos.length > 0 && <TaskCardSlider photos={task.photos} />}

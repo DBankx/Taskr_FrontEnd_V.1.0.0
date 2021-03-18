@@ -5,10 +5,9 @@ import ProfileBox from "./ProfileBox";
 import rootStoreContext from "../../../application/stores/rootstore";
 import Loader from "../../../application/appLayout/FullPageSpinner";
 import AccountBio from "./AccountBio";
-import ReviewSummary from "./ReviewSummary";
 import TagLine from "./TagLine";
-import ProfileReviews from "./ProfileReviews";
 import SEO from "../../../application/appLayout/SEO";
+import ProfileReviews from "../../publicProfile/ProfileReviews/ProfileReviews";
 
 const MyProfile = () => {
     const {loadingInitial, privateProfile, getPrivateProfile} = useContext(rootStoreContext).profileStore;
@@ -29,9 +28,8 @@ const MyProfile = () => {
                     <div>
                         <Stack direction={["column", "row"]} spacing="1em" justifyContent={["start", "space-between"]}>
                             <TagLine tagline={privateProfile.tagline} />
-                            <ReviewSummary />
                         </Stack>
-                        <ProfileReviews />
+                        <ProfileReviews userId={privateProfile.id} user={privateProfile}/>
                     </div>
                 </SimpleGrid>
             </div>

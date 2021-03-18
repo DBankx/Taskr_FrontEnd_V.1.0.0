@@ -7,6 +7,7 @@ import Alert from "../common/Alert";
 import {CheckmarkIcon, CloseIcon} from "../../infrastructure/icons/Icons";
 import React from "react";
 import {alertErrors} from "../../infrastructure/utils/getErrors";
+import {history} from "../../index";
 
 //---------------------------------------------------------
 // Store for all Job related actions
@@ -24,6 +25,7 @@ export class TaskStore{
     @observable taskQueryValues: ITaskQueryValues = {title: "", pageNumber: 1, pageSize: 20, maxPrice: 0, minPrice: 0, sortBy: undefined, category: undefined, deliveryType: undefined};
     @observable task: ITask | null = null;
     @observable watching = false;
+    @observable deletingTask = false;
     
     // ------------------------
     // Actions
@@ -135,6 +137,28 @@ export class TaskStore{
         }catch (e) {
            alertErrors(e);
            throw e;
+        }
+    }
+    
+    @action deleteTask = async (taskId: string) => {
+        this.deletingTask = true;
+        try{
+           await JobRequest.deleteTaskById(taskId);
+           runInAction(() => {
+               if(window.location.pathname.startsWith("/task")){
+                   history.push("/");
+               }
+               
+               if(window.location.pathname.startsWith("/profile")){
+                   this.rootStore.profileStore.profileTasks = this.rootStore.profileStore.profileTasks!.filter(x => x.id != taskId); 
+               }
+               this.deletingTask = false;
+           })
+            toast.success(<Alert type="success" subject="Task deleted" icon={<CheckmarkIcon boxSize={8} color="#224a23" />} message="Your task was successfully deleted" />)
+        }catch (e) {
+            runInAction(() => this.deletingTask = false);
+            alertErrors(e);
+            throw e;
         }
     }
 }

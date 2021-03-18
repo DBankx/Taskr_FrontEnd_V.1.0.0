@@ -5,13 +5,13 @@ import {IBid, IBidSubmission} from "../../infrastructure/models/bid";
 import {TaskStatus} from "../../infrastructure/enums/taskStatus";
 import {
     ILanguage,
-    IPrivateProfile, IPublicProfile, IReturnReviews,
+    IPrivateProfile, IPublicProfile,
     ISkill, ISocials
 } from "../../infrastructure/models/profile";
 import {NotificationStatus} from "../../infrastructure/enums/notification";
 import {IPaginatedNotificationsResponse} from "../../infrastructure/models/notification";
 import {IChat} from "../../infrastructure/models/chat";
-import {IOrder} from "../../infrastructure/models/order";
+import {IOrder, IReview} from "../../infrastructure/models/order";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
@@ -67,7 +67,8 @@ export const JobRequest = {
     }),
     createTask: (taskSubmission: FormData) : Promise<Record<string, unknown>> => ApiRequest.post("/jobs", taskSubmission, {
         cancelToken: axios.CancelToken.source().token
-    })
+    }),
+    deleteTaskById: (taskId: string) : Promise<Record<string, unknown>> => ApiRequest.delete(`/jobs/${taskId}`)
 }
 
 
@@ -149,7 +150,7 @@ export const PublicProfileRequest = {
     getPublicProfileTasks : (userId: string) : Promise<ITask[]> => ApiRequest.get(`/profile/public/tasks/${userId}`, {
         cancelToken: axios.CancelToken.source().token
     }),
-    getUserReviews: (userId: string, predicate: string) : Promise<IReturnReviews> => ApiRequest.get(`/profile/reviews/${userId}`, {params:{predicate}}) 
+    getUserReviews: (userId: string, predicate: string) : Promise<IReview[]> => ApiRequest.get(`/profile/reviews/${userId}`, {params:{predicate}}) 
 }
 
 export const ChatRequest = {

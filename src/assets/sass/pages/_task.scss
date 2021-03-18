@@ -482,6 +482,10 @@
   border: 5px solid darken($color-green, 10%);
 }
 
+.rib-i-tl::after{
+  border: 5px solid darken($error-color, 10%);
+}
+
 .ribbon span {
   position: absolute;
   display: block;
@@ -501,6 +505,10 @@
 
 .rib-c{
   background-color: $color-green;
+}
+
+.rib-i{
+  background-color: $error-color;
 }
 
 /* top left*/

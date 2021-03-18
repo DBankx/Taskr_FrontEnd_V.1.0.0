@@ -19,6 +19,8 @@ export interface IPrivateProfile{
     socials: ISocials;
     emailConfirmed: boolean;
     bankAccount: IBankAccount;
+    avgReviewRating: number;
+    reviewsCount: number;
 }
 
 export interface IPublicProfile{
@@ -34,6 +36,8 @@ export interface IPublicProfile{
     tagline: string;
     socials: ISocials; 
     isUser: boolean;
+    avgReviewRating: number;
+    reviewsCount: number;
 }
 
 export interface ISocials{
@@ -61,10 +65,4 @@ export interface IBankAccount{
     accountHolderType: string;
     bankName: string;
     routingNumber: string;
-}
-
-export interface IReturnReviews{
-    avgReviews: number;
-    reviewsCount: number;
-    reviews: IReview[];
 }

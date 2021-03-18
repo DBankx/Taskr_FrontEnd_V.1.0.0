@@ -69,7 +69,7 @@ const TaskDetailsForm = () => {
                     taskSubmissionData.append("address", values.address);
                     taskSubmissionData.append("postCode", values.postCode);
                     taskSubmissionData.append("initialPrice", values.price.toString());
-                    taskSubmissionData.append("deliveryDate", new Date(values.deliveryDate).toUTCString());
+                    taskSubmissionData.append("endDate", new Date(values.deliveryDate).toISOString());
                     taskSubmissionData.append("category", values.category.toString());
                     
                     createTask(taskSubmissionData).then(() => history.push(`/task/${values.id}`)).catch(() => action.setSubmitting(false));
@@ -273,3 +273,4 @@ const TaskDetailsForm = () => {
 }
 
 export default observer(TaskDetailsForm);
+

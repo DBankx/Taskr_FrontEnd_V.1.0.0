@@ -26,7 +26,7 @@ const ReviewPane = ({userId, predicate}: IProps) => {
             </Select>
             </div>
             <Box mt={10} mb={4}>
-                {reviews.reviews.length > 0 ? reviews.reviews.map((review) => (
+                {reviews.length > 0 ? reviews.map((review) => (
                     <Box key={review.id}>
                         <Review review={review}/>
                         <Divider mt={3} mb={3} />

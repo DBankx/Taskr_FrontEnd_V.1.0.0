@@ -1,4 +1,4 @@
-﻿import {Box, SimpleGrid} from "@chakra-ui/react";
+﻿import {Box, SimpleGrid, Spinner} from "@chakra-ui/react";
 import React, {useContext, useEffect} from "react";
 import rootStoreContext from "../../application/stores/rootstore";
 import {RouteComponentProps} from "react-router-dom";
@@ -30,8 +30,12 @@ const PublicProfilePage : React.FC<RouteComponentProps<{userId: string}>> = ({ma
                         {publicProfileDetails === null || loadingProfileDetails ? <ProfileDetailsBottomPlaceholder /> : <ProfileDetailsBottom publicProfile={publicProfileDetails} /> }
                     </Box>
                     <Box>
-                        {publicProfileTasks === null || loadingProfileTasks ? <ProfileTaskPlaceholder /> : <ProfileTaskSection profileTasks={publicProfileTasks} /> }
-                        <ProfileReviews userId={match.params.userId} />
+                        {publicProfileTasks === null || publicProfileDetails === null || loadingProfileDetails || loadingProfileTasks ? <ProfileTaskPlaceholder /> : <ProfileTaskSection profileTasks={publicProfileTasks} /> }
+
+                        {publicProfileDetails === null || loadingProfileDetails ?
+                            <Spinner/> :
+                            <ProfileReviews userId={match.params.userId} user={publicProfileDetails}/>
+                        }
                     </Box>
                 </SimpleGrid>
             </Box>

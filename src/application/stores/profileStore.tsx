@@ -19,8 +19,7 @@ export class ProfileStore{
         makeObservable(this);
     }
     
-    @observable profileActiveTasks : ITask[] | null = null;
-    @observable profileInactiveTasks : ITask[] | null = null; 
+    @observable profileTasks : ITask[] | null = null;
     @observable loadingInitial = false;
     @observable privateProfile : IPrivateProfile | null = null;
     @observable userNotifications : IPaginatedNotificationsResponse | null = null;
@@ -31,16 +30,7 @@ export class ProfileStore{
         try{
             const tasks = await profileRequest.getAllTasks(taskStatus);
             runInAction(() => {
-                switch (taskStatus) {
-                    case TaskStatus.Active:
-                        this.profileActiveTasks = tasks;
-                        break;
-                    case TaskStatus.InActive:
-                        this.profileInactiveTasks = tasks;
-                        break;
-                    default:
-                        break;
-                }
+                this.profileTasks = tasks; 
                 this.loadingInitial = false;
             })
         }catch (errors) {

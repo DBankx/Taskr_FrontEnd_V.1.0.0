@@ -1,9 +1,9 @@
 import React from "react";
 import {ITask} from "../../infrastructure/models/task";
 import {observer} from "mobx-react-lite";
-import {Box, Divider, Flex, HStack, Image, SimpleGrid, Spacer, useMediaQuery} from "@chakra-ui/react";
+import {Box, Divider, Flex, HStack, Image, SimpleGrid, Spacer, useMediaQuery, Center} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import {CalendarIcon, LocationIcon} from "../../infrastructure/icons/Icons";
+import {CalendarIcon, LocationIcon, WebIcon} from "../../infrastructure/icons/Icons";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
 import TaskStatus from "../../application/common/TaskStatus";
@@ -14,7 +14,6 @@ interface IProps{
 
 dayjs.extend(relativeTime);
 
-// TODO - change creator avatar to use the avatar from the Database
 
 const TaskItem : React.FC<IProps> = ({task}) => {
     const hasPhotos = task.photos.length > 0;
@@ -30,7 +29,7 @@ const TaskItem : React.FC<IProps> = ({task}) => {
                <Link to={`/task/${task.id}`}><span className="truncate__1">{task.title}</span></Link>
             </div>
                 <HStack spacing="10px" style={{margin: "0.5em 0"}}>
-                    <Image borderRadius="full" boxSize="30px" alt="tasker-avatar" src={`https://ui-avatars.com/api/?name=${task.creator.userName}&rounded=true&bold=true`} />
+                    <Image borderRadius="full" boxSize="30px" alt="tasker-avatar" src={task.creator.avatar} />
                     <Link className="text__blue" to={`/public-profile/${task.creator.id}`}>{task.creator.userName}</Link>
                     <div>
                         <span className="text__sm text__silent">•</span>
@@ -42,10 +41,13 @@ const TaskItem : React.FC<IProps> = ({task}) => {
                                 {task.description}
                             </span>
                         </div>
-                    <HStack spacing="20px">
-                    <div className="query__task__endDate">
-                        <small className="text__primary"><CalendarIcon color="#3D3373" /> Ends {dayjs(task.deliveryDate).from(Date.now())} </small>
-                    </div>
+                    <HStack mt={4} spacing="20px">
+                    <Box  className="query__task__endDate">
+                        <Center>
+                            <CalendarIcon mr="0.5em"  color="#7a7d85" boxSize={5} />
+                            <small className="text__silent text__bold">Ends {dayjs(task.deliveryDate).from(Date.now())} </small>
+                        </Center>
+                    </Box>
                         <TaskStatus taskStatus={task.jobStatus} />
                     </HStack>
                 </Box>
@@ -53,8 +55,8 @@ const TaskItem : React.FC<IProps> = ({task}) => {
             <Divider mt={3} mb={3} />
             <Flex alignItems="center">
                 <div className="text__darker">
-                    <LocationIcon boxSize={8} />
-                    {task.postCode ? task.postCode : "Online"}
+                    {task.postCode ? <LocationIcon boxSize={8} /> : <WebIcon boxSize={8} />}
+                    {task.postCode ? "In person" : "Online"}
                 </div>
                 <Spacer />
                 <div className="text__dark__grey query__price__label">

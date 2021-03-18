@@ -16,7 +16,7 @@ const NavSearchInput = () => {
    });
    const location = useLocation();
     return (
-        <Formik initialValues={{title: navQuery.title ? navQuery.title : "", category:  navQuery.category ? navQuery.category : undefined}} onSubmit={(values, action) => {
+        <Formik initialValues={{title: navQuery.title ? navQuery.title : undefined, category:  navQuery.category ? navQuery.category : undefined}} onSubmit={(values, action) => {
             if(location.pathname !== "/tasks"){
                 history.push("/tasks")
             }

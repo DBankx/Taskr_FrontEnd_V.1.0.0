@@ -73,7 +73,10 @@ const TaskPage : React.FC<RouteComponentProps<{id: string}>> = ({match}) => {
                     ) : (
                         <Box>
                             <Box className="task__fixed__box">
-                                <TaskAssignedDetails task={task} />
+                                <Alert status="error" variant="left-accent">
+                                    <AlertIcon/>
+                                    This task has ended please contact the taskr
+                                </Alert>
                             </Box>
                         </Box>
                     )}

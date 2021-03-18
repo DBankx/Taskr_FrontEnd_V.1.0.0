@@ -1,9 +1,10 @@
 ﻿import {RootStore} from "./rootstore";
 import {action, makeObservable, observable, runInAction} from "mobx";
-import {IPublicProfile, IReturnReviews} from "../../infrastructure/models/profile";
+import {IPublicProfile} from "../../infrastructure/models/profile";
 import {alertErrors} from "../../infrastructure/utils/getErrors";
 import {PublicProfileRequest} from "../api/agent";
 import {ITask} from "../../infrastructure/models/task";
+import { IReview } from "../../infrastructure/models/order";
 
 export class PublicProfileStore {
     rootStore: RootStore
@@ -18,7 +19,7 @@ export class PublicProfileStore {
     @observable publicProfileTasks : ITask[] | null = null;
     @observable loadingProfileTasks = false;
     @observable loadingReviews = false;
-    @observable reviews : IReturnReviews | null = null;
+    @observable reviews : IReview[] | null = null;
     
     @action getPublicProfileDetails = async (userId: string) => {
         this.loadingProfileDetails = true;
