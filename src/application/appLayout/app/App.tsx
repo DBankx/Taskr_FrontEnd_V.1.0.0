@@ -11,6 +11,8 @@ import { observer } from 'mobx-react-lite';
 import rootStoreContext from "../../stores/rootstore";
 import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer} from "react-toastify";
+import PrivateRoute from "../../../infrastructure/utils/PrivateRoute";
+import NotFound from "../../common/NotFound";
 
 const HomePage = lazy(() => import("../../../features/home/HomePage"));
 const QueryPage = lazy(() => import("../../../features/search/QueryPage"));
@@ -59,14 +61,15 @@ function App() {
           <Route exact path="/signin" component={SignInPage} />
           <Route exact path="/task/:id" component={TaskPage} />
           <Route exact path="/view-bids/:taskId" component={BidHistoryPage} />
-          <Route exact path="/create-task/details" component={TitleCategoryPage} />
-          <Route exact path="/post-task" component={TaskDetailsForm} />
-          <Route exact path="/profile" component={ProfilePage} />
+          <PrivateRoute exact path="/create-task/details" component={TitleCategoryPage} />
+          <PrivateRoute exact path="/post-task" component={TaskDetailsForm} />
+          <PrivateRoute exact path="/profile" component={ProfilePage} />
           <Route exact path="/public-profile/:userId" component={PublicProfile} />
-          <Route exact path="/inbox" component={InboxPage} />
-          <Route exact path="/conversation/:chatId" component={MessagePage} />
-          <Route exact path="/checkout/:orderId" component={CheckoutPage} />
-          <Route exact path="/order/:orderNumber" component={OrderPage} />
+          <PrivateRoute exact path="/inbox" component={InboxPage} />
+          <PrivateRoute exact path="/conversation/:chatId" component={MessagePage} />
+          <PrivateRoute exact path="/checkout/:orderId" component={CheckoutPage} />
+          <PrivateRoute exact path="/order/:orderNumber" component={OrderPage} />
+          <Route component={NotFound} />
         </Switch>
       </Suspense>
     </div>

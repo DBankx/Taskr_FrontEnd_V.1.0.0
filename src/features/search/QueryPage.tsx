@@ -10,19 +10,24 @@ import {Category} from "../../infrastructure/enums/category";
 import {DeliveryTypes} from "../../infrastructure/enums/deliveryTypes";
 import SEO from "../../application/appLayout/SEO";
 import notFoundImage from "../../assets/images/undraw_page_not_found_su7k.svg";
+import {IdeaIcon} from "../../infrastructure/icons/Icons";
+import SoftAlert from "../../application/common/SoftAlert";
 
 const QueryPage = () => {
     const {loadingInitial, tasks, getAllJobs, taskQueryValues, setTasksQueryParams} = useContext(rootStoreContext).taskStore;
+    const {isLoggedIn} = useContext(rootStoreContext).authStore;
     const [queryParams, setParams] = useQueryParams({
         title: StringParam,
         deliveryType: NumberParam,
         category: NumberParam,
         sortBy: StringParam,
         minPrice: NumberParam,
-        maxPrice: NumberParam
+        maxPrice: NumberParam,
+        pageSize: NumberParam,
+        pageNumber: NumberParam
     }) 
     
-    setTasksQueryParams(queryParams.title!, queryParams.maxPrice!, queryParams.minPrice!, 1, 20, queryParams.sortBy!, queryParams.category!, queryParams.deliveryType!);
+    setTasksQueryParams(queryParams.title!, queryParams.maxPrice!, queryParams.minPrice!, queryParams.pageNumber!, queryParams.pageSize!, queryParams.sortBy!, queryParams.category!, queryParams.deliveryType!);
     useEffect(() => {
         getAllJobs();
     }, [getAllJobs, taskQueryValues, queryParams])
@@ -32,6 +37,10 @@ const QueryPage = () => {
             <SEO title={`search results for ${queryParams.title}`} />
             <div className="main">
                 <div>
+                    <Box>
+                        {!isLoggedIn && <SoftAlert icon={<IdeaIcon color="#719FF1" boxSize={10} />} message="See a task you can complete? or Post a task and have runners complete it for you? Register or login now to access them" />}
+                    </Box>
+                    
                     {queryParams.title && <h1 className="text__lg">Results for {`"${queryParams.title}"`}</h1>}
                     <div className="query__body">
                     <QueryActions />
@@ -40,7 +49,7 @@ const QueryPage = () => {
                                 <Box mt={8}>
                                     <ul className="profile__skill__list">
                                         {Object.entries(queryParams).map(([queryParam, queryKey], index) => (
-                                            queryKey !== undefined && <Tag
+                                            queryKey !== undefined && queryParam !== "pageSize" && queryParam !== "pageNumber" && <Tag
                                                 size="lg"
                                                 key={index}
                                                 borderRadius="full"

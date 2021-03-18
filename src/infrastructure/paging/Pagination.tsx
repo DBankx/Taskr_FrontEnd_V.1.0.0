@@ -1,6 +1,7 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 import {observer} from "mobx-react-lite";
+import {NumberParam, StringParam, useQueryParams} from "use-query-params";
 
 interface IProps{
     totalRecords: number;
@@ -10,13 +11,28 @@ interface IProps{
 }
 
 const Pagination : React.FC<IProps> = ({totalPages}) => {
+    const [queryParams, setParams] = useQueryParams({
+        title: StringParam,
+        deliveryType: NumberParam,
+        category: NumberParam,
+        sortBy: StringParam,
+        minPrice: NumberParam,
+        maxPrice: NumberParam,
+        pageSize: NumberParam,
+        pageNumber: NumberParam
+    })
     return (
        <ReactPaginate
             previousLabel="Prev"
             nextLabel="Next&#8594;"
             pageCount={totalPages}
-            pageRangeDisplayed={2}
-            marginPagesDisplayed={2}
+            onPageChange = {(data) => {
+                const selected = data.selected;
+                setParams({...queryParams, pageNumber: selected + 1});
+            }}
+            initialPage={queryParams.pageNumber ? queryParams.pageNumber - 1 : 0}
+            pageRangeDisplayed={5}
+            marginPagesDisplayed={2}    
             breakLabel="..."
             containerClassName="pagination__container"
             pageClassName="pagination__page__box"

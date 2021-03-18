@@ -1,6 +1,6 @@
 ﻿body{
   font-family: Larsseit, sans-serif !important;
-  font-size: 1.6rem !important;
+  font-size: 1.6em !important;
   line-height: 1.7 !important;
   font-weight: 500 !important;
 }
@@ -31,6 +31,10 @@
   
   &__light__dark{
     color: #8A7D83 !important;
+  }
+  
+  &__nm{
+    font-size: 15px !important;
   }
   
   &__md{

@@ -1,14 +1,13 @@
-﻿import {Button, RadioGroup, Select, Textarea, Radio, SimpleGrid } from "@chakra-ui/react";
+﻿import {Button, RadioGroup, Select, Textarea, Radio, FormControl, FormLabel, HStack, FormHelperText, Box } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { Category } from "../../infrastructure/enums/category";
 import SoftAlert from "../../application/common/SoftAlert";
-import {IdeaIcon, LocationIcon, WebIcon} from "../../infrastructure/icons/Icons";
+import {IdeaIcon} from "../../infrastructure/icons/Icons";
 import {history} from "../../index";
 import SEO from "../../application/appLayout/SEO";
 import * as yup from "yup";
-import {DeliveryTypes} from "../../infrastructure/enums/deliveryTypes";
 import {getAllEnumKeys} from "../../infrastructure/enums/enumFunctions";
 
 const TitleCategory = () =>{
@@ -25,7 +24,7 @@ const TitleCategory = () =>{
                     <h1 className="text__primary text__lg text__middle">Tell us what you need done?</h1>
                 </div>
                 
-                <Formik validationSchema={validationSchema} initialValues={{title: "", category: "", deliveryType: "0"}} onSubmit={values => history.push(`/post-task?title=${values.title}&category=${values.category}&deliveryType=${values.deliveryType}`)}>
+                <Formik validationSchema={validationSchema} initialValues={{title: "", category: undefined, deliveryType: "0"}} onSubmit={values => history.push(`/post-task?title=${values.title}&category=${values.category}&deliveryType=${values.deliveryType}`)}>
                     {({
                         handleSubmit,
                         handleBlur,
@@ -61,30 +60,18 @@ const TitleCategory = () =>{
                                 )}
                             </div>
                             
-                            <div className="form__field">
-                                <RadioGroup value={values.deliveryType} name="deliveryType" onChange={handleChange} onBlur={handleBlur} >
-                                    <SimpleGrid spacing="10px" templateColumns={{xl: "1fr 1fr", lg: "1fr 1fr", md: "1fr 1fr", sm: "1fr"}}>
-                                        
-                                        <div className="form__location__picker">
-                                            <p className="bold__label">Delivery type</p>
-                                        <Radio defaultChecked className="form__radio__bg" colorScheme="green" value={DeliveryTypes.InPerson.toString()}>
-                                            <p className="form__radio__bg__label">In Person</p>
-                                        </Radio>
-                                            <p className="text__darker">Select this option if a tasker is needed in person to respond to your needs.</p>
-                                            <LocationIcon boxSize={8} color="#3D3373" />
-                                        </div>
-                                        
-                                        <div className="form__location__picker">
-                                            <p className="bold__label">Delivery type</p>
-                                        <Radio className="form__radio__bg" colorScheme="green" value={DeliveryTypes.Online.toString()}>
-                                            <p className="form__radio__bg__label">Online</p>
-                                        </Radio>
-                                            <p className="text__darker">Select this option if your needs can be met if the tasker works remotley.</p>
-                                            <WebIcon boxSize={8} color="#3D3373" />
-                                        </div>
-                                    </SimpleGrid>
-                                </RadioGroup>
-                            </div>
+                            <Box mt="1.5em" className="form__field em">
+                                <FormControl as="fieldset">
+                                    <FormLabel as="legend">Delivery type</FormLabel>
+                                    <RadioGroup name="deliveryType" value={values.deliveryType}  defaultValue="0">
+                                        <HStack spacing="24px">
+                                            <Radio colorScheme="green" onChange={handleChange} onBlur={handleBlur} className="form__radio__bg" value="0"><p  className="text__nm text__darker">In person (Physical)</p></Radio>
+                                            <Radio colorScheme="green" onChange={handleChange} onBlur={handleBlur} className="form__radio__bg" value="1"><p className="text__nm text__darker">Online (Remote)</p></Radio>
+                                        </HStack>
+                                    </RadioGroup>
+                                    <FormHelperText>Select the best location type for your task</FormHelperText>
+                                </FormControl> 
+                            </Box>
                             
                             
                             <div style={{margin: "2em 0"}}>

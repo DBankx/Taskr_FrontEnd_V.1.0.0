@@ -12,6 +12,8 @@ import {NotificationStatus} from "../../infrastructure/enums/notification";
 import {IPaginatedNotificationsResponse} from "../../infrastructure/models/notification";
 import {IChat} from "../../infrastructure/models/chat";
 import {IOrder, IReview} from "../../infrastructure/models/order";
+import {history} from "../../index";
+import {toast} from "react-toastify";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
@@ -26,6 +28,30 @@ axios.interceptors.request.use((config: AxiosRequestConfig) => {
     return Promise.reject(error);
 })
 
+// things to do on response errors 
+axios.interceptors.response.use(undefined, error => {
+    if (error.message === 'Network Error' && !error.response) {
+        toast.error('Network Error - Check your connection');
+    }
+    if(error.response.status === 401 && error.response.headers["www-authenticate"].startsWith("Bearer error")){
+        window.localStorage.removeItem("jwt");
+        history.push("/signin");
+        toast.info("Your session has expired, Please login again");
+    }
+    //redirect to notfound page for bad guids
+    if (error.response.status === 404) {
+        history.push('/notfound');
+    }
+    //redirect to notfound page for invalid id guid
+    if (error.response.status === 400 && error.response.config.method == 'get') {
+        history.push('/notfound');
+    }
+    //send a toast notification if any response is a 500 status code
+    if (error.response.status === 500) {
+        toast.error('Server error - Try reloading the page');
+    }
+    throw error.response;
+})
 
 const responseBody = (response: AxiosResponse) => response.data;
 
