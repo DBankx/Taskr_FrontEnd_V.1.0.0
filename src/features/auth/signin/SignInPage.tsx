@@ -21,7 +21,7 @@ const SignInPage = () => {
           <Box>
               <div className="auth__card">
                   <div style={{padding: "1em"}}>
-                  <h3 className="text__primary">Sign in to taksr.</h3>
+                  <h3 className="text__primary">Sign in to taskr.</h3>
                   <div className="auth__providers">
                       <Button className="btn btn__full-width btn__fb btn__auth" leftIcon={<FacebookIcon />}>Continue with Facebook</Button>
                       <Button className="btn btn__full-width btn__outline__auth btn__auth" leftIcon={<GoogleIcon />}>

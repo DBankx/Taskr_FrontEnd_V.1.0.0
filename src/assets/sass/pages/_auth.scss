@@ -10,11 +10,17 @@
  } 
 }
 
+.auth__signup{
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  background-color: #fff;
+  min-width: 40%;
+}
+
 @media(max-width: 600px){
   .auth{
     &__card{
       width: 95%;
-      
     }
   }
 }

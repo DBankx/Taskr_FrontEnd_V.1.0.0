@@ -27,6 +27,9 @@ const InboxPage = lazy(() => import("../../../features/Chat/InboxPage"));
 const MessagePage = lazy(() => import("../../../features/Chat/messages/MessagePage"));
 const CheckoutPage = lazy(() => import("../../../features/checkout/checkoutPage"));
 const OrderPage = lazy(() => import("../../../features/order/OrdersPage"));
+const SignUpPage = lazy(() => import("../../../features/auth/signup/SignUpPage"));
+const AwaitingConfirmationMail = lazy(() => import("../../../features/auth/signup/AwatingConfirmationMail"));
+const ConfirmEmail = lazy(() => import("../../../features/auth/signup/ConfirmEmail"));
 
 // Chakra ui theme
 const theme = extendTheme(customTheme);
@@ -58,7 +61,10 @@ function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/tasks" component={QueryPage} />
+          <Route exact path="/signup" component={SignUpPage} />
           <Route exact path="/signin" component={SignInPage} />
+          <Route exact path="/await-confirm" component={AwaitingConfirmationMail} />
+          <Route exact path="/confirm-email" component={ConfirmEmail} />
           <Route exact path="/task/:id" component={TaskPage} />
           <Route exact path="/view-bids/:taskId" component={BidHistoryPage} />
           <PrivateRoute exact path="/create-task/details" component={TitleCategoryPage} />

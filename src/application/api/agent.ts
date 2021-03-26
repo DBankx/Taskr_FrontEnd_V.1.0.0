@@ -1,6 +1,6 @@
 ﻿import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
 import {IPaginatedTaskResponse, ITask, ITaskQueryValues} from "../../infrastructure/models/task";
-import {IAuthSuccessResponse, ISignInFormValues} from "../../infrastructure/models/auth";
+import {IAuthSuccessResponse, ISignInFormValues, ISignUpFormValues} from "../../infrastructure/models/auth";
 import {IBid, IBidSubmission} from "../../infrastructure/models/bid";
 import {TaskStatus} from "../../infrastructure/enums/taskStatus";
 import {
@@ -108,6 +108,15 @@ export const AuthRequest = {
     }),
     changePassword: (values: any) : Promise<Record<string, unknown>> => ApiRequest.put("/auth/change-password", values, {
         cancelToken: axios.CancelToken.source().token
+    }),
+    signUp: (values: ISignUpFormValues) : Promise<Record<string, unknown>> => ApiRequest.post("/auth/signup", values, {
+        cancelToken: axios.CancelToken.source().token
+    }),
+    confirmEmail: (userId: string, code: string) : Promise<Record<string, unknown>> => ApiRequest.post("/auth/confirm-email", undefined, {
+        params:{
+            userId,
+            code
+        }
     })
 }
 

@@ -1,6 +1,6 @@
 import {RootStore} from "./rootstore";
 import {action, computed, makeObservable, observable, reaction, runInAction} from "mobx";
-import {ISignInFormValues, IUser} from "../../infrastructure/models/auth";
+import {ISignInFormValues, ISignUpFormValues, IUser} from "../../infrastructure/models/auth";
 import {AuthRequest} from "../api/agent";
 import React from "react";
 import Alert from "../common/Alert";
@@ -30,6 +30,7 @@ export class AuthStore{
     
     @observable token : string | null = localStorage.getItem("jwt");
     @observable user : IUser | null = null;
+    @observable confirmingEmail = false;
 
     
     @computed get isLoggedIn(){
@@ -53,6 +54,30 @@ export class AuthStore{
         } catch(error){
             toast.error(<Alert subject="Invalid credentials" message="" icon={<CloseIcon boxSize={8} color="#73000c" />} type="error" />)
             throw error;
+        }
+    }
+    
+    @action SignUpUser = async (signUpFormValues: ISignUpFormValues) => {
+        try{
+            await AuthRequest.signUp(signUpFormValues);
+            history.push({pathname: "/await-confirm", search: `?email=${signUpFormValues.email}`});
+        } catch (error) {
+           alertErrors(error);
+           throw error;
+        }
+    }
+    
+    @action confirmEmail = async (userId: string, code: string) => {
+        this.confirmingEmail = true;
+        try{
+            await AuthRequest.confirmEmail(userId, code);
+            runInAction(() => {
+                this.confirmingEmail = false;
+            })
+        } catch (e) {
+            runInAction(() => this.confirmingEmail = false);
+           alertErrors(e);
+           throw e;
         }
     }
     

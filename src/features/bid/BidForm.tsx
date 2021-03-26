@@ -5,11 +5,13 @@ import {
     NumberInputField,
     Button,
     Flex,
-    Spacer
+    Spacer,
+    Spinner,
+    useDisclosure
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { observer } from "mobx-react-lite";
-import React, {useContext, useState} from "react";
+import React, {useContext, useState, lazy, Suspense} from "react";
 import {IBidSubmission} from "../../infrastructure/models/bid";
 import {ITask} from "../../infrastructure/models/task";
 import {MoneyIcon} from "../../infrastructure/icons/Icons";
@@ -17,12 +19,16 @@ import * as yup from "yup";
 import rootStoreContext from "../../application/stores/rootstore";
 import {DeliveryTypes} from "../../infrastructure/enums/deliveryTypes";
 
+const MapFormModal = lazy(() => import("../../application/common/MapModal"));
+
 interface IProps{
     task: ITask
 }
 
 const BidForm : React.FC<IProps> = ({task}) => {
     const [isDescriptionEnabled, setDescription] = useState<boolean>(false);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    
     const validationSchema = yup.object().shape({
         price: yup.number().lessThan(task.initialPrice, `Price must be less than initial bid: $${task.initialPrice} `)
     });
@@ -44,9 +50,12 @@ const BidForm : React.FC<IProps> = ({task}) => {
               }) => (
                 <form onSubmit={handleSubmit} className="task__bid__form__card">
                     
-                    {task.deliveryType === DeliveryTypes.InPerson && <div className="map__compact__image">
+                    {task.deliveryType === DeliveryTypes.InPerson && <div onClick={onOpen}  className="map__compact__image">
                         <img src="https://cdn6.agoda.net/images/MAPS-1214/default/property-map-entry-1.svg" alt="compact-map" />
                         <p className="map__compact__footer">VIEW MAP</p>
+                        <Suspense fallback={<Spinner />} >
+                            <MapFormModal isOpen={isOpen} onClose={onClose} />
+                        </Suspense>
                     </div>}
                   
                     <div style={{textAlign: "center", margin: "1em 0"}}>

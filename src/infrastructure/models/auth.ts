@@ -3,6 +3,16 @@ export interface ISignInFormValues{
     password: string;
 }
 
+export interface ISignUpFormValues{
+    country: string;
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    username: string;
+    confirmPassword: string;
+}
+
 export interface IAuthSuccessResponse {
     token: string;
     user: IUser;
