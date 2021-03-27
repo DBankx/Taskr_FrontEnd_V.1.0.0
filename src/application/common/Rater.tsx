@@ -10,12 +10,17 @@ interface IProps{
 }
 
 const Rater : React.FC<IProps> = ({rating, boxSize, justifyContent}) => {
-    const iterator = [...Array(rating)];
     return (
         <HStack spacing="4px" justifyContent={justifyContent}>
-            {iterator.map((value: undefined, index: number) => (
-                <StarIcon boxSize={boxSize} key={index} color={value} />
-            ))} 
+            {Array(5)
+                .fill("")
+                .map((_, i) => (
+                    <StarIcon
+                        key={`${_}${i}`}
+                        color={i < rating ? "#FFC100" : "gray.300"}
+                        boxSize={boxSize}
+                    />
+                ))}
         </HStack>
     )
 }

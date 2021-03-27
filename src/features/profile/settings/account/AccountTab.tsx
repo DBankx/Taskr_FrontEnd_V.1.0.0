@@ -20,7 +20,10 @@ const AccountTab : React.FC<IProps> = ({user, privateProfile}) => {
             <Divider mt={3} mb={3} />
             <HStack spacing="30px" mt={4} mb={4}>
                 <Image src={user.avatar} borderRadius="full" boxSize="80px" alt="avatar" />
-                <Button className="btn btn__white">Change profile photo</Button>
+                <Box>
+                <Button disabled className="btn btn__white">Change profile photo</Button>
+                    <small style={{display: "block"}} className="text__silent">Profile photo cannot be changed now</small>
+                </Box>
             </HStack>
             <AccountForm privateProfile={privateProfile} />
             <Divider mt={3} mb={3} />

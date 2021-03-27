@@ -30,6 +30,18 @@
   }
 }
 
+.home__tab {
+  width: fit-content !important;
+  justify-content: center !important;
+  button {
+    font-size: 1em !important;
+    outline: none !important;
+    padding: 1em !important;
+    height: 20px !important;
+    min-width: 125px !important;
+  }
+}
+
 @media(max-width: 600px){
   .home{
     &__banner{

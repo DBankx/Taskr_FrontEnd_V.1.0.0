@@ -66,12 +66,9 @@ const ProfilePage = () => {
              <TabList className="profile__tabs" style={{zIndex: 0}}>
                  <Slider {...sliderSettings}>
                  <Tab>My Tasks</Tab>
-                 <Tab>Bids / Offers</Tab>
                  <Tab>My Orders</Tab>
                  <Tab>Watchlist</Tab>
-                 <Tab>Saved Runners</Tab>
                  <Tab>My Profile</Tab>
-                 <Tab>My Reviews</Tab>
                  <Tab>Account Settings</Tab>
                  </Slider>
              </TabList>  
@@ -81,22 +78,13 @@ const ProfilePage = () => {
                        <TaskTab />
                    </TabPanel>
                    <TabPanel>
-                       hey
-                   </TabPanel>
-                   <TabPanel>
                        <Orders />
                    </TabPanel>
                    <TabPanel>
                        <WatchlistPage />
                    </TabPanel>
                    <TabPanel>
-                       hey
-                   </TabPanel>
-                   <TabPanel>
                        <MyProfile />
-                   </TabPanel>
-                   <TabPanel>
-                       hey
                    </TabPanel>
                    <TabPanel>
                        <ProfileSettingsPage />

@@ -23,13 +23,10 @@ const ProfileMenu : React.FC<IProps> = ({user}) => {
             </MenuButton>
             <MenuList   minWidth="180px" className="nav__auth__box">
                     <MenuItem onClick={() => history.push("/profile")}>My Tasks</MenuItem>
-                    <MenuItem as={Link} to="/profile?tab=1">Bids / Offers</MenuItem>
-                    <MenuItem as={Link} to="/profile?tab=2">My Orders </MenuItem>
-                    <MenuItem as={Link} to="/profile?tab=3">Watchlist</MenuItem>
-                    <MenuItem as={Link} to="/profile?tab=4">Saved runners</MenuItem>
-                    <MenuItem as={Link} to="/profile?tab=5">My Profile</MenuItem>
-                <MenuItem as={Link} to="/profile?tab=6">My Reviews</MenuItem>
-                <MenuItem as={Link} to="/profile?tab=7">Account Settings</MenuItem>
+                    <MenuItem as={Link} to="/profile?tab=1">My Orders </MenuItem>
+                    <MenuItem as={Link} to="/profile?tab=2">Watchlist</MenuItem>
+                    <MenuItem as={Link} to="/profile?tab=3">My Profile</MenuItem>
+                <MenuItem as={Link} to="/profile?tab=4">Account Settings</MenuItem>
                     <MenuItem onClick={() => logOutUser()}>Logout</MenuItem>
             </MenuList>
         </Menu> 
