@@ -33,6 +33,11 @@
   text-align: center !important;
   vertical-align: top !important;
   
+  &__blue{
+    background-color: $color-blue !important;
+    color: #fff !important;
+  }
+  
   &__red{
     background-color: $error-color !important;
     color: #fff !important;

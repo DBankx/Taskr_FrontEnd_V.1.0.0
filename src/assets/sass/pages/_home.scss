@@ -42,6 +42,13 @@
   }
 }
 
+.ending__box{
+  background-color: $color-blue;
+  color: #fff;
+  border-radius: 5px;
+  padding: 3em 1em;
+}
+
 @media(max-width: 600px){
   .home{
     &__banner{
@@ -64,4 +71,5 @@
       }
     }
   }
+  
 }

@@ -1,9 +1,12 @@
-﻿import { Box, SimpleGrid, Circle, Center, Stack, Image, Tabs, TabList, TabPanels, TabPanel, Tab} from "@chakra-ui/react";
+﻿import { Box, SimpleGrid, Circle, Center, Stack, Image, Tabs, TabList, TabPanels, TabPanel, Tab, HStack, Button, Container} from "@chakra-ui/react";
 import React from "react";
 import Logo from "../../assets/images/taskr-logo.svg";
 import postOnline from "../../assets/images/undraw_Post_online_re_1b82.svg";
 import reviewOffers from "../../assets/images/undraw_Hiring_re_yk5n.svg";
 import pay from "../../assets/images/undraw_Credit_card_re_blml.svg";
+import secure from "../../assets/images/undraw_Security_on_ff2u.svg";
+import insure from "../../assets/images/undraw_accept_terms_4in8.svg";
+import contact from "../../assets/images/undraw_experts3_3njd.svg";
 import {useMediaQuery} from "@chakra-ui/react";
 import {
     CateringIcon, CheckmarkIcon,
@@ -15,6 +18,7 @@ import {
 } from "../../infrastructure/icons/Icons";
 import {Link} from "react-router-dom";
 import Rater from "../../application/common/Rater";
+import {history} from "../../index";
 
 const HomePage = () => {
     const [isMobile] = useMediaQuery("(max-width: 400px)");
@@ -183,7 +187,7 @@ const HomePage = () => {
             </Box>
             
             <Box mt="4em" style={{backgroundColor: "#F8F9F9"}}>
-                <Box className="container">
+                <Box className="container" pb="4em">
                 <Center>
                <Box width={{lg: "50%", md: "70%", base: "100%"}} className="text__middle" pt="3em">
                    <h1 style={{fontSize: "24px", lineHeight: "32px", fontWeight: 600, marginBottom: "0.5em"}}>Meet some Runners!</h1>
@@ -228,7 +232,7 @@ const HomePage = () => {
                         <TabPanel>
                             <Box bg="#fff" maxW="800px" borderWidth="1px" borderRadius="lg" overflow="hidden">
                                 <Stack direction={["column", "row"]}>
-                                    <Image src="https://images.unsplash.com/photo-1593804863197-0a95c8ebef64?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" width={{lg: "50%", md: "50%", base: "initial"}} height="100%" alt="james" />
+                                    <Image src="https://images.unsplash.com/photo-1593804863197-0a95c8ebef64?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" width={{lg: "50%", md: "50%", base: "initial"}} height={{lg: "100%", sm: "300px"}} alt="james" />
                                     <Box p="5">
                                         <Box className="text__primary text__bold text__bigger__md" as="h1">Esther</Box>
                                         <i className="text__silent">Niche: cooking, catering, food technique</i>
@@ -254,7 +258,7 @@ const HomePage = () => {
                         <TabPanel>
                             <Box bg="#fff" maxW="800px" borderWidth="1px" borderRadius="lg" overflow="hidden">
                                 <Stack direction={["column", "row"]}>
-                                    <Image src="https://images.unsplash.com/photo-1512361436605-a484bdb34b5f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" width={{lg: "50%", md: "50%", base: "initial"}} height="100%" alt="james" />
+                                    <Image src="https://images.unsplash.com/photo-1512361436605-a484bdb34b5f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" width={{lg: "50%", md: "50%", base: "initial"}} height={{lg: "100%", sm: "300px"}} alt="james" />
                                     <Box p="5">
                                         <Box className="text__primary text__bold text__bigger__md" as="h1">Gordonisha</Box>
                                         <i className="text__silent">Niche: art, web design, painting</i>
@@ -282,6 +286,79 @@ const HomePage = () => {
                     </Center>
                     <Center mt="1em"><Link to="/become-runner" className="btn btn__primary btn__nm btn__bg">Become a Runner</Link></Center>
                 </Box>
+            </Box>
+            
+            <Box className="container">
+                <Center>
+                    <Box width={{lg: "50%", md: "70%", base: "100%"}} className="text__middle" pt="3em">
+                        <h1 style={{fontSize: "24px", lineHeight: "32px", fontWeight: 600, marginBottom: "0.5em"}}>Some other things you might want to know</h1>
+                        <p className="text__md">Whether you’re getting work done or doing tasks on Airtasker, know that we’ve got your back every step of the way.</p>
+                    </Box>
+                </Center>
+                
+                <Box mt="2em">
+                <Center>
+                    <Container>
+                        <HStack spacing="5px">
+                            <Image src={secure} alt="security" width={{lg: "200px", base: "150px"}} />
+                            <Box>
+                                <h1 className="text__bigger__md text__bold">Secure Payments</h1>
+                                <p>We hold task payments secure with our PCI-DSS compliant Taskr Pay – so tasks can be completed knowing payment is there when you&apos;re done.</p>
+                            </Box>
+                        </HStack>
+                    </Container>
+                </Center>
+
+                    <Center mt="3em">
+                        <Container>
+                            <HStack spacing="5px">
+                                <Box>
+                                    <h1 className="text__bigger__md text__bold">Top level insurance</h1>
+                                    <p>Insurance is there to ease any worries - making sure the Tasker has liability insurance from CGU while performing most task activities. T&C&apos;s apply.</p>
+                                </Box>
+
+                                <Image src={insure} alt="security" width={{lg: "200px", base: "150px"}} />
+                            </HStack>
+                        </Container>
+                    </Center>
+
+                    <Center mt="3em">
+                        <Container>
+                            <HStack spacing="5px">
+                                <Image src={contact} alt="security" width={{lg: "200px", base: "150px"}} />
+                                <Box>
+                                    <h1 className="text__bigger__md text__bold">Here if you need us</h1>
+                                    <p>Our comprehensive Help Centre and dedicated taskr Support are on hand 24/7 to help with any questions, queries or issues you might have.</p>
+                                    <Link to="/contact-us" className="link text__blue">Contact us &#8594;</Link>
+                                </Box>
+
+                            </HStack>
+                        </Container>
+                    </Center>
+                    
+                </Box>
+
+                <Box mt="4em">
+                    <Center>
+                        <Box>
+                            <Stack spacing="10px" direction="row" alignItems="center">
+                                <Image src={Logo} alt="taskr" width="100px" />
+                                <PlusIcon boxSize="20px" color="#AEBBC6" />
+                                <Image src={"https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Stripe_logo%2C_revised_2016.png/1200px-Stripe_logo%2C_revised_2016.png"} alt="stripe" width="100px" />
+                            </Stack>
+                            <Center><a className="link text__bold text__middle" href="https://stripe.com/payments" rel="noreferrer noopener" target="_blank">Learn more &#8594;</a></Center>
+                        </Box>
+                    </Center>
+                </Box>
+            </Box>
+            
+            <Box className="container">
+            <Box className="ending__box" mt="4em">
+                <HStack justifyContent="space-between">
+                <h1 style={{fontSize: "24px", fontWeight: 600, width: "70%"}}>Ready to get that todo list done and dusted?</h1>
+                    <Button onClick={() => history.push("/create-task/details")} className="btn btn__bg btn__primary">Get started now</Button>
+                </HStack>
+            </Box>
             </Box>
             
         </Box>
