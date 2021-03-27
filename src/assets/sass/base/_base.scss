@@ -28,8 +28,32 @@ body {
   height: 100vh;
 }
 
-::selection {
-  background-color: $color-secondary;
+
+.content{
+  min-height: calc(100vh - 70px); 
+}
+
+.footer-container{
+  min-height: 500px;
+  background-color: #3E4153;
+}
+
+.footer{
+  &__heading{
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 20px;
+    color: #c5c6cb;
+    letter-spacing: 2px;
+    margin: 0 0 1em;
+    text-transform: uppercase;
+  }
+  
+  &__list{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 }
 
 .container{

@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer} from "react-toastify";
 import PrivateRoute from "../../../infrastructure/utils/PrivateRoute";
 import NotFound from "../../common/NotFound";
+import Footer from "../../common/Footer";
 
 const HomePage = lazy(() => import("../../../features/home/HomePage"));
 const QueryPage = lazy(() => import("../../../features/search/QueryPage"));
@@ -53,7 +54,7 @@ function App() {
   if(!appLoaded) return <FullPageSpinner />;
   return (
       <ChakraProvider theme={theme}>
-    <div className="App">
+    <div className="content">
       <SEO title="The No 1 online market place for delegating tasks" />
       <ToastContainer position="bottom-right" />
       <Suspense fallback={<FullPageSpinner />}>
@@ -79,6 +80,9 @@ function App() {
         </Switch>
       </Suspense>
     </div>
+        <div className="footer-container">
+          <Footer />
+        </div>
       </ChakraProvider>
   );
 }
